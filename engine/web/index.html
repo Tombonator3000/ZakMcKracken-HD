@@ -1,0 +1,164 @@
+<!doctype html>
+<!--
+  Zak McKracken HD i nettleseren, bare lokalt.
+
+  Siden startes av engine/run-web.sh (eller ./spill.sh --nettleser) og skal bare åpnes på
+  http://localhost:8000 på maskinen der spillet ligger. Spillet og HD-grafikken tilhører
+  Disney/Lucasfilm og skal aldri ligge på en åpen adresse (ingen GitHub Pages, ingen publisering,
+  ingen opplasting). Siden nekter å starte hvis den ikke er åpnet fra localhost.
+
+  HD-patchen (DigHD) er ikke slått på for Zak ennå (DigHD::create godtar bare The Dig og
+  Sam & Max), så spillet vises med originalgrafikken, og valgene for HD under gjør ingenting
+  ennå. Musikken spilles fra Track1.fla til Track21.fla og krever at motoren er bygget med
+  FLAC (engine/build-web.sh gjør det). Ikke prøvd i nettleser.
+
+  Valg i adressen:
+    ?rom=22        hopper til rom 22 like etter starten (krever DigHD)
+    ?klassisk      starter med originalgrafikken (Ctrl+H bytter; krever DigHD)
+    ?gult          gult felt der HD mangler (Ctrl+Shift+H slår av og på; krever DigHD)
+    ?mod=auto      en annen mod i data/mods (standard gpt)
+    ?args=...      flere valg til ScummVM, skilt med mellomrom
+    ?DIGHD_...=... setter en DIGHD-variabel (test og feilsøking, se docs/HD-MOTOR.md)
+-->
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Zak McKracken HD (lokalt)</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+    canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; border: 0; outline: none; }
+    #status {
+      position: absolute; left: 50%; bottom: 2em; transform: translateX(-50%); z-index: 2;
+      max-width: 90%; padding: .6em 1em; border-radius: 4px; text-align: center;
+      color: #ddd; background: rgba(0, 0, 0, .75); font: 15px/1.4 system-ui, sans-serif;
+    }
+    #status.feil { color: #fff; background: #a00; }
+    #status[hidden] { display: none; }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" tabindex="-1" oncontextmenu="event.preventDefault()"></canvas>
+  <div id="status">Laster ScummVM ...</div>
+  <script>
+  (function () {
+    'use strict';
+    var statusEl = document.getElementById('status');
+    function status(text, feil) {
+      statusEl.textContent = text;
+      statusEl.className = feil ? 'feil' : '';
+      statusEl.hidden = !text;
+    }
+
+    // Bare på denne maskinen
+    var lokal = ['localhost', '127.0.0.1', '[::1]', '::1'];
+    if (lokal.indexOf(location.hostname) < 0) {
+      status('Denne siden kjøres bare lokalt, på http://localhost:8000. Spillet og HD-grafikken tilhører Lucasfilm/Disney og skal ikke ligge på en åpen adresse.', true);
+      return;
+    }
+
+    var q = new URLSearchParams(location.search);
+    var mod = q.get('mod') || 'gpt';
+    if (!/^[A-Za-z0-9_-]+$/.test(mod)) {
+      status('Ugyldig modnavn: ' + mod, true);
+      return;
+    }
+
+    // DigHD leser innstillingene fra miljøvariabler, som i engine/run.sh og spill.sh.
+    // mod=ingen: uten mod (engine/run-web.sh bruker det når mods/ ikke har noen mod)
+    var env = {};
+    if (mod !== 'ingen') env.DIGHD_MOD = '/data/mods/' + mod;
+    if (q.has('rom')) {
+      env.DIGHD_TEST_ROOM = q.get('rom');
+      env.DIGHD_TEST_AT = '240';
+      env.DIGHD_SKIP_VIDEO = '1';
+    }
+    if (q.has('klassisk')) env.DIGHD_CLASSIC = '1';
+    if (q.has('gult')) env.DIGHD_SHOW_MISSING = '1';
+    q.forEach(function (v, k) {
+      if (/^DIGHD_[A-Z0-9_]+$/.test(k)) env[k] = v;
+    });
+
+    // Valgene til ScummVM leses fra delen etter # (dists/emscripten/custom_shell-pre.js).
+    // Uten høydekorrigering: FM-Towns-skjermen er 320 x 240, og med korrigeringen på
+    // (standard i ScummVM) viser Zak en melding om det ved hver start.
+    var args = ['--path=/data/games/zak', '--no-aspect-ratio', '--subtitles'];
+    if (q.get('args')) args = args.concat(q.get('args').split(' ').filter(Boolean));
+    args.push('zak');
+    history.replaceState(null, '', location.pathname + location.search + '#' + args.join(' '));
+
+    // Tastene spillet og ScummVM bruker, skal ikke gå til nettleseren
+    // (F5 er spillmenyen, ikke last på nytt; Ctrl+H er HD eller klassisk, ikke historikk).
+    window.addEventListener('keydown', function (e) {
+      if (/^F([1-9]|10)$/.test(e.key) || e.key === 'Tab' || e.key === 'Backspace' ||
+          ((e.ctrlKey || e.altKey) && !e.metaKey && e.key.length === 1)) {
+        e.preventDefault();
+      }
+    }, true);
+
+    // ScummVM ber om MIDI-tilgang når den lastes (dists/emscripten/custom_shell-pre.js), og da
+    // spør nettleseren brukeren om tillatelse. Dette stopper spørsmålet. Zak (FM-Towns) bruker
+    // ikke MIDI: musikken er CD-sporene (TrackN.fla), og lydeffektene kommer fra
+    // FM-Towns-lydemuleringen i ScummVM.
+    try {
+      Object.defineProperty(navigator, 'requestMIDIAccess', {
+        configurable: true,
+        value: function () { return new Promise(function () {}); }
+      });
+    } catch (e) { /* eldre nettleser: da spør den */ }
+
+    var canvas = document.getElementById('canvas');
+    canvas.addEventListener('webglcontextlost', function (e) {
+      status('Grafikken i nettleseren ble borte (WebGL). Last siden på nytt.', true);
+      e.preventDefault();
+    }, false);
+
+    window.onerror = function () {
+      status('Noe gikk galt. Se konsollen i nettleseren (F12).', true);
+    };
+
+    // Lerretet får riktig størrelse først etter en resize (se Known Issues i
+    // dists/emscripten/README.md i ScummVM). Uten den strekkes bildet litt skjevt. Den sendes når
+    // spillet har satt opp skjermen. HD-patchen skriver "DigHD: screen" da, men DigHD er av for
+    // Zak. Det andre tegnet er den første spillfilen etter 00.LFL: ScummVM leser bare indeksen
+    // 00.LFL før spillet setter opp skjermen, og rommene og tegnsettene etterpå (sjekket med
+    // motoren på maskinen, ikke i nettleser).
+    var skjermSett = false;
+    function skjermKlar() {
+      if (skjermSett) return;
+      skjermSett = true;
+      setTimeout(function () { window.dispatchEvent(new Event('resize')); }, 300);
+    }
+    var nettFetch = window.fetch.bind(window);
+    window.fetch = function (input, init) {
+      var sti = new URL(typeof input === 'string' || input instanceof URL ? input : input.url, location.href).pathname;
+      if (/^\/data\/games\/zak\/[^/]+$/.test(sti) && !/\/(00\.LFL|index\.json)$/i.test(sti)) skjermKlar();
+      return nettFetch(input, init);
+    };
+
+    window.Module = {
+      canvas: canvas,
+      preRun: [function () {
+        for (var k in env) ENV[k] = env[k];
+      }],
+      onRuntimeInitialized: function () {
+        status('Starter Zak McKracken (mod: ' + mod + '). Kjører bare lokalt.');
+        setTimeout(function () { if (!statusEl.className) status(''); }, 6000);
+      },
+      print: function (text) {
+        console.log(text);
+        // Fra HD-patchen, når den kjører (se skjermKlar)
+        if (/^DigHD: screen /.test(text)) skjermKlar();
+      },
+      printErr: function (text) { console.error(text); },
+      setStatus: function (text) { if (text) console.log(text); }
+    };
+
+    var s = document.createElement('script');
+    s.src = 'scummvm.js';
+    s.onerror = function () { status('Fant ikke scummvm.js. Start med ./spill.sh --nettleser.', true); };
+    document.body.appendChild(s);
+  })();
+  </script>
+</body>
+</html>

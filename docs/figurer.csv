@@ -1,0 +1,9 @@
+rekkefolge,kostyme,figur,hva,rom,romnavn,kodek,ruter,synlige_ruter,retninger,animasjoner,storste_rute,ark,jobber,store_ruter,skript_ganger,skript_rom,tegnet_i_romtest
+1,1,Zak,spillbar (skuespiller 1 i ActorOps),49,,0x58,51,,4,,,,,,,,
+2,2,Annie,spillbar (skuespiller 2 i ActorOps),49,,0x58,49,,4,,,,,,,,
+3,7,Melissa,spillbar (skuespiller 3 i ActorOps),28,,0x58,14,,4,,,,,,,,
+4,36,Leslie,spillbar (skuespiller 4 i ActorOps),28,,0x58,14,,4,,,,,,,,
+,10,pilot,ActorOps med navnet pilot,40,,0x58,32,,4,,,,,,,,
+,11,stewardess,ActorOps med navnet stewardess,11,,0x58,33,,4,,,,,,,,
+,26,police,ActorOps med navnet police,49,,0x58,36,,4,,,,,,,,
+,28,representative / Caponian,ActorOps med navnene representative og Caponian,49,,0x58,32,,4,,,,,,,,

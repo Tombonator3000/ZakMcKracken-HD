@@ -1,0 +1,25 @@
+# Spillfiler og alt som lages fra dem skal aldri inn i main (opphavsrett og størrelse).
+# Spillfilene ligger i grenen "spilldata" og hentes med tools/hent_spilldata.sh.
+game/
+/game
+work/
+mods/
+out/
+*.LFL
+*.lfl
+*.fla
+*.FLA
+Track*.flac
+
+# ScummVM-kildekoden og byggene
+engine/scummvm/
+engine/scummvm-web/
+engine/emsdk/
+/mods
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+.pytest_cache/
