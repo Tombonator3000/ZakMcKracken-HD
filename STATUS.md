@@ -10,7 +10,7 @@ Repoet har samme oppsett som Sam & Max HD og The Dig HD Remake, tilpasset Zak Mc
 
 | Del | Hva | Hvordan det er testet |
 | --- | --- | --- |
-| Spillfiler | 83 filer (00.LFL til 59.LFL, 98.LFL, 99.LFL, Track1.fla til Track21.fla) i `spilldata`, hentes og sjekkes med `tools/hent_spilldata.sh` | Størrelsene sjekket mot Drive ved nedlasting; SHA-256 for alle filene sjekket i grenens arbeidskopi etter siste push 11. oktober |
+| Spillfiler | 83 filer (00.LFL til 59.LFL, 98.LFL, 99.LFL, Track1.fla til Track21.fla) i `spilldata`, hentes og sjekkes med `tools/hent_spilldata.sh` | Størrelsene sjekket mot Drive ved nedlasting. Fersk klone og `tools/hent_spilldata.sh` 11. oktober: 83 filer, SHA-256 stemmer for alle |
 | Utgave | Engelsk FM-Towns | MD5 av 00.LFL funnet i ScummVMs `scumm-md5.h` ved c9091321 |
 | Motor | ScummVM c9091321 med `engine/patches/0001-dighd-hd-grafikk.patch` (Sam & Max sin, uendret) og FLAC | `engine/build.sh` her 11. oktober. Zak startet fra `game/` uten skjerm i 30 sekunder: `zak`, FM-TOWNS, SCUMM 3, riktig MD5, rommene 49, 1, 47, 9 og 50 lest. Ikke spilt med skjerm og lyd |
 | HD i motoren | Ikke portet. DigHD er av for Zak | `docs/HD-MOTOR.md` sier hva som må til |

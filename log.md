@@ -26,3 +26,8 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Grenene `hd-mod` (README og SHA256SUMS) og `gpt-arbeid` (AGENTS, BESTILLING, ORDRE uten jobber) laget og pushet, som i Sam & Max.
 - AGENTS, README, memory, todo, STATUS, ANALYSE og HD-MOTOR skrevet for Zak.
 - Ikke gjort: HD-motoren for Zak, stilpiloten, nettsiden og AppImage-arbeidsflyten.
+
+## 2026-10-11 22:55 (Claude)
+- PR 1 (`oppsett-som-sam-max`) åpnet. CI (test: nettleser og pipeline) grønn på 4ad21f0.
+- Kontroll: fersk `git clone` av grenen, så `tools/hent_spilldata.sh`: 83 filer hentet, SHA-256 stemmer for alle, `git status` tom etterpå.
+- Jeg får ikke flette min egen PR. Tom fletter.
