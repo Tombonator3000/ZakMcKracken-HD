@@ -1,0 +1,147 @@
+# Den komplette Linux-pakken: ScummVM med patchen, spillet, CD-musikken og HD-modden (når den finnes)
+# i én AppImage. Bygges på Ubuntu 22.04 (glibc 2.35), så den går på de fleste nyere distroer.
+# Publiseres som release "linux" i dette repoet. Spillet tilhører Disney/Lucasfilm og skal ikke
+# deles utenfor repoet.
+#
+# Zak McKracken (engelsk FM-Towns-utgave, ScummVM-ID zak): HD-motoren er ikke slått på for Zak, og
+# det finnes ingen HD-mod, så pakken gir originalgrafikken. Motoren må bygges med FLAC (libflac-dev),
+# ellers spilles ikke CD-musikken. Utløseren ved push til main er av; start den for hånd
+# (workflow_dispatch) eller vent på nattkjøringen når hd-mod endres.
+name: Linux-pakke
+
+on:
+  workflow_dispatch:
+  # Hver natt: ny pakke hvis HD-modden i grenen hd-mod er endret siden sist
+  schedule:
+    - cron: '17 2 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: linux-pakke
+  cancel-in-progress: true
+
+jobs:
+  sjekk:
+    runs-on: ubuntu-latest
+    outputs:
+      bygg: ${{ steps.mod.outputs.bygg }}
+    steps:
+      - id: mod
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          MOD=$(gh api repos/${{ github.repository }}/git/ref/heads/hd-mod --jq .object.sha 2>/dev/null || true)
+          SIST=$(gh api repos/${{ github.repository }}/releases/tags/linux --jq .body 2>/dev/null || true)
+          if [ "${{ github.event_name }}" = schedule ] && [ -z "$MOD" ]; then
+            echo "Grenen hd-mod finnes ikke ennå. Ingen ny pakke."
+            echo "bygg=nei" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event_name }}" = schedule ] && echo "$SIST" | grep -q "hd-mod: $MOD"; then
+            echo "HD-modden er den samme som i pakken ($MOD). Ingen ny pakke."
+            echo "bygg=nei" >> "$GITHUB_OUTPUT"
+          else
+            echo "bygg=ja" >> "$GITHUB_OUTPUT"
+          fi
+
+  pakke:
+    needs: sjekk
+    if: needs.sjekk.outputs.bygg == 'ja'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Byggepakker
+        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libsdl2-dev libpng-dev zlib1g-dev libflac-dev libfuse2 file
+
+      - name: Bygg ScummVM med patchen
+        run: JOBS=$(nproc) engine/build.sh
+
+      # CD-musikken (Track1.fla til Track21.fla) er FLAC. Uten FLAC i motoren blir det ingen musikk.
+      - name: Sjekk at motoren har FLAC
+        run: |
+          engine/scummvm/scummvm --version > "$RUNNER_TEMP/scummvm-versjon.txt" 2>&1 || true
+          cat "$RUNNER_TEMP/scummvm-versjon.txt"
+          grep "Features compiled in:" "$RUNNER_TEMP/scummvm-versjon.txt" | grep -q FLAC
+
+      - name: Spillet og CD-musikken (grenen spilldata)
+        run: tools/hent_spilldata.sh
+
+      - name: HD-modden (grenen hd-mod, tom til den første modden finnes)
+        run: tools/mod_gren.sh hent || true
+
+      - name: linuxdeploy og appimagetool
+        run: |
+          mkdir -p work/verktoy
+          curl -fsSL -o work/verktoy/linuxdeploy https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+          curl -fsSL -o work/verktoy/appimagetool https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
+          chmod +x work/verktoy/*
+          sha256sum work/verktoy/*
+
+      - name: Lag AppImage
+        env:
+          LINUXDEPLOY: ${{ github.workspace }}/work/verktoy/linuxdeploy
+          APPIMAGETOOL: ${{ github.workspace }}/work/verktoy/appimagetool
+          APPIMAGE_EXTRACT_AND_RUN: 1
+        run: tools/pakke_linux.sh
+
+      - name: Test pakken uten skjerm
+        run: |
+          T=$(mktemp -d)
+          # Runneren har egne XDG-mapper; testen skal bruke sin egen hjemmemappe.
+          # Spillet skal starte og fortsatt kjøre når tiden er ute (avslutningskode 124 fra timeout).
+          set +e
+          env HOME=$T XDG_CONFIG_HOME=$T/.config XDG_DATA_HOME=$T/.local/share \
+            SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy APPIMAGE_EXTRACT_AND_RUN=1 \
+            timeout 60 out/linux/ZakHD-x86_64.AppImage --debuglevel=1 > out/linux/test.log 2>&1
+          code=$?
+          set -e
+          grep -E "Using gameid zak|SCUMM version 3|Using MD5" out/linux/test.log
+          grep -q "Using gameid zak, variant FM-TOWNS" out/linux/test.log
+          grep -q "Using MD5 '2d4536a56e01da4b02eb021e7770afa2'" out/linux/test.log
+          [ "$code" = 124 ] || { echo "Spillet stoppet før tiden (kode $code)"; tail -40 out/linux/test.log; exit 1; }
+          grep -q "^\[zak\]" $T/.config/zak-hd/scummvm.ini
+
+      # Et skrivebord har lyd- og grafikkbibliotekene AppImage forventer å finne (ALSA,
+      # FreeType, GBM, Wayland, OpenGL); de tas ikke med i pakken. Resten skal pakken ha med seg.
+      # Bildet hentes fra AWS-speilet av Docker Hub: Docker Hub stopper anonyme hentinger fra
+      # GitHub-maskinene når grensen er nådd (toomanyrequests, 9. oktober 2026).
+      - name: Test pakken på Debian 12 uten byggepakker
+        run: |
+          docker run --rm -v "$PWD/out/linux:/pakke:ro" public.ecr.aws/docker/library/debian:12-slim sh -c '
+            apt-get update -qq && apt-get install -y -qq libgl1 libasound2 libfreetype6 libgbm1 libwayland-client0 libwayland-cursor0 libwayland-egl1 libxkbcommon0 > /dev/null
+            cd /tmp && /pakke/ZakHD-x86_64.AppImage --appimage-extract > /dev/null
+            echo "Biblioteker som mangler:"; LD_LIBRARY_PATH=squashfs-root/usr/lib ldd squashfs-root/usr/bin/scummvm | grep "not found" || echo "ingen"
+            HOME=/tmp/hjem SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy timeout 30 squashfs-root/AppRun --debuglevel=1 > /tmp/test.log 2>&1
+            code=$?
+            echo "Avslutningskode: $code"
+            grep -E "Using gameid zak|Using MD5" /tmp/test.log || { tail -40 /tmp/test.log; exit 1; }
+            [ "$code" = 124 ] || { tail -40 /tmp/test.log; exit 1; }'
+
+      - name: Publiser som release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo "Den komplette Linux-pakken: ScummVM med patchen, spillet (engelsk FM-Towns-utgave av Zak McKracken) og CD-musikken i én fil."
+            echo "HD-grafikken er ikke med ennå: HD-motoren er ikke slått på for Zak (FM-Towns, SCUMM v3), så spillet vises som originalen."
+            echo
+            echo "Last ned ZakHD-x86_64.AppImage, gjør den kjørbar og start den:"
+            echo
+            echo '    chmod +x ZakHD-x86_64.AppImage'
+            echo '    ./ZakHD-x86_64.AppImage'
+            echo
+            echo "Spillet starter rett, i fullskjerm. Alt+Enter bytter vindu og fullskjerm."
+            echo "Mangler FUSE på maskinen: ./ZakHD-x86_64.AppImage --appimage-extract-and-run"
+            echo
+            echo "Spillet tilhører Disney/Lucasfilm. Filen skal ikke deles utenfor repoet."
+            echo
+            echo '```'
+            cat out/linux/AppDir/usr/share/zak-hd/BYGG.txt
+            cat out/linux/ZakHD-x86_64.AppImage.sha256
+            echo '```'
+          } > out/linux/notater.md
+          gh release view linux > /dev/null 2>&1 || gh release create linux --title "Zak McKracken HD for Linux" --notes "Lages av arbeidsflyten Linux-pakke." --latest=false
+          gh release upload linux out/linux/ZakHD-x86_64.AppImage out/linux/ZakHD-x86_64.AppImage.sha256 --clobber
+          gh release edit linux --notes-file out/linux/notater.md

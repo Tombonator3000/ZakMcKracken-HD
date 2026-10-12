@@ -1,0 +1,35 @@
+name: test
+
+on:
+  push:
+    branches-ignore: [spilldata, hd-mod, gpt-arbeid]
+  pull_request:
+
+jobs:
+  nettleser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lokale filer, personvern og Pages-prefiks
+        run: node --test engine/pages/tests/*.test.mjs
+      - name: Kontroller Pages-pakkeren
+        run: python3 -m py_compile engine/build-pages.py
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Installer pipelinen
+        run: pip install -e "pipeline[dev]"
+      - name: Tester uten spillfiler
+        working-directory: pipeline
+        run: pytest -m "not game" -q
+      - name: Ingen spillfiler i grenen
+        run: |
+          if git ls-files | grep -iE '\.(lfl|fla|flac)$|^game/|^work/|^mods/'; then
+            echo "Spillfiler eller avledede filer er sjekket inn"; exit 1
+          fi
+      - name: Skallskriptene
+        run: for f in spill.sh engine/*.sh tools/*.sh; do bash -n "$f"; done

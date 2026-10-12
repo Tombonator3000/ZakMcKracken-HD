@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zakhd"
+version = "0.1.0"
+description = "HD-pipeline for Zak McKracken (FM-Towns): oppskalering, mod-pakker og grafikkjobber for HD-motoren"
+requires-python = ">=3.12"
+dependencies = [
+  "pillow>=10",
+  "numpy>=1.26",
+  "scipy>=1.11",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+# Dekoderne for The Digs LA1/AKOS/SAN (digart). Zak bruker egne dekodere (v3grafikk.py) og trenger
+# dem ikke; de står igjen fordi export.py (The Dig) er med i pakken.
+uttrekk = [
+  "thedig-textures @ git+https://github.com/felipe-dos-santos81/thedig-textures@1cf355ed1aa32326fc1b3097ba1d1df692b51501",
+]
+
+[project.scripts]
+zakhd = "zakhd.cli:main"
+
+[tool.setuptools]
+packages = ["zakhd"]
+
+[tool.setuptools.package-data]
+zakhd = ["skrifter/*/*"]
+
+[tool.pytest.ini_options]
+markers = ["game: trenger spillfilene i game/ (hentes med tools/hent_spilldata.sh)"]
