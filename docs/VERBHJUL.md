@@ -1,6 +1,6 @@
 # Verbhjulet (alternativ C)
 
-Tom valgte 12. oktober 2026 et verbhjul som i *Day of the Tentacle Remastered*. Dette dokumentet klargjør det: hvordan DOTT Remastered gjorde det, hva skriptene i Zak krever, forslaget til oppførsel, ikonene, arbeidet i motoren og testene. Ingenting er bygget ennå. Tallene er målt i FM-Towns-utgaven med `pipeline/zakhd/lfl.py` og de dekompilerte skriptene (work/skript) 12. oktober.
+Tom valgte 12. oktober 2026 et verbhjul som i *Day of the Tentacle Remastered*, og godkjente oppførselen under samme kveld («Lag det»). Hjulet er bygget som `engine/patches/0002-verbhjul.patch` (13. oktober), med midlertidige ikoner, og testet uten skjerm mot originalpanelet. Dokumentet sier hvordan DOTT gjorde det, hva skriptene i Zak krever, hvordan hjulet virker, hva som er testet og hva som gjenstår. Tallene er målt i FM-Towns-utgaven med `pipeline/zakhd/lfl.py` og de dekompilerte skriptene (work/skript).
 
 Bakgrunn og de andre alternativene: [GRENSESNITT.md](GRENSESNITT.md). Verblisten: [verbhjul-verb.csv](verbhjul-verb.csv).
 
@@ -56,25 +56,52 @@ Fra globalt skript 11, som spillet setter som `VAR_VERB_SCRIPT` (globalt skript 
 - Inventaret er verbplassene 101 til 110 (objektet står i Var[102] til Var[111]), og pilene er 115 og 116.
 - I spesielle moduser bytter panelet verb: Fly to og Swim to i stedet for Walk to, Teleport to, Buy og Sell i butikken, Switch og navnene på figurene, og egne verb når man styrer et dyr (Chew, Poop, Left head, Right head, Swim forward, Swim backward, Chatter, Smile, verb 32 til 34).
 
-## Forslag til oppførsel
+## Oppførselen
 
-Dette må Tom godkjenne før det bygges.
+Godkjent av Tom 12. oktober. Bygget i `engines/scumm/verbhjul.cpp` (patch 0002).
 
-- **Peke:** navnet på objektet vises i setningslinjen, som What is gjør i dag. What is trenger da ikke noe ikon.
-- **Trykk eller venstreklikk på et objekt:** Walk to, som i originalen. Det kjører også koden objekter har for Walk to (123 objekter, for eksempel dører).
-- **Hold inne eller høyreklikk på et objekt:** hjulet åpnes rundt objektet med objektets verb. Høyreklikk har ingen egen betydning i v3 i dag (ScummVM sender det som et vanlig klikk), så det kan brukes.
-- **Hvilke verb:** de som har en egen oppføring i objektets verbtabell (OC-blokken, fra byte 19), og som er på i verbpanelet akkurat nå. Det siste gjør at Buy bare vises i butikken og Teleport to bare når det verbet er på, uten at hjulet må kjenne spillets moduser.
-- **Faste plasser:** hvert verb har alltid samme plass i hjulet, så hånden lærer det. Forslag: rekkefølgen i originalpanelet (Push, Open, Put on, Turn on øverst, så Pull, Close, Pick up, Take off, Turn off, så Give, Read, Use). Plassene som ikke gjelder objektet, står tomme eller grå.
-- **Ikon og tekst:** hvert ikon har verbet som tekst ved siden av. Det hindrer gjetting og gjør hjulet lesbart før ikonene er tegnet.
-- **Valg:** hjulet sender nøyaktig de samme kallene som originalpanelet: verbet (`runInputScript(1, verb, 0)`), så objektet (`runInputScript(2, 0, 0)` med musen på objektet), så setningslinjen (`runInputScript(1, 100, 0)`) for å kjøre. Ingen skript endres.
-- **To objekter (Use with, Give to):** når Var[119] er satt etter valget, lukkes hjulet og setningen venter ("Use oxygen tank with"). Neste trykk på et objekt, en figur eller en ting i inventaret fullfører, og setningslinjen kjøres som over. For å avbryte sender hjulet et klikk på Walk to (verb 3). Når en preposisjon venter, kjører skript 11 da skript 18, som tømmer setningen, akkurat som når man klikker Walk to i originalpanelet. Et trykk på tomt gulv tømmer ikke setningen i originalen.
-- **Inventaret:** hold eller høyreklikk på en ting i inventaret gir hjulet med tingens verb. Klikket sendes som klikk på verbplassen (101 til 110).
-- **Objekter uten hjul:** objekter med bare Walk to eller bare 255 (152 objekter) gjør det de skal med et vanlig trykk. Kulisser uten verb får ikke hjul.
-- **Spesialmodus:** når panelet viser verb 31 til 40 (dyr, Switch, figurvalg, tegning), vises panelet som i originalen og hjulet er av.
-- **Panelet:** med hjulet på kan de tre verbradene (y 152 til 175) skjules. Setningslinjen og inventaret står. Panelet går fra 72 til 48 linjer.
-- **Valg i spillets meny (F5):** Verbhjul av eller på, og hjulet med "verb for objektet" (som DOTT) eller "alle verb" (ingen hint). Originalpanelet kan alltid velges. Valget lagres.
+**Urskiven.** Hjulet har tolv faste plasser, én per handlingsverb, og hvert verb står alltid på samme klokkeslett:
 
-Hinting: å vise bare verbene objektet har kode for, røper noe (at tapetet kan dras i, for eksempel). DOTT Remastered godtok det. Valget "alle verb" er for den som vil spille uten hint.
+| Klokke | Verb | I stedet, når panelet viser det |
+| ---: | --- | --- |
+| 12 | Pick up | Buy (i butikken) |
+| 1 | Open | |
+| 2 | Close | |
+| 3 | Use | |
+| 4 | Give | Sell (i butikken) |
+| 5 | Turn on | |
+| 6 | Turn off | |
+| 7 | Put on | |
+| 8 | Take off | |
+| 9 | Read | |
+| 10 | Push | Teleport to |
+| 11 | Pull | |
+
+Motsatte par står ved siden av hverandre. Use er det mest brukte verbet (171 objekter) og står klokka 3. Buy, Sell og Teleport to tar plassen til verbet de erstatter i originalpanelet (samme plass i panelet), så butikken og teleporten trenger ingen egen logikk.
+
+**Hvilke verb som vises.** Som standard verbene objektet har en egen oppføring for i verbtabellen (OC-blokken, fra byte 19), som i DOTT. For ting i inventaret vises også Give og Sell, fordi setningsskriptet (globalt skript 15) håndterer dem for alle ting. Et verb vises bare når plassen i originalpanelet er på. Med valget «alle verb» vises alle verbene som er på, på de samme plassene.
+
+**Betjening.**
+- Venstreklikk eller trykk: Walk to, som i originalen. Det kjører også koden objekter har for Walk to (dører).
+- Høyreklikk på et objekt eller en ting i inventaret: hjulet åpnes rundt pekeren. Klikk på et ikon velger, klikk utenfor lukker.
+- Hold høyre knapp, dra til et ikon og slipp: velger i én bevegelse.
+- Langt trykk på mobil og i nettleseren: nettsiden sender det som høyreklikk (`engine/pages/touch.mjs`, 0,5 sekunder), så hjulet åpnes, og et trykk på ikonet velger.
+- Har objektet ingen verb for hjulet (bare Walk to, eller bare koden for alle verb), er høyreklikket et vanlig klikk.
+- Esc lukker hjulet. Ctrl+W slår hjulet av og på; av betyr originalpanelet.
+
+**Teksten.** Under hjulet står navnet på objektet, og mens pekeren er på et ikon hele setningen («Pull cat clock»). Teksten tegnes av hjulet selv: å bruke setningslinjen til forhåndsvisning ville betydd å klikke i spillet for hver bevegelse, og et nytt klikk på samme objekt kjører setningen.
+
+**Det hjulet sender.** De samme klikkene som originalpanelet, ett per ramme, gjennom spillets eget inngangsskript (globalt skript 11):
+1. Er verbet allerede valgt, først Walk to (ellers ville et nytt klikk på verbet kjørt setningen som venter).
+2. Verbet.
+3. Objektet: et klikk i rommet på punktet der hjulet ble åpnet (`VAR_VIRT_MOUSE` settes for det ene kallet), eller inventarplassen 101 til 110.
+4. Har skriptet satt en preposisjon og mangler objekt nummer to: hjulet venter (se under). Ellers klikkes setningslinjen (verb 100), og setningen kjøres.
+
+**To objekter.** Use på noe med klasse 1 til 4 og Give setter en preposisjon. Setningslinjen må da ikke klikkes, for skript 11 tømmer setningen hvis den klikkes før objekt nummer to er valgt (skript 18). Hjulet lukkes, setningslinjen viser for eksempel «Use ticket in», og neste venstreklikk i rommet eller på inventaret sendes som klikk på det objektet og så på setningslinjen. Høyreklikk avbryter: hjulet klikker Walk to, som tømmer setningen akkurat som i originalpanelet.
+
+**Panelet.** Mens hjulet er på, tegnes ikke verb 1 til 17 i panelet, og de kan ikke klikkes; tastene for dem virker fortsatt. Setningslinjen, inventaret, pilene, Switch, navnene på figurene og verbene når man styrer et dyr står som før.
+
+**Valgene** lagres i scummvm.ini under `[scummvm]`: `verbhjul` (av eller på, standard på) og `verbhjul_alle` (standard av). For tester: miljøvariablene `VERBHJUL=0` og `VERBHJUL_ALLE=1`.
 
 ## Ikonene
 
@@ -84,28 +111,47 @@ Bestillingen er ikke aktiv. Etter remake-skillen (docs/skills/scumm-hd-remake/SK
 
 ## Arbeidet i motoren
 
-Kan bygges som en del av patchen, i denne rekkefølgen:
+Patch 0002 ligger oppå HD-patchen (0001, den samme som i The Dig og Sam & Max). `tools/lag_patcher.sh` lager begge på nytt fra `engine/scummvm`.
 
-1. **Logikken:** tilstand for hjulet (lukket, åpent på objekt, venter på andre objekt), lesing av verbtabellen (eget oppslag uten 255, siden `getVerbEntrypoint` også godtar 255), sjekk av hvilke verb som er på i panelet (`_verbs[slot].curmode`), og sendingen av kallene over. Dette kan testes uten skjerm før HD-motoren er portet.
-2. **Inndata:** høyreklikk og langt trykk (berøring) i `ScummEngine::parseEvent` eller der musetastene leses, og at `checkExecVerbs` ikke får klikkene mens hjulet er åpent.
-3. **Tegningen:** i HD-laget når DigHD er portet til Zak (docs/HD-MOTOR.md). Til da kan en enkel versjon med bare tekst tegnes for å prøve oppførselen.
-4. **Panelet:** skjule verbradene og flytte inventaret, sammen med alternativ A (rom og panel i hver sin skala) når det kommer.
-5. **Menyvalgene** i F5-menyen.
+| Sted | Hva |
+| --- | --- |
+| `engines/scumm/verbhjul.cpp`, `verbhjul.h` | Klassen `VerbWheel`: urskiven, verbene for objektet, klikkene, ventingen på objekt nummer to, tegningen og testdriveren. Bare for `zak` på FM-Towns |
+| `input.cpp`, `ScummEngine::parseEvent` | Hjulet ser hver hendelse først (høyreklikk, klikk mens hjulet er åpent, Ctrl+W) |
+| `verbs.cpp`, `checkExecVerbs` | Ett klikk fra hjulet per ramme, før spillets egne klikk |
+| `verbs.cpp`, `findVerbAtPos` og `drawVerb` | Verb 1 til 17 tegnes ikke og kan ikke klikkes mens hjulet er på |
+| `scumm.cpp`, `waitForTimer` | Hjulet tegnes på skjermen rett før `updateScreen`, etter FM-Towns-lagene. Når det lukkes, legges området inn som skittent rektangel i FM-Towns-skjermen, så spillet tegnes der igjen |
+| `script.cpp`, `doSentence` | Logger hver setning (for testene) |
+
+Tegningen er foreløpig enkel: runde ikoner med tre bokstaver i ScummVMs konsollskrift på spillets egen skjerm (320 x 240). Når HD-motoren er portet, tegnes hjulet i HD med de tegnede ikonene.
 
 ## Tester
 
-- **Samme resultat som originalen:** for hvert objekt i et rom: kjør setningen én gang med originalpanelet (verb, objekt, setningslinje) og én gang med hjulet, uten skjerm, og sammenlign `doSentence` (verb, objekt A, objekt B) i loggen. Skal være likt for alle objekter og verb i hjulet.
-- **To objekter:** Use med preposisjon og Give, også fra inventaret.
-- **Spesialmodus:** at hjulet er av når panelet viser verb 31 til 40, og at Buy bare vises i butikken.
-- **Berøring:** langt trykk i nettleseren og på mobil.
-- Tom spiller med skjerm og sier hva som føles feil.
+`tools/verbhjul_test.sh` kjører spillet uten skjerm to ganger samtidig, med originalpanelet og med hjulet, og sammenligner setningene spillet kjører (`doSentence`). Introen går av seg selv til rom 1, der man kan styre Zak etter rundt 1300 rammer.
 
-## Åpne spørsmål til Tom
+Kjørt 13. oktober med motoren bygget av `engine/build.sh` (begge patchene): bestått.
 
-1. Standard: verb for objektet (som DOTT) eller alle verb?
-2. Både høyreklikk og hold inne på PC, eller bare det ene?
-3. Tekst ved siden av ikonene hele tiden, eller bare når man peker?
-4. Ikonene i samme stilpilot som det første rommet og Zak, eller som en egen pilot?
+| Handling | Hjulet | Setning |
+| --- | --- | --- |
+| Open door (84) | høyreklikk, klikk på ikonet | 2 84 0 |
+| Pull dresser drawer (92) | hold og dra | 6 92 0 |
+| Turn on lamp (103) | høyreklikk, klikk | 5 103 0 |
+| Pull window shade (90) | høyreklikk, klikk | 6 90 0 |
+| Turn on cat clock (95) | høyreklikk, klikk | 5 95 0 |
+| Read ticket (82, inventaret) | høyreklikk på inventaret, klikk | 12 82 0 |
+| Use ticket in door | høyreklikk på inventaret, Use, venter, klikk på døren | 14 82 84, så 14 84 82 (spillets eget andre forsøk, likt i originalen) |
+| Use ticket, så høyreklikk | avbrudd | ingen setning; preposisjon og objekt er 0 etterpå |
+
+Testet for hånd uten skjerm samme natt: «alle verb» (døren får alle tolv plassene), Ctrl+W av (originalpanelet tegnes igjen) og på (panelet skjules igjen), og skjermbilder som viser at hjulet ryddes bort når det lukkes.
+
+Ikke testet: med skjerm og mus, Esc for å lukke hjulet, langt trykk i nettleseren og på mobil, butikken (Buy og Sell), teleporten, figurbytte, styring av dyr, andre rom enn rom 1, og at valget faktisk lagres i scummvm.ini (ScummVM skrev ingen scummvm.ini i testmiljøet, heller ikke ved avslutning).
+
+## Det som gjenstår
+
+- Navnet på objektet under pekeren mens hjulet er lukket (i dag gir What is det i originalen; What is er skjult når hjulet er på, men tasten c virker).
+- Valgene i spillets meny (F5) i stedet for bare Ctrl+W og scummvm.ini.
+- De 15 ikonene, etter motiv- og designavklaringen i remake-skillen, godkjent av Tom (gjerne sammen med stilpiloten i rom 1).
+- Tegning i HD når HD-motoren er portet til Zak.
+- Prøve med skjerm, i nettleseren og på mobil, og i butikken, teleporten, ved figurbytte og når man styrer dyr.
 
 ## Kilder
 

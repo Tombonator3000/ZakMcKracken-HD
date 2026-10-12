@@ -6,7 +6,9 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 - HD-versjon av *Zak McKracken and the Alien Mindbenders* (FM-Towns-utgaven, SCUMM v3 med 256 farger): HD-bakgrunner, HD-objekter, HD-figurer og HD-tekst, lagt oppå originalen slik som i The Dig HD og Sam & Max HD.
 - Tom vil ha det samme som for The Dig: spillet starter rett inn som originalen, HD eller originalgrafikk velges i spillets egen meny, det virker på mobil, og det finnes en komplett fil til nedlasting (Linux først).
 - Tom ba 11. oktober om en utredning av et mer moderne grensesnitt (verbhjul som i Curse of Monkey Island og Full Throttle, eller ikoninventar som i Monkey Island 2) og større bilde. Utredningen er `docs/GRENSESNITT.md`.
-- Tom valgte 12. oktober C: verbhjul som i Day of the Tentacle Remastered. Klargjort i `docs/VERBHJUL.md` og `docs/verbhjul-verb.csv`. Forslaget er DOTT sin metode (hjulet viser verbene objektet har kode for), hvert verb med eget ikon. Tre ikoner (øye, hånd, tannhjul) frarådes med tall fra skriptene: 97 av 489 objekter med verbkode får da et tvetydig valg. Ingenting er bygget; fire spørsmål venter på Tom.
+- Tom valgte 12. oktober C: verbhjul som i Day of the Tentacle Remastered, og godkjente oppførselen samme kveld («Lag det»): urskive med tolv faste plasser (12 Pick up/Buy, 1 Open, 2 Close, 3 Use, 4 Give/Sell, 5 Turn on, 6 Turn off, 7 Put on, 8 Take off, 9 Read, 10 Push/Teleport to, 11 Pull), verb for objektet som standard og «alle verb» som valg, høyreklikk og hold-og-dra, teksten under hjulet, ikonene i samme stilpilot som rom 1. Tre ikoner (øye, hånd, tannhjul) ble frarådet: 97 av 489 objekter med verbkode får da et tvetydig valg.
+- Verbhjulet er bygget som `engine/patches/0002-verbhjul.patch` (13. oktober), oppå 0001, som holdes lik den i Sam & Max. `tools/lag_patcher.sh` lager begge; `tools/verbhjul_test.sh` tester hjulet mot originalpanelet uten skjerm.
+- Tom spurte om en egen inventarskjerm; svaret var nei: rommet er 2,5:1, så på 16:9 er det uansett plass til inventaret under rommet, og MI SE ble kritisert for å gjemme inventaret.
 - DOTT Remastered sitt hjul viser verbene som gjelder objektet (PopMatters, PCWorld), ikke alle ni. GRENSESNITT.md sa først det motsatte; rettet 12. oktober.
 
 ## Spillfilene
@@ -17,7 +19,7 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 - Spillfiler og alt laget fra dem (work/, mods/) skal aldri inn i main.
 
 ## Skriptene (12. oktober)
-- Klikk går til globalt skript 11 (`VAR_VERB_SCRIPT`, satt i skript 7). Setningen: verb Var[116], objekt Var[117] og Var[118], preposisjon Var[119] (129 in, 130 with, 131 on, 132 to), standardverb Var[120] (3, Walk to). Objektet under musen finnes av skript 22 (Var[114]). Setningen kjøres ved andre klikk på samme objekt eller klikk på setningslinjen (verb 100). Skript 18 tømmer setningen. Var[300] er spillets tilstand (3 vanlig spill).
+- Klikk går til globalt skript 11 (`VAR_VERB_SCRIPT`, satt i skript 7). Setningslinjen (verb 100) må ikke klikkes når en preposisjon venter uten objekt nummer to; da tømmer skript 11 setningen. Setningen: verb Var[116], objekt Var[117] og Var[118], preposisjon Var[119] (129 in, 130 with, 131 on, 132 to), standardverb Var[120] (3, Walk to). Objektet under musen finnes av skript 22 (Var[114]). Setningen kjøres ved andre klikk på samme objekt eller klikk på setningslinjen (verb 100). Skript 18 tømmer setningen. Var[300] er spillets tilstand (3 vanlig spill).
 - Verb 1 til 14 er standardverbene, 15 Buy, 16 Sell, 17 Teleport to, 31 til 40 spesialmoduser (Switch, figurnavn, verb når man styrer dyr). Inventaret er verb 101 til 110, pilene 115 og 116.
 - Romene har ingen navn i indeksen; beskrivelser i `docs/romnavn.csv`.
 

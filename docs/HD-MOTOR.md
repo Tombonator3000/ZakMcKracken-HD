@@ -6,6 +6,7 @@ Kort versjon for Zak. Hvordan motoren virker, innstillingene, testkrokene og hva
 
 - `engine/patches/0001-dighd-hd-grafikk.patch` er Sam & Max sin patch (The Digs patch utvidet for v6) mot ScummVM `c9091321` (`engine/SCUMMVM_COMMIT`). Den er ikke endret for Zak.
 - DigHD er **ikke** på for Zak. `DigHD::create` godtar bare `GID_DIG` og `GID_SAMNMAX`. Spillet kjører som vanlig ScummVM, og en mod gjør ingenting.
+- Verbhjulet ligger i en egen patch oppå denne, `engine/patches/0002-verbhjul.patch` (docs/VERBHJUL.md). Hjulet tegnes rett før `updateScreen`, etter FM-Towns-lagene, og må flyttes inn i HD-laget når DigHD er portet.
 - Testet: `engine/build.sh` bygget motoren med patchen og FLAC her, og Zak startet uten skjerm: `Using gameid zak, variant FM-TOWNS`, SCUMM 3, riktig MD5, rommene 49, 1, 47, 9 og 50 ble lest (introen). Ikke spilt med skjerm og lyd.
 
 ## Det som må til for Zak

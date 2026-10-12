@@ -63,12 +63,13 @@ pytest -m "not game"             # det CI kjører
 node --test engine/pages/tests/*.test.mjs   # nettsidekoden
 engine/run.sh ingen              # spillet uten mod
 python3 tools/indeks_info.py game/00.LFL
+tools/verbhjul_test.sh           # verbhjulet mot originalpanelet uten skjerm
 ```
 
 ## Arbeid med motoren
 
-- Patchen ligger i `engine/patches/` og er den samme som i Sam & Max. Gjør endringer i `engine/scummvm`, og lag patchen på nytt med
-  `git -C engine/scummvm add -N engines/scumm/dighd.cpp engines/scumm/dighd.h && git -C engine/scummvm diff > engine/patches/0001-dighd-hd-grafikk.patch`.
+- Patchene ligger i `engine/patches/` og legges på i rekkefølge: `0001-dighd-hd-grafikk.patch` (HD-motoren, den samme som i Sam & Max) og `0002-verbhjul.patch` (verbhjulet for Zak, `engines/scumm/verbhjul.*` og krokene). Gjør endringer i `engine/scummvm`, og lag begge på nytt med `tools/lag_patcher.sh`. Ikke lag 0001 med `git diff` av hele kopien; da kommer hjulet med i den.
+- Etter endringer i verbhjulet: `tools/verbhjul_test.sh` (originalpanelet og hjulet skal gi de samme setningene, omtrent fire minutter).
 - ScummVM-versjonen er låst i `engine/SCUMMVM_COMMIT`. Bytt den bare sammen med en test av patchen.
 - Hva som må portes for Zak: `docs/HD-MOTOR.md`.
 

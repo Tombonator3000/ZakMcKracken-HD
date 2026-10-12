@@ -19,6 +19,7 @@ engine/build.sh                              # ScummVM med patchen (libsdl2-dev,
 
 - [docs/ANALYSE.md](docs/ANALYSE.md): spillfilene, formatet, tellinger og grafikken som skal byttes ut
 - [docs/HD-MOTOR.md](docs/HD-MOTOR.md): hva som må til for HD-motoren i Zak
+- [docs/VERBHJUL.md](docs/VERBHJUL.md): verbhjulet som i Day of the Tentacle Remastered (bygget, med midlertidige ikoner)
 - [docs/GRENSESNITT.md](docs/GRENSESNITT.md): verbhjul, ikoninventar og større bilde
 - [docs/HD-REMASTER-METODE.md](docs/HD-REMASTER-METODE.md): arbeidsmetoden og godkjenningene
 - [AGENTS.md](AGENTS.md): regler for agentene som jobber i repoet

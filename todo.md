@@ -44,13 +44,17 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 
 - [x] Tom valgte C, verbhjul som i DOTT Remastered (12. oktober)
 - [x] Klargjort: hvordan DOTT gjorde det, hvordan skript 11 tar imot klikk, verb per objekt, forslag til oppførsel, ikonliste (`docs/verbhjul-verb.csv`), motorarbeid og tester
-- [ ] Tom svarer på de fire åpne spørsmålene i VERBHJUL.md (verb for objektet eller alle, høyreklikk og hold, tekst ved ikonene, ikonene i stilpiloten)
-- [ ] Logikken i patchen: tilstand, verbtabellen uten 255, verb som er på i panelet, kallene til skript 11 (verb, objekt, setningslinje 100), to objekter, avbryt med Walk to
-- [ ] Test uten skjerm: samme `doSentence` med hjulet som med originalpanelet for alle objekter i et rom
-- [ ] Inndata: høyreklikk og langt trykk; `checkExecVerbs` får ikke klikkene mens hjulet er åpent
-- [ ] Enkel tegning med tekst for å prøve oppførselen før HD-motoren er portet
+- [x] Tom godkjente oppførselen (urskive med tolv faste plasser, verb for objektet, høyreklikk og hold-og-dra, tekst under hjulet, ikonene i stilpiloten) og ba om at det lages (12. oktober)
+- [x] Logikken i `engine/patches/0002-verbhjul.patch`: urskiven, verbtabellen uten 255, verb som er på i panelet, klikkene til skript 11, venting på objekt nummer to (setningslinjen klikkes ikke da), avbryt med Walk to (13. oktober)
+- [x] Inndata: høyreklikk, hold og dra, klikk på ikon; spillet får ikke klikkene mens hjulet er åpent; Esc lukker; Ctrl+W av og på
+- [x] Enkel tegning med tre bokstaver på spillets skjerm, ryddes bort når hjulet lukkes
+- [x] Verb 1 til 17 skjules i panelet når hjulet er på; tastene virker; resten av panelet står
+- [x] `tools/verbhjul_test.sh`: originalpanelet og hjulet gir de samme 8 setningene i rom 1, med venting og avbrudd (bestått 13. oktober)
+- [x] `tools/lag_patcher.sh` lager 0001 og 0002 på nytt; 0001 er byte for byte lik den i Sam & Max
+- [ ] Navnet på objektet under pekeren mens hjulet er lukket (What is er skjult)
+- [ ] Prøv med skjerm og mus, i nettleseren og på mobil (langt trykk), og at valget lagres i scummvm.ini
+- [ ] Prøv butikken (Buy, Sell), teleporten, figurbytte og styring av dyr
 - [ ] Tegning i HD-laget når DigHD er portet til Zak
-- [ ] Skjul verbradene når hjulet er på; spesialmodus (verb 31 til 40) viser panelet
 - [ ] Menyvalg i F5: verbhjul av eller på, verb for objektet eller alle verb
 - [ ] Ikonene (15) etter motiv- og designavklaring, godkjent av Tom
 - [ ] Senere, hvis ønsket: A (rom og panel i hver sin skala) og B (ikoninventar), se GRENSESNITT.md
