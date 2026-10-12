@@ -4,6 +4,8 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 
 ## Neste
 
+- [x] Innført kildetro motiv- og designanalyse før HD-produksjon i `docs/skills/scumm-hd-remake/SKILL.md`, med henvisninger fra arbeidsinstruksene (12. oktober 2026)
+
 ### Oppsett (11. oktober)
 
 - [x] Spillfilene hentet fra Drive (`Zak-fm`) og lagt i grenen `spilldata` med sjekksummer

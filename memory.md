@@ -45,3 +45,9 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 - Roller: Claude koden, ChatGPT/Codex grafikken, Tom godkjenner.
 - Claude får ikke flette sine egne PR-er (som i de andre repoene). Tom fletter når CI er grønn.
 - Stilpilot med ett rom og ett figurark før noe bestilles i mengde. Glatt figurstil med ekte alfa fra starten. Forslag til pilot: rom 1 (Zaks leilighet) og kostyme 1 (Zak).
+
+## Kildetro grafikk og design (12. oktober 2026)
+- Tom ba om samme regel i remake-skillen i Dig, Sam & Max og Zak: avklar motiv, funksjon, palett, figuridentitet og design fra riktig originalkontekst før grafisk HD-arbeid, også stilpilot.
+- Skillen ligger i `docs/skills/scumm-hd-remake/SKILL.md`. Den er koblet fra AGENTS, remastermetoden, bestillingen og malen for grafikkgrenen. Spillets egne stilvalg gjelder; Dig sine figurer og materialer er ikke designfasit for de andre spillene.
+- Rett påviste feil i produksjonsgrunnlaget før generering. Beskyttede jobbfiler beholdes; korrigert prompt og kildebegrunnelse leveres i et separat notat.
+- Visuell kontroll av mening, identitet og hele animasjoner i spillet kommer i tillegg til teknisk mottak. Innført regel er ikke bevis for at alle ressursene er analysert eller spilltestet.
