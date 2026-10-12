@@ -6,6 +6,9 @@ Skriver to filer:
                           ruter, HD-størrelse (4x) og et grovt anslag på antall grafikkjobber
   docs/rom-oversikt.csv   én rad per rom, samme kolonner som i The Dig og Sam & Max
 
+Navnet på rommene hentes fra docs/romnavn.csv (beskrivelser skrevet fra skript og bilder), siden
+indeksen ikke har romnavn.
+
 Med de dekompilerte skriptene (work/skript/objekter.tsv) merkes objekter som kan plukkes opp
 (verb 8, Pick up), siden de er kandidater til inventarikoner (docs/GRENSESNITT.md).
 
@@ -48,8 +51,18 @@ def _les_verb(skript: Path | None) -> dict[int, list[int]]:
     return out
 
 
+def _les_romnavn(docs: Path) -> dict[str, str]:
+    """Beskrivelsene i docs/romnavn.csv (rom, beskrivelse, kilde), skrevet for hånd fra skript og bilder."""
+    f = docs / "romnavn.csv"
+    if not f.exists():
+        return {}
+    with open(f, newline="", encoding="utf-8") as fh:
+        return {r["rom"]: r["beskrivelse"] for r in csv.DictReader(fh)}
+
+
 def skriv(extract: Path, docs: Path, skript: Path | None = None) -> dict:
     rooms = json.loads((extract / "rooms.json").read_text())["rooms"]
+    romnavn = _les_romnavn(docs)
     costumes = json.loads((extract / "costumes.json").read_text())
     fonts_f = extract / "fonts.json"
     fonts = json.loads(fonts_f.read_text()) if fonts_f.exists() else {}
@@ -62,7 +75,7 @@ def skriv(extract: Path, docs: Path, skript: Path | None = None) -> dict:
         r = rooms[k]
         if not r.get("width"):
             continue
-        rader.append({"type": "rom", "id": k, "rom": k, "navn": r.get("name", ""), "bredde": r["width"],
+        rader.append({"type": "rom", "id": k, "rom": k, "navn": romnavn.get(k, r.get("name", "")), "bredde": r["width"],
                       "hoyde": r["height"], "ruter": "", "unike_bilder": 1, "bredde_x4": r["width"] * SKALA,
                       "hoyde_x4": r["height"] * SKALA, "piksler": r["width"] * r["height"],
                       "jobber_anslag": _romjobber(r["width"]), "inventar": "",
@@ -112,7 +125,7 @@ def skriv(extract: Path, docs: Path, skript: Path | None = None) -> dict:
             if not r.get("width"):
                 continue
             n_rom += 1
-            w.writerow({"rom": k, "navn": r.get("name", ""), "bredde": r["width"], "hoyde": r["height"],
+            w.writerow({"rom": k, "navn": romnavn.get(k, r.get("name", "")), "bredde": r["width"], "hoyde": r["height"],
                         "z_plan": int(bool(r.get("zplane"))), "paletter": 1,
                         "objektbilder": sum(len(o.get("states", [])) for o in r["objects"]),
                         "bredde_x4": r["width"] * SKALA, "hoyde_x4": r["height"] * SKALA,

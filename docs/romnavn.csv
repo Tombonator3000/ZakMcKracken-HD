@@ -1,0 +1,59 @@
+rom,beskrivelse,kilde
+1,"Zaks leilighet: soverom (seng, telefon, telefonsvarer, kattklokke)","objektnavn; replikk ""Yay, it's my CashCard."""
+2,"Zaks leilighet: stue og kjøkken (TV, kjøleskap, komfyr, vask)",objektnavn; bilde; dør til rom 1 og 3
+3,"Gaten utenfor leiligheten (postkasse, buss, Golden Gate Bridge)",objektnavn (14th Avenue)
+4,The Phone Company: skranke med terminal og betalingstelefon,objektnavn; bilde (TPC på veggen)
+5,"Gaten ved Lou's Loans (buss, trapp)",bilde (skilt Lou's Loans og 14th Ave); objektnavn (13th Avenue)
+6,"Kontor med bokhyller, skrivebord og Yeti-hodeskalle",objektnavn; bilde
+7,"Inne i bruktbutikken: kjøp- og salgsluke, Lotto, verktøy og gitar","objektnavn (Buy Window, Sell Window, Lotto)"
+8,Flyplass: terminal med avisstand og billettautomat,objektnavn; replikker (bokselgeren)
+9,Flyplass: utgang til flyene (annen terminal),"objektnavn; bilde (Gates, Air)"
+10,"Romskipet til romvesenene (The King, skjerm, knapper)","replikker (The King; ""Space Cadillac""); objektnavn"
+11,"Flykabin (seter, toalett, mikrobølgeovn, oksygentank)",objektnavn
+12,"Ved Mt. Rainier: tre, tohodet ekorn, flyplass",objektnavn
+13,"Hule med ekornreir, ildsted og ankh-dør",objektnavn
+14,"Kammer med ankh, sokkel, statue og krystall",objektnavn; bilde
+15,"Kammer med hieroglyfer, pyramide og ansikt (kart over Mars)",objektnavn; replikker (kart over Mars-ansiktet og Mars-pyramiden)
+16,"Fangerom i romskipet (fangekammer, kart, maskin)","objektnavn; replikk ""Here's the stuff they took!"""
+17,Utendørs med flaggstang og jak,"objektnavn (Yak, hay, yak pie)"
+18,Fengsel med celler og ettersøkt-plakat,objektnavn
+19,"Guruens rom (statue, oppslagstavle, sertifikat)",replikker (Guru); objektnavn
+20,Ørken ved pyramide og sfinks,"objektnavn (Cairo, pyramid door); bilde"
+21,"Ørken ved inngangen i pyramiden (sandhaug, nøkkelhull)",objektnavn
+22,Ørken med hemmelig inngang og merkelige tegn,objektnavn
+23,Gang i pyramiden med et sovende beist,replikker; bilde
+24,Gravkammer med sarkofag og fakkel,objektnavn
+25,Krystallkammer med krystallaber og glødende objekt,objektnavn
+26,"Mars: overflaten (hjelm, lufttilførsel)","replikker (""I'm out of air!""); bilde"
+27,Mars: trikkestasjon ved pyramiden og det store ansiktet,"objektnavn (Shuttle Bug, tram, monolith, huge face)"
+28,"Mars: hostellet (låsbokser, køyer, sikringer)","objektnavn; replikk ""I've depressurized the hostel!"""
+29,Mars: det store kammeret med krystallkule,"objektnavn (Great Chamber, crystal sphere, landing site)"
+30,Mars-bussen: førerplassen (I love Mars-skilt),"bilde; objektnavn (boom box, oksygenventil); replikk ""BLASTOFF!"""
+31,Havet med delfin,objektnavn
+32,Stor statue med massiv dør,objektnavn
+33,Mars: kart over ansiktskammeret og pyramiden,"objektnavn (Mars pyramid, Mars face chamber); bilde"
+34,Kart over jorden i oldtiden med labyrint,"replikker (""the map from my dream""); bilde"
+35,"Labyrint med kraftfelt, glassrør og nøkler",objektnavn; replikker
+36,Døråpning høyt oppe,"replikk (""SCARED of heights"")"
+37,Jungelsti,"objektnavn (path); replikk ""hopelessly lost"""
+38,Landsby med hytte og shamanen,replikker (Shaman); objektnavn
+39,Jungel med tempelinngang,objektnavn
+40,"Småfly i luften (pilot, fallskjerm)",replikker (pilot); bilde (biplan)
+41,Havbunnen med plattform og glødende objekt,"objektnavn; replikk ""bottom part of the device"""
+42,Jungel med inka-fuglemater og fugl,"objektnavn; replikk ""Ancient Incan Bird Feeder"""
+43,"Utsikt over en dal (rulle, kandelaber, øye)","objektnavn; replikk ""I see a valley"""
+44,Stonehenge om natten med vaktpost,"objektnavn (Stonehenge, guard house); replikker (sentry)"
+45,Reisemål-skjermen (DESTINATIONS),bilde
+46,Svart bilde (320 x 136),bilde
+48,Under vann med små gule figurer,bilde; ikke avklart
+49,Ramme med skyer (lastes først i introen),bilde; lastes først i introen
+50,Lagre og laste: skjermen med sfinksen i nesebriller,"bilde; replikk ""The game was saved."""
+51,Verdensrommet med Mars og jorden,bilde
+52,Tastatur med talltaster (kodelås),bilde; meldinger * og #
+53,Tunnel med fakler,objektnavn
+54,Romskip i verdensrommet,bilde
+55,Svart bilde,bilde
+56,To bur mot blå bakgrunn,bilde; ikke avklart
+57,Pyramide om natten,bilde
+58,Seng mot blå bakgrunn (drømmen),bilde; replikk i globalt skript 2 om drøm
+59,Sjefens kontor i The National Inquisitor,bilde (vinduet); objektnavn (ticket); globalt skript 4 (sjefen gir billetten til Seattle)

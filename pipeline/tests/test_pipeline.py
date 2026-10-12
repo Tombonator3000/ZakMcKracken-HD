@@ -1538,3 +1538,19 @@ def test_rejected_soft_sheet():
     assert myk.rejected_sheet(rej, "fig002_01", "hva som helst")     # "*" gjelder alle
     assert myk.rejected_sheet(rej, "fig003_01", "abc") is None      # sjekk er ikke avvist
     assert myk.rejected_sheet(None, "fig004_01", "abc") is None
+
+
+def test_skriptoversikt_tekst():
+    """tools/skriptoversikt.py: tekst og argumenter fra utskriften til descumm."""
+    import importlib.util
+    sti = Path(__file__).resolve().parents[2] / "tools" / "skriptoversikt.py"
+    spec = importlib.util.spec_from_file_location("skriptoversikt", sti)
+    so = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(so)
+    linje = 'print(10,[Text("Look." + newline() + "Write it^" + wait() + "now@@"),Color(3)]);'
+    assert so._kall(linje, "print") == ['10,[Text("Look." + newline() + "Write it^" + wait() + "now@@"),Color(3)]']
+    assert so.tekst_i_print(so._kall(linje, "print")[0]) == "Look. / Write it... now"
+    assert so.lesbar_tekst('"It\'s " + getName(Var[55]) + "."') == "It's [navn Var[55]]."
+    assert so._del_argumenter("Var[314],Var[315],-1,-1") == ["Var[314]", "Var[315]", "-1", "-1"]
+    # loadRoom( inne i loadRoomWithEgo( skal ikke telles som loadRoom
+    assert so._kall("loadRoomWithEgo(84,1,-1,-1);", "loadRoom") == []

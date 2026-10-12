@@ -13,7 +13,7 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [x] Samme oppsett som Sam-Max-HD: AGENTS, README, memory, todo, log, STATUS, `engine/`, `pipeline/` (`zakhd`), `tools/`, `docs/`, `spill.sh`, arbeidsflyter
 - [x] Grenene `hd-mod` og `gpt-arbeid` som startgrener
 - [x] ScummVM ved c9091321 med patchen og FLAC bygget, og Zak startet uten skjerm (uten HD)
-- [ ] Tom fletter PR-en med oppsettet når CI er grønn
+- [x] Tom fletter PR-en med oppsettet når CI er grønn (PR 1, flettet 12. oktober)
 - [ ] Tom skrur av lenkedelingen på Drive-mappen `Scummvm` når han ikke trenger den
 - [ ] Tom starter `./spill.sh` på laptopen og ser at spillet starter med bilde og CD-musikk
 
@@ -24,7 +24,8 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [x] Liste over all grafikk som skal byttes ut (`docs/grafikkliste.csv`, `zakhd grafikkliste`)
 - [x] Romliste som CSV (`docs/rom-oversikt.csv`, uten navn)
 - [x] De fire spillbare figurene koblet til kostymer (`docs/figurer.csv`)
-- [ ] Navn på rommene i romlisten ved gjennomsyn (indeksen har ingen romnavn)
+- [x] Beskrivelse av alle 58 rommene fra objektnavn, replikker og bilder (`docs/romnavn.csv`, brukes av `zakhd grafikkliste`). Rom 48 og 56 er ikke avklart
+- [x] Lesbart lag over skriptene: `tools/skriptoversikt.py` gir ROM.md, REPLIKKER.md (1309 replikker), rom-koblinger.tsv og kostymer-i-rom.tsv i work/skript
 - [ ] Resten av kostymene koblet til figurer (fra `ActorOps` og `putActor` i skriptene)
 - [ ] Hvilket rom og hvilken palett hvert kostyme faktisk vises i, og bruk den i RGBA-bildene
 - [ ] Hvilke ting kan havne i inventaret (pickupObject i skriptene og verb 8), til eventuelle ikoner
@@ -39,13 +40,20 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [ ] Menyen (raden HD Graphics) og pekeren for FM-Towns-utgaven
 - [ ] Romtesten i alle 58 rom
 
-### Grensesnitt (`docs/GRENSESNITT.md`, ikke bestemt)
+### Grensesnitt: verbhjulet (`docs/VERBHJUL.md`)
 
-- [ ] Tom velger hva han vil ha: A (rom og panel skalert hver for seg), B (ikoninventar), C (verbhjul med alle verb)
-- [ ] A: bygg skjermen av rom og panel i hver sin skala, og regn om musen
-- [ ] B: ikonark for inventaret og klikk på ikon sendt som klikk på verbplassen
-- [ ] C: verbhjul med alle verb, sendt som `runInputScript` som originalen
-- [ ] Valgene i spillets egen meny, hver for seg
+- [x] Tom valgte C, verbhjul som i DOTT Remastered (12. oktober)
+- [x] Klargjort: hvordan DOTT gjorde det, hvordan skript 11 tar imot klikk, verb per objekt, forslag til oppførsel, ikonliste (`docs/verbhjul-verb.csv`), motorarbeid og tester
+- [ ] Tom svarer på de fire åpne spørsmålene i VERBHJUL.md (verb for objektet eller alle, høyreklikk og hold, tekst ved ikonene, ikonene i stilpiloten)
+- [ ] Logikken i patchen: tilstand, verbtabellen uten 255, verb som er på i panelet, kallene til skript 11 (verb, objekt, setningslinje 100), to objekter, avbryt med Walk to
+- [ ] Test uten skjerm: samme `doSentence` med hjulet som med originalpanelet for alle objekter i et rom
+- [ ] Inndata: høyreklikk og langt trykk; `checkExecVerbs` får ikke klikkene mens hjulet er åpent
+- [ ] Enkel tegning med tekst for å prøve oppførselen før HD-motoren er portet
+- [ ] Tegning i HD-laget når DigHD er portet til Zak
+- [ ] Skjul verbradene når hjulet er på; spesialmodus (verb 31 til 40) viser panelet
+- [ ] Menyvalg i F5: verbhjul av eller på, verb for objektet eller alle verb
+- [ ] Ikonene (15) etter motiv- og designavklaring, godkjent av Tom
+- [ ] Senere, hvis ønsket: A (rom og panel i hver sin skala) og B (ikoninventar), se GRENSESNITT.md
 
 ### Pipeline
 
