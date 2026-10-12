@@ -5,7 +5,9 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 ## Mål
 - HD-versjon av *Zak McKracken and the Alien Mindbenders* (FM-Towns-utgaven, SCUMM v3 med 256 farger): HD-bakgrunner, HD-objekter, HD-figurer og HD-tekst, lagt oppå originalen slik som i The Dig HD og Sam & Max HD.
 - Tom vil ha det samme som for The Dig: spillet starter rett inn som originalen, HD eller originalgrafikk velges i spillets egen meny, det virker på mobil, og det finnes en komplett fil til nedlasting (Linux først).
-- Tom ba 11. oktober om en utredning av et mer moderne grensesnitt (verbhjul som i Curse of Monkey Island og Full Throttle, eller ikoninventar som i Monkey Island 2) og større bilde. Utredningen er `docs/GRENSESNITT.md`. Ingenting er bestemt eller bygget.
+- Tom ba 11. oktober om en utredning av et mer moderne grensesnitt (verbhjul som i Curse of Monkey Island og Full Throttle, eller ikoninventar som i Monkey Island 2) og større bilde. Utredningen er `docs/GRENSESNITT.md`.
+- Tom valgte 12. oktober C: verbhjul som i Day of the Tentacle Remastered. Klargjort i `docs/VERBHJUL.md` og `docs/verbhjul-verb.csv`. Forslaget er DOTT sin metode (hjulet viser verbene objektet har kode for), hvert verb med eget ikon. Tre ikoner (øye, hånd, tannhjul) frarådes med tall fra skriptene: 97 av 489 objekter med verbkode får da et tvetydig valg. Ingenting er bygget; fire spørsmål venter på Tom.
+- DOTT Remastered sitt hjul viser verbene som gjelder objektet (PopMatters, PCWorld), ikke alle ni. GRENSESNITT.md sa først det motsatte; rettet 12. oktober.
 
 ## Spillfilene
 - Original på Google Drive, mappen `Zak-fm` (id `1C4-aa3j3Jgso3Z2J00UYS3lfvNcxl4-Z`) i mappen `Scummvm` (id `1YpufOwLtohaVAPOdRxnIs4DHzO_0GcQ5`). `Scummvm` var fortsatt delt med lenke 11. oktober (fra Sam & Max-arbeidet), så filene ble hentet med curl.
@@ -13,6 +15,11 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 - Filer: `00.LFL` (indeks), `01.LFL` til `59.LFL` (rom med skript, lyder og kostymer; `47.LFL` har ingen RO-blokk), `98.LFL` og `99.LFL` (tegnsett 1 og 0), `Track1.fla` til `Track21.fla` (CD-musikk, FLAC). 83 filer, 330 040 888 byte.
 - Kopi i grenen `spilldata` (uten felles historikk med `main`) med `game/SHA256SUMS`. Ingen fil er over 90 MB, så ingenting er delt. Pushet i seks commits (rom og tegnsett, så sporene i fem grupper) 11. oktober.
 - Spillfiler og alt laget fra dem (work/, mods/) skal aldri inn i main.
+
+## Skriptene (12. oktober)
+- Klikk går til globalt skript 11 (`VAR_VERB_SCRIPT`, satt i skript 7). Setningen: verb Var[116], objekt Var[117] og Var[118], preposisjon Var[119] (129 in, 130 with, 131 on, 132 to), standardverb Var[120] (3, Walk to). Objektet under musen finnes av skript 22 (Var[114]). Setningen kjøres ved andre klikk på samme objekt eller klikk på setningslinjen (verb 100). Skript 18 tømmer setningen. Var[300] er spillets tilstand (3 vanlig spill).
+- Verb 1 til 14 er standardverbene, 15 Buy, 16 Sell, 17 Teleport to, 31 til 40 spesialmoduser (Switch, figurnavn, verb når man styrer dyr). Inventaret er verb 101 til 110, pilene 115 og 116.
+- Romene har ingen navn i indeksen; beskrivelser i `docs/romnavn.csv`.
 
 ## Format (sjekket 11. oktober)
 - Små blokkhoder: uint32 LE størrelse med hodet, så 2 tegn. Ikke kryptert.

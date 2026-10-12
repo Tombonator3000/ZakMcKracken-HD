@@ -2,7 +2,9 @@
 
 Utredning 11. oktober 2026, etter spørsmål fra Tom: kan verblinjen med tekst byttes med et ikonbasert hjul som i *The Curse of Monkey Island* og *Full Throttle*, eller kan inventaret som bare er tekst bli ikoner som i *Monkey Island 2*, så bildet kan bli større?
 
-Kort svar: ja, alle tre lar seg gjøre i HD-laget uten å endre spillets skript, men ikke med et hjul på tre ikoner. Zak bruker 14 verb, og flere gåter avhenger av hvilket verb man velger. Anbefalt rekkefølge står nederst. Ingenting her er bygget eller testet; det forutsetter at HD-motoren først er portet til Zak (docs/HD-MOTOR.md).
+Kort svar: ja, alle tre lar seg gjøre i HD-laget uten å endre spillets skript, men ikke med et hjul på tre ikoner. Zak bruker 14 verb, og flere gåter avhenger av hvilket verb man velger. Ingenting her er bygget eller testet; det forutsetter at HD-motoren først er portet til Zak (docs/HD-MOTOR.md).
+
+**Beslutning 12. oktober 2026:** Tom valgte C, verbhjul som i Day of the Tentacle Remastered. Klargjøringen står i [VERBHJUL.md](VERBHJUL.md). Der er også rettet en feil i dette dokumentet: DOTT-hjulet viser verbene som gjelder objektet, ikke alle ni.
 
 ## Slik er skjermen i Zak FM-Towns
 
@@ -28,7 +30,7 @@ Et klikk går gjennom ScummVM sin `checkExecVerbs` (verbs.cpp): klikk på et ver
 - **The Curse of Monkey Island** (1997): en mynt med tre ikoner (hånd, hodeskalle, papegøye) dukker opp over objektet; høyreklikk gjør det mest opplagte. Inventaret ligger i en kiste som dekker det meste av skjermen. Siden verbene og inventaret ikke ligger nederst lenger, kan rommet fylle hele skjermen. Modellen kom fra *Full Throttle* (1995).
 - **Monkey Island 2** (1991): verbene ble færre (Turn on og Turn off forsvant), og inventaret ble ikoner i stedet for tekst, med verbene nede til venstre og ikonene nede til høyre. Det samme oppsettet kom senere i CD-utgaven av det første spillet.
 - **Monkey Island SE** (2010): nytt grensesnitt etter mønster av Curse, med originalen som valg. Kritikken (docs i Dig-repoet, REMASTER-FORBILDER.md): verb og inventar i egne menyer gjorde at man ikke så rommet og inventaret samtidig, og ordspillgåtene ble svakere.
-- **Day of the Tentacle Remastered** (2016): et verbhjul rundt objektet med alle de ni verbene, og den gamle verbraden som valg. Grafikk, lyd og grensesnitt kan byttes hver for seg.
+- **Day of the Tentacle Remastered** (2016): et verbhjul rundt objektet med verbene som gjelder det objektet (rettet 12. oktober; først stod det her at alle ni var med), og den gamle verbraden som valg. Grafikk, lyd og grensesnitt kan byttes hver for seg.
 
 ## Alternativene
 
@@ -56,13 +58,15 @@ Hver inventarplass (verb 101 til 110) tegnes som et bilde av objektet i stedet f
 
 ### C. Verbhjul (som Day of the Tentacle Remastered)
 
-Langt trykk eller høyreklikk på et objekt åpner et hjul rundt det med alle verbene som ikoner. Valget sendes som klikk på verbet og så på objektet.
+Valgt av Tom 12. oktober. Detaljene står i [VERBHJUL.md](VERBHJUL.md).
 
-- Alle verb må være med. Zak skiller mellom Use, Put on, Turn on, Read og Push, og gåtene bruker forskjellen. Et hjul på tre ikoner som i Curse ville måtte gjette verbet og endre gåtene.
-- Hjulet må ikke vise bare de verbene objektet har kode for (verbtabellen i OC-blokken), for det røper løsningen. Det kan eventuelt være et eget hjelpevalg.
+Langt trykk eller høyreklikk på et objekt åpner et hjul rundt det med verbene objektet har kode for, som i DOTT Remastered. Valget sendes som klikk på verbet, objektet og setningslinjen, slik originalpanelet gjør.
+
+- Hvert verb beholder sitt eget ikon. Zak skiller mellom Use, Put on, Turn on, Read og Push på samme objekt, og gåtene bruker forskjellen. Fordi hjulet bare viser objektets verb, blir det lite likevel: 433 av 770 objekter trenger ikke hjul, og de fleste andre har ett til tre verb.
+- Å vise bare objektets verb røper noe. DOTT godtok det; et valg "alle verb" gir hjulet uten hint.
 - Passer godt på mobil, der verbraden er liten å treffe.
-- Trenger 14 til 19 ikoner i samme stil, tegnet en gang.
-- Med hjulet kan verbraden skjules, og panelet blir bare inventaret.
+- Trenger 15 ikoner i samme stil.
+- Med hjulet kan verbradene skjules; setningslinjen og inventaret står.
 
 ### D. Hjul med tre ikoner og fullskjerm som i Curse
 
@@ -70,12 +74,9 @@ Frarådes. Det skjuler verbskillene Zak bygger gåtene på, og inventaret må da
 
 ## Anbefaling
 
-1. **A først.** Størst gevinst for minst arbeid, og ingenting skjules.
-2. **B etterpå**, når ikonene kan bestilles sammen med objektene (samme grafikere, samme stil).
-3. **C som eget valg**, særlig for mobil.
-4. Alle valgene i spillets egen meny (F5), hver for seg, med originaloppsettet tilgjengelig hele tiden, slik Tom vil ha det og slik DOTT Remastered gjorde.
+Anbefalingen 11. oktober var A først, så B, og C som eget valg. Tom valgte C 12. oktober (VERBHJUL.md). A og B kan fortsatt komme i tillegg, og alle valgene skal ligge i spillets egen meny (F5), hver for seg, med originaloppsettet tilgjengelig hele tiden.
 
-Rekkefølgen i arbeidet: HD-motoren portet til Zak (FM-Towns-tegningen), så A, så B og C. Punktene står i todo.md.
+Rekkefølgen i arbeidet: logikken i verbhjulet kan bygges og testes uten skjerm med en gang; tegningen i HD venter på at HD-motoren er portet til Zak (FM-Towns-tegningen). Punktene står i todo.md.
 
 ## Kilder
 
@@ -84,3 +85,4 @@ Rekkefølgen i arbeidet: HD-motoren portet til Zak (FM-Towns-tegningen), så A, 
 - Wikipedia, Monkey Island 2: LeChuck's Revenge (ikoninventar, færre verb, SE-grensesnittet): https://en.wikipedia.org/wiki/Monkey_Island_2:_LeChuck%27s_Revenge
 - Adventure Game Studio wiki, Verb coin: https://www.adventuregamestudio.co.uk/wiki/Verb_coin
 - REMASTER-FORBILDER.md i Dig-HD-Remake (DOTT Remastered sitt verbhjul, kritikken av MI SE, med kilder).
+- PopMatters om DOTT Remastered (hjulet viser verbene objektet kan brukes med): https://www.popmatters.com/day-of-the-tentacle-remastered-remastering-a-classic-2495438589.html

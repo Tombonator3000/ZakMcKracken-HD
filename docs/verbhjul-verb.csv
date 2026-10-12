@@ -1,0 +1,27 @@
+verb,tekst,tast,x,y,objekter_med_kode,ikonforslag
+1,Push,q,0,152,61,Hånd som dytter
+2,Open,w,48,152,89,Åpen dør
+3,Fly to / Swim to / Walk to,e,104,152,123,Fotspor
+4,Put on,r,176,152,8,Hånd som tar på (klær)
+5,Turn on,t,256,152,33,Bryter på
+6,Pull,a,0,160,57,Hånd som drar
+7,Close,s,48,160,67,Lukket dør
+8,Pick up,d,104,160,95,Hånd som griper
+9,Take off,f,176,160,8,Hånd som tar av (klær)
+10,Turn off,g,256,160,25,Bryter av
+11,Give,z,0,168,22,Hånd som gir
+12,Read,x,48,168,93,Åpen bok eller øye på tekst
+13,What is,c,104,168,0,Spørsmålstegn
+14,Use,v,176,168,171,Tannhjul eller verktøy
+15,Buy,d,104,160,13,Mynt inn
+16,Sell,z,0,168,0,Mynt ut
+17,Teleport to,q,0,152,10,Glimt (teleport)
+31,Done / Finished drawing / To Zak,b,256,168,0,
+32,Chew / Left head / Record / Swim forward,q,104,152,0,
+33,Play / Poop / Right head / Swim backward,r,0,152,0,
+34,Chatter / Smile,e,104,152,0,
+36,Switch,b,256,168,0,
+37,Zak,,0,152,0,
+38,Annie,,48,152,0,
+39,Melissa,,104,152,0,
+40,Leslie,,176,152,0,
