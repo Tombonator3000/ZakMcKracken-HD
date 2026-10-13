@@ -1,6 +1,6 @@
 {
   "dato": "2026-10-13",
-  "status": "konseptkandidater_til_stilvurdering",
+  "status": "Zak_Annie_v1_og_Caponian_v2_er_kandidater_Caponian_v1_er_avvist",
   "verktøy": "innebygd ChatGPT-bildegenerator",
   "eksakt_modell": "ikke eksponert",
   "referanser": {
@@ -52,7 +52,8 @@
       ],
       "etterbehandling": "ingen",
       "egen_visuell_kontroll": true,
-      "uavhengig_visuell_kontroll": true
+      "uavhengig_visuell_kontroll": true,
+      "status": "konseptkandidat_til_stilvurdering"
     },
     {
       "figur": "Annie Larris",
@@ -80,7 +81,8 @@
       ],
       "etterbehandling": "ingen",
       "egen_visuell_kontroll": true,
-      "uavhengig_visuell_kontroll": true
+      "uavhengig_visuell_kontroll": true,
+      "status": "konseptkandidat_til_stilvurdering"
     },
     {
       "figur": "Caponian",
@@ -109,7 +111,50 @@
       ],
       "etterbehandling": "ingen",
       "egen_visuell_kontroll": true,
-      "uavhengig_visuell_kontroll": true
+      "uavhengig_visuell_kontroll": true,
+      "status": "avvist_av_Tom",
+      "avvisningsgrunn": [
+        "For mykt og avrundet hode, feil biologisk nese",
+        "Solbriller uten Groucho-maskens falske nese og bart",
+        "Bøyde menneskeknær",
+        "Feil stor oppstående draktkrage"
+      ],
+      "kontroll_presisering": "Den første positive identitetsvurderingen ble motsagt av brukerens rettelse. Visuell kontroll hadde oversett vesentlige feil."
+    },
+    {
+      "figur": "Caponian",
+      "variant": "v2",
+      "kostyme_kobling": 28,
+      "status": "korrigert_konseptkandidat_ikke_brukergodkjent",
+      "resultat": "caponian-pilot-v2.png",
+      "prompt": "caponian-prompt-02.txt",
+      "referanser": [
+        "referanser/caponian-fmtowns.png",
+        "referanser/purcell-stil.png",
+        "zak-pilot-v1.png"
+      ],
+      "styrende_kilde": "Toms eksplisitte anatomiske rettelse i samtalen, gjengitt i CAPONIAN-RETTELSE.md",
+      "avvist_v1_brukt_som_referanse": false,
+      "raakilde": "/home/tombonator3000t/.codex/generated_images/01a136d6-5bdd-78c1-bdb7-4026508ab18f/exec-d4f4a1d4-4735-4f13-99bc-6e16bfeaf0bb.png",
+      "nytt_forsok": 1,
+      "totalt_antall_caponian_forsok": 2,
+      "helfigurer": 3,
+      "umaskerte_helfigurer": 2,
+      "forkledde_helfigurer": 1,
+      "byster": 3,
+      "forkledde_byster": 2,
+      "foreslaatt_storrelse": [
+        1792,
+        1024
+      ],
+      "levert_storrelse": [
+        1659,
+        948
+      ],
+      "etterbehandling": "ingen",
+      "egen_visuell_kontroll": true,
+      "ny_uavhengig_visuell_kontroll": true,
+      "palettvalg": "Blågrå pilotpalett, ikke originalens varme hudpalett."
     }
   ],
   "kontroll": {
@@ -120,18 +165,35 @@
     "originalanimasjon_koblet": false,
     "motorimport": false,
     "spilltest": false,
-    "notat": "Nye vinkler, kroppsdeler og milde karikaturtrekk er konseptforslag. Se README.md for visuelle forbehold."
+    "notat": "Caponian v1 er avvist etter brukerens korreksjon. Ny, separat visuell kontroll av v2 er gjort mot firkantet anatomi, Groucho-masker, dresser og rette ben. Stillbildet beviser ikke knefri gange.",
+    "caponian_v2": {
+      "langt_firkantet_moai_ansikt": true,
+      "levende_hud_uten_steintekstur": true,
+      "alle_tre_forkledninger_har_falsk_nese_bart_klare_glass": true,
+      "fedora_og_cowboyhatt": true,
+      "mork_dress_med_revers": true,
+      "rette_ben_i_alle_helfigurer": true,
+      "leken_2d_stil": true,
+      "gaanimasjon_kontrollert": false,
+      "brukergodkjent": false
+    },
+    "historiske_bilder_referanser_og_prompt01_uendret": 11
   },
   "filer": [
     {
       "fil": "BRIEF.md",
-      "bytes": 3690,
-      "sha256": "047e9482c2119afefc20191092338a132531bd1f13ff9bd88cc0e3ab5ec6dbb8"
+      "bytes": 3840,
+      "sha256": "0d264aef3137644b7f09cdf1e2d095b01e925a5f9f62936df031975bf4f599b8"
+    },
+    {
+      "fil": "CAPONIAN-RETTELSE.md",
+      "bytes": 2368,
+      "sha256": "0751b85dc911871025916e3dc6a353bfdda9304fefb622b8062d9bf094a86dde"
     },
     {
       "fil": "README.md",
-      "bytes": 3364,
-      "sha256": "969a7a40c0c41e2811e16fa39d743259fa928aa337cf7f769cca814ecca6cc33"
+      "bytes": 3952,
+      "sha256": "a134e1fd1acebf749aa740c5a1b5292f11b36d460fcb12a8600a6171a488050f"
     },
     {
       "fil": "annie-pilot-v1.png",
@@ -161,9 +223,25 @@
       "format": "PNG"
     },
     {
+      "fil": "caponian-pilot-v2.png",
+      "bytes": 1725369,
+      "sha256": "005c999b300600166d5c1e477d720fb9c98acc74a812fd287eb2621997583953",
+      "maal": [
+        1659,
+        948
+      ],
+      "modus": "RGB",
+      "format": "PNG"
+    },
+    {
       "fil": "caponian-prompt-01.txt",
       "bytes": 4775,
       "sha256": "f0023bc7f7f94a46ea9890719f45524f8ec339a96889371770cab4fe0130c22f"
+    },
+    {
+      "fil": "caponian-prompt-02.txt",
+      "bytes": 5292,
+      "sha256": "36f4536f448e4563f5610d3176022a5b041871bd6a13c8b6c45275943ec4b3fb"
     },
     {
       "fil": "referanser/annie-fmtowns-stonehenge.png",
@@ -236,5 +314,13 @@
       "bytes": 3808,
       "sha256": "6c5dd8b1905df9279ad490306718606f7b046bffb6d9caf3e687314aa38be6ba"
     }
+  ],
+  "aktive_resultater": [
+    "zak-pilot-v1.png",
+    "annie-pilot-v1.png",
+    "caponian-pilot-v2.png"
+  ],
+  "avviste_resultater": [
+    "caponian-pilot-v1.png"
   ]
 }

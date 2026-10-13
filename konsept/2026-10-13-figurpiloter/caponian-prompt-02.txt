@@ -1,0 +1,32 @@
+Use case: stylized-concept / identity-preserve.
+Create ONE corrected CAPONIAN pilot character sheet for Zak McKracken, with lightly whimsical Steve Purcell / Sam & Max-inspired drawn lines and the clean presentation of reference 3.
+USER'S ANATOMY SPECIFICATION BELOW IS THE PRIMARY DESIGN AUTHORITY.
+Reference 1: original FM-Towns scene, ordinary unmasked Caponian is the slim BLACK-CLOTHED BALD ALIEN at FAR LEFT. The white-clothed Elvis figure is The King and must not be copied.
+Reference 2: Purcell drawing, STYLE ONLY: variable ink lines, angular shape language, comic asymmetry and clear flat colors. No animal anatomy or clothing from it.
+Reference 3: Zak companion sheet, PRESENTATION and rendering finish ONLY. Do not transfer Zak's face, hair, clothes, relaxed stance or bent knees.
+No rejected previous Caponian image is supplied or to be followed.
+
+ESSENTIAL BIOLOGY:
+This species resembles a LIVING MOAI, the monumental heads of Easter Island, with an exceptionally long RECTANGULAR FACE. Think long planar forehead, broad flat cranium top, near-parallel straight sides, heavy horizontal overhanging brow, recessed tired eyes, a long STRAIGHT ANGULAR nasal ridge, broad planar nose base and a strong flat SQUARE chin/jaw. The head should read as one tall slender squared block with living skin over angular anatomy. A very tall narrow rectangular head, not a broad square cartoon-human head. Minimal small ears close to the skull. Hairless smooth grey-blue living skin. NO bulbous floppy hanging nose, no wavy/fluted crest, no organic mohawk, no folded brain top, no drooping tentacle face. These are biological beings, NOT rock statues: absolutely NO stone texture, stone cracks, masonry or carving marks. Expression is dry, deadpan, suspicious and comically bureaucratic.
+Caponian legs HAVE NO KNEES. BOTH legs in EVERY full-body pose are continuous straight rigid shafts from hip to ankle. No knee articulation, bent knee silhouette, crouch, hip-slung fashion pose or trouser folds suggesting a kneecap. Their gait is a stiff quick tiny shuffle from the hips. In this still sheet keep all legs straight and feet close, with at most a tiny toe-forward offset. Do not draw ordinary human walking. Use a tall narrow slightly stiff torso, medium arms, coherent bare grey-blue hands, dark shoes. Keep head/body ratio stable.
+
+CLOTHES:
+A simple DARK CHARCOAL BUSINESS SUIT inspired by Men in Black: ordinary jacket with modest folded lapels, plain white shirt collar, thin dark tie, matching straight trousers and black business shoes. NO high Dracula collar, space tunic, white Elvis jumpsuit, badges, weapon or loose accessory.
+DISGUISE IS THE KEY JOKE:
+Classic GROUCHO MARX NOVELTY GLASSES, NOT sunglasses. A visible black eyeglass frame with CLEAR lenses, exaggerated attached black eyebrows, a SEPARATE large peach-colored fake plastic nose, and a conspicuous BUSHY BLACK MOUSTACHE attached directly beneath that false nose. The black moustache must be unmistakable even at small size. The fake nose is an external prop distinctly different in color and shape from the real angular grey-blue nose. Preserve the alien's true skull underneath.
+A tall-crowned BLACK FEDORA completely hides the elongated cranium top. Also show a TEN-GALLON COWBOY HAT option with oversized high crown and upturned wide brim. Both hats are real hats worn on the same alien, not parts of his head.
+
+COMPOSITION:
+Landscape sheet, ideally 1792 x 1024, plain warm off-white background. Exact small title "CAPONIAN" at upper left. Three head-to-toe full-body figures across the left three quarters with all feet on one line and matched scale:
+1. UNMASKED front three-quarter: clearly tall rectangular Moai-like skull, sober dark business suit, bare empty hands, both legs absolutely straight.
+2. UNMASKED true side profile: show the flat angular forehead/brow/nose/chin profile, same skull height and body. Arms relaxed, legs straight.
+3. DISGUISED three-quarter front: same body and suit, tall black fedora AND full Groucho device with clear lenses, distinct peach fake nose and large BLACK MOUSTACHE. Straight rigid legs, small close foot spacing, stiff stance.
+On the right three smaller head-and-shoulder studies stacked:
+TOP: unmasked front closeup, makes rectangular biology and deadpan eyes obvious.
+MIDDLE: same head in FEDORA + GROUCHO glasses/false nose/BLACK MOUSTACHE.
+BOTTOM: same head in TEN-GALLON COWBOY HAT + the SAME complete GROUCHO device/false nose/BLACK MOUSTACHE.
+Keep ample clean space between drawings, nothing cropped. No extra figures, collage panels, arrows, explanatory paragraphs or labels except the title. No anatomy diagram or motion streaks.
+
+STYLE:
+Readable hand-drawn 2D adventure-comic design, witty angular proportions, intentional mild asymmetry, confident tapered variable-weight contours, thin face details, coherent flat color regions and two cel-shadow tones. Compatible with Zak's sheet without becoming a generic handsome human. No glossy 3D, painterly rendering, pixel art, heavy uniform outlines or photorealism.
+Final self-check before drawing: LONG SQUARED MOAI HEAD; PLAIN DARK BUSINESS SUIT; ALL LEGS STRAIGHT WITH NO KNEES; EVERY DISGUISED VIEW HAS CLEAR GROUCHO FRAMES + DIFFERENT-COLORED FALSE NOSE + LARGE BLACK MOUSTACHE + HAT. All are mandatory.

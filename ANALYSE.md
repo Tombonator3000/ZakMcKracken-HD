@@ -79,3 +79,14 @@ Behold beskyttede jobbfiler. Hvis en prompt har feil motiv eller motsier brukere
 Den fullstendige [figur- og objektanalysen fra 12. oktober](rapporter/sam-max-konseptanalyse-20261012/ANALYSE.md) er bevart som et datert eksempel. Tellinger, kostymer, egennavn og tekniske funn der gjelder Sam & Max og det daværende uttrekket, ikke Zak eller The Dig. Rapporten må leses sammen med rettelsene og nyere repoanalyse; den er ikke et godkjent produksjonsgrunnlag alene.
 
 Lærdommen som overføres er å fastslå riktig motiv før nytegning, skille personer fra objekter og effekter, bevare identitet gjennom alle varianter, bruke riktig palett og kontrollere hele animasjonen. Spesifikke SCUMM-formater, kostymenumre og avspillingsdetaljer må verifiseres i hvert spill.
+
+## Caponian: Toms designrettelse 13. oktober 2026
+
+Tom avviste første Caponian-pilot og presiserte følgende grunnlag for videre grafikk:
+
+- Lange firkantede, Moai-lignende biologiske ansikter. Ikke foldet myk hodeskalle eller hengende pærenese.
+- Groucho Marx-tøysebriller med påmontert falsk nese og svart bart. Vanlige solbriller er ikke riktig forkledning.
+- Fedora eller stor ten-gallon cowboyhatt, og mørk dress inspirert av Men in Black.
+- Ingen knær. Fremtidig gange skal bruke raske, korte, stive trinn, ikke vanlig menneskelig knebøy.
+
+Dette er brukerens korrigerte designgrunnlag. Stillbildet v2 illustrerer det, men gangavspilling er ikke testet. Caponian v1 er avvist og brukes ikke som referanse. Se [rettelsesnotatet](konsept/2026-10-13-figurpiloter/CAPONIAN-RETTELSE.md) og [ny pilot](konsept/2026-10-13-figurpiloter/caponian-pilot-v2.png). Ny pilot er en kandidat, ikke et godkjent produksjonsark.

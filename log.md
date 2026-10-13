@@ -27,3 +27,10 @@
 - Tom utvidet figurpilotbestillingen med en Caponian. Levert `konsept/2026-10-13-figurpiloter/caponian-pilot-v1.png`, 1659 x 948, fra ett forsøk med innebygd ChatGPT-bildegenerator.
 - Tre helfigurvinkler uten forkledning, to uttrykk og en liten hatt-/brillevariant. Kostyme 28 er repoets navngitte representative / Caponian; The King er holdt separat.
 - Blågrå hud og mørk drakt følger illustrasjonen Tom la ved. Avvik fra originalens varmere hudpalett er dokumentert. Hele settet på tre pilotark bevares med prompter, kilder og sjekksummer. Ingen spillressurser eller motor er endret.
+
+## 2026-10-13 22:43 (Codex)
+
+- Tom avviste Caponian v1 og korrigerte Moai-lignende firkantet anatomi, komplette Groucho-briller med falsk nese/bart, mørk dress og ben uten knær. Første visuelle kontroll overså disse feilene; den positive identitetsvurderingen av v1 er trukket tilbake.
+- Ny `caponian-pilot-v2.png` generert fra original FM-Towns-skjerm, Purcell-stilreferanse og Zak-ark som presentasjonsreferanse, styrt av brukerens anatomirettelse. Avvist v1 ble ikke brukt som bildeanker. Rå v1 og prompt 01 er beholdt uendret som historikk.
+- V2 viser tre helfigurer og tre byster, inkludert fedora og cowboyhatt med komplett Groucho-forkledning. Alle synlige ben er rette. Ny uavhengig visuell kontroll er utført mot sju konkrete kriterier. Ingen brukeraksept, motorimport eller knefri gåanimasjon påstås.
+- Ett nytt forsøk med innebygd ChatGPT-bildegenerator, 1659 x 948 RGB PNG. Korrigert brief, separat prompt 02, analyse, avvisningsstatus og proveniens er lagret. Zak- og Annie-bildene er uendret.
