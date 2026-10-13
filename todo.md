@@ -58,6 +58,10 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [ ] Menyvalg i F5: verbhjul av eller på, verb for objektet eller alle verb
 - [ ] Ikonene (15) etter motiv- og designavklaring, godkjent av Tom
 - [ ] Senere, hvis ønsket: A (rom og panel i hver sin skala) og B (ikoninventar), se GRENSESNITT.md
+- [x] Målt et dynamisk hjul (Toms forslag 13. oktober) med `tools/verbhjul_dynamisk.py`: høyst fire ikoner for 330 av 337 objekter uten skriptendring, se VERBHJUL.md
+- [ ] Tom: ja eller nei til dynamisk modus (lik kode og tilstand, regel for hånd for sju objekter) og portretter for figurbytte
+- [ ] Hvis ja: tabellen fra `verbhjul_dynamisk.py --tsv` inn i moden, motoren leser den, testen utvides med skuffen og et objekt med delt gruppe
+- [ ] Hvis ja: les de 26 Open/Close-parene og 16 Turn on/off-parene som ikke følger tilstandsregelen påviselig
 
 ### Pipeline
 
