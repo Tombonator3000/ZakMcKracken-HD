@@ -72,15 +72,16 @@ Andre valg sendes videre til ScummVM.
 | Ctrl+F5 | ScummVM-menyen |
 | Høyreklikk eller hold inne | Verbhjulet på tingen under pekeren (docs/VERBHJUL.md) |
 | Ctrl+W | Verbhjulet av og på; av gir originalpanelet med alle verbene |
+| Klikk på et portrett nederst til høyre | Bytter figur, når spillet lar deg bytte (som Switch og navnet, eller F1 til F4) |
 
 ## Verbhjulet
 
-Det kan prøves nå, før HD-grafikken finnes. Ikonene er midlertidige: runde knapper med tre bokstaver. Under hjulet står hele setningen mens pekeren er på et ikon.
+Det kan prøves nå, før HD-grafikken finnes. Ikonene er midlertidige: runde knapper med tre bokstaver. Under hjulet står hele setningen mens pekeren er på et ikon. Hjulet er dynamisk: høyst fire ikoner, og en lukket skuff viser bare Open, en åpen bare Close.
 
-1. Rom 1 (Zaks soverom): høyreklikk på døren, skuffen i kommoden, lampen og kattklokka, og velg et verb. Zak skal gjøre det samme som med originalpanelet.
+1. Rom 1 (Zaks soverom): høyreklikk på døren, skuffen i kommoden, lampen og kattklokka, og velg et verb. Zak skal gjøre det samme som med originalpanelet. Åpne skuffen og høyreklikk igjen: nå skal hjulet vise Close.
 2. Hold høyre knapp på et objekt, dra til et ikon og slipp.
 3. Høyreklikk på billetten i inventaret og velg Use. Setningslinjen viser «Use ticket in». Klikk på døren. Høyreklikk i stedet for å avbryte.
-4. Butikken (Buy og Sell), teleporten, figurbytte og når man styrer et dyr: er ikke prøvd. Si fra hvis hjulet viser feil verb eller ikke kommer.
+4. Butikken (Buy og Sell), teleporten, figurbytte der Switch kommer i spillet, og når man styrer et dyr: er ikke prøvd. Det samme gjelder Sushi i fiskebollen, våtdrakten, oksygentanken, mikrobølgeovnen, boom-boksen og fallskjermen, som har egne regler. Si fra hvis hjulet viser feil verb, mangler et verb du trenger, eller ikke kommer. Ctrl+W gir originalpanelet med alle verbene.
 5. I nettleseren og på mobil: hold fingeren stille et halvt sekund på en ting, så trykk på ikonet.
 
 ## Hva du bør se etter

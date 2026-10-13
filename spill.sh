@@ -141,5 +141,5 @@ steg "Starter Zak (mod: $MOD)"
 [ "$KLASSISK" = 1 ] && export DIGHD_CLASSIC=1
 [ "$GULT" = 1 ] && export DIGHD_SHOW_MISSING=1
 echo "HD er ikke slått på for Zak ennå; spillet vises med originalgrafikken. Alt+S: skjermbilde."
-echo "Verbhjulet: høyreklikk (eller hold inne) på en ting. Ctrl+W slår hjulet av og på."
+echo "Verbhjulet: høyreklikk (eller hold inne) på en ting. Ctrl+W slår hjulet av og på. Portrettene nederst til høyre bytter figur."
 exec engine/run.sh "$MOD" "${EKSTRA[@]}"

@@ -64,12 +64,14 @@ node --test engine/pages/tests/*.test.mjs   # nettsidekoden
 engine/run.sh ingen              # spillet uten mod
 python3 tools/indeks_info.py game/00.LFL
 tools/verbhjul_test.sh           # verbhjulet mot originalpanelet uten skjerm
+python3 tools/verbhjul_dynamisk.py  # ikonene i det dynamiske hjulet, per objekt (--cpp for motoren)
 ```
 
 ## Arbeid med motoren
 
-- Patchene ligger i `engine/patches/` og legges på i rekkefølge: `0001-dighd-hd-grafikk.patch` (HD-motoren, den samme som i Sam & Max) og `0002-verbhjul.patch` (verbhjulet for Zak, `engines/scumm/verbhjul.*` og krokene). Gjør endringer i `engine/scummvm`, og lag begge på nytt med `tools/lag_patcher.sh`. Ikke lag 0001 med `git diff` av hele kopien; da kommer hjulet med i den.
+- Patchene ligger i `engine/patches/` og legges på i rekkefølge: `0001-dighd-hd-grafikk.patch` (HD-motoren, den samme som i Sam & Max) og `0002-verbhjul.patch` (verbhjulet for Zak, `engines/scumm/verbhjul.*`, `verbhjul_zak.h` og krokene). Gjør endringer i `engine/scummvm`, og lag begge på nytt med `tools/lag_patcher.sh`. Ikke lag 0001 med `git diff` av hele kopien; da kommer hjulet med i den.
 - Etter endringer i verbhjulet: `tools/verbhjul_test.sh` (originalpanelet og hjulet skal gi de samme setningene, omtrent fire minutter).
+- Reglene for det dynamiske hjulet (`engines/scumm/verbhjul_zak.h`) lages av `python3 tools/verbhjul_dynamisk.py --cpp engine/scummvm/engines/scumm/verbhjul_zak.h` fra work/skript; regler for hånd står i `HAAND` i verktøyet, med kilden i skriptene. Lag så patchene på nytt og kjør testen.
 - ScummVM-versjonen er låst i `engine/SCUMMVM_COMMIT`. Bytt den bare sammen med en test av patchen.
 - Hva som må portes for Zak: `docs/HD-MOTOR.md`.
 

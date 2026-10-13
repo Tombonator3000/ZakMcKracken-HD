@@ -1,6 +1,6 @@
 # Verbhjulet (alternativ C)
 
-Tom valgte 12. oktober 2026 et verbhjul som i *Day of the Tentacle Remastered*, og godkjente oppførselen under samme kveld («Lag det»). Hjulet er bygget som `engine/patches/0002-verbhjul.patch` (13. oktober), med midlertidige ikoner, og testet uten skjerm mot originalpanelet. Dokumentet sier hvordan DOTT gjorde det, hva skriptene i Zak krever, hvordan hjulet virker, hva som er testet og hva som gjenstår. Tallene er målt i FM-Towns-utgaven med `pipeline/zakhd/lfl.py` og de dekompilerte skriptene (work/skript).
+Tom valgte 12. oktober 2026 et verbhjul som i *Day of the Tentacle Remastered*, og godkjente oppførselen under samme kveld («Lag det»). Hjulet er bygget som `engine/patches/0002-verbhjul.patch` (13. oktober), med midlertidige ikoner, og testet uten skjerm mot originalpanelet. Samme dag sa Tom ja til et dynamisk hjul med høyst fire valg og portretter for figurbytte; begge er bygget og er standard (se «Dynamisk hjul» og «Portretter for figurbytte»). Dokumentet sier hvordan DOTT gjorde det, hva skriptene i Zak krever, hvordan hjulet virker, hva som er testet og hva som gjenstår. Tallene er målt i FM-Towns-utgaven med `pipeline/zakhd/lfl.py` og de dekompilerte skriptene (work/skript).
 
 Bakgrunn og de andre alternativene: [GRENSESNITT.md](GRENSESNITT.md). Verblisten: [verbhjul-verb.csv](verbhjul-verb.csv).
 
@@ -80,7 +80,7 @@ Godkjent av Tom 12. oktober. Bygget i `engines/scumm/verbhjul.cpp` (patch 0002).
 
 Motsatte par står ved siden av hverandre. Use er det mest brukte verbet (171 objekter) og står klokka 3. Buy, Sell og Teleport to tar plassen til verbet de erstatter i originalpanelet (samme plass i panelet), så butikken og teleporten trenger ingen egen logikk.
 
-**Hvilke verb som vises.** Som standard verbene objektet har en egen oppføring for i verbtabellen (OC-blokken, fra byte 19), som i DOTT. For ting i inventaret vises også Give og Sell, fordi setningsskriptet (globalt skript 15) håndterer dem for alle ting. Et verb vises bare når plassen i originalpanelet er på. Med valget «alle verb» vises alle verbene som er på, på de samme plassene.
+**Hvilke verb som vises.** Som standard det dynamiske utvalget: høyst fire ikoner, der verb med lik kode er ett ikon og Open/Close og Turn on/Turn off viser det som passer tilstanden (se «Dynamisk hjul»). Ikonet står på plassen til verbet det sender. Med `verbhjul_dynamisk` av vises ett ikon per verb objektet har en egen oppføring for i verbtabellen (OC-blokken, fra byte 19), som i DOTT. For ting i inventaret vises også Give (Sell i butikken), fordi setningsskriptet (globalt skript 15) håndterer dem for alle ting. Et verb vises bare når plassen i originalpanelet er på. Med valget «alle verb» vises alle verbene som er på, på de samme plassene.
 
 **Betjening.**
 - Venstreklikk eller trykk: Walk to, som i originalen. Det kjører også koden objekter har for Walk to (dører).
@@ -100,9 +100,9 @@ Motsatte par står ved siden av hverandre. Use er det mest brukte verbet (171 ob
 
 **To objekter.** Use på noe med klasse 1 til 4 og Give setter en preposisjon. Setningslinjen må da ikke klikkes, for skript 11 tømmer setningen hvis den klikkes før objekt nummer to er valgt (skript 18). Hjulet lukkes, setningslinjen viser for eksempel «Use ticket in», og neste venstreklikk i rommet eller på inventaret sendes som klikk på det objektet og så på setningslinjen. Pilene i inventaret (115 og 116) blar uten å avbryte ventingen, fordi skript 11 bare kjeder til skript 20 for dem og lar setningen stå. Høyreklikk avbryter: hjulet klikker Walk to, som tømmer setningen akkurat som i originalpanelet.
 
-**Panelet.** Mens hjulet er på, tegnes ikke verb 1 til 17 i panelet, og de kan ikke klikkes; tastene for dem virker fortsatt. Setningslinjen, inventaret, pilene, Switch, navnene på figurene og verbene når man styrer et dyr står som før.
+**Panelet.** Mens hjulet er på, tegnes ikke verb 1 til 17 i panelet, og de kan ikke klikkes; tastene for dem virker fortsatt. Med portrettene på er Switch også borte fra panelet (tasten virker). Setningslinjen, inventaret, pilene, navnene på figurene og verbene når man styrer et dyr står som før.
 
-**Valgene** lagres i scummvm.ini under `[scummvm]`: `verbhjul` (av eller på, standard på) og `verbhjul_alle` (standard av). For tester: miljøvariablene `VERBHJUL=0` og `VERBHJUL_ALLE=1`.
+**Valgene** lagres i scummvm.ini under `[scummvm]`: `verbhjul` (av eller på, standard på), `verbhjul_dynamisk` (standard på), `verbhjul_alle` (standard av) og `verbhjul_portretter` (standard på). Miljøvariablene med de samme navnene i store bokstaver (`VERBHJUL=0`, `VERBHJUL_DYNAMISK=0` og så videre) overstyrer dem.
 
 ## Ikonene
 
@@ -116,46 +116,113 @@ Patch 0002 ligger oppå HD-patchen (0001, den samme som i The Dig og Sam & Max).
 
 | Sted | Hva |
 | --- | --- |
-| `engines/scumm/verbhjul.cpp`, `verbhjul.h` | Klassen `VerbWheel`: urskiven, verbene for objektet, klikkene, ventingen på objekt nummer to, tegningen og testdriveren. Bare for `zak` på FM-Towns |
+| `engines/scumm/verbhjul.cpp`, `verbhjul.h` | Klassen `VerbWheel`: urskiven, verbene for objektet, det dynamiske utvalget, portrettene, klikkene, ventingen på objekt nummer to, tegningen og testdriveren. Bare for `zak` på FM-Towns |
+| `engines/scumm/verbhjul_zak.h` | Reglene for det dynamiske hjulet, 337 objekter, laget av `tools/verbhjul_dynamisk.py --cpp` (bare objekt- og verbnummer) |
 | `input.cpp`, `ScummEngine::parseEvent` | Hjulet ser hver hendelse først (høyreklikk, klikk mens hjulet er åpent, Ctrl+W) |
 | `verbs.cpp`, `checkExecVerbs` | Ett klikk fra hjulet per ramme, før spillets egne klikk |
-| `verbs.cpp`, `findVerbAtPos` og `drawVerb` | Verb 1 til 17 tegnes ikke og kan ikke klikkes mens hjulet er på |
+| `verbs.cpp`, `findVerbAtPos` og `drawVerb` | Verb 1 til 17 tegnes ikke og kan ikke klikkes mens hjulet er på, og Switch (36) ikke mens portrettene er på |
 | `scumm.cpp`, `waitForTimer` | Hjulet tegnes på skjermen rett før `updateScreen`, etter FM-Towns-lagene. Når det lukkes, legges området inn som skittent rektangel i FM-Towns-skjermen, så spillet tegnes der igjen |
 | `script.cpp`, `doSentence` | Logger hver setning (for testene) |
+
+Klikkene hjulet og portrettene sender, sjekkes en gang til når de sendes, siden et skript kan ha endret noe i rammen imellom: et verb som ikke lenger er på i panelet, eller en figur som ikke kan velges, stopper hele setningen. Bytter spillet rom (eller lastes et lagret spill) mens klikk venter eller hjulet venter på objekt nummer to, kastes de. Betingelsene i reglene sjekkes mot spillets antall variabler og objekter før de brukes. Dette kom etter en gjennomgang av koden 13. oktober.
 
 Tegningen er foreløpig enkel: runde ikoner med tre bokstaver i ScummVMs konsollskrift på spillets egen skjerm (320 x 240). Når HD-motoren er portet, tegnes hjulet i HD med de tegnede ikonene.
 
 ## Tester
 
-`tools/verbhjul_test.sh` kjører spillet uten skjerm to ganger samtidig, med originalpanelet og med hjulet, og sammenligner setningene spillet kjører (`doSentence`). Introen går av seg selv til rom 1, der man kan styre Zak etter rundt 1300 rammer.
+`tools/verbhjul_test.sh` kjører spillet uten skjerm to ganger samtidig, med originalpanelet og med hjulet (dynamisk, med portrettene), og sammenligner setningene spillet kjører (`doSentence`). Introen går av seg selv til rom 1, der man kan styre Zak etter rundt 1300 rammer. Tar under fire minutter.
 
-Kjørt 13. oktober med motoren bygget av `engine/build.sh` (begge patchene): bestått.
+Kjørt 13. oktober med motoren bygget av `engine/build.sh` (begge patchene): bestått, 11 like setninger.
 
 | Handling | Hjulet | Setning |
 | --- | --- | --- |
 | Open door (84) | høyreklikk, klikk på ikonet | 2 84 0 |
-| Pull dresser drawer (92) | hold og dra | 6 92 0 |
+| Open dresser drawer (92) | hold og dra; Open og Pull er ett ikon | 2 92 0 |
 | Turn on lamp (103) | høyreklikk, klikk | 5 103 0 |
-| Pull window shade (90) | høyreklikk, klikk | 6 90 0 |
-| Turn on cat clock (95) | høyreklikk, klikk | 5 95 0 |
+| Pull window shade (90) | høyreklikk, klikk; rullegardinen er oppe, så hjulet viser Close og Pull | 6 90 0 |
+| Turn off cat clock (95) | høyreklikk, klikk; klokken går når rom 1 starter (klasse 6 er ikke satt), så hjulet viser Turn off, ikke Turn on | 10 95 0 |
 | Read ticket (82, inventaret) | høyreklikk på inventaret, klikk | 12 82 0 |
 | Use ticket in door | høyreklikk på inventaret, Use, venter, klikk på døren | 14 82 84, så 14 84 82 (spillets eget andre forsøk, likt i originalen) |
 | Use ticket, så høyreklikk | avbrudd | ingen setning; preposisjon og objekt er 0 etterpå |
-| Walk to lamp (103), så Use ticket in door | vanlig klikk på lampen, høyreklikk på inventaret, Use, klikk på døren | 3 103 0, så 14 82 84 og 14 84 82. Originalpanelet tømmer med et klikk på setningslinjen først. Før rettingen 13. oktober ga hjulet 14 103 82 |
+| Close dresser drawer (92) | skuffen er åpen, hjulet viser bare Close | 7 92 0 |
+| Open dresser (91) | regel for hånd: tilstanden til skuffen 92; hjulet viser Open og Use | 2 91 0 |
+| Bytt til Annie | portrettet i hjulet, F2 i originalen | 38 0 0, og Annie (ego 2) i rom 6 etterpå i begge |
 
-Kjørt på nytt 13. oktober etter rettingen av tømmingen: bestått, 11 like setninger, 3 minutter 38 sekunder.
+Figurbyttet krever at spillet har slått på Switch. Det skjer senere i spillet, så testen setter variablene ScummVM sjekker for F1 til F4 (Var[145] bit 0 for Annie) og dem globalt skript 24 bruker for Switch (Var[152] bit 4 og Var[250]), og kjører skript 24. Det er bare i testen.
 
-Testet for hånd uten skjerm samme natt: «alle verb» (døren får alle tolv plassene), Ctrl+W av (originalpanelet tegnes igjen) og på (panelet skjules igjen), og skjermbilder som viser at hjulet ryddes bort når det lukkes.
+Testet for hånd uten skjerm 13. oktober: «alle verb» (døren får alle tolv plassene), Ctrl+W av (originalpanelet tegnes igjen) og på (panelet skjules igjen), skjermbilder som viser at hjulet ryddes bort når det lukkes, hjulet med `verbhjul_dynamisk` av (skuffen får Open, Close, Push og Pull, katteklokken fem verb, som før) og Esc (lukker hjulet).
 
-Ikke testet: med skjerm og mus, pilene i inventaret mens hjulet venter (det trengs flere ting i inventaret enn i starten), Esc for å lukke hjulet, langt trykk i nettleseren og på mobil, butikken (Buy og Sell), teleporten, figurbytte, styring av dyr, andre rom enn rom 1, og at valget faktisk lagres i scummvm.ini (ScummVM skrev ingen scummvm.ini i testmiljøet, heller ikke ved avslutning).
+Ikke testet: med skjerm og mus, langt trykk i nettleseren og på mobil, butikken (Buy og Sell), teleporten, styring av dyr, andre rom enn rom 1, figurbytte på det stedet i spillet der Switch faktisk kommer, og at valgene lagres i scummvm.ini (ScummVM skrev ingen scummvm.ini i testmiljøet). Reglene for hånd er lest i skriptene, men bare kommoden er prøvd i spillet.
+
+## Dynamisk hjul (Toms forslag 13. oktober)
+
+Tom spurte om hjulet kan være dynamisk: høyst tre eller fire ikoner per objekt, verbene slått sammen (øye for Look at og Read; hånd for Pick up, Push, Pull, Open og Close etter hva som går an; bryter for Turn on og Turn off; snakkeboble for Talk to), Fly utenfor hjulet (flybillett på skranken åpner kartet), og figurbytte som små portretter i et hjørne. Etter målingen under sa han ja til det dynamiske hjulet og portrettene, uten snakkeboblen. Bygget samme dag og er standard.
+
+**Reglene.** `tools/verbhjul_dynamisk.py` leser verbtabellene og objektkoden i de dekompilerte skriptene og klassene i 00.LFL, og skriver én regel per objekt til `engines/scumm/verbhjul_zak.h` (formatet står i verktøyet og i `verbhjul.h`):
+
+1. Lik kode blir ett ikon: verbene hopper til samme sted i objektkoden, og koden spør ikke hvilket verb som ble valgt (lesing av Var[52], Var[116] eller Local[1], også i skript den starter). Give holdes alltid for seg (trenger mottaker), og Use for seg når objektet har preposisjonsklasse 1 til 4. Eksempel: skuffen i rom 1 har Open og Pull på samme kode, og Push og Close.
+2. Par etter tilstand: Open/Close og Turn on/Turn off viser bare det ene ikonet. Spillets egen regel er 0 lukket eller av, 1 åpen eller på (globalt skript 31 og 32). Verktøyet godtar paret bare når begge sider sjekker tilstanden før de gjør noe (`getState(...) == 0` og `== 1`, eller skript 31 og 32), på objektet selv (også som `VAR_ME` og Var[50]), i koden eller i skriptene den starter. Da gjør verbet som skjules ingenting i den tilstanden. Det samme for klasse 6 når den brukes som av og på og begge sider sjekker den (lampen i rom 6). Bare `setState` er ikke nok: telefonsvareren i rom 1 spiller av nye beskjeder med Turn on også når den står på, så den beholder begge ikonene. Det gjelder også vasken i rom 2 og bryterne i rom 16, 25 og 35, der Turn on gjør noe på nytt (for eksempel husker hvilken figur som slo på bryteren i rom 25).
+3. Regler for hånd, lest i skriptene, med kilden som kommentar i verktøyet (19 objekter):
+
+| Objekt | Regel |
+| --- | --- |
+| Sushi i fiskebollen (14) | Put on eller Take off etter Var[222] (bollen på hodet), Give bare i inventaret, Pick up bare i rommet |
+| Kommoden (91) | Sender verbet videre til skuffen (92): Open og Pull ett ikon, Push og Close ett, valgt etter tilstanden til skuffen |
+| Våtdrakten (39) | Put on eller Take off etter klasse 6 (settes når den tas på, globalt skript 75), Give bare i inventaret |
+| Oksygentanken (50) | Put on eller Take off etter Var[219] (15 når den er på), Give bare i inventaret, Pick up bare i rommet |
+| Mikrobølgeovnen (260) | Open eller Close etter tilstanden til 260, Turn on eller Turn off etter tilstanden til 261 (lokalt skript 206, 223, 224 og 225) |
+| Boom-boksen (71) | Turn off når den tar opp (klasse 6) eller spiller av (Var[143] bit 0), ellers Turn on; Give vises ikke (gir bare «No way, it's mine!»); Read (merket) bare i inventaret; Pick up bare i rommet |
+| Døren 247 (rom 11) | Open eller Close etter tilstanden til døren 246 |
+| Skapet 367 (rom 18) | Open eller Close etter tilstanden til skapdøren 368 |
+| Verktøykassen (34) | Open når klasse 6 er satt (lukket), ellers Close |
+| Koffertene 258 og 259 | Fire verb til ett ikon: koffert 257 svarer det samme på alle |
+| Fallskjermen (77) | Put on vises ikke (gir bare «I'm already wearing it.») |
+| Lighteren (49), lommelykten (69), radioen (492) | Turn on eller Turn off etter klasse 6, som settes når de slås på. Koden sjekker ikke klassen først, men det skjulte verbet ville bare gjort det samme en gang til |
+| Katteklokken (95) | Som over, motsatt vei: klassen fjernes når den startes, og rom 1 starter animasjonen når klassen ikke er satt |
+| Setet (119, rom 2), skriveunderlaget (175, rom 6) | Open eller Close etter tilstanden; Close setter bare tilstanden tilbake |
+| Vasken (242, rom 11) | Turn on eller Turn off etter tilstanden; Turn on starter bare overløpet på nytt |
+
+**Resultatet** (337 objekter med verbkode):
+
+| Ikoner | Hjulet før | Dynamisk, i rommet | Dynamisk, i inventaret |
+| ---: | ---: | ---: | ---: |
+| 1 | 119 | 202 | |
+| 2 | 104 | 89 | 42 |
+| 3 | 58 | 36 | 59 |
+| 4 | 36 | 10 | 21 |
+| 5 til 7 | 20 | 0 | 0 |
+
+Inventaret gjelder de 122 objektene som kan plukkes opp, kjøpes eller gis til en figur i skriptene, og tallet tar med Give, som hjulet alltid gir for ting i inventaret. Til sammen er det 56 par etter tilstand, 8 etter klasse 6 og 2 etter en variabel.
+
+Motoren sjekker at den leser alle reglene riktig: testkommandoen `rules` skriver hver regel tilbake og sammenligner med tabellen (337 regler, 0 avvik 13. oktober).
+
+**Det som er mistet.** Ingen handling med egen virkning. Tre replikker vises ikke lenger fra hjulet: Give på boom-boksen («No way, it's mine!»), Read på boom-boksen mens den står i rommet (merket kan leses når Melissa har den), og Put on på fallskjermen («I'm already wearing it.»). Ved par vises bare det ene verbet; det andre gir som regel bare «It's already open» og lignende.
+
+**Det ikonet sender.** Ett av verbene i gruppen: verbet paret har valgt, ellers det første av Open, Close, Pick up, Turn on, Turn off, Put on, Take off, Read, Use, Push, Pull, Give, Buy, Sell, Teleport to. Ikonet står på plassen til det verbet på urskiven. Setningen er altså alltid en originalpanelet kunne gitt. Teksten under hjulet viser verbet og objektet («Close dresser drawer»).
+
+**Svar på resten av forslaget:**
+
+- Øye: Zak har ikke Look at. Read finnes (93 objekter), og What is er navnet under pekeren. Øyet kan være ikonet for Read.
+- Snakkeboble: Zak har ikke Talk to. Samtalene startes av skriptene, når man kommer inn i et rom eller gir noe med Give. Et snakkeikon krever nye skript og ny tekst. Tom sa nei til det.
+- Fly: flyreisene virker allerede slik Tom beskriver. Use på reservasjonsterminalen på flyplassen (objekt 194 i rom 8, 220 i rom 9) med CashCard laster reisemålskjermen (rom 45, globalt skript 90, som setter eget inndataskript 92). Terminalen har bare Use og får ett ikon. «Fly to» er Walk to når Zak styrer fuglen (skuespiller 6, globalt skript 24 og 119), og er vanlig klikk, ikke i hjulet.
+- Et fast sett med fire ikoner dekker ikke spillet: Give, Put on, Take off, Buy, Sell og Teleport to finnes på 43 objekter, og noen objekter har to ulike håndhandlinger (strømledningen i rom 2: Pull og Pick up). Derfor står ikonene på plassen til verbet de sender. Hånd, øye, tannhjul og bryter kan være motivene når ikonene tegnes.
+
+Usikkert: tallene og reglene kommer fra tekstsøk i den dekompilerte koden. Skript som startes gjennom en variabel (`startScript(Var[112],...)`) følges ikke, og lokale skript følges bare fra objektkoden selv. Reglene for hånd er lest, men bare kommoden er prøvd i spillet.
+
+## Portretter for figurbytte
+
+Mens spillet lar spilleren bytte figur (Switch er på i panelet), står små portretter av figurene nederst til høyre, under inventaret, der panelet ikke tegner noe. Den man styrer er gul. Bare figurene som kan velges vises, etter de samme bitene ScummVM bruker for F1 til F4 (Var[144] bit 15 for Zak, Var[145] bit 0 til 2 for Annie, Melissa og Leslie). Et klikk på et portrett sender det samme som navnet på figuren etter Switch (verb 37 til 40) gjennom skript 11, slik F1 til F4 gjør. Ingen skriptendring. Switch-knappen tegnes ikke mens portrettene er på; tasten virker.
+
+Portrettene virker også med hjulet av (Ctrl+W). Valget er `verbhjul_portretter` (standard på). Foreløpig står det «Zak», «Ann», «Mel» og «Les» i boksene; de tegnede portrettene kommer etter stilpiloten.
 
 ## Det som gjenstår
 
+- Mens hjulet sender klikkene sine (tre eller fire rammer), og i rammen etter et klikk på et portrett, tar ikke spillet imot andre taster og klikk; de går tapt. Gjelder bare svært raske trykk.
 - Navnet på objektet under pekeren mens hjulet er lukket (i dag gir What is det i originalen; What is er skjult når hjulet er på, men tasten c virker).
 - Valgene i spillets meny (F5) i stedet for bare Ctrl+W og scummvm.ini.
-- De 15 ikonene, etter motiv- og designavklaringen i remake-skillen, godkjent av Tom (gjerne sammen med stilpiloten i rom 1).
+- De 15 ikonene og de fire portrettene, etter motiv- og designavklaringen i remake-skillen, godkjent av Tom (gjerne sammen med stilpiloten i rom 1).
 - Tegning i HD når HD-motoren er portet til Zak.
-- Prøve med skjerm, i nettleseren og på mobil, og i butikken, teleporten, ved figurbytte og når man styrer dyr.
+- Prøve med skjerm, i nettleseren og på mobil, og i butikken, teleporten, ved figurbytte der Switch kommer i spillet og når man styrer dyr. Prøve reglene for hånd i spillet (Sushi, våtdrakten, oksygentanken, mikrobølgeovnen, boom-boksen, fallskjermen).
 
 ## Kilder
 

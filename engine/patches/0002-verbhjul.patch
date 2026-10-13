@@ -122,10 +122,10 @@ index 20c4b0c5..af9f2fbd 100644
  	byte _completeScreenBuffer[320 * 200];
 diff --git a/engines/scumm/verbhjul.cpp b/engines/scumm/verbhjul.cpp
 new file mode 100644
-index 00000000..3f0fd7c0
+index 00000000..270aa58e
 --- /dev/null
 +++ b/engines/scumm/verbhjul.cpp
-@@ -0,0 +1,789 @@
+@@ -0,0 +1,1226 @@
 +/* ScummVM - Graphic Adventure Engine
 + *
 + * ScummVM is the legal property of its developers, whose names
@@ -149,6 +149,7 @@ index 00000000..3f0fd7c0
 +
 +#define FORBIDDEN_SYMBOL_EXCEPTION_getenv
 +
++#include "common/algorithm.h"
 +#include "common/config-manager.h"
 +#include "common/debug.h"
 +#include "common/endian.h"
@@ -166,6 +167,7 @@ index 00000000..3f0fd7c0
 +#include "scumm/scumm.h"
 +#include "scumm/verbs.h"
 +#include "scumm/verbhjul.h"
++#include "scumm/verbhjul_zak.h"
 +
 +namespace Scumm {
 +
@@ -178,12 +180,24 @@ index 00000000..3f0fd7c0
 +	kVarPrep = 119,         // preposition (129 in, 130 with, 131 on, 132 to), 0 = none
 +	kVarInventory = 102,    // objects shown in inventory slots 101..110
 +	kZakWalkTo = 3,
++	kZakGive = 11,
++	kZakSell = 16,
++	kZakSwitch = 36,       // Switch; the kids' names are 37 to 40
 +	kZakSentence = 100,    // the sentence line; clicking it runs the sentence
 +	kZakInvFirst = 101,
 +	kZakInvLast = 110,
 +	kZakInvUp = 115,       // inventory arrows: they only scroll (script 20)
 +	kZakInvDown = 116
 +};
++
++// The verb an icon of the dynamic wheel sends when its group has several
++static const int kPriority[] = { 2, 7, 8, 5, 10, 4, 9, 12, 14, 1, 6, 11, 15, 16, 17 };
++
++static const char *const kKidLabel[4] = { "Zak", "Ann", "Mel", "Les" };
++
++// Portraits: four boxes in the bottom right corner of the 320 x 240 screen,
++// under the inventory, where the panel draws nothing
++static const int kPortraitW = 22, kPortraitH = 18, kPortraitGap = 2;
 +
 +// Clock positions 12, 1, 2 ... 11; the second verb takes the place when the
 +// first is not in the panel (shop, teleport).
@@ -266,15 +280,87 @@ index 00000000..3f0fd7c0
 +		_enabled = ConfMan.getBool("verbhjul", app);
 +	if (ConfMan.hasKey("verbhjul_alle", app))
 +		_allVerbs = ConfMan.getBool("verbhjul_alle", app);
++	if (ConfMan.hasKey("verbhjul_dynamisk", app))
++		_dynamic = ConfMan.getBool("verbhjul_dynamisk", app);
++	if (ConfMan.hasKey("verbhjul_portretter", app))
++		_portraits = ConfMan.getBool("verbhjul_portretter", app);
 +	if (const char *e = getenv("VERBHJUL"))
 +		_enabled = (*e != '0');
 +	if (const char *e = getenv("VERBHJUL_ALLE"))
 +		_allVerbs = (*e != '0');
++	if (const char *e = getenv("VERBHJUL_DYNAMISK"))
++		_dynamic = (*e != '0');
++	if (const char *e = getenv("VERBHJUL_PORTRETTER"))
++		_portraits = (*e != '0');
 +	if (const char *d = getenv("VERBHJUL_DUMP_DIR"))
 +		_dumpDir = d;
 +	if (const char *t = getenv("VERBHJUL_TEST"))
 +		parseTests(t);
-+	debug("Verbhjul: %s, %s", _enabled ? "on" : "off", _allVerbs ? "all verbs" : "the object's verbs");
++	loadRules();
++	debug("Verbhjul: %s, %s, portraits %s, %d rules", _enabled ? "on" : "off",
++	      _allVerbs ? "all verbs" : (_dynamic ? "dynamic" : "the object's verbs"),
++	      _portraits ? "on" : "off", (int)_rules.size());
++}
++
++void VerbWheel::loadRules() {
++	for (const VerbWheelRule *r = kZakVerbWheelRules; r->spec; r++) {
++		Rule rule;
++		Common::StringTokenizer words(r->spec, " ");
++		while (!words.empty()) {
++			const Common::String w = words.nextToken();
++			if (w.size() < 3 || w[1] != '=')
++				continue;
++			const Common::String v = w.substr(2);
++			if (w[0] == 'g') {
++				Common::StringTokenizer groups(v, ";");
++				while (!groups.empty()) {
++					Common::Array<int> g;
++					Common::StringTokenizer verbs(groups.nextToken(), ",");
++					while (!verbs.empty())
++						g.push_back(atoi(verbs.nextToken().c_str()));
++					if (!g.empty())
++						rule.groups.push_back(g);
++				}
++			} else if (w[0] == 'p') {
++				// a/b:cond
++				Pair p;
++				p.a = atoi(v.c_str());
++				const size_t slash = v.find('/'), colon = v.find(':');
++				if (slash == Common::String::npos || colon == Common::String::npos || colon + 1 >= v.size())
++					continue;
++				p.b = atoi(v.c_str() + slash + 1);
++				Common::StringTokenizer conds(v.substr(colon + 1), "+");
++				while (!conds.empty()) {
++					const Common::String c = conds.nextToken();
++					if (c.empty())
++						continue;
++					Cond cond;
++					cond.type = c[0];
++					cond.arg = atoi(c.c_str() + 1);
++					cond.bit = 0;
++					const size_t dot = c.find('.'), eq = c.find('=');
++					if (dot != Common::String::npos)
++						cond.bit = atoi(c.c_str() + dot + 1);
++					if (eq != Common::String::npos) {
++						Common::StringTokenizer vals(c.substr(eq + 1), "|");
++						while (!vals.empty())
++							cond.values.push_back(atoi(vals.nextToken().c_str()));
++					}
++					p.conds.push_back(cond);
++				}
++				rule.pairs.push_back(p);
++			} else if (w[0] == 'i' || w[0] == 'r' || w[0] == 'x') {
++				uint32 &mask = w[0] == 'i' ? rule.invOnly : (w[0] == 'r' ? rule.roomOnly : rule.never);
++				Common::StringTokenizer verbs(v, ",");
++				while (!verbs.empty()) {
++					const int verb = atoi(verbs.nextToken().c_str());
++					if (verb > 0 && verb < 32)
++						mask |= 1u << verb;
++				}
++			}
++		}
++		_rules[r->obj] = rule;
++	}
 +}
 +
 +VerbWheel::~VerbWheel() {
@@ -291,7 +377,7 @@ index 00000000..3f0fd7c0
 +}
 +
 +bool VerbWheel::hidesVerb(int verbid) const {
-+	return _enabled && verbid >= 1 && verbid <= 17;
++	return (_enabled && verbid >= 1 && verbid <= 17) || (_portraits && verbid == kZakSwitch);
 +}
 +
 +bool VerbWheel::verbActive(int verbid) const {
@@ -324,6 +410,10 @@ index 00000000..3f0fd7c0
 +}
 +
 +void VerbWheel::collectVerbs(int obj, bool inventory) {
++	if (_dynamic && !_allVerbs && _rules.contains(obj)) {
++		collectDynamic(_rules[obj], obj, inventory);
++		return;
++	}
 +	Common::Array<int> own;
 +	const byte *ob = _vm->getOBCDFromObject(obj);
 +	if (ob) {
@@ -352,6 +442,268 @@ index 00000000..3f0fd7c0
 +			}
 +		}
 +	}
++}
++
++Common::String VerbWheel::ruleText(const Rule &rule) {
++	Common::String g = "g=";
++	for (uint i = 0; i < rule.groups.size(); i++) {
++		if (i)
++			g += ';';
++		for (uint k = 0; k < rule.groups[i].size(); k++)
++			g += Common::String::format(k ? ",%d" : "%d", rule.groups[i][k]);
++	}
++	Common::Array<Common::String> words;
++	words.push_back(g);
++	for (uint i = 0; i < rule.pairs.size(); i++) {
++		const Pair &p = rule.pairs[i];
++		Common::String w = Common::String::format("p=%d/%d:", p.a, p.b);
++		for (uint c = 0; c < p.conds.size(); c++) {
++			const Cond &cd = p.conds[c];
++			if (c)
++				w += '+';
++			w += cd.type;
++			if (cd.type == 'b')
++				w += Common::String::format("%d.%d", cd.arg, cd.bit);
++			else if (cd.arg)
++				w += Common::String::format("%d", cd.arg);
++			for (uint v = 0; v < cd.values.size(); v++)
++				w += Common::String::format(v ? "|%d" : "=%d", cd.values[v]);
++		}
++		words.push_back(w);
++	}
++	const uint32 masks[3] = { rule.invOnly, rule.roomOnly, rule.never };
++	const char names[3] = { 'i', 'r', 'x' };
++	for (int m = 0; m < 3; m++) {
++		if (!masks[m])
++			continue;
++		Common::String w = Common::String::format("%c=", names[m]);
++		bool first = true;
++		for (int v = 1; v < 32; v++) {
++			if (masks[m] & (1u << v)) {
++				w += Common::String::format(first ? "%d" : ",%d", v);
++				first = false;
++			}
++		}
++		words.push_back(w);
++	}
++	Common::sort(words.begin(), words.end());
++	Common::String out;
++	for (uint i = 0; i < words.size(); i++)
++		out += (i ? " " : "") + words[i];
++	return out;
++}
++
++bool VerbWheel::condition(const Cond &c, int obj) const {
++	// Checked here, not when the rules are read: the game's sizes are not known yet then.
++	// Out of range would stop the game (assertRange) or read outside the variables.
++	const bool ok = (c.type == 's' && c.arg >= 0 && (c.arg ? c.arg : obj) < _vm->_numGlobalObjects) ||
++		((c.type == 'c' || c.type == 'C') && c.arg >= 1 && c.arg <= 32 && obj < _vm->_numGlobalObjects) ||
++		((c.type == 'v' || c.type == 'b') && c.arg >= 0 && c.arg < _vm->_numVariables && c.bit >= 0 && c.bit < 32);
++	if (!ok) {
++		warning("Verbhjul: condition %c%d for object %d is out of range", c.type, c.arg, obj);
++		return false;
++	}
++	switch (c.type) {
++	case 's':
++		return _vm->getState(c.arg ? c.arg : obj) != 0;
++	case 'c':
++		return _vm->getClass(obj, c.arg);
++	case 'C':
++		return !_vm->getClass(obj, c.arg);
++	case 'v': {
++		const int value = _vm->_scummVars[c.arg];
++		for (uint i = 0; i < c.values.size(); i++)
++			if (c.values[i] == value)
++				return true;
++		return false;
++	}
++	case 'b':
++		return ((uint32)_vm->_scummVars[c.arg] >> c.bit) & 1;
++	default:
++		return false;
++	}
++}
++
++void VerbWheel::placeVerb(int v) {
++	int slot = -1;
++	for (int i = 0; i < 12 && slot < 0; i++)
++		if (kClock[i][0] == v || kClock[i][1] == v)
++			slot = i;
++	if (slot < 0)
++		return;
++	// Two icons for the same place (not expected): the next free place clockwise
++	for (int n = 0; n < 12; n++) {
++		const int i = (slot + n) % 12;
++		if (!_slots[i]) {
++			_slots[i] = v;
++			return;
++		}
++	}
++}
++
++void VerbWheel::collectDynamic(const Rule &rule, int obj, bool inventory) {
++	for (int i = 0; i < 12; i++)
++		_slots[i] = 0;
++	// The groups, without the verbs that are not shown here or not in the panel now
++	Common::Array<Common::Array<int> > groups;
++	Common::Array<int> shown;
++	for (uint g = 0; g < rule.groups.size(); g++) {
++		Common::Array<int> verbs;
++		for (uint k = 0; k < rule.groups[g].size(); k++) {
++			const int v = rule.groups[g][k];
++			const uint32 bit = (v > 0 && v < 32) ? 1u << v : 0;
++			if ((rule.never & bit) || (!inventory && (rule.invOnly & bit)) || (inventory && (rule.roomOnly & bit)))
++				continue;
++			if (!verbActive(v))
++				continue;
++			verbs.push_back(v);
++		}
++		if (!verbs.empty()) {
++			groups.push_back(verbs);
++			shown.push_back(0);
++		}
++	}
++	// Pairs: only one of the two icons, by the state of the object
++	for (uint p = 0; p < rule.pairs.size(); p++) {
++		const Pair &pr = rule.pairs[p];
++		int ia = -1, ib = -1;
++		for (uint g = 0; g < groups.size(); g++) {
++			for (uint k = 0; k < groups[g].size(); k++) {
++				if (groups[g][k] == pr.a && ia < 0)
++					ia = g;
++				if (groups[g][k] == pr.b && ib < 0)
++					ib = g;
++			}
++		}
++		if (ia < 0 || ib < 0 || ia == ib)
++			continue;
++		bool showB = false;
++		for (uint c = 0; c < pr.conds.size() && !showB; c++)
++			showB = condition(pr.conds[c], obj);
++		if (showB) {
++			shown[ib] = pr.b;
++			groups[ia].clear();
++		} else {
++			shown[ia] = pr.a;
++			groups[ib].clear();
++		}
++	}
++	bool give = false;
++	for (uint g = 0; g < groups.size(); g++) {
++		if (groups[g].empty())
++			continue;
++		int v = shown[g];
++		for (uint n = 0; !v && n < ARRAYSIZE(kPriority); n++)
++			for (uint k = 0; k < groups[g].size(); k++)
++				if (groups[g][k] == kPriority[n])
++					v = kPriority[n];
++		if (!v)
++			v = groups[g][0];
++		if (v == kZakGive || v == kZakSell)
++			give = true;
++		placeVerb(v);
++	}
++	// The sentence script handles Give (Sell in the shop) for any item
++	if (inventory && !give) {
++		if (verbActive(kZakGive) && !(rule.never & (1u << kZakGive)))
++			placeVerb(kZakGive);
++		else if (verbActive(kZakSell) && !(rule.never & (1u << kZakSell)))
++			placeVerb(kZakSell);
++	}
++}
++
++// ------------------------------------------------------------------ portraits
++
++bool VerbWheel::kidAvailable(int kid) const {
++	// As ScummVM's F1 to F4 (checkExecVerbs): Zak Var[144] bit 15, Annie, Melissa
++	// and Leslie Var[145] bits 0 to 2; a set bit means the kid can not be chosen
++	return !_vm->readVar(0x890E + kid);
++}
++
++bool VerbWheel::portraitsShown() const {
++	if (!_portraits || _vm->_mainMenuIsActive)
++		return false;
++	const int slot = _vm->getVerbSlot(kZakSwitch, 0);
++	if (slot <= 0 || _vm->_verbs[slot].curmode != 1)
++		return false;
++	for (int k = 1; k <= 4; k++)
++		if (k != _vm->_scummVars[_vm->VAR_EGO] && kidAvailable(k))
++			return true;
++	return false;
++}
++
++Common::Rect VerbWheel::portraitRect(int kid) const {
++	const int total = 4 * kPortraitW + 3 * kPortraitGap;
++	const int x = _vm->_screenWidth - 2 - total + (kid - 1) * (kPortraitW + kPortraitGap);
++	const int y = _vm->_screenHeight - 2 - kPortraitH;
++	return Common::Rect(x, y, x + kPortraitW, y + kPortraitH);
++}
++
++int VerbWheel::portraitAt(int x, int y) const {
++	if (!portraitsShown())
++		return 0;
++	for (int k = 1; k <= 4; k++)
++		if (kidAvailable(k) && portraitRect(k).contains(x, y))
++			return k;
++	return 0;
++}
++
++void VerbWheel::drawPortraits() {
++	Common::String what;
++	if (portraitsShown()) {
++		what = Common::String::format("ego %d:", _vm->_scummVars[_vm->VAR_EGO]);
++		for (int k = 1; k <= 4; k++)
++			what += kidAvailable(k) ? '1' : '0';
++	}
++	if (what.empty()) {
++		if (!_portraitDrawn.isEmpty()) {
++			restoreScreenRect(_portraitDrawn);
++			_portraitDrawn = Common::Rect();
++			_portraitShown.clear();
++			debug("Verbhjul: portraits hidden");
++		}
++		return;
++	}
++	if (what != _portraitShown) {
++		debug("Verbhjul: portraits %s", what.c_str());
++		if (!_portraitDrawn.isEmpty())
++			restoreScreenRect(_portraitDrawn);
++		_portraitShown = what;
++	}
++	Graphics::Surface *s = g_system->lockScreen();
++	if (!s)
++		return;
++	const Graphics::Font *font = FontMan.getFontByUsage(s->w >= 2 * _vm->_screenWidth ?
++		Graphics::FontManager::kGUIFont : Graphics::FontManager::kConsoleFont);
++	if (!font)
++		font = FontMan.getFontByUsage(Graphics::FontManager::kConsoleFont);
++	const uint32 cRing = color(*s, 214, 214, 224);
++	const uint32 cFill = color(*s, 32, 40, 72);
++	const uint32 cEgo = color(*s, 240, 196, 48);
++	const uint32 cText = color(*s, 255, 255, 255);
++	const uint32 cTextEgo = color(*s, 16, 16, 24);
++	const int ego = _vm->_scummVars[_vm->VAR_EGO];
++	Common::Rect all;
++	for (int k = 1; k <= 4; k++) {
++		if (!kidAvailable(k) && k != ego)
++			continue;
++		const Common::Rect r = toScreen(portraitRect(k));
++		Common::Rect rc = r;
++		rc.clip(Common::Rect(s->w, s->h));
++		if (rc.isEmpty())
++			continue;
++		s->fillRect(rc, k == ego ? cEgo : cFill);
++		s->frameRect(rc, cRing);
++		if (font)
++			font->drawString(s, kKidLabel[k - 1], rc.left, rc.top + (rc.height() - font->getFontHeight()) / 2,
++			                 rc.width(), k == ego ? cTextEgo : cText, Graphics::kTextAlignCenter);
++		if (all.isEmpty())
++			all = rc;
++		else
++			all.extend(rc);
++	}
++	g_system->unlockScreen();
++	_portraitDrawn = all;
 +}
 +
 +// ------------------------------------------------------------------ wheel
@@ -415,37 +767,33 @@ index 00000000..3f0fd7c0
 +void VerbWheel::choose(int i) {
 +	const int v = _slots[i];
 +	debug("Verbhjul: chose %d (%s) for object %d", v, verbName(v).c_str(), _obj);
-+	// Start from an empty sentence. The input script keeps the object when the
-+	// verb changes (Walk to lamp, then Use gives "Use lamp with"), so an object
-+	// left over from the last click would end up in this sentence, and clicking
-+	// the verb that is already selected would run the sentence that waits.
-+	// Walk to, then the sentence line, clears it the way a player can: with
-+	// Walk to and no object clicked, global script 11 runs script 18.
-+	if (_vm->_scummVars[kVarObjA] || _vm->_scummVars[kVarObjB] || _vm->_scummVars[kVarPrep] ||
-+	    _vm->_scummVars[kVarVerb] == v) {
-+		if (_vm->_scummVars[kVarVerb] != kZakWalkTo)
-+			_steps.push_back({ kStepVerb, kZakWalkTo, 0 });
-+		_steps.push_back({ kStepVerb, kZakSentence, 0 });
-+	}
-+	_steps.push_back({ kStepVerb, v, 0 });
++	// Clicking the verb that is already selected would run the pending sentence
++	if (_vm->_scummVars[kVarVerb] == v)
++		queueStep(kStepVerb, kZakWalkTo, 0);
++	queueStep(kStepVerb, v, 0);
 +	if (_invVerb)
-+		_steps.push_back({ kStepVerb, _invVerb, 0 });
++		queueStep(kStepVerb, _invVerb, 0);
 +	else
-+		_steps.push_back({ kStepScene, _virt.x, _virt.y });
++		queueStep(kStepScene, _virt.x, _virt.y);
 +	// Runs the sentence, or waits for a second object (see tick)
-+	_steps.push_back({ kStepCheck, v, _obj });
++	queueStep(kStepCheck, v, _obj);
 +	_waitVerb = v;
 +	_waitObj = _obj;
 +	close();
 +}
 +
++void VerbWheel::queueStep(StepType type, int a, int b) {
++	_stepRoom = _vm->_currentRoom;
++	_steps.push_back({ type, a, b });
++}
++
 +void VerbWheel::queueTarget(int obj, int invVerb, const Common::Point &virt) {
 +	debug("Verbhjul: second object %d%s", obj, invVerb ? Common::String::format(" (inventory slot %d)", invVerb).c_str() : "");
 +	if (invVerb)
-+		_steps.push_back({ kStepVerb, invVerb, 0 });
++		queueStep(kStepVerb, invVerb, 0);
 +	else
-+		_steps.push_back({ kStepScene, virt.x, virt.y });
-+	_steps.push_back({ kStepCheck, _waitVerb, _waitObj });
++		queueStep(kStepScene, virt.x, virt.y);
++	queueStep(kStepCheck, _waitVerb, _waitObj);
 +	_state = kClosed;
 +}
 +
@@ -464,8 +812,6 @@ index 00000000..3f0fd7c0
 +		}
 +		return false;
 +	}
-+	if (!_enabled)
-+		return false;
 +
 +	const bool mouse = ev.type == Common::EVENT_MOUSEMOVE || ev.type == Common::EVENT_LBUTTONDOWN ||
 +		ev.type == Common::EVENT_LBUTTONUP || ev.type == Common::EVENT_RBUTTONDOWN || ev.type == Common::EVENT_RBUTTONUP;
@@ -475,6 +821,28 @@ index 00000000..3f0fd7c0
 +	const int x = CLIP<int>(ev.mouse.x * _vm->_screenWidth / sw, 0, _vm->_screenWidth - 1);
 +	const int y = CLIP<int>(ev.mouse.y * _vm->_screenHeight / sh, 0, _vm->_screenHeight - 1);
 +	const bool canAct = _vm->_userPut > 0 && _vm->_cursor.state > 0 && !_vm->_mainMenuIsActive;
++	const bool canSwitch = _vm->_userPut > 0 && !_vm->_mainMenuIsActive;   // as the Switch button
++
++	// The portraits work with the wheel on or off
++	if (ev.type == Common::EVENT_LBUTTONDOWN && _state != kOpen) {
++		const int kid = portraitAt(x, y);
++		if (kid) {
++			if (canSwitch && kid != _vm->_scummVars[_vm->VAR_EGO]) {
++				debug("Verbhjul: portrait %d", kid);
++				_state = kClosed;
++				queueStep(kStepKid, kid, 0);
++			}
++			_swallowLeftUp = true;
++			return true;
++		}
++	}
++	if (!_enabled) {
++		if (ev.type == Common::EVENT_LBUTTONUP && _swallowLeftUp) {
++			_swallowLeftUp = false;
++			return true;
++		}
++		return false;
++	}
 +
 +	switch (ev.type) {
 +	case Common::EVENT_MOUSEMOVE:
@@ -493,7 +861,7 @@ index 00000000..3f0fd7c0
 +		}
 +		if (_state == kWaitTarget) {
 +			debug("Verbhjul: cancelled the sentence");
-+			_steps.push_back({ kStepVerb, kZakWalkTo, 0 });
++			queueStep(kStepVerb, kZakWalkTo, 0);
 +			_state = kClosed;
 +			_swallowRightUp = true;
 +			return true;
@@ -570,14 +938,38 @@ index 00000000..3f0fd7c0
 +		debug("Verbhjul: the sentence is no longer waiting");
 +		_state = kClosed;
 +	}
++	// A new room (or a loaded game): the queued clicks and the waiting sentence are stale
++	if ((!_steps.empty() || _state == kWaitTarget) && _vm->_currentRoom != _stepRoom) {
++		debug("Verbhjul: room changed; dropped %d queued clicks", (int)_steps.size());
++		_steps.clear();
++		if (_state == kWaitTarget)
++			_state = kClosed;
++	}
 +	if (_steps.empty() || _vm->_userPut <= 0)
 +		return false;
 +
 +	const Step st = _steps.remove_at(0);
 +	switch (st.type) {
 +	case kStepVerb:
++		// Checked again: a script may have switched the verb off since the choice
++		if (st.a >= 1 && st.a <= 17 && !verbActive(st.a)) {
++			debug("Verbhjul: verb %d is no longer in the panel; dropped the sentence", st.a);
++			_steps.clear();
++			if (_state == kWaitTarget)
++				_state = kClosed;
++			return false;
++		}
 +		debug("Verbhjul: click verb %d", st.a);
 +		_vm->runInputScript(kVerbClickArea, st.a, 0);
++		break;
++	case kStepKid:
++		// The same checks as ScummVM's F1 to F4, when the click is sent
++		if (!portraitsShown() || !kidAvailable(st.a) || st.a == _vm->_scummVars[_vm->VAR_EGO]) {
++			debug("Verbhjul: kid %d can not be chosen now; dropped", st.a);
++			return false;
++		}
++		debug("Verbhjul: click verb %d", kZakSwitch + st.a);
++		_vm->runInputScript(kVerbClickArea, kZakSwitch + st.a, 0);
 +		break;
 +	case kStepScene: {
 +		// The input script finds the object at VAR_VIRT_MOUSE (global script 22)
@@ -697,6 +1089,7 @@ index 00000000..3f0fd7c0
 +}
 +
 +void VerbWheel::draw() {
++	drawPortraits();
 +	if (_state != kOpen) {
 +		if (!_drawn.isEmpty() || !_textRect.isEmpty()) {
 +			restoreScreenRect(_drawn);
@@ -759,7 +1152,7 @@ index 00000000..3f0fd7c0
 +		const int th = font->getFontHeight() + 4 * scale;
 +		const int ty = (_center.y + kRadius + kIcon + 2) * s->h / _vm->_screenHeight;
 +		const int tx = CLIP<int>(_center.x * s->w / _vm->_screenWidth - tw / 2, 0, MAX(0, s->w - tw));
-+		box = Common::Rect(tx, ty, tx + tw, MIN<int>(s->h, ty + th));
++		box = Common::Rect(tx, ty, MIN<int>(s->w, tx + tw), MIN<int>(s->h, ty + th));
 +		s->fillRect(box, cBox);
 +		s->frameRect(box, cRing);
 +		font->drawString(s, text, tx, ty + 2 * scale, tw, cText, Graphics::kTextAlignCenter);
@@ -845,6 +1238,57 @@ index 00000000..3f0fd7c0
 +			pushKey((Common::KeyCode)t.arg[0], t.arg[0]);
 +		} else if (t.cmd == "ctrl" && !t.arg.empty()) {
 +			pushKey((Common::KeyCode)t.arg[0], t.arg[0], Common::KBD_CTRL);
++		} else if (t.cmd == "fkey") {
++			const int n = atoi(t.arg.c_str());
++			if (n >= 1 && n <= 12)
++				pushKey((Common::KeyCode)(Common::KEYCODE_F1 + n - 1), Common::ASCII_F1 + n - 1);
++		} else if (t.cmd == "portrait") {
++			const int k = atoi(t.arg.c_str());
++			if (k >= 1 && k <= 4) {
++				const Common::Rect r = portraitRect(k);
++				const Common::Point p((r.left + r.right) / 2, (r.top + r.bottom) / 2);
++				pushMouse(Common::EVENT_MOUSEMOVE, p.x, p.y);
++				pushMouse(Common::EVENT_LBUTTONDOWN, p.x, p.y);
++				_upFrame = _frame + 2;
++				_upRight = false;
++				_upPos = p;
++			}
++		} else if (t.cmd == "setvar" && parseXY(t.arg, x, y)) {
++			// setvar=n/value
++			if (x >= 0 && x < _vm->_numVariables)
++				_vm->_scummVars[x] = y;
++		} else if (t.cmd == "setbit") {
++			// setbit=n.bit/value
++			const size_t dot = t.arg.find('.'), slash = t.arg.find('/');
++			if (dot != Common::String::npos && slash != Common::String::npos) {
++				const int n = atoi(t.arg.c_str()), bit = atoi(t.arg.c_str() + dot + 1);
++				if (n >= 0 && n < _vm->_numVariables && bit >= 0 && bit < 32) {
++					if (atoi(t.arg.c_str() + slash + 1))
++						_vm->_scummVars[n] |= (1u << bit);
++					else
++						_vm->_scummVars[n] &= ~(1u << bit);
++				}
++			}
++		} else if (t.cmd == "script") {
++			_vm->runScript(atoi(t.arg.c_str()), false, false, nullptr);
++		} else if (t.cmd == "rules") {
++			int n = 0, bad = 0;
++			for (const VerbWheelRule *r = kZakVerbWheelRules; r->spec; r++, n++) {
++				Common::Array<Common::String> words;
++				Common::StringTokenizer tok(r->spec, " ");
++				while (!tok.empty())
++					words.push_back(tok.nextToken());
++				Common::sort(words.begin(), words.end());
++				Common::String want;
++				for (uint k = 0; k < words.size(); k++)
++					want += (k ? " " : "") + words[k];
++				const Common::String got = _rules.contains(r->obj) ? ruleText(_rules[r->obj]) : Common::String();
++				if (got != want) {
++					bad++;
++					debug("Verbhjul: rule %d differs: \"%s\" read as \"%s\"", r->obj, r->spec, got.c_str());
++				}
++			}
++			debug("Verbhjul: rules checked: %d, %d differ", n, bad);
 +		} else if ((t.cmd == "click" || t.cmd == "rclick") && parseXY(t.arg, x, y)) {
 +			const bool right = t.cmd == "rclick";
 +			pushMouse(Common::EVENT_MOUSEMOVE, x, y);
@@ -917,10 +1361,10 @@ index 00000000..3f0fd7c0
 +} // End of namespace Scumm
 diff --git a/engines/scumm/verbhjul.h b/engines/scumm/verbhjul.h
 new file mode 100644
-index 00000000..cf77425a
+index 00000000..088a0c08
 --- /dev/null
 +++ b/engines/scumm/verbhjul.h
-@@ -0,0 +1,178 @@
+@@ -0,0 +1,245 @@
 +/* ScummVM - Graphic Adventure Engine
 + *
 + * ScummVM is the legal property of its developers, whose names
@@ -956,12 +1400,40 @@ index 00000000..cf77425a
 + *    8 Take off        9 Read    10 Push (Teleport to)  11 Pull
 + *
 + * Buy, Sell and Teleport to take the place of the verb they replace in the
-+ * original verb panel. By default only the verbs the object has code for
-+ * are shown (the object's verb table in its OC block), plus Give and Sell
-+ * for inventory items, which the game's sentence script handles for any
-+ * item. With "verbhjul_alle" every active verb is shown. A verb is only
-+ * shown while its slot in the original panel is switched on, so the shop
-+ * and the teleport modes need no special handling.
++ * original verb panel. A verb is only shown while its slot in the original
++ * panel is switched on, so the shop and the teleport modes need no special
++ * handling. Inventory items always get Give (or Sell in the shop), which the
++ * game's sentence script handles for any item.
++ *
++ * Which icons an object gets:
++ *  - Dynamic (default): at most four. Verbs that run the same object code
++ *    share one icon, Open/Close and Turn on/Turn off show only the one that
++ *    fits the object's state, and a few objects have hand-made rules. The
++ *    rules come from verbhjul_zak.h, generated by tools/verbhjul_dynamisk.py
++ *    from the game's scripts. One rule per object, words separated by spaces:
++ *      g=2,6;1,7;14   the icons; the verbs of a group run the same code
++ *      p=2/7:s        of the icons with verb 2 and verb 7 only one is shown:
++ *                     the one with 7 when the condition holds. s = the
++ *                     object's state is not 0, s92 = the state of object 92,
++ *                     c6 = class 6 is set, C6 = class 6 is not set,
++ *                     v222=14|16 = Var[222] is 14 or 16, b143.0 = bit 0
++ *                     of Var[143] is set; several joined by + mean "or"
++ *      i=11 / r=8     these verbs only in the inventory / only in the room
++ *      x=11           these verbs never (they only give a remark)
++ *    An icon sends one verb of its group (the pair's verb, or the first of
++ *    Open, Close, Pick up, Turn on, Turn off, Put on, Take off, Read, Use,
++ *    Push, Pull, Give, Buy, Sell, Teleport to) and sits at that verb's clock
++ *    position. Objects without a rule get one icon per verb.
++ *  - The object's verbs (verbhjul_dynamisk off): one icon per verb in the
++ *    object's verb table (its OC block).
++ *  - All verbs (verbhjul_alle): every active verb.
++ *
++ * Character portraits: while the game lets the player switch kid (the
++ * Switch verb is on), small portraits of the kids that can be chosen stand in
++ * the bottom right corner, the current one highlighted. Clicking one sends
++ * the same click as choosing the kid's name after Switch (verbs 37 to 40),
++ * as ScummVM's F1 to F4 do. The Switch button itself is then hidden. This
++ * works with the wheel on or off.
 + *
 + * Choosing a verb sends exactly the clicks a player would make on the
 + * original panel, one per frame, through the game's own input script
@@ -982,12 +1454,16 @@ index 00000000..cf77425a
 + * verbs when playing an animal) stay as they are.
 + *
 + * Settings (application domain): verbhjul (on/off, default on),
-+ * verbhjul_alle (all verbs instead of the object's verbs, default off).
++ * verbhjul_dynamisk (dynamic icons, default on), verbhjul_alle (all verbs,
++ * default off), verbhjul_portretter (portraits, default on). Environment
++ * variables with the same names in capitals override them.
 + * Ctrl+W switches the wheel on and off while playing.
 + *
 + * Test hooks for running without a screen:
-+ *   VERBHJUL_TEST=frame:command,...  commands: esc, key=<ascii>, ctrl=<ascii>, click=x/y,
-+ *       rclick=x/y, rdrag=x/y>verb, pick=verb, dump=name, log, quit.
++ *   VERBHJUL_TEST=frame:command,...  commands: esc, key=<ascii>, ctrl=<ascii>, fkey=<n>,
++ *       click=x/y, rclick=x/y, rdrag=x/y>verb, pick=verb, portrait=<1..4>,
++ *       setvar=n/value, setbit=n.bit/value, script=n, rules, dump=name, log, quit.
++ *       rules: writes every parsed rule back and compares it with verbhjul_zak.h.
 + *       Coordinates are game pixels (320 x 240); frames are calls to tick().
 + *   VERBHJUL_DUMP_DIR  where dump=name writes name.png (the screen).
 + * Every injected click, every wheel opened and every doSentence is logged
@@ -999,6 +1475,7 @@ index 00000000..cf77425a
 +
 +#include "common/array.h"
 +#include "common/events.h"
++#include "common/hashmap.h"
 +#include "common/rect.h"
 +#include "common/str.h"
 +
@@ -1031,9 +1508,26 @@ index 00000000..cf77425a
 +
 +private:
 +	enum State { kClosed, kOpen, kWaitTarget };
-+	enum StepType { kStepVerb, kStepScene, kStepCheck };
++	enum StepType { kStepVerb, kStepScene, kStepCheck, kStepKid };
 +	struct Step { StepType type; int a, b; };
 +	struct TestCmd { int frame; Common::String cmd, arg; };
++
++	// A rule of the dynamic wheel (see verbhjul_zak.h)
++	struct Cond {
++		char type;               // 's' state, 'c' class set, 'C' class not set, 'v' variable, 'b' bit
++		int arg;                 // object (0 = this one), class or variable
++		int bit;
++		Common::Array<int> values;
++	};
++	struct Pair {
++		int a, b;
++		Common::Array<Cond> conds;   // any of them true: show b
++	};
++	struct Rule {
++		Common::Array<Common::Array<int> > groups;
++		Common::Array<Pair> pairs;
++		uint32 invOnly = 0, roomOnly = 0, never = 0;   // bit per verb
++	};
 +
 +	explicit VerbWheel(ScummEngine *vm);
 +
@@ -1043,8 +1537,21 @@ index 00000000..cf77425a
 +	void close();
 +	void choose(int slotIndex);
 +	void queueTarget(int obj, int invVerb, const Common::Point &virt);
++	void queueStep(StepType type, int a, int b);
 +	void collectVerbs(int obj, bool inventory);
++	void collectDynamic(const Rule &rule, int obj, bool inventory);
++	bool condition(const Cond &c, int obj) const;
++	void placeVerb(int v);
++	void loadRules();
++	static Common::String ruleText(const Rule &rule);   // the rule written back (test: rules)
 +	bool verbActive(int verbid) const;
++
++	// Character portraits
++	bool portraitsShown() const;
++	bool kidAvailable(int kid) const;
++	Common::Rect portraitRect(int kid) const;   // game screen coordinates
++	int portraitAt(int x, int y) const;
++	void drawPortraits();
 +	int hoverAt(int x, int y) const;
 +	Common::Point slotCenter(int i) const;
 +	Common::String verbName(int verbid) const;
@@ -1068,6 +1575,11 @@ index 00000000..cf77425a
 +	ScummEngine *_vm;
 +	bool _enabled = true;
 +	bool _allVerbs = false;
++	bool _dynamic = true;
++	bool _portraits = true;
++	Common::HashMap<int, Rule> _rules;
++	Common::Rect _portraitDrawn;   // screen rectangle of the portraits drawn last time
++	Common::String _portraitShown; // what was drawn (kids and the current one)
 +	State _state = kClosed;
 +	bool _openedByPress = false;
 +	bool _pressMoved = false;
@@ -1085,6 +1597,7 @@ index 00000000..cf77425a
 +	Common::Array<Step> _steps;
 +	int _waitVerb = 0;
 +	int _waitObj = 0;
++	int _stepRoom = -1;      // the room the queued clicks and the waiting sentence belong to
 +	uint32 _frame = 0;
 +	Common::Array<TestCmd> _tests;
 +	Common::String _dumpDir;
@@ -1094,6 +1607,393 @@ index 00000000..cf77425a
 +	Common::Point _upPos;
 +	bool _swallowLeftUp = false;
 +	bool _swallowRightUp = false;
++};
++
++} // End of namespace Scumm
++
++#endif
+diff --git a/engines/scumm/verbhjul_zak.h b/engines/scumm/verbhjul_zak.h
+new file mode 100644
+index 00000000..1a345435
+--- /dev/null
++++ b/engines/scumm/verbhjul_zak.h
+@@ -0,0 +1,381 @@
++/* ScummVM - Graphic Adventure Engine
++ *
++ * ScummVM is the legal property of its developers, whose names
++ * are too numerous to list here. Please refer to the COPYRIGHT
++ * file distributed with this source distribution.
++ *
++ * This program is free software: you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation, either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++/*
++ * Generated by tools/verbhjul_dynamisk.py in the ZakMcKracken-HD repository;
++ * do not edit by hand. The icons of the dynamic verb wheel for Zak McKracken
++ * FM-Towns, per object. The format is described in verbhjul.h.
++ */
++
++#ifndef SCUMM_VERBHJUL_ZAK_H
++#define SCUMM_VERBHJUL_ZAK_H
++
++namespace Scumm {
++
++struct VerbWheelRule {
++	uint16 obj;
++	const char *spec;
++};
++
++static const VerbWheelRule kZakVerbWheelRules[] = {
++	{ 14, "g=4;8;9;11;14 p=4/9:v222=14|16 i=11 r=8" },
++	{ 15, "g=8;12;14" },
++	{ 16, "g=8;12;14" },
++	{ 17, "g=6,8;12;14" },
++	{ 18, "g=11;12;14" },
++	{ 19, "g=8;14" },
++	{ 20, "g=6;8;14" },
++	{ 21, "g=8;14" },
++	{ 22, "g=8;14" },
++	{ 23, "g=8;14" },
++	{ 24, "g=8;14" },
++	{ 25, "g=8;14" },
++	{ 26, "g=8;14" },
++	{ 27, "g=12;14" },
++	{ 28, "g=2;7;12;14" },
++	{ 29, "g=8;14" },
++	{ 30, "g=8;12;14" },
++	{ 31, "g=8;14" },
++	{ 32, "g=8;11;12;14" },
++	{ 33, "g=8;14" },
++	{ 34, "g=2;7;14;15 p=2/7:C6" },
++	{ 35, "g=14" },
++	{ 36, "g=14" },
++	{ 37, "g=14" },
++	{ 38, "g=14" },
++	{ 39, "g=4;9;11;12;15 p=4/9:c6 i=11" },
++	{ 40, "g=4;9;11;15" },
++	{ 41, "g=14;15" },
++	{ 42, "g=11;12" },
++	{ 43, "g=4;9;11;15" },
++	{ 44, "g=12;14;15" },
++	{ 45, "g=12" },
++	{ 46, "g=12;14" },
++	{ 47, "g=8;14" },
++	{ 48, "g=6,8;14" },
++	{ 49, "g=5;8;10;14 p=5/10:c6" },
++	{ 50, "g=4,14;8;9;11;12 p=4/9:v219=15 i=11 r=8" },
++	{ 52, "g=6,8;14" },
++	{ 53, "g=8;14" },
++	{ 54, "g=8;14" },
++	{ 55, "g=8;14" },
++	{ 56, "g=8;14" },
++	{ 57, "g=8;14" },
++	{ 58, "g=8;14" },
++	{ 59, "g=8;14" },
++	{ 60, "g=8;14" },
++	{ 61, "g=11;12;14" },
++	{ 62, "g=11;12;14" },
++	{ 63, "g=11;12;14" },
++	{ 64, "g=8;14" },
++	{ 65, "g=4;9;11;12" },
++	{ 66, "g=4;9;11;12" },
++	{ 67, "g=6,8;14" },
++	{ 68, "g=8;11;14" },
++	{ 69, "g=5,14;8;10 p=5/10:c6" },
++	{ 70, "g=8;14" },
++	{ 71, "g=2;5;8;10;11;12;14 p=5/10:c6+b143.0 x=11 i=12 r=8" },
++	{ 72, "g=8;12;14" },
++	{ 73, "g=6,8;14" },
++	{ 74, "g=8;11;12;14" },
++	{ 75, "g=11;12;14" },
++	{ 76, "g=8;14" },
++	{ 77, "g=2,6,14;4;9;12 x=4" },
++	{ 78, "g=8;11;14" },
++	{ 79, "g=8;12" },
++	{ 80, "g=8;14" },
++	{ 81, "g=8;14" },
++	{ 82, "g=11;12;14" },
++	{ 83, "g=11;12;14" },
++	{ 84, "g=2;7;14 p=2/7:s" },
++	{ 85, "g=14" },
++	{ 86, "g=14" },
++	{ 87, "g=8,14" },
++	{ 88, "g=5,14;10" },
++	{ 90, "g=2;6;7 p=2/7:s" },
++	{ 91, "g=2,6;1,7;14 p=2/7:s92" },
++	{ 92, "g=1,7;2,6 p=2/7:s" },
++	{ 94, "g=1,7;2,6 p=2/7:s" },
++	{ 95, "g=5;6,8;10;12 p=5/10:C6" },
++	{ 103, "g=5;10;14 p=5/10:s" },
++	{ 106, "g=8;12;14" },
++	{ 107, "g=1,6,8" },
++	{ 108, "g=2,6,8;14" },
++	{ 110, "g=8;14" },
++	{ 111, "g=2;7 p=2/7:s" },
++	{ 112, "g=2;7 p=2/7:s" },
++	{ 113, "g=5,10" },
++	{ 118, "g=6;14" },
++	{ 119, "g=1,6;2,8;7 p=2/7:s" },
++	{ 121, "g=1,7;2,6 p=2/7:s" },
++	{ 122, "g=5,10,14" },
++	{ 123, "g=5;10" },
++	{ 124, "g=2,5,10;14" },
++	{ 125, "g=1,7;2,6 p=2/7:s" },
++	{ 126, "g=2;7;14 p=2/7:s" },
++	{ 129, "g=5;10;14" },
++	{ 130, "g=8" },
++	{ 131, "g=6,8" },
++	{ 135, "g=2;7 p=2/7:s" },
++	{ 138, "g=2;7;12;14 p=2/7:s" },
++	{ 139, "g=7;8,12" },
++	{ 142, "g=2;14" },
++	{ 144, "g=17" },
++	{ 147, "g=1,14" },
++	{ 149, "g=12" },
++	{ 150, "g=14" },
++	{ 151, "g=2;7 p=2/7:s" },
++	{ 152, "g=5;10;12;14" },
++	{ 153, "g=14" },
++	{ 154, "g=12" },
++	{ 155, "g=2;7 p=2/7:s" },
++	{ 156, "g=2;7 p=2/7:s" },
++	{ 157, "g=2;7" },
++	{ 159, "g=12;14" },
++	{ 161, "g=2;7 p=2/7:s" },
++	{ 162, "g=2;7 p=2/7:s" },
++	{ 163, "g=2" },
++	{ 164, "g=12" },
++	{ 165, "g=12" },
++	{ 167, "g=12" },
++	{ 169, "g=2;7;12;14 p=2/7:s" },
++	{ 172, "g=2;7 p=2/7:s" },
++	{ 173, "g=2" },
++	{ 174, "g=5;10;14 p=5/10:c6" },
++	{ 175, "g=1,7;2,6,8 p=2/7:s" },
++	{ 176, "g=2,6,8,12" },
++	{ 177, "g=2,6,8,12" },
++	{ 178, "g=1;6;7;12" },
++	{ 179, "g=1,6,8" },
++	{ 180, "g=2;7 p=2/7:s" },
++	{ 181, "g=12" },
++	{ 182, "g=12" },
++	{ 183, "g=15" },
++	{ 184, "g=15" },
++	{ 185, "g=15" },
++	{ 186, "g=15" },
++	{ 187, "g=15" },
++	{ 188, "g=15" },
++	{ 189, "g=12;15" },
++	{ 191, "g=2" },
++	{ 192, "g=14" },
++	{ 193, "g=12;14" },
++	{ 194, "g=14" },
++	{ 214, "g=12" },
++	{ 219, "g=12;14" },
++	{ 220, "g=14" },
++	{ 229, "g=14" },
++	{ 230, "g=1,5,14" },
++	{ 231, "g=1,5,14" },
++	{ 232, "g=1,5,14" },
++	{ 233, "g=1,5,14" },
++	{ 234, "g=1,5,14" },
++	{ 235, "g=1,5,14" },
++	{ 236, "g=12" },
++	{ 237, "g=12" },
++	{ 238, "g=2" },
++	{ 240, "g=1,14" },
++	{ 241, "g=8" },
++	{ 242, "g=5;10;14 p=5/10:s" },
++	{ 243, "g=14" },
++	{ 244, "g=1,6,14" },
++	{ 245, "g=1,14;12" },
++	{ 246, "g=2;7 p=2/7:s" },
++	{ 247, "g=2;7 p=2/7:s246" },
++	{ 248, "g=12" },
++	{ 249, "g=2;7 p=2/7:s" },
++	{ 250, "g=2;7 p=2/7:s" },
++	{ 251, "g=2;7 p=2/7:s" },
++	{ 252, "g=2;7 p=2/7:s" },
++	{ 253, "g=2;7 p=2/7:s" },
++	{ 254, "g=2;7 p=2/7:s" },
++	{ 255, "g=14" },
++	{ 256, "g=2;7 p=2/7:s" },
++	{ 257, "g=2,6,7,8" },
++	{ 258, "g=2,6,7,8" },
++	{ 259, "g=2,6,7,8" },
++	{ 260, "g=2;5;7;10;14 p=2/7:s p=5/10:s261" },
++	{ 262, "g=8" },
++	{ 264, "g=2,6,8" },
++	{ 267, "g=1,8;14" },
++	{ 268, "g=8;14;17" },
++	{ 271, "g=8" },
++	{ 273, "g=1,6,8;14" },
++	{ 282, "g=12;14" },
++	{ 285, "g=1,6,8;11;14" },
++	{ 288, "g=8;14" },
++	{ 293, "g=12;14" },
++	{ 294, "g=12;14" },
++	{ 299, "g=2;7" },
++	{ 300, "g=2" },
++	{ 301, "g=2;7" },
++	{ 302, "g=2" },
++	{ 303, "g=2;7" },
++	{ 304, "g=2" },
++	{ 310, "g=12" },
++	{ 316, "g=1,14" },
++	{ 317, "g=1,14" },
++	{ 318, "g=1,14" },
++	{ 319, "g=12" },
++	{ 320, "g=12" },
++	{ 325, "g=2;7;14 p=2/7:s" },
++	{ 326, "g=1,14" },
++	{ 328, "g=2;7 p=2/7:s" },
++	{ 329, "g=2;7 p=2/7:s" },
++	{ 330, "g=12" },
++	{ 331, "g=1,6,14;5;10" },
++	{ 333, "g=6,8;14" },
++	{ 343, "g=1,5,6,14;10" },
++	{ 344, "g=12" },
++	{ 348, "g=12" },
++	{ 349, "g=2" },
++	{ 350, "g=2;7 p=2/7:s" },
++	{ 351, "g=2;7" },
++	{ 352, "g=12;14;17" },
++	{ 356, "g=12;14" },
++	{ 359, "g=14" },
++	{ 362, "g=8" },
++	{ 363, "g=2;7 p=2/7:s" },
++	{ 364, "g=12" },
++	{ 366, "g=2;7;14 p=2/7:s" },
++	{ 367, "g=1,7;2,6 p=2/7:s368" },
++	{ 368, "g=1,7;2,6 p=2/7:s" },
++	{ 369, "g=12" },
++	{ 370, "g=14" },
++	{ 371, "g=12" },
++	{ 372, "g=2;7" },
++	{ 376, "g=12" },
++	{ 377, "g=12" },
++	{ 378, "g=12" },
++	{ 380, "g=12" },
++	{ 391, "g=1,8;14" },
++	{ 392, "g=1,2,6,7" },
++	{ 393, "g=14" },
++	{ 395, "g=1,6,8,14" },
++	{ 399, "g=12;14" },
++	{ 400, "g=2" },
++	{ 411, "g=12" },
++	{ 413, "g=1" },
++	{ 414, "g=1" },
++	{ 416, "g=14" },
++	{ 423, "g=1,6,14" },
++	{ 424, "g=1,6,14;5;10" },
++	{ 425, "g=1,6,14;5;10" },
++	{ 426, "g=14" },
++	{ 427, "g=1,6,8;14" },
++	{ 428, "g=1,6,8;14" },
++	{ 429, "g=8" },
++	{ 430, "g=1,6,8" },
++	{ 431, "g=8" },
++	{ 445, "g=5;14" },
++	{ 446, "g=12;14" },
++	{ 447, "g=12;14" },
++	{ 448, "g=14" },
++	{ 449, "g=2;7 p=2/7:s" },
++	{ 450, "g=1,14" },
++	{ 451, "g=8;14" },
++	{ 452, "g=2;7 p=2/7:s" },
++	{ 453, "g=12" },
++	{ 454, "g=2;7" },
++	{ 458, "g=12" },
++	{ 463, "g=2;7 p=2/7:s" },
++	{ 464, "g=2;7 p=2/7:s" },
++	{ 466, "g=1,14" },
++	{ 468, "g=1,14" },
++	{ 469, "g=12" },
++	{ 470, "g=2;7;14 p=2/7:s" },
++	{ 471, "g=8" },
++	{ 472, "g=2;7 p=2/7:s" },
++	{ 473, "g=1,14" },
++	{ 475, "g=2;7 p=2/7:s" },
++	{ 476, "g=2;7 p=2/7:s" },
++	{ 477, "g=14" },
++	{ 478, "g=1,2,6,8" },
++	{ 479, "g=1,6,8;12" },
++	{ 480, "g=17" },
++	{ 481, "g=17" },
++	{ 482, "g=17" },
++	{ 483, "g=17" },
++	{ 484, "g=17" },
++	{ 485, "g=17" },
++	{ 486, "g=17" },
++	{ 488, "g=2;7 p=2/7:s" },
++	{ 489, "g=2;7;14 p=2/7:s" },
++	{ 490, "g=1,6,14;5;10 p=5/10:s" },
++	{ 491, "g=12" },
++	{ 492, "g=5;10;14 p=5/10:c6" },
++	{ 496, "g=2,5,14" },
++	{ 504, "g=14" },
++	{ 513, "g=12" },
++	{ 517, "g=1,2;6,7 p=2/7:s" },
++	{ 518, "g=14" },
++	{ 520, "g=1,5,6,10,14;11" },
++	{ 525, "g=2" },
++	{ 530, "g=14" },
++	{ 531, "g=1,14" },
++	{ 532, "g=1,14" },
++	{ 533, "g=1,14" },
++	{ 535, "g=8" },
++	{ 536, "g=8" },
++	{ 537, "g=8" },
++	{ 539, "g=12" },
++	{ 540, "g=12" },
++	{ 541, "g=12" },
++	{ 544, "g=8" },
++	{ 545, "g=1,14" },
++	{ 549, "g=12;14" },
++	{ 556, "g=1,6,14;5;10" },
++	{ 557, "g=1,6,14;5;10" },
++	{ 558, "g=12" },
++	{ 577, "g=12" },
++	{ 578, "g=2" },
++	{ 580, "g=12" },
++	{ 586, "g=12" },
++	{ 587, "g=12" },
++	{ 588, "g=12" },
++	{ 589, "g=12" },
++	{ 591, "g=2" },
++	{ 592, "g=2" },
++	{ 609, "g=1,6,8" },
++	{ 610, "g=1,6,8" },
++	{ 614, "g=1,6,8" },
++	{ 621, "g=14" },
++	{ 622, "g=12" },
++	{ 623, "g=8" },
++	{ 630, "g=14" },
++	{ 631, "g=14" },
++	{ 640, "g=14" },
++	{ 641, "g=12" },
++	{ 642, "g=1,6,14;2,10;5,7 p=2/7:s" },
++	{ 645, "g=8" },
++	{ 646, "g=8" },
++	{ 647, "g=6,8" },
++	{ 648, "g=14" },
++	{ 653, "g=8" },
++	{ 748, "g=14" },
++	{ 749, "g=14" },
++	{ 783, "g=2,6,14" },
++	{ 0, nullptr }
 +};
 +
 +} // End of namespace Scumm

@@ -4,7 +4,7 @@ Utredning 11. oktober 2026, etter spørsmål fra Tom: kan verblinjen med tekst b
 
 Kort svar: ja, alle tre lar seg gjøre i HD-laget uten å endre spillets skript, men ikke med et hjul på tre ikoner. Zak bruker 14 verb, og flere gåter avhenger av hvilket verb man velger. Ingenting her er bygget eller testet; det forutsetter at HD-motoren først er portet til Zak (docs/HD-MOTOR.md).
 
-**Beslutning 12. oktober 2026:** Tom valgte C, verbhjul som i Day of the Tentacle Remastered. Det er bygget (patch 0002, 13. oktober); se [VERBHJUL.md](VERBHJUL.md). Der er også rettet en feil i dette dokumentet: DOTT-hjulet viser verbene som gjelder objektet, ikke alle ni.
+**Beslutning 12. oktober 2026:** Tom valgte C, verbhjul som i Day of the Tentacle Remastered. Det er bygget (patch 0002, 13. oktober); se [VERBHJUL.md](VERBHJUL.md). 13. oktober ble det dynamisk (høyst fire valg, verb med lik kode slått sammen, Open eller Close etter tilstand) og fikk portretter for figurbytte, etter forslag fra Tom. Der er også rettet en feil i dette dokumentet: DOTT-hjulet viser verbene som gjelder objektet, ikke alle ni.
 
 ## Slik er skjermen i Zak FM-Towns
 
