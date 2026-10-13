@@ -77,6 +77,16 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [ ] Stilpilot med Tom: rom 1 og kostyme 1 sett i motoren, stilankere, godkjenning
 - [ ] Master-figurark for Zak, Annie, Melissa og Leslie
 - [ ] Aktiver bestillingen (`docs/BESTILLING-CHATGPT.md`) og grafikkrunder med `tools/gpt_runde.sh`
+- [ ] Ta inn grafikkjobbene fra Sam & Max HD (PR 4 der, 13. oktober), tilpasset v3:
+  - [ ] Fast størrelse i figurarkene: mål per rute i figurprompten, `tools/sjekk_leveranse.py` i `verktoy/` i `gpt-arbeid`, `myk.py` versjon 4 (her er den versjon 2)
+  - [ ] Hovedark (`figur.MASTERS`, `master_jobs`) for Zak, Annie, Melissa og Leslie, brukt som bilde to i figurjobbene deres
+  - [ ] Pilotordren: bare stilpiloten i ORDRE.md så lenge `stil/` er tom (`FIG_PILOT` og `PILOT_ROOMS`)
+  - [ ] Ikonark pakket i rader rom for rom med flat bakgrunn, og den omskrevne romprompten (ingenting legges til, fjernes eller ryddes, skilt bokstav for bokstav)
+  - [ ] Palett per kostyme fra skriptene (`tools/kostymer.py` i Sam & Max, `kostymer-i-rom.tsv` her) inn i `docs/kostymefarger.csv` og `zakhd extract`. Kostymepalettene peker på romindekser (for eksempel 225 til 229)
+  - [ ] Ikke ta med skyggeregelen (`figur.SHADOW_INDEX`): i v3 setter ScummVM ingen skyggetabell (bare v5 og nyere, `actor.cpp`), så indeks 13 er en vanlig farge. Kostyme 8 bruker den i 104 piksler (målt 13. oktober). Gjør regelen til et valg per spill
+  - [ ] Søppelrutegrensen (`figur.MAX_CEL`) kan tas med, men ingen av de 847 rutene i Zak er over 640 x 400
+  - [ ] Speilvending som i Sam & Max: alle 40 kostymer har speilflagg av, så rutene mot venstre lages av motoren
+- [ ] Dynamisk lys med normalkart og luminansmaske, etter godkjent stilpilot (Tom 13. oktober): valgfritt for spilleren (av som standard, eget valg i menyen), ingen kastede skygger. Prøv først i ett rom med normalkart regnet ut fra HD-bildene og lyset av og på med en tast. Lyset legges inn før fargeforholdet fra paletten. Samme plan som i Sam & Max HD
 
 ### Spillbart for Tom
 
