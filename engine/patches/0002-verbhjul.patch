@@ -122,10 +122,10 @@ index 20c4b0c5..af9f2fbd 100644
  	byte _completeScreenBuffer[320 * 200];
 diff --git a/engines/scumm/verbhjul.cpp b/engines/scumm/verbhjul.cpp
 new file mode 100644
-index 00000000..5b79545d
+index 00000000..3f0fd7c0
 --- /dev/null
 +++ b/engines/scumm/verbhjul.cpp
-@@ -0,0 +1,773 @@
+@@ -0,0 +1,789 @@
 +/* ScummVM - Graphic Adventure Engine
 + *
 + * ScummVM is the legal property of its developers, whose names
@@ -180,7 +180,9 @@ index 00000000..5b79545d
 +	kZakWalkTo = 3,
 +	kZakSentence = 100,    // the sentence line; clicking it runs the sentence
 +	kZakInvFirst = 101,
-+	kZakInvLast = 110
++	kZakInvLast = 110,
++	kZakInvUp = 115,       // inventory arrows: they only scroll (script 20)
++	kZakInvDown = 116
 +};
 +
 +// Clock positions 12, 1, 2 ... 11; the second verb takes the place when the
@@ -413,9 +415,18 @@ index 00000000..5b79545d
 +void VerbWheel::choose(int i) {
 +	const int v = _slots[i];
 +	debug("Verbhjul: chose %d (%s) for object %d", v, verbName(v).c_str(), _obj);
-+	// Clicking the verb that is already selected would run the pending sentence
-+	if (_vm->_scummVars[kVarVerb] == v)
-+		_steps.push_back({ kStepVerb, kZakWalkTo, 0 });
++	// Start from an empty sentence. The input script keeps the object when the
++	// verb changes (Walk to lamp, then Use gives "Use lamp with"), so an object
++	// left over from the last click would end up in this sentence, and clicking
++	// the verb that is already selected would run the sentence that waits.
++	// Walk to, then the sentence line, clears it the way a player can: with
++	// Walk to and no object clicked, global script 11 runs script 18.
++	if (_vm->_scummVars[kVarObjA] || _vm->_scummVars[kVarObjB] || _vm->_scummVars[kVarPrep] ||
++	    _vm->_scummVars[kVarVerb] == v) {
++		if (_vm->_scummVars[kVarVerb] != kZakWalkTo)
++			_steps.push_back({ kStepVerb, kZakWalkTo, 0 });
++		_steps.push_back({ kStepVerb, kZakSentence, 0 });
++	}
 +	_steps.push_back({ kStepVerb, v, 0 });
 +	if (_invVerb)
 +		_steps.push_back({ kStepVerb, _invVerb, 0 });
@@ -530,6 +541,11 @@ index 00000000..5b79545d
 +				_swallowLeftUp = true;
 +				return true;
 +			}
++			// The inventory arrows only scroll, and the sentence keeps waiting
++			// (the input script chains to script 20 without touching it)
++			const int slot = _vm->findVerbAtPos(x, y);
++			if (slot > 0 && (_vm->_verbs[slot].verbid == kZakInvUp || _vm->_verbs[slot].verbid == kZakInvDown))
++				return false;
 +			// Another button of the panel: the game handles it
 +			_state = kClosed;
 +		}
@@ -901,10 +917,10 @@ index 00000000..5b79545d
 +} // End of namespace Scumm
 diff --git a/engines/scumm/verbhjul.h b/engines/scumm/verbhjul.h
 new file mode 100644
-index 00000000..03efdef3
+index 00000000..cf77425a
 --- /dev/null
 +++ b/engines/scumm/verbhjul.h
-@@ -0,0 +1,176 @@
+@@ -0,0 +1,178 @@
 +/* ScummVM - Graphic Adventure Engine
 + *
 + * ScummVM is the legal property of its developers, whose names
@@ -949,13 +965,15 @@ index 00000000..03efdef3
 + *
 + * Choosing a verb sends exactly the clicks a player would make on the
 + * original panel, one per frame, through the game's own input script
-+ * (global script 11): the verb, the object (a scene click at the stored
++ * (global script 11): Walk to and the sentence line when something is left
++ * of the last sentence (this clears it), the verb, the object (a scene click at the stored
 + * point, or the inventory slot), then the sentence line (verb 100), which
 + * runs the sentence. No game script is changed. When the sentence waits
 + * for a second object (Use ... with, Give ... to; the input script has set
 + * a preposition), the sentence line is not clicked, since that would clear
 + * the sentence. The wheel closes, and the next left click on an object, a
-+ * person or an inventory item sends that click and then the sentence line. A right click cancels by clicking Walk to, which clears the sentence
++ * person or an inventory item sends that click and then the sentence line.
++ * The inventory arrows scroll without ending the wait. A right click cancels by clicking Walk to, which clears the sentence
 + * the same way the original panel does.
 + *
 + * With the wheel on, the original verb buttons 1 to 17 are not drawn and
