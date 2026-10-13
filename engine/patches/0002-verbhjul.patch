@@ -1,0 +1,1128 @@
+diff --git a/engines/scumm/input.cpp b/engines/scumm/input.cpp
+index e799cd12..26ea7723 100644
+--- a/engines/scumm/input.cpp
++++ b/engines/scumm/input.cpp
+@@ -29,6 +29,7 @@
+ 
+ #include "scumm/debugger.h"
+ #include "scumm/dighd.h"
++#include "scumm/verbhjul.h"
+ #include "scumm/dialogs.h"
+ #include "scumm/insane/insane.h"
+ #include "scumm/imuse/imuse.h"
+@@ -108,6 +109,10 @@ void ScummEngine_v80he::parseEvent(Common::Event event) {
+ #endif
+ 
+ void ScummEngine::parseEvent(Common::Event event) {
++	// Zak FM-Towns verb wheel: right click, and clicks while the wheel is open
++	if (_verbWheel && _verbWheel->handleEvent(event))
++		return;
++
+ 	// Handle Macintosh events before scaling the mouse coordinates.
+ 	//
+ 	// TODO: Don't allow menu while message banner is active. Don't allow
+diff --git a/engines/scumm/module.mk b/engines/scumm/module.mk
+index 42985c9e..ace26be3 100644
+--- a/engines/scumm/module.mk
++++ b/engines/scumm/module.mk
+@@ -2,6 +2,7 @@ MODULE := engines/scumm
+ 
+ MODULE_OBJS := \
+ 	dighd.o \
++	verbhjul.o \
+ 	actor.o \
+ 	akos.o \
+ 	base-costume.o \
+diff --git a/engines/scumm/script.cpp b/engines/scumm/script.cpp
+index 0e09904f..9350fcf7 100644
+--- a/engines/scumm/script.cpp
++++ b/engines/scumm/script.cpp
+@@ -30,6 +30,7 @@
+ #include "scumm/scumm_v0.h"
+ #include "scumm/scumm_v2.h"
+ #include "scumm/sound.h"
++#include "scumm/verbhjul.h"
+ #include "scumm/verbs.h"
+ 
+ namespace Scumm {
+@@ -1110,6 +1111,9 @@ void ScummEngine::killAllScriptsExceptCurrent() {
+ void ScummEngine::doSentence(int verb, int objectA, int objectB) {
+ 	SentenceTab *st;
+ 
++	if (_verbWheel)
++		_verbWheel->noteSentence(verb, objectA, objectB);
++
+ 	if (_game.version >= 7) {
+ 
+ 		if (objectA == objectB)
+diff --git a/engines/scumm/scumm.cpp b/engines/scumm/scumm.cpp
+index 8abc0a15..d67e8f24 100644
+--- a/engines/scumm/scumm.cpp
++++ b/engines/scumm/scumm.cpp
+@@ -41,6 +41,7 @@
+ 
+ #include "scumm/akos.h"
+ #include "scumm/dighd.h"
++#include "scumm/verbhjul.h"
+ #include "scumm/charset.h"
+ #include "scumm/costume.h"
+ #include "scumm/debugger.h"
+@@ -487,6 +488,7 @@ ScummEngine::ScummEngine(OSystem *syst, const DetectorResult &dr)
+ 
+ 
+ ScummEngine::~ScummEngine() {
++	delete _verbWheel;
+ 	delete _digHD;
+ 	delete _musicEngine;
+ 
+@@ -1473,6 +1475,7 @@ Common::Error ScummEngine::init() {
+ 	}
+ 
+ 	// Initialize backend
++	_verbWheel = VerbWheel::create(this);
+ 	_digHD = DigHD::create(this);
+ 	if (_digHD) {
+ 		if (!_digHD->initGraphics(_screenWidth, _screenHeight))
+@@ -2995,6 +2998,8 @@ void ScummEngine::waitForTimer(int quarterFrames, bool freezeMacGui) {
+ 
+ 		if (_digHD)
+ 			_digHD->beforeUpdateScreen();
++		if (_verbWheel)
++			_verbWheel->draw();
+ 		_system->updateScreen();
+ 		cur = _system->getMillis();
+ 
+diff --git a/engines/scumm/scumm.h b/engines/scumm/scumm.h
+index 20c4b0c5..af9f2fbd 100644
+--- a/engines/scumm/scumm.h
++++ b/engines/scumm/scumm.h
+@@ -94,6 +94,7 @@ class IMuse;
+ class IMuseDigital;
+ class MacGui;
+ class DigHD;
++class VerbWheel;
+ class MusicEngine;
+ class Player_Towns;
+ class ScummEngine;
+@@ -537,6 +538,7 @@ extern const char *const insaneKeymapId;
+ class ScummEngine : public Engine, public Common::Serializable {
+ 	friend class ScummDebugger;
+ 	friend class DigHD;
++	friend class VerbWheel;
+ 	friend class CharsetRenderer;
+ 	friend class CharsetRendererClassic;
+ 	friend class CharsetRendererTownsClassic;
+@@ -1710,6 +1712,7 @@ public:
+ 
+ 	Graphics::Surface *_macScreen = nullptr;
+ 	DigHD *_digHD = nullptr; // Dig HD replacement graphics (dighd.cpp)
++	VerbWheel *_verbWheel = nullptr; // Verb wheel for Zak McKracken FM-Towns (verbhjul.cpp)
+ 	MacGui *_macGui = nullptr;
+ 	bool _useMacGraphicsSmoothing = true;
+ 	byte _completeScreenBuffer[320 * 200];
+diff --git a/engines/scumm/verbhjul.cpp b/engines/scumm/verbhjul.cpp
+new file mode 100644
+index 00000000..5b79545d
+--- /dev/null
++++ b/engines/scumm/verbhjul.cpp
+@@ -0,0 +1,773 @@
++/* ScummVM - Graphic Adventure Engine
++ *
++ * ScummVM is the legal property of its developers, whose names
++ * are too numerous to list here. Please refer to the COPYRIGHT
++ * file distributed with this source distribution.
++ *
++ * This program is free software: you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation, either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++#define FORBIDDEN_SYMBOL_EXCEPTION_getenv
++
++#include "common/config-manager.h"
++#include "common/debug.h"
++#include "common/endian.h"
++#include "common/fs.h"
++#include "common/system.h"
++#include "common/textconsole.h"
++#include "common/tokenizer.h"
++#include "graphics/font.h"
++#include "graphics/fontman.h"
++#include "graphics/surface.h"
++#include "image/png.h"
++
++#include "scumm/gfx.h"
++#include "scumm/object.h"
++#include "scumm/scumm.h"
++#include "scumm/verbs.h"
++#include "scumm/verbhjul.h"
++
++namespace Scumm {
++
++// What the input script of Zak FM-Towns (global script 11) uses; read from
++// the decompiled scripts (see docs/VERBHJUL.md).
++enum {
++	kVarVerb = 116,         // verb of the sentence being built
++	kVarObjA = 117,         // first object
++	kVarObjB = 118,         // second object
++	kVarPrep = 119,         // preposition (129 in, 130 with, 131 on, 132 to), 0 = none
++	kVarInventory = 102,    // objects shown in inventory slots 101..110
++	kZakWalkTo = 3,
++	kZakSentence = 100,    // the sentence line; clicking it runs the sentence
++	kZakInvFirst = 101,
++	kZakInvLast = 110
++};
++
++// Clock positions 12, 1, 2 ... 11; the second verb takes the place when the
++// first is not in the panel (shop, teleport).
++static const int kClock[12][2] = {
++	{ 8, 15 },   // Pick up / Buy
++	{ 2, 0 },    // Open
++	{ 7, 0 },    // Close
++	{ 14, 0 },   // Use
++	{ 11, 16 },  // Give / Sell
++	{ 5, 0 },    // Turn on
++	{ 10, 0 },   // Turn off
++	{ 4, 0 },    // Put on
++	{ 9, 0 },    // Take off
++	{ 12, 0 },   // Read
++	{ 1, 17 },   // Push / Teleport to
++	{ 6, 0 }     // Pull
++};
++
++// Placeholder icons until the drawn icons exist: at most three letters, so
++// they fit in the icon on the 320 x 240 screen. The text under the wheel
++// shows the whole verb while the pointer is on an icon.
++static const char *verbLabel(int v) {
++	switch (v) {
++	case 1: return "Psh";
++	case 2: return "Opn";
++	case 4: return "Put";
++	case 5: return "On";
++	case 6: return "Pul";
++	case 7: return "Cls";
++	case 8: return "Get";
++	case 9: return "Rem";
++	case 10: return "Off";
++	case 11: return "Giv";
++	case 12: return "Rd";
++	case 14: return "Use";
++	case 15: return "Buy";
++	case 16: return "Sel";
++	case 17: return "Tp";
++	default: return "?";
++	}
++}
++
++static const char *verbFallbackName(int v) {
++	switch (v) {
++	case 1: return "Push";
++	case 2: return "Open";
++	case 4: return "Put on";
++	case 5: return "Turn on";
++	case 6: return "Pull";
++	case 7: return "Close";
++	case 8: return "Pick up";
++	case 9: return "Take off";
++	case 10: return "Turn off";
++	case 11: return "Give";
++	case 12: return "Read";
++	case 14: return "Use";
++	case 15: return "Buy";
++	case 16: return "Sell";
++	case 17: return "Teleport to";
++	default: return "";
++	}
++}
++
++// Size of the wheel in game pixels. Twelve icons on a circle touch when the
++// radius is 3.86 times the icon radius (2 * sin 15 degrees = 0.518).
++static const int kRadius = 40;     // centre to icon centre
++static const int kIcon = 10;       // icon radius
++
++VerbWheel *VerbWheel::create(ScummEngine *vm) {
++	if (vm->_game.id != GID_ZAK || vm->_game.platform != Common::kPlatformFMTowns || vm->_game.version != 3)
++		return nullptr;
++	return new VerbWheel(vm);
++}
++
++VerbWheel::VerbWheel(ScummEngine *vm) : _vm(vm) {
++	for (int i = 0; i < 12; i++)
++		_slots[i] = 0;
++	const Common::String app = Common::ConfigManager::kApplicationDomain;
++	if (ConfMan.hasKey("verbhjul", app))
++		_enabled = ConfMan.getBool("verbhjul", app);
++	if (ConfMan.hasKey("verbhjul_alle", app))
++		_allVerbs = ConfMan.getBool("verbhjul_alle", app);
++	if (const char *e = getenv("VERBHJUL"))
++		_enabled = (*e != '0');
++	if (const char *e = getenv("VERBHJUL_ALLE"))
++		_allVerbs = (*e != '0');
++	if (const char *d = getenv("VERBHJUL_DUMP_DIR"))
++		_dumpDir = d;
++	if (const char *t = getenv("VERBHJUL_TEST"))
++		parseTests(t);
++	debug("Verbhjul: %s, %s", _enabled ? "on" : "off", _allVerbs ? "all verbs" : "the object's verbs");
++}
++
++VerbWheel::~VerbWheel() {
++}
++
++void VerbWheel::setEnabled(bool on) {
++	if (_state != kClosed)
++		close();
++	_enabled = on;
++	ConfMan.setBool("verbhjul", on, Common::ConfigManager::kApplicationDomain);
++	ConfMan.flushToDisk();
++	_vm->redrawVerbs();
++	debug("Verbhjul: switched %s", on ? "on" : "off");
++}
++
++bool VerbWheel::hidesVerb(int verbid) const {
++	return _enabled && verbid >= 1 && verbid <= 17;
++}
++
++bool VerbWheel::verbActive(int verbid) const {
++	const int slot = _vm->getVerbSlot(verbid, 0);
++	return slot > 0 && _vm->_verbs[slot].curmode == 1;
++}
++
++// ------------------------------------------------------------------ targets
++
++bool VerbWheel::targetAt(int x, int y, int &obj, int &invVerb, Common::Point &virt) {
++	obj = 0;
++	invVerb = 0;
++	const int slot = _vm->findVerbAtPos(x, y);
++	if (slot > 0) {
++		const int id = _vm->_verbs[slot].verbid;
++		if (id >= kZakInvFirst && id <= kZakInvLast) {
++			obj = _vm->_scummVars[kVarInventory + id - kZakInvFirst];
++			invVerb = id;
++			return obj > 0 && _vm->whereIsObject(obj) != WIO_NOT_FOUND;
++		}
++		return false;
++	}
++	VirtScreen *vs = _vm->findVirtScreen(y);
++	if (!vs || vs->number != kMainVirtScreen)
++		return false;
++	virt.x = x + vs->xstart;
++	virt.y = y - vs->topline;
++	obj = _vm->findObject(virt.x, virt.y);
++	return obj > 0;
++}
++
++void VerbWheel::collectVerbs(int obj, bool inventory) {
++	Common::Array<int> own;
++	const byte *ob = _vm->getOBCDFromObject(obj);
++	if (ob) {
++		// GF_SMALL_HEADER: the verb table starts 19 bytes into the OC block
++		// (as in ScummEngine::getVerbEntrypoint); entries are verb, offset
++		const uint32 size = READ_LE_UINT32(ob);
++		for (const byte *p = ob + 19; p + 3 <= ob + size && *p; p += 3)
++			if (*p != 0xFF)
++				own.push_back(*p);
++	}
++	for (int i = 0; i < 12; i++) {
++		_slots[i] = 0;
++		for (int c = 0; c < 2; c++) {
++			const int v = kClock[i][c];
++			if (!v || !verbActive(v))
++				continue;
++			bool ok = _allVerbs;
++			for (uint k = 0; !ok && k < own.size(); k++)
++				ok = (own[k] == v);
++			// The sentence script handles Give and Sell for any item
++			if (inventory && (v == 11 || v == 16))
++				ok = true;
++			if (ok) {
++				_slots[i] = v;
++				break;
++			}
++		}
++	}
++}
++
++// ------------------------------------------------------------------ wheel
++
++Common::Point VerbWheel::slotCenter(int i) const {
++	static const int kCos[12] = { 0, 500, 866, 1000, 866, 500, 0, -500, -866, -1000, -866, -500 };
++	static const int kSin[12] = { -1000, -866, -500, 0, 500, 866, 1000, 866, 500, 0, -500, -866 };
++	return Common::Point(_center.x + kRadius * kCos[i] / 1000, _center.y + kRadius * kSin[i] / 1000);
++}
++
++int VerbWheel::hoverAt(int x, int y) const {
++	for (int i = 0; i < 12; i++) {
++		if (!_slots[i])
++			continue;
++		const Common::Point c = slotCenter(i);
++		const int dx = x - c.x, dy = y - c.y;
++		if (dx * dx + dy * dy <= (kIcon + 2) * (kIcon + 2))
++			return i;
++	}
++	return -1;
++}
++
++bool VerbWheel::open(int x, int y, bool byPress) {
++	int obj, inv;
++	Common::Point virt;
++	if (!targetAt(x, y, obj, inv, virt))
++		return false;
++	collectVerbs(obj, inv != 0);
++	Common::String list;
++	for (int i = 0; i < 12; i++)
++		if (_slots[i])
++			list += Common::String::format(" %d", _slots[i]);
++	if (list.empty()) {
++		debug("Verbhjul: object %d has no verbs for the wheel; normal click", obj);
++		return false;
++	}
++	_obj = obj;
++	_invVerb = inv;
++	_virt = virt;
++	_state = kOpen;
++	_openedByPress = byPress;
++	_pressMoved = false;
++	_press = Common::Point(x, y);
++	_hover = -1;
++	const int m = kRadius + kIcon + 2;
++	_center.x = CLIP<int>(x, m, _vm->_screenWidth - 1 - m);
++	_center.y = CLIP<int>(y, m, _vm->_screenHeight - 1 - m - 12);
++	debug("Verbhjul: open on object %d \"%s\"%s at %d,%d, verbs%s", obj, objectName(obj).c_str(),
++	      inv ? Common::String::format(" (inventory slot %d)", inv).c_str() : "", x, y, list.c_str());
++	return true;
++}
++
++void VerbWheel::close() {
++	if (_state == kOpen)
++		debug("Verbhjul: closed");
++	_state = kClosed;
++	_hover = -1;
++	_openedByPress = false;
++}
++
++void VerbWheel::choose(int i) {
++	const int v = _slots[i];
++	debug("Verbhjul: chose %d (%s) for object %d", v, verbName(v).c_str(), _obj);
++	// Clicking the verb that is already selected would run the pending sentence
++	if (_vm->_scummVars[kVarVerb] == v)
++		_steps.push_back({ kStepVerb, kZakWalkTo, 0 });
++	_steps.push_back({ kStepVerb, v, 0 });
++	if (_invVerb)
++		_steps.push_back({ kStepVerb, _invVerb, 0 });
++	else
++		_steps.push_back({ kStepScene, _virt.x, _virt.y });
++	// Runs the sentence, or waits for a second object (see tick)
++	_steps.push_back({ kStepCheck, v, _obj });
++	_waitVerb = v;
++	_waitObj = _obj;
++	close();
++}
++
++void VerbWheel::queueTarget(int obj, int invVerb, const Common::Point &virt) {
++	debug("Verbhjul: second object %d%s", obj, invVerb ? Common::String::format(" (inventory slot %d)", invVerb).c_str() : "");
++	if (invVerb)
++		_steps.push_back({ kStepVerb, invVerb, 0 });
++	else
++		_steps.push_back({ kStepScene, virt.x, virt.y });
++	_steps.push_back({ kStepCheck, _waitVerb, _waitObj });
++	_state = kClosed;
++}
++
++// ------------------------------------------------------------------ input
++
++bool VerbWheel::handleEvent(const Common::Event &ev) {
++	if (ev.type == Common::EVENT_KEYDOWN) {
++		if (ev.kbd.keycode == Common::KEYCODE_w && (ev.kbd.flags & Common::KBD_CTRL) &&
++		    !(ev.kbd.flags & (Common::KBD_ALT | Common::KBD_SHIFT))) {
++			setEnabled(!_enabled);
++			return true;
++		}
++		if (_state == kOpen && ev.kbd.keycode == Common::KEYCODE_ESCAPE) {
++			close();
++			return true;
++		}
++		return false;
++	}
++	if (!_enabled)
++		return false;
++
++	const bool mouse = ev.type == Common::EVENT_MOUSEMOVE || ev.type == Common::EVENT_LBUTTONDOWN ||
++		ev.type == Common::EVENT_LBUTTONUP || ev.type == Common::EVENT_RBUTTONDOWN || ev.type == Common::EVENT_RBUTTONUP;
++	if (!mouse)
++		return false;
++	const int sw = MAX<int>(1, g_system->getWidth()), sh = MAX<int>(1, g_system->getHeight());
++	const int x = CLIP<int>(ev.mouse.x * _vm->_screenWidth / sw, 0, _vm->_screenWidth - 1);
++	const int y = CLIP<int>(ev.mouse.y * _vm->_screenHeight / sh, 0, _vm->_screenHeight - 1);
++	const bool canAct = _vm->_userPut > 0 && _vm->_cursor.state > 0 && !_vm->_mainMenuIsActive;
++
++	switch (ev.type) {
++	case Common::EVENT_MOUSEMOVE:
++		if (_state == kOpen) {
++			_hover = hoverAt(x, y);
++			if (ABS(x - _press.x) + ABS(y - _press.y) > 3)
++				_pressMoved = true;
++		}
++		return false;
++
++	case Common::EVENT_RBUTTONDOWN:
++		if (_state == kOpen) {
++			close();
++			_swallowRightUp = true;
++			return true;
++		}
++		if (_state == kWaitTarget) {
++			debug("Verbhjul: cancelled the sentence");
++			_steps.push_back({ kStepVerb, kZakWalkTo, 0 });
++			_state = kClosed;
++			_swallowRightUp = true;
++			return true;
++		}
++		if (canAct && open(x, y, true)) {
++			_swallowRightUp = true;
++			return true;
++		}
++		return false;
++
++	case Common::EVENT_RBUTTONUP:
++		if (_state == kOpen && _openedByPress) {
++			_openedByPress = false;
++			const int h = hoverAt(x, y);
++			if (h >= 0 && _pressMoved)
++				choose(h);
++		}
++		if (_swallowRightUp) {
++			_swallowRightUp = false;
++			return true;
++		}
++		return false;
++
++	case Common::EVENT_LBUTTONDOWN:
++		if (_state == kOpen) {
++			const int h = hoverAt(x, y);
++			if (h >= 0)
++				choose(h);
++			else
++				close();
++			_swallowLeftUp = true;
++			return true;
++		}
++		if (_state == kWaitTarget) {
++			int obj, inv;
++			Common::Point virt;
++			const bool target = targetAt(x, y, obj, inv, virt);
++			VirtScreen *vs = _vm->findVirtScreen(y);
++			if (target || (vs && vs->number == kMainVirtScreen)) {
++				if (!target) {
++					virt.x = x + vs->xstart;
++					virt.y = y - vs->topline;
++				}
++				queueTarget(obj, inv, virt);
++				_swallowLeftUp = true;
++				return true;
++			}
++			// Another button of the panel: the game handles it
++			_state = kClosed;
++		}
++		return false;
++
++	case Common::EVENT_LBUTTONUP:
++		if (_swallowLeftUp) {
++			_swallowLeftUp = false;
++			return true;
++		}
++		return false;
++
++	default:
++		return false;
++	}
++}
++
++bool VerbWheel::tick() {
++	_frame++;
++	runTests();
++	if (_state == kWaitTarget && _steps.empty() && _vm->_scummVars[kVarPrep] == 0) {
++		debug("Verbhjul: the sentence is no longer waiting");
++		_state = kClosed;
++	}
++	if (_steps.empty() || _vm->_userPut <= 0)
++		return false;
++
++	const Step st = _steps.remove_at(0);
++	switch (st.type) {
++	case kStepVerb:
++		debug("Verbhjul: click verb %d", st.a);
++		_vm->runInputScript(kVerbClickArea, st.a, 0);
++		break;
++	case kStepScene: {
++		// The input script finds the object at VAR_VIRT_MOUSE (global script 22)
++		const int ox = _vm->_scummVars[_vm->VAR_VIRT_MOUSE_X], oy = _vm->_scummVars[_vm->VAR_VIRT_MOUSE_Y];
++		_vm->_scummVars[_vm->VAR_VIRT_MOUSE_X] = st.a;
++		_vm->_scummVars[_vm->VAR_VIRT_MOUSE_Y] = st.b;
++		debug("Verbhjul: click room at %d,%d", st.a, st.b);
++		_vm->runInputScript(kSceneClickArea, 0, 0);
++		_vm->_scummVars[_vm->VAR_VIRT_MOUSE_X] = ox;
++		_vm->_scummVars[_vm->VAR_VIRT_MOUSE_Y] = oy;
++		break;
++	}
++	case kStepCheck:
++		// A preposition without a second object: the sentence waits. Clicking the
++		// sentence line now would clear it (global script 11 runs script 18).
++		if (_vm->_scummVars[kVarPrep] != 0 && _vm->_scummVars[kVarObjB] == 0 && _vm->_scummVars[kVarObjA] != 0) {
++			_state = kWaitTarget;
++			debug("Verbhjul: waiting for the second object (verb %d, object %d, preposition %d)",
++			      _vm->_scummVars[kVarVerb], _vm->_scummVars[kVarObjA], _vm->_scummVars[kVarPrep]);
++		} else {
++			debug("Verbhjul: click verb %d", kZakSentence);
++			_vm->runInputScript(kVerbClickArea, kZakSentence, 0);
++		}
++		break;
++	}
++	return true;
++}
++
++void VerbWheel::noteSentence(int verb, int objA, int objB) {
++	debug("Verbhjul: doSentence %d %d %d", verb, objA, objB);
++}
++
++// ------------------------------------------------------------------ text
++
++Common::String VerbWheel::verbName(int verbid) const {
++	const int slot = _vm->getVerbSlot(verbid, 0);
++	Common::String s;
++	if (slot > 0) {
++		const byte *p = _vm->getResourceAddress(rtVerb, slot);
++		for (int i = 0; p && p[i] && i < 40; i++)
++			if (p[i] >= 32 && p[i] < 127 && p[i] != '@')
++				s += (char)p[i];
++	}
++	s.trim();
++	return s.empty() ? Common::String(verbFallbackName(verbid)) : s;
++}
++
++Common::String VerbWheel::objectName(int obj) const {
++	const byte *p = _vm->getObjOrActorName(obj);
++	Common::String s;
++	for (int i = 0; p && p[i] && i < 60; i++)
++		if (p[i] >= 32 && p[i] < 127 && p[i] != '@')
++			s += (char)p[i];
++	s.trim();
++	return s;
++}
++
++Common::String VerbWheel::previewText() const {
++	const Common::String name = objectName(_obj);
++	if (_hover >= 0 && _slots[_hover])
++		return verbName(_slots[_hover]) + " " + name;
++	return name;
++}
++
++// ------------------------------------------------------------------ drawing
++
++uint32 VerbWheel::color(const Graphics::Surface &s, byte r, byte g, byte b) const {
++	if (s.format.bytesPerPixel > 1)
++		return s.format.RGBToColor(r, g, b);
++	// 8-bit screen: the nearest colour of the current palette
++	int best = 0, bestDist = 0x7FFFFFFF;
++	for (int i = 0; i < 256; i++) {
++		const int dr = _vm->_currentPalette[i * 3] - r, dg = _vm->_currentPalette[i * 3 + 1] - g, db = _vm->_currentPalette[i * 3 + 2] - b;
++		const int d = dr * dr + dg * dg + db * db;
++		if (d < bestDist) {
++			bestDist = d;
++			best = i;
++		}
++	}
++	return best;
++}
++
++void VerbWheel::fillCircle(Graphics::Surface &s, int cx, int cy, int rad, uint32 c) const {
++	for (int dy = -rad; dy <= rad; dy++) {
++		const int y = cy + dy;
++		if (y < 0 || y >= s.h)
++			continue;
++		int dx = 0;
++		while ((dx + 1) * (dx + 1) + dy * dy <= rad * rad)
++			dx++;
++		const int x0 = MAX(0, cx - dx), x1 = MIN<int>(s.w - 1, cx + dx);
++		if (x1 >= x0)
++			s.hLine(x0, y, x1, c);
++	}
++}
++
++Common::Rect VerbWheel::toScreen(const Common::Rect &r) const {
++	const int sw = g_system->getWidth(), sh = g_system->getHeight();
++	return Common::Rect(r.left * sw / _vm->_screenWidth, r.top * sh / _vm->_screenHeight,
++	                    (r.right * sw + _vm->_screenWidth - 1) / _vm->_screenWidth,
++	                    (r.bottom * sh + _vm->_screenHeight - 1) / _vm->_screenHeight);
++}
++
++void VerbWheel::restoreScreenRect(const Common::Rect &r) {
++	if (r.isEmpty())
++		return;
++#ifndef DISABLE_TOWNS_DUAL_LAYER_MODE
++	if (_vm->_townsScreen) {
++		_vm->_townsScreen->addDirtyRect(r.left, r.top, r.width(), r.height());
++		return;
++	}
++#endif
++	// Without the FM-Towns layers: let the engine copy everything again (not tested)
++	_vm->_fullRedraw = true;
++	_vm->markRectAsDirty(kVerbVirtScreen, 0, _vm->_screenWidth, 0, _vm->_virtscr[kVerbVirtScreen].h);
++	_vm->markRectAsDirty(kTextVirtScreen, 0, _vm->_screenWidth, 0, _vm->_virtscr[kTextVirtScreen].h);
++}
++
++void VerbWheel::draw() {
++	if (_state != kOpen) {
++		if (!_drawn.isEmpty() || !_textRect.isEmpty()) {
++			restoreScreenRect(_drawn);
++			restoreScreenRect(_textRect);
++			_drawn = Common::Rect();
++			_textRect = Common::Rect();
++			_shownText.clear();
++		}
++		return;
++	}
++	Graphics::Surface *s = g_system->lockScreen();
++	if (!s)
++		return;
++	// The small console font on the game's own 320 x 240 screen, the GUI font when the screen is larger
++	const Graphics::Font *font = FontMan.getFontByUsage(s->w >= 2 * _vm->_screenWidth ?
++		Graphics::FontManager::kGUIFont : Graphics::FontManager::kConsoleFont);
++	if (!font)
++		font = FontMan.getFontByUsage(Graphics::FontManager::kConsoleFont);
++
++	const uint32 cRing = color(*s, 214, 214, 224);
++	const uint32 cFill = color(*s, 32, 40, 72);
++	const uint32 cHover = color(*s, 240, 196, 48);
++	const uint32 cText = color(*s, 255, 255, 255);
++	const uint32 cTextHover = color(*s, 16, 16, 24);
++	const uint32 cBox = color(*s, 12, 12, 20);
++
++	const int scale = MAX(1, (int)(s->w / _vm->_screenWidth));
++	const int rs = kIcon * s->w / _vm->_screenWidth;
++	Common::Rect bbox;
++	for (int i = 0; i < 12; i++) {
++		if (!_slots[i])
++			continue;
++		const Common::Point g = slotCenter(i);
++		const int x = g.x * s->w / _vm->_screenWidth, y = g.y * s->h / _vm->_screenHeight;
++		const bool hot = (i == _hover);
++		fillCircle(*s, x, y, rs, cRing);
++		fillCircle(*s, x, y, rs - scale, hot ? cHover : cFill);
++		if (font) {
++			const char *label = verbLabel(_slots[i]);
++			const int fh = font->getFontHeight();
++			font->drawString(s, label, x - rs, y - fh / 2, 2 * rs, hot ? cTextHover : cText, Graphics::kTextAlignCenter);
++		}
++		Common::Rect r(x - rs, y - rs, x + rs + 1, y + rs + 1);
++		if (bbox.isEmpty())
++			bbox = r;
++		else
++			bbox.extend(r);
++	}
++	bbox.clip(Common::Rect(s->w, s->h));
++
++	// What the click will do, under the wheel
++	const Common::String text = previewText();
++	if (text != _shownText) {
++		restoreScreenRect(_textRect);  // the old box may be wider
++		_shownText = text;
++	}
++	Common::Rect box;
++	if (font && !text.empty()) {
++		const int tw = font->getStringWidth(text) + 8 * scale;
++		const int th = font->getFontHeight() + 4 * scale;
++		const int ty = (_center.y + kRadius + kIcon + 2) * s->h / _vm->_screenHeight;
++		const int tx = CLIP<int>(_center.x * s->w / _vm->_screenWidth - tw / 2, 0, MAX(0, s->w - tw));
++		box = Common::Rect(tx, ty, tx + tw, MIN<int>(s->h, ty + th));
++		s->fillRect(box, cBox);
++		s->frameRect(box, cRing);
++		font->drawString(s, text, tx, ty + 2 * scale, tw, cText, Graphics::kTextAlignCenter);
++	}
++	g_system->unlockScreen();
++	if (!_drawn.isEmpty() && _drawn != bbox)
++		restoreScreenRect(_drawn);
++	_drawn = bbox;
++	_textRect.extend(box);
++	if (_textRect.isEmpty())
++		_textRect = box;
++}
++
++// ------------------------------------------------------------------ tests
++
++void VerbWheel::parseTests(const char *spec) {
++	Common::StringTokenizer tok(spec, ",");
++	while (!tok.empty()) {
++		const Common::String item = tok.nextToken();
++		const size_t colon = item.find(':');
++		if (colon == Common::String::npos)
++			continue;
++		TestCmd t;
++		t.frame = atoi(item.substr(0, colon).c_str());
++		Common::String rest = item.substr(colon + 1);
++		const size_t eq = rest.find('=');
++		t.cmd = eq == Common::String::npos ? rest : rest.substr(0, eq);
++		t.arg = eq == Common::String::npos ? Common::String() : rest.substr(eq + 1);
++		_tests.push_back(t);
++	}
++	debug("Verbhjul: %d test commands", (int)_tests.size());
++}
++
++void VerbWheel::pushMouse(Common::EventType type, int x, int y) {
++	const int sw = g_system->getWidth(), sh = g_system->getHeight();
++	Common::Event ev;
++	ev.type = type;
++	ev.mouse = Common::Point(x * sw / _vm->_screenWidth + sw / _vm->_screenWidth / 2,
++	                         y * sh / _vm->_screenHeight + sh / _vm->_screenHeight / 2);
++	g_system->getEventManager()->pushEvent(ev);
++}
++
++void VerbWheel::pushKey(Common::KeyCode code, uint16 ascii, byte flags) {
++	Common::Event ev;
++	ev.type = Common::EVENT_KEYDOWN;
++	ev.kbd = Common::KeyState(code, ascii, flags);
++	g_system->getEventManager()->pushEvent(ev);
++	ev.type = Common::EVENT_KEYUP;
++	g_system->getEventManager()->pushEvent(ev);
++}
++
++static bool parseXY(const Common::String &s, int &x, int &y) {
++	const size_t slash = s.find('/');
++	if (slash == Common::String::npos)
++		return false;
++	x = atoi(s.substr(0, slash).c_str());
++	y = atoi(s.substr(slash + 1).c_str());
++	return true;
++}
++
++void VerbWheel::runTests() {
++	if (_upFrame == (int)_frame) {
++		Common::Point p = _upPos;
++		if (_rdragVerb) {
++			for (int i = 0; i < 12; i++)
++				if (_slots[i] == _rdragVerb && _state == kOpen)
++					p = slotCenter(i);
++			pushMouse(Common::EVENT_MOUSEMOVE, p.x, p.y);
++			_rdragVerb = 0;
++		}
++		pushMouse(_upRight ? Common::EVENT_RBUTTONUP : Common::EVENT_LBUTTONUP, p.x, p.y);
++		_upFrame = -1;
++	}
++	for (uint i = 0; i < _tests.size(); i++) {
++		const TestCmd &t = _tests[i];
++		if (t.frame != (int)_frame)
++			continue;
++		int x = 0, y = 0;
++		debug("Verbhjul: test %s %s at frame %u (room %d)", t.cmd.c_str(), t.arg.c_str(), _frame, _vm->_currentRoom);
++		if (t.cmd == "esc") {
++			pushKey(Common::KEYCODE_ESCAPE, Common::ASCII_ESCAPE);
++		} else if (t.cmd == "key" && !t.arg.empty()) {
++			pushKey((Common::KeyCode)t.arg[0], t.arg[0]);
++		} else if (t.cmd == "ctrl" && !t.arg.empty()) {
++			pushKey((Common::KeyCode)t.arg[0], t.arg[0], Common::KBD_CTRL);
++		} else if ((t.cmd == "click" || t.cmd == "rclick") && parseXY(t.arg, x, y)) {
++			const bool right = t.cmd == "rclick";
++			pushMouse(Common::EVENT_MOUSEMOVE, x, y);
++			pushMouse(right ? Common::EVENT_RBUTTONDOWN : Common::EVENT_LBUTTONDOWN, x, y);
++			_upFrame = _frame + 3;
++			_upRight = right;
++			_upPos = Common::Point(x, y);
++		} else if (t.cmd == "rdrag") {
++			const size_t gt = t.arg.find('>');
++			if (gt != Common::String::npos && parseXY(t.arg.substr(0, gt), x, y)) {
++				pushMouse(Common::EVENT_MOUSEMOVE, x, y);
++				pushMouse(Common::EVENT_RBUTTONDOWN, x, y);
++				_rdragVerb = atoi(t.arg.substr(gt + 1).c_str());
++				_upFrame = _frame + 3;
++				_upRight = true;
++				_upPos = Common::Point(x, y);
++			}
++		} else if (t.cmd == "pick") {
++			const int v = atoi(t.arg.c_str());
++			bool found = false;
++			for (int k = 0; k < 12 && !found; k++) {
++				if (_slots[k] == v && _state == kOpen) {
++					const Common::Point p = slotCenter(k);
++					pushMouse(Common::EVENT_MOUSEMOVE, p.x, p.y);
++					pushMouse(Common::EVENT_LBUTTONDOWN, p.x, p.y);
++					_upFrame = _frame + 2;
++					_upRight = false;
++					_upPos = p;
++					found = true;
++				}
++			}
++			if (!found)
++				debug("Verbhjul: test pick: verb %d is not in the wheel", v);
++		} else if (t.cmd == "dump") {
++			dumpScreen(t.arg.empty() ? Common::String::format("verbhjul_%05u", _frame) : t.arg);
++		} else if (t.cmd == "log") {
++			Common::String sl;
++			for (int k = 0; k < 12; k++)
++				sl += Common::String::format(" %d", _slots[k]);
++			debug("Verbhjul: state %d, room %d, userPut %d, cursor %d, ego %d, verb %d, obj %d, obj2 %d, prep %d, slots%s",
++			      (int)_state, _vm->_currentRoom, _vm->_userPut, _vm->_cursor.state, _vm->_scummVars[_vm->VAR_EGO],
++			      _vm->_scummVars[kVarVerb], _vm->_scummVars[kVarObjA], _vm->_scummVars[kVarObjB],
++			      _vm->_scummVars[kVarPrep], sl.c_str());
++		} else if (t.cmd == "quit") {
++			_vm->quitGame();
++		}
++	}
++}
++
++void VerbWheel::dumpScreen(const Common::String &name) {
++	if (_dumpDir.empty())
++		return;
++	Graphics::Surface *s = g_system->lockScreen();
++	if (!s)
++		return;
++	Common::FSNode node(Common::FSNode(Common::Path(_dumpDir, Common::Path::kNativeSeparator)).getChild(name + ".png"));
++	Common::WriteStream *ws = node.createWriteStream();
++	if (ws) {
++		if (s->format.bytesPerPixel == 1)
++			::Image::writePNG(*ws, *s, _vm->_currentPalette);
++		else
++			::Image::writePNG(*ws, *s);
++		ws->finalize();
++		delete ws;
++	}
++	g_system->unlockScreen();
++	debug("Verbhjul: dumped %s.png", name.c_str());
++}
++
++} // End of namespace Scumm
+diff --git a/engines/scumm/verbhjul.h b/engines/scumm/verbhjul.h
+new file mode 100644
+index 00000000..03efdef3
+--- /dev/null
++++ b/engines/scumm/verbhjul.h
+@@ -0,0 +1,176 @@
++/* ScummVM - Graphic Adventure Engine
++ *
++ * ScummVM is the legal property of its developers, whose names
++ * are too numerous to list here. Please refer to the COPYRIGHT
++ * file distributed with this source distribution.
++ *
++ * This program is free software: you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation, either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++/*
++ * Verb wheel (verbhjul) for Zak McKracken, FM-Towns (SCUMM v3), in the
++ * style of Day of the Tentacle Remastered. See docs/VERBHJUL.md in the
++ * ZakMcKracken-HD repository.
++ *
++ * Right click (or a long press, which the web player sends as a right
++ * click) on an object or an inventory item opens a wheel around the
++ * pointer. The wheel has twelve fixed clock positions, one per action verb:
++ *
++ *   12 Pick up (Buy)   1 Open     2 Close    3 Use
++ *    4 Give (Sell)     5 Turn on  6 Turn off 7 Put on
++ *    8 Take off        9 Read    10 Push (Teleport to)  11 Pull
++ *
++ * Buy, Sell and Teleport to take the place of the verb they replace in the
++ * original verb panel. By default only the verbs the object has code for
++ * are shown (the object's verb table in its OC block), plus Give and Sell
++ * for inventory items, which the game's sentence script handles for any
++ * item. With "verbhjul_alle" every active verb is shown. A verb is only
++ * shown while its slot in the original panel is switched on, so the shop
++ * and the teleport modes need no special handling.
++ *
++ * Choosing a verb sends exactly the clicks a player would make on the
++ * original panel, one per frame, through the game's own input script
++ * (global script 11): the verb, the object (a scene click at the stored
++ * point, or the inventory slot), then the sentence line (verb 100), which
++ * runs the sentence. No game script is changed. When the sentence waits
++ * for a second object (Use ... with, Give ... to; the input script has set
++ * a preposition), the sentence line is not clicked, since that would clear
++ * the sentence. The wheel closes, and the next left click on an object, a
++ * person or an inventory item sends that click and then the sentence line. A right click cancels by clicking Walk to, which clears the sentence
++ * the same way the original panel does.
++ *
++ * With the wheel on, the original verb buttons 1 to 17 are not drawn and
++ * not clickable; their keyboard shortcuts still work. All other verbs (the
++ * sentence line, the inventory, Switch, the kids' names and the special
++ * verbs when playing an animal) stay as they are.
++ *
++ * Settings (application domain): verbhjul (on/off, default on),
++ * verbhjul_alle (all verbs instead of the object's verbs, default off).
++ * Ctrl+W switches the wheel on and off while playing.
++ *
++ * Test hooks for running without a screen:
++ *   VERBHJUL_TEST=frame:command,...  commands: esc, key=<ascii>, ctrl=<ascii>, click=x/y,
++ *       rclick=x/y, rdrag=x/y>verb, pick=verb, dump=name, log, quit.
++ *       Coordinates are game pixels (320 x 240); frames are calls to tick().
++ *   VERBHJUL_DUMP_DIR  where dump=name writes name.png (the screen).
++ * Every injected click, every wheel opened and every doSentence is logged
++ * with debug() as "Verbhjul: ...".
++ */
++
++#ifndef SCUMM_VERBHJUL_H
++#define SCUMM_VERBHJUL_H
++
++#include "common/array.h"
++#include "common/events.h"
++#include "common/rect.h"
++#include "common/str.h"
++
++namespace Graphics {
++struct Surface;
++}
++
++namespace Scumm {
++
++class ScummEngine;
++
++class VerbWheel {
++public:
++	/** Returns a wheel for Zak McKracken FM-Towns, nullptr for other games. */
++	static VerbWheel *create(ScummEngine *vm);
++	~VerbWheel();
++
++	/** First look at every event. True means the engine must not see it. */
++	bool handleEvent(const Common::Event &ev);
++	/** Called once per frame at the start of checkExecVerbs. True: this frame's input is used. */
++	bool tick();
++	/** Draws the wheel on the system screen, right before updateScreen. */
++	void draw();
++	/** True for the original verb buttons the wheel replaces, while it is on. */
++	bool hidesVerb(int verbid) const;
++	/** Logs every sentence the game runs (for the tests). */
++	void noteSentence(int verb, int objA, int objB);
++
++	bool isEnabled() const { return _enabled; }
++
++private:
++	enum State { kClosed, kOpen, kWaitTarget };
++	enum StepType { kStepVerb, kStepScene, kStepCheck };
++	struct Step { StepType type; int a, b; };
++	struct TestCmd { int frame; Common::String cmd, arg; };
++
++	explicit VerbWheel(ScummEngine *vm);
++
++	// What is under a point (game screen coordinates): object or inventory slot
++	bool targetAt(int x, int y, int &obj, int &invVerb, Common::Point &virt);
++	bool open(int x, int y, bool byPress);
++	void close();
++	void choose(int slotIndex);
++	void queueTarget(int obj, int invVerb, const Common::Point &virt);
++	void collectVerbs(int obj, bool inventory);
++	bool verbActive(int verbid) const;
++	int hoverAt(int x, int y) const;
++	Common::Point slotCenter(int i) const;
++	Common::String verbName(int verbid) const;
++	Common::String objectName(int obj) const;
++	Common::String previewText() const;
++	void setEnabled(bool on);
++
++	// Drawing on the system screen
++	uint32 color(const Graphics::Surface &s, byte r, byte g, byte b) const;
++	void fillCircle(Graphics::Surface &s, int cx, int cy, int rad, uint32 c) const;
++	void restoreScreenRect(const Common::Rect &r);
++	Common::Rect toScreen(const Common::Rect &r) const;
++
++	// Tests
++	void parseTests(const char *spec);
++	void runTests();
++	void pushMouse(Common::EventType type, int x, int y);
++	void pushKey(Common::KeyCode code, uint16 ascii, byte flags = 0);
++	void dumpScreen(const Common::String &name);
++
++	ScummEngine *_vm;
++	bool _enabled = true;
++	bool _allVerbs = false;
++	State _state = kClosed;
++	bool _openedByPress = false;
++	bool _pressMoved = false;
++	Common::Point _center;   // game screen coordinates of the wheel
++	Common::Point _press;    // where the right button went down
++	int _obj = 0;
++	int _invVerb = 0;        // 101..110 when the wheel is on an inventory item
++	Common::Point _virt;     // room coordinates of the object click
++	int _slots[12];          // verb id per clock position, 0 = empty
++	int _hover = -1;
++	Common::Rect _drawn;     // screen rectangle drawn last time
++	Common::Rect _textRect;  // screen rectangle of the preview text
++	Common::String _shownText;
++	bool _restoreAll = false;
++	Common::Array<Step> _steps;
++	int _waitVerb = 0;
++	int _waitObj = 0;
++	uint32 _frame = 0;
++	Common::Array<TestCmd> _tests;
++	Common::String _dumpDir;
++	int _rdragVerb = 0;      // test: verb to drag to after a right press
++	int _upFrame = -1;       // test: frame to release a pending button
++	bool _upRight = false;
++	Common::Point _upPos;
++	bool _swallowLeftUp = false;
++	bool _swallowRightUp = false;
++};
++
++} // End of namespace Scumm
++
++#endif
+diff --git a/engines/scumm/verbs.cpp b/engines/scumm/verbs.cpp
+index 1637dd33..b5206295 100644
+--- a/engines/scumm/verbs.cpp
++++ b/engines/scumm/verbs.cpp
+@@ -29,6 +29,7 @@
+ #include "scumm/scumm_v7.h"
+ #include "scumm/string_v7.h"
+ #include "scumm/verbs.h"
++#include "scumm/verbhjul.h"
+ 
+ namespace Scumm {
+ 
+@@ -587,6 +588,10 @@ void ScummEngine::checkExecVerbs() {
+ 	int i, over;
+ 	VerbSlot *vs;
+ 
++	// Zak FM-Towns verb wheel: clicks it sends to the input script, one per frame
++	if (_verbWheel && _verbWheel->tick())
++		return;
++
+ 	if (_userPut <= 0 || _mouseAndKeyboardStat == 0)
+ 		return;
+ 
+@@ -1017,6 +1022,8 @@ int ScummEngine::findVerbAtPos(int x, int y) const {
+ 	do {
+ 		if (vs->curmode != 1 || !vs->verbid || vs->saveid || y < vs->curRect.top || y >= vs->curRect.bottom)
+ 			continue;
++		if (_verbWheel && _verbWheel->hidesVerb(vs->verbid))
++			continue;
+ 		if (vs->center) {
+ 			if (x < -(vs->curRect.right - 2 * vs->curRect.left) || x >= vs->curRect.right)
+ 				continue;
+@@ -1132,6 +1139,12 @@ void ScummEngine::drawVerb(int verb, int mode, Common::TextToSpeechManager::Acti
+ 
+ 	vs = &_verbs[verb];
+ 
++	// Zak FM-Towns verb wheel: the buttons it replaces are not drawn
++	if (_verbWheel && _verbWheel->hidesVerb(vs->verbid) && !vs->saveid && vs->curmode && vs->verbid) {
++		restoreVerbBG(verb);
++		return;
++	}
++
+ 	if (!vs->saveid && vs->curmode && vs->verbid) {
+ 		if (vs->type == kImageVerbType) {
+ 			drawVerbBitmap(verb, vs->curRect.left, vs->curRect.top);

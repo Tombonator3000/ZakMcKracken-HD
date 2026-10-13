@@ -51,3 +51,20 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
   - GRENSESNITT.md, todo og memory oppdatert med beslutningen.
 - Til Tom: zak-skript.zip (work/skript med ROM.md og REPLIKKER.md), zak-sprites.zip (uttrekket uten indeksbildene) og kontaktark over rom (med beskrivelsene) og kostymer. Laget fra work/, ikke lagt i repoet.
 - `pytest`: 37 bestått. Ingenting i motoren er endret, og verbhjulet er ikke bygget.
+
+## 2026-10-12 23:48 til 2026-10-13 00:35 (Claude)
+- Tom spurte hva den beste løsningen for verbhjulet er. Svar: urskive med tolv faste plasser, ett handlingsverb per plass, bare objektets verb som standard (som DOTT), høyreklikk og hold-og-dra, hele setningen som tekst, ikonene i stilpiloten. Tom: «Lag det». Han spurte også om det trengs en egen inventarskjerm; svar nei (rommet er 2,5:1, så på 16:9 er det plass til inventaret under rommet uansett, og MI SE ble kritisert for å gjemme inventaret).
+- Ny gren `verbhjul` fra main (PR 2 var flettet, f2c5db9).
+- Bygget hjulet i ScummVM: `engines/scumm/verbhjul.cpp` og `.h` (klassen VerbWheel, bare for zak på FM-Towns), med kroker i `ScummEngine::parseEvent` (hendelsene), starten av `checkExecVerbs` (ett klikk per ramme), `findVerbAtPos` og `drawVerb` (verb 1 til 17 skjules), `waitForTimer` (tegning rett før `updateScreen`, opprydding med skittent rektangel i FM-Towns-skjermen) og `doSentence` (logg). Lagt i en egen patch, `engine/patches/0002-verbhjul.patch`, oppå 0001.
+- Hjulet sender de samme klikkene som originalpanelet gjennom skript 11: verb, objekt (klikk i rommet med `VAR_VIRT_MOUSE` satt for det ene kallet, eller inventarplassen), så setningslinjen (verb 100).
+- Feil funnet og rettet underveis:
+  - Ikonene overlappet (radius 30 og ikonradius 11). Med tolv plasser må radiusen være minst 3,86 ganger ikonradiusen; nå 40 og 10.
+  - Etikettene var for brede på spillets 320 x 240-skjerm; nå tre bokstaver i konsollskriften, og hele setningen står under hjulet.
+  - «Use ticket in door» ble tømt: skript 11 kjører skript 18 når setningslinjen klikkes før objekt nummer to er valgt. Hjulet sjekker nå preposisjonen først og klikker ikke setningslinjen da.
+  - Navnekollisjon med `kVerbWalkTo` i verbs.h; konstantene heter nå kZak*.
+- Testdriver i hjulet (`VERBHJUL_TEST`, `VERBHJUL_DUMP_DIR`): taster, klikk, høyreklikk, hold og dra, valg av ikon, skjermbilder og logg uten skjerm.
+- `tools/verbhjul_test.sh`: originalpanelet og hjulet uten skjerm, samtidig, i rom 1 (introen går av seg selv til rom 1 med styring etter rundt 1300 rammer). Bestått med motoren bygget av `engine/build.sh` med begge patchene: like 8 setninger (Open door, Pull dresser drawer med hold og dra, Turn on lamp, Pull window shade, Turn on cat clock, Read ticket fra inventaret, Use ticket in door med venting), og avbrudd med høyreklikk tømmer setningen. Tok 3 minutter 23 sekunder.
+- Prøvd for hånd uten skjerm: «alle verb» (døren får alle tolv), Ctrl+W av (originalpanelet tegnes igjen) og på (skjules igjen), og skjermbilder som viser at hjulet ryddes bort. ScummVM skrev ingen scummvm.ini i testmiljøet, så lagringen av valget er ikke bekreftet.
+- `tools/lag_patcher.sh` lager 0001 og 0002 på nytt fra `engine/scummvm` og sjekker at de passer etter hverandre. Første versjon feilet når hjulfilene var endret (de holdes nå utenfor `git apply -R`), og ga 9 tegn lange hasher i `index`-linjene; nå `core.abbrev=8`, og 0001 er byte for byte lik den i Sam & Max.
+- Dokumentert i VERBHJUL.md (oppførselen, motorarbeidet, testene, det som gjenstår), AGENTS (to patcher, nye verktøy), HD-MOTOR, SPILLTEST (taster og en kort spilltest), GRENSESNITT, README, spill.sh (hjelpetekst), todo, STATUS og memory.
+- Ikke gjort: navnet under pekeren mens hjulet er lukket, F5-menyen, HD-tegning, de tegnede ikonene, prøving med skjerm, i nettleseren og på mobil.

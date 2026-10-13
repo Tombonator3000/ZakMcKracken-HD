@@ -70,6 +70,18 @@ Andre valg sendes videre til ScummVM.
 | Alt+S | Skjermbilde (lagres i mappen ScummVM skriver ut i terminalen) |
 | F5 | Spillets meny (lagre, laste, avslutte). Hvor HD-valget skal ligge i Zak, er ikke bestemt |
 | Ctrl+F5 | ScummVM-menyen |
+| Høyreklikk eller hold inne | Verbhjulet på tingen under pekeren (docs/VERBHJUL.md) |
+| Ctrl+W | Verbhjulet av og på; av gir originalpanelet med alle verbene |
+
+## Verbhjulet
+
+Det kan prøves nå, før HD-grafikken finnes. Ikonene er midlertidige: runde knapper med tre bokstaver. Under hjulet står hele setningen mens pekeren er på et ikon.
+
+1. Rom 1 (Zaks soverom): høyreklikk på døren, skuffen i kommoden, lampen og kattklokka, og velg et verb. Zak skal gjøre det samme som med originalpanelet.
+2. Hold høyre knapp på et objekt, dra til et ikon og slipp.
+3. Høyreklikk på billetten i inventaret og velg Use. Setningslinjen viser «Use ticket in». Klikk på døren. Høyreklikk i stedet for å avbryte.
+4. Butikken (Buy og Sell), teleporten, figurbytte og når man styrer et dyr: er ikke prøvd. Si fra hvis hjulet viser feil verb eller ikke kommer.
+5. I nettleseren og på mobil: hold fingeren stille et halvt sekund på en ting, så trykk på ikonet.
 
 ## Hva du bør se etter
 
