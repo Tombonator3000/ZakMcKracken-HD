@@ -12,7 +12,10 @@
 #   Open door (84), Pull dresser drawer (92, med hold og dra), Turn on lamp (103),
 #   Pull window shade (90), Turn on cat clock (95), Read ticket (82, fra inventaret),
 #   Use ticket in door (to objekter: hjulet venter på det andre objektet).
-# Til slutt et avbrudd (Use ticket, så høyreklikk) og skjermbilder av hjulet i work/verbhjul-test.
+# Så et avbrudd (Use ticket, så høyreklikk) og skjermbilder av hjulet i work/verbhjul-test.
+# Til slutt Walk to lamp og så Use ticket in door: lampen må ikke bli med i setningen. Skriptet
+# beholder objektet når verbet byttes, så uten tømming kjørte hjulet «Use lamp with ticket» med
+# en gang (funnet 13. oktober). Originalpanelet tømmer med et klikk på setningslinjen først.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -32,7 +35,8 @@ A+=",1580:click=4/163,1592:click=100/64,1604:click=100/64"
 A+=",1640:click=260/155,1652:click=156/52,1664:click=156/52"
 A+=",1700:click=52/171,1712:click=10/179,1724:click=10/179"
 A+=",1760:click=180/171,1772:click=10/179,1784:click=308/96,1796:click=308/96"
-A+=",1840:quit"
+A+=",1860:click=256/72,1900:click=20/147,1912:click=180/171,1924:click=10/179,1936:click=308/96,1948:click=308/96"
+A+=",1990:quit"
 
 # Hjulet: høyreklikk og valg, eller hold og dra
 B="1400:rclick=308/96,1405:dump=hjul_dor,1408:pick=2"
@@ -43,7 +47,9 @@ B+=",1640:rclick=156/52,1645:dump=hjul_kattklokke,1648:pick=5"
 B+=",1700:rclick=10/179,1705:dump=hjul_inventar,1708:pick=12"
 B+=",1760:rclick=10/179,1768:pick=14,1778:dump=venter,1784:click=308/96"
 B+=",1810:rclick=10/179,1818:pick=14,1826:rclick=160/100,1832:log"
-B+=",1835:dump=etter,1840:quit"
+B+=",1835:dump=etter"
+B+=",1860:click=256/72,1900:rclick=10/179,1908:pick=14,1924:log,1936:click=308/96"
+B+=",1990:quit"
 
 kjor() {  # navn, VERBHJUL, test
 	HOME="$OUT/home-$1" XDG_CONFIG_HOME="$OUT/home-$1/.config" SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy \
@@ -69,7 +75,8 @@ if ! diff -q "$OUT/setninger-original.txt" "$OUT/setninger-hjul.txt" > /dev/null
 fi
 grep -q "Verbhjul: waiting for the second object" "$OUT/b.log" || { echo "FEIL: hjulet ventet ikke på det andre objektet"; feil=1; }
 grep -q "Verbhjul: cancelled the sentence" "$OUT/b.log" || { echo "FEIL: avbruddet ble ikke registrert"; feil=1; }
-grep "Verbhjul: state" "$OUT/b.log" | tail -1 | grep -q "prep 0" || { echo "FEIL: setningen ble ikke tømt etter avbruddet"; feil=1; }
+grep "Verbhjul: state" "$OUT/b.log" | sed -n 1p | grep -q "prep 0" || { echo "FEIL: setningen ble ikke tømt etter avbruddet"; feil=1; }
+grep "Verbhjul: state" "$OUT/b.log" | sed -n 2p | grep -q "verb 14, obj 82, obj2 0, prep 129" || { echo "FEIL: etter Walk to lamp ventet ikke hjulet med Use ticket in"; feil=1; }
 echo "Skjermbilder: $OUT/bilder"
 [ "$feil" = 0 ] && echo "Bestått: $(wc -l < "$OUT/setninger-hjul.txt") like setninger, venting og avbrudd virker."
 exit "$feil"

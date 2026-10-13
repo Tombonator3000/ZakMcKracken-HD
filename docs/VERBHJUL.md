@@ -49,7 +49,8 @@ Fra globalt skript 11, som spillet setter som `VAR_VERB_SCRIPT` (globalt skript 
 
 - Hvert klikk går til skript 11 med klikkområde (1 verb, 2 rom, 4 tast) og verbnummer.
 - Setningen står i variabler: verb i Var[116], første objekt i Var[117], andre objekt i Var[118], preposisjon i Var[119]. Standardverbet er Var[120] (Walk to, 3).
-- Skript 22 finner det som er under musen: først en skuespiller (`actorFromPos`), ellers et objekt (`findObject`), og legger det i Var[114].
+- Skript 22 finner det som er under musen og legger det i Var[114]. Ved vanlige klikk ser det bare etter objekter (`findObject`). Skuespillere (`actorFromPos`) ser det bare etter når Give venter på mottakeren (`startScript(22,[133,1])`, bare figurer med klasse 133) og for What is.
+- Når verbet byttes, beholder skriptet objektet. Walk to lamp og så Use gir «Use lamp with», fordi skript 21 kjøres på objektet som står i Var[117]. Setningen tømmes bare av skript 18: etter en setning med et annet verb enn Walk to, ved klikk på Give, ved et nytt verb mens en preposisjon venter, og ved klikk på setningslinjen mens verbet er Walk to.
 - Setningen kjøres når man klikker det samme objektet en gang til, eller klikker setningslinjen (verb 100). Walk to kjøres med en gang.
 - Use: skript 21 ser etter klasse 1 til 4 på objektet. Har det en, settes preposisjonen (129 in, 130 with, 131 on, 132 to), og setningen venter på et objekt til. 112 objekter med Use har en slik klasse.
 - Give setter alltid preposisjonen 132 (to).
@@ -92,12 +93,12 @@ Motsatte par står ved siden av hverandre. Use er det mest brukte verbet (171 ob
 **Teksten.** Under hjulet står navnet på objektet, og mens pekeren er på et ikon hele setningen («Pull cat clock»). Teksten tegnes av hjulet selv: å bruke setningslinjen til forhåndsvisning ville betydd å klikke i spillet for hver bevegelse, og et nytt klikk på samme objekt kjører setningen.
 
 **Det hjulet sender.** De samme klikkene som originalpanelet, ett per ramme, gjennom spillets eget inngangsskript (globalt skript 11):
-1. Er verbet allerede valgt, først Walk to (ellers ville et nytt klikk på verbet kjørt setningen som venter).
+1. Står det noe igjen fra forrige setning (objekt, preposisjon, eller det samme verbet er valgt), tømmes setningen først: Walk to hvis et annet verb er valgt, så setningslinjen. Med Walk to og uten objekt kjører skript 11 da skript 18, og ingen setning kjøres. Uten dette ble objektet fra et vanlig klikk med i setningen: Walk to lamp, så Use på ticket i hjulet, kjørte «Use lamp with ticket» med en gang (funnet og rettet 13. oktober). I originalpanelet ser spilleren «Use lamp with» på setningslinjen og må klikke en gang til; hjulet kjører uten å vise noe, så det må tømme.
 2. Verbet.
 3. Objektet: et klikk i rommet på punktet der hjulet ble åpnet (`VAR_VIRT_MOUSE` settes for det ene kallet), eller inventarplassen 101 til 110.
 4. Har skriptet satt en preposisjon og mangler objekt nummer to: hjulet venter (se under). Ellers klikkes setningslinjen (verb 100), og setningen kjøres.
 
-**To objekter.** Use på noe med klasse 1 til 4 og Give setter en preposisjon. Setningslinjen må da ikke klikkes, for skript 11 tømmer setningen hvis den klikkes før objekt nummer to er valgt (skript 18). Hjulet lukkes, setningslinjen viser for eksempel «Use ticket in», og neste venstreklikk i rommet eller på inventaret sendes som klikk på det objektet og så på setningslinjen. Høyreklikk avbryter: hjulet klikker Walk to, som tømmer setningen akkurat som i originalpanelet.
+**To objekter.** Use på noe med klasse 1 til 4 og Give setter en preposisjon. Setningslinjen må da ikke klikkes, for skript 11 tømmer setningen hvis den klikkes før objekt nummer to er valgt (skript 18). Hjulet lukkes, setningslinjen viser for eksempel «Use ticket in», og neste venstreklikk i rommet eller på inventaret sendes som klikk på det objektet og så på setningslinjen. Pilene i inventaret (115 og 116) blar uten å avbryte ventingen, fordi skript 11 bare kjeder til skript 20 for dem og lar setningen stå. Høyreklikk avbryter: hjulet klikker Walk to, som tømmer setningen akkurat som i originalpanelet.
 
 **Panelet.** Mens hjulet er på, tegnes ikke verb 1 til 17 i panelet, og de kan ikke klikkes; tastene for dem virker fortsatt. Setningslinjen, inventaret, pilene, Switch, navnene på figurene og verbene når man styrer et dyr står som før.
 
@@ -140,10 +141,13 @@ Kjørt 13. oktober med motoren bygget av `engine/build.sh` (begge patchene): bes
 | Read ticket (82, inventaret) | høyreklikk på inventaret, klikk | 12 82 0 |
 | Use ticket in door | høyreklikk på inventaret, Use, venter, klikk på døren | 14 82 84, så 14 84 82 (spillets eget andre forsøk, likt i originalen) |
 | Use ticket, så høyreklikk | avbrudd | ingen setning; preposisjon og objekt er 0 etterpå |
+| Walk to lamp (103), så Use ticket in door | vanlig klikk på lampen, høyreklikk på inventaret, Use, klikk på døren | 3 103 0, så 14 82 84 og 14 84 82. Originalpanelet tømmer med et klikk på setningslinjen først. Før rettingen 13. oktober ga hjulet 14 103 82 |
+
+Kjørt på nytt 13. oktober etter rettingen av tømmingen: bestått, 11 like setninger, 3 minutter 38 sekunder.
 
 Testet for hånd uten skjerm samme natt: «alle verb» (døren får alle tolv plassene), Ctrl+W av (originalpanelet tegnes igjen) og på (panelet skjules igjen), og skjermbilder som viser at hjulet ryddes bort når det lukkes.
 
-Ikke testet: med skjerm og mus, Esc for å lukke hjulet, langt trykk i nettleseren og på mobil, butikken (Buy og Sell), teleporten, figurbytte, styring av dyr, andre rom enn rom 1, og at valget faktisk lagres i scummvm.ini (ScummVM skrev ingen scummvm.ini i testmiljøet, heller ikke ved avslutning).
+Ikke testet: med skjerm og mus, pilene i inventaret mens hjulet venter (det trengs flere ting i inventaret enn i starten), Esc for å lukke hjulet, langt trykk i nettleseren og på mobil, butikken (Buy og Sell), teleporten, figurbytte, styring av dyr, andre rom enn rom 1, og at valget faktisk lagres i scummvm.ini (ScummVM skrev ingen scummvm.ini i testmiljøet, heller ikke ved avslutning).
 
 ## Det som gjenstår
 
