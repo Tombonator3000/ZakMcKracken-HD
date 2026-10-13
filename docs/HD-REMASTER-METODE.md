@@ -28,7 +28,7 @@ Dokumenterte forhold:
 
 Konsekvens for oss: DOTT er det nærmeste forbildet for trofast nytegning. DOTT er SCUMM v6, mens Zak her er v3, så metoden gjelder, men filformatene og motorkrokene er ikke de samme. Bevar originalens handlinger når UI endres. Ikke påstå at alle prosjektene brukte samme hjul eller samme arbeidsmetode.
 
-**Fra piksel til HD-strek.** Tom viste 13. oktober 2026 Bernard, Laverne og Hoagie fra DOTT side om side, original og remaster. Remasteren er den samme figuren tegnet over: samme positur, silhuett, proporsjoner og plass, hver pikselklynge tolket som det den forestiller (briller, navneskilt, joggesko, hodeskalle med flammer), samme farge per flate, ren mørk kontur, flate farger med ett skyggetrinn og ingen nye detaljer. Det er målet for figurene våre. Detaljene står i remake-skillen under «Fra piksel til HD-strek».
+**Fra piksel til HD-strek.** Tom viste 13. oktober 2026 Bernard, Laverne og Hoagie fra DOTT side om side, original og remaster. Remasteren viser den samme figuren i HD: samme positur, silhuett, proporsjoner og plass, hver pikselklynge tolket som det den forestiller (briller, navneskilt, joggesko, hodeskalle med flammer), samme farge per flate, ren mørk kontur, flate farger med ett skyggetrinn og ingen nye detaljer. Det er målet for figurene våre. Detaljene står i remake-skillen under «Fra piksel til HD-strek».
 
 Kildene dokumenterer prinsippene og omfanget. Lagstrukturen og kontrollpunktene nedenfor er vårt forslag, ikke en påstand om hvilket tegneprogram eller hvilken overtegningsprosedyre Double Fine brukte.
 
