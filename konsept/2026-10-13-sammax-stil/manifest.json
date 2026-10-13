@@ -1,0 +1,102 @@
+{
+  "dato": "2026-10-13",
+  "status": "konseptkandidat_venter_brukerens_stilvurdering",
+  "scene": {
+    "spill": "Zak McKracken and the Alien Mindbenders",
+    "utgave": "English FM-Towns",
+    "rom": 42,
+    "motiv": "Jungel med inka-fuglemater og fugl",
+    "kilde": "https://www.scummvm.org/data/screenshots/scumm/zak/zak_fmtowns_en_1_1_full.png",
+    "romidentitet": "Zak origin/main 31f760ea2b65895484bdd5ec82151c2156a1fef3:docs/romnavn.csv",
+    "viewport_rekt_xywh": [
+      0,
+      32,
+      640,
+      256
+    ]
+  },
+  "stil": {
+    "repo": "https://github.com/Tombonator3000/Sam-Max-HD",
+    "gren": "gpt-arbeid",
+    "undersokt_commit": "f77b860a",
+    "kilde": "rapporter/stilpilot-fortsettelse-20261013/kontor-helrom.png",
+    "godkjenningsbevis": [
+      "rapporter/stilpilot-fortsettelse-20261013/TOMS-GODKJENNING.json",
+      "stil/manifest.json"
+    ],
+    "rolle": "Tegnestil alene; Zak-originalen styrer motiv, identitet og palett"
+  },
+  "generering": {
+    "verktoy": "innebygd ChatGPT-bildegenerator",
+    "eksakt_modell": "ikke eksponert",
+    "forsok": 1,
+    "prompt": "prompt-forsok-01.txt",
+    "referanser_i_rekkefolge": [
+      "referanser/zak-rom042-original.png",
+      "referanser/sammax-godkjent-kontor.png"
+    ],
+    "onsket_storrelse": [
+      2560,
+      1024
+    ],
+    "levert_storrelse": [
+      1983,
+      793
+    ],
+    "etterbehandling": "ingen",
+    "opprinnelig_fil": "/home/tombonator3000t/.codex/generated_images/01a136d6-5bdd-78c1-bdb7-4026508ab18f/exec-a8b3e024-adac-4d4c-96f2-fb0e873d097d.png"
+  },
+  "kontroll": {
+    "png_og_dimensjoner": true,
+    "referanser_byteidentiske": true,
+    "visuelt_sett_av_hovedagent": true,
+    "uavhengig_visuell_kontroll": true,
+    "tom_godkjent": false,
+    "motorimport": false,
+    "spilltest": false,
+    "pikselpresis_produksjonsgeometri": false,
+    "forbehold": [
+      "Zak er glattere og vennligere i ansiktet med fyldigere haar",
+      "Landskapet er mer detaljert og malerisk enn stilankeret",
+      "Fugl, steinsprekker og skiltmerker er tolket friere"
+    ]
+  },
+  "filer": [
+    {
+      "fil": "BRIEF.md",
+      "bytes": 2750,
+      "sha256": "978135deaa41f68e1df9deb16e2f75393be422541ac8c5c35600851e4b08d2e4"
+    },
+    {
+      "fil": "README.md",
+      "bytes": 2405,
+      "sha256": "fb7f2cf38eee56be85085f967de6d39f4467920a60601813cbc279e48e60c24f"
+    },
+    {
+      "fil": "prompt-forsok-01.txt",
+      "bytes": 4105,
+      "sha256": "83aa083d8648048069ee6d87ea09f072fab0ce346b2f403fe157665d7d3a9f9a"
+    },
+    {
+      "fil": "referanser/sammax-godkjent-kontor.png",
+      "bytes": 1580710,
+      "sha256": "22e7511f0b84249e11e071c5538a279fd62c7dabd7be7c7beac656e2b1000dd4",
+      "bredde": 1952,
+      "hoyde": 800
+    },
+    {
+      "fil": "referanser/zak-rom042-original.png",
+      "bytes": 71071,
+      "sha256": "576fbc7ad50f6fc81ff7bcd56186e8af4a7400534aef06362ac1bc9495d6ffd2",
+      "bredde": 640,
+      "hoyde": 480
+    },
+    {
+      "fil": "zak-rom042-sammax-konsept-v1.png",
+      "bytes": 2217161,
+      "sha256": "1b5ec38ad798f7d04f56c7011ebb94f459042c47463f3d58f7996929918d437b",
+      "bredde": 1983,
+      "hoyde": 793
+    }
+  ]
+}
