@@ -1,0 +1,240 @@
+{
+  "dato": "2026-10-13",
+  "status": "konseptkandidater_til_stilvurdering",
+  "verktøy": "innebygd ChatGPT-bildegenerator",
+  "eksakt_modell": "ikke eksponert",
+  "referanser": {
+    "referanser/toms-zak-illustrasjon.jpg": {
+      "rolle": "Brukervedlegg, valgt figurdesign og pilotpalett",
+      "kilde": "1000053237.jpg fra Tom 13. oktober 2026",
+      "illustrator": "ikke verifisert"
+    },
+    "referanser/purcell-stil.png": {
+      "rolle": "Kun strek, asymmetri og fargebehandling",
+      "kilde": "Sam-Max-HD/work/.gpt-gren/referanser/purcell-farge-20261013.png; registrert i samme repos referanser/manifest-20261013.json"
+    },
+    "referanser/zak-fmtowns.png": {
+      "rolle": "Original Zak i rom 42",
+      "kilde": "https://www.scummvm.org/data/screenshots/scumm/zak/zak_fmtowns_en_1_1_full.png"
+    },
+    "referanser/annie-fmtowns-stonehenge.png": {
+      "rolle": "Annie-original ved Stonehenge; palettforskjell mot vedlegg",
+      "kilde": "https://www.scummvm.org/data/screenshots/scumm/zak/zak_fmtowns_en_1_6_full.png"
+    },
+    "referanser/caponian-fmtowns.png": {
+      "rolle": "Vanlig barhodet Caponian til venstre, adskilt fra The King; palettforskjell mot vedlegg",
+      "kilde": "https://www.scummvm.org/data/screenshots/scumm/zak/zak_fmtowns_en_1_4_full.png"
+    }
+  },
+  "kostymekobling_kilde": "origin/main 31f760ea2b65895484bdd5ec82151c2156a1fef3:docs/figurer.csv og docs/ANALYSE.md",
+  "genereringer": [
+    {
+      "figur": "Zak McKracken",
+      "kostyme_kobling": 1,
+      "resultat": "zak-pilot-v1.png",
+      "prompt": "zak-prompt-01.txt",
+      "referanser": [
+        "referanser/toms-zak-illustrasjon.jpg",
+        "referanser/purcell-stil.png",
+        "referanser/zak-fmtowns.png"
+      ],
+      "raakilde": "/home/tombonator3000t/.codex/generated_images/01a136d6-5bdd-78c1-bdb7-4026508ab18f/exec-d6a9cd39-bcec-4195-8c63-c88f7ebcc178.png",
+      "helfigurer": 3,
+      "uttrykk": 3,
+      "forsok": 1,
+      "foreslaatt_storrelse": [
+        1792,
+        1024
+      ],
+      "levert_storrelse": [
+        1659,
+        948
+      ],
+      "etterbehandling": "ingen",
+      "egen_visuell_kontroll": true,
+      "uavhengig_visuell_kontroll": true
+    },
+    {
+      "figur": "Annie Larris",
+      "kostyme_kobling": 2,
+      "resultat": "annie-pilot-v1.png",
+      "prompt": "annie-prompt-01.txt",
+      "referanser": [
+        "referanser/toms-zak-illustrasjon.jpg",
+        "referanser/purcell-stil.png",
+        "referanser/annie-fmtowns-stonehenge.png",
+        "zak-pilot-v1.png"
+      ],
+      "raakilde": "/home/tombonator3000t/.codex/generated_images/01a136d6-5bdd-78c1-bdb7-4026508ab18f/exec-cdca3df0-c43c-40b0-9086-bdfe97b67042.png",
+      "helfigurer": 3,
+      "uttrykk": 3,
+      "palettvalg": "Blå genser fra vedlegget. FM-Towns har rosa/magenta originaldrakt.",
+      "forsok": 1,
+      "foreslaatt_storrelse": [
+        1792,
+        1024
+      ],
+      "levert_storrelse": [
+        1659,
+        948
+      ],
+      "etterbehandling": "ingen",
+      "egen_visuell_kontroll": true,
+      "uavhengig_visuell_kontroll": true
+    },
+    {
+      "figur": "Caponian",
+      "kostyme_kobling": 28,
+      "resultat": "caponian-pilot-v1.png",
+      "prompt": "caponian-prompt-01.txt",
+      "referanser": [
+        "referanser/toms-zak-illustrasjon.jpg",
+        "referanser/purcell-stil.png",
+        "zak-pilot-v1.png",
+        "referanser/caponian-fmtowns.png"
+      ],
+      "raakilde": "/home/tombonator3000t/.codex/generated_images/01a136d6-5bdd-78c1-bdb7-4026508ab18f/exec-8921ac2e-0058-4fe7-a861-9c878a9de622.png",
+      "helfigurer": 3,
+      "uttrykk": 2,
+      "forkledningsbyster": 1,
+      "palettvalg": "Blågrå hud fra vedlegget. FM-Towns-skjermbildet har varmere hudpalett.",
+      "forsok": 1,
+      "foreslaatt_storrelse": [
+        1792,
+        1024
+      ],
+      "levert_storrelse": [
+        1659,
+        948
+      ],
+      "etterbehandling": "ingen",
+      "egen_visuell_kontroll": true,
+      "uavhengig_visuell_kontroll": true
+    }
+  ],
+  "kontroll": {
+    "referansekopier_byteidentiske": true,
+    "resultater_byteidentiske_med_raakilder": true,
+    "begge_agenter_sett_alle_ark": true,
+    "tom_godkjent": false,
+    "originalanimasjon_koblet": false,
+    "motorimport": false,
+    "spilltest": false,
+    "notat": "Nye vinkler, kroppsdeler og milde karikaturtrekk er konseptforslag. Se README.md for visuelle forbehold."
+  },
+  "filer": [
+    {
+      "fil": "BRIEF.md",
+      "bytes": 3690,
+      "sha256": "047e9482c2119afefc20191092338a132531bd1f13ff9bd88cc0e3ab5ec6dbb8"
+    },
+    {
+      "fil": "README.md",
+      "bytes": 3364,
+      "sha256": "969a7a40c0c41e2811e16fa39d743259fa928aa337cf7f769cca814ecca6cc33"
+    },
+    {
+      "fil": "annie-pilot-v1.png",
+      "bytes": 1854944,
+      "sha256": "08dbef2584e9ff3abea8b508334c249e285f35a6d26d205f48b569983b2af4a7",
+      "maal": [
+        1659,
+        948
+      ],
+      "modus": "RGB",
+      "format": "PNG"
+    },
+    {
+      "fil": "annie-prompt-01.txt",
+      "bytes": 4554,
+      "sha256": "c253d7ca005d23ffa53526c7e2acc7c5cd8de46fb73bb37e38e51fb5d3350ac2"
+    },
+    {
+      "fil": "caponian-pilot-v1.png",
+      "bytes": 1798993,
+      "sha256": "1e837ed24ca46168b76badc6fa81a7ba3687b7a76176b3bff1a85ff504e447d8",
+      "maal": [
+        1659,
+        948
+      ],
+      "modus": "RGB",
+      "format": "PNG"
+    },
+    {
+      "fil": "caponian-prompt-01.txt",
+      "bytes": 4775,
+      "sha256": "f0023bc7f7f94a46ea9890719f45524f8ec339a96889371770cab4fe0130c22f"
+    },
+    {
+      "fil": "referanser/annie-fmtowns-stonehenge.png",
+      "bytes": 67369,
+      "sha256": "6565d7cad7d0ccfe9af9aa9720dbc6dd00241b47637df33a1080ee76a3335964",
+      "maal": [
+        640,
+        480
+      ],
+      "modus": "RGB",
+      "format": "PNG"
+    },
+    {
+      "fil": "referanser/caponian-fmtowns.png",
+      "bytes": 44114,
+      "sha256": "ae460a024577278734a727af54da0bea93e329179d87f8524dc148043e5047c6",
+      "maal": [
+        640,
+        480
+      ],
+      "modus": "RGB",
+      "format": "PNG"
+    },
+    {
+      "fil": "referanser/purcell-stil.png",
+      "bytes": 728463,
+      "sha256": "67ad5f6a138718a51d36b60c76cfbd68d711ebf985187ae364c6532da8d81a64",
+      "maal": [
+        663,
+        816
+      ],
+      "modus": "RGB",
+      "format": "PNG"
+    },
+    {
+      "fil": "referanser/toms-zak-illustrasjon.jpg",
+      "bytes": 187877,
+      "sha256": "eecfb50acf9b29feac3f5f5eba4ae7c5206d86795d2a30169287662dd9f0d545",
+      "maal": [
+        960,
+        1280
+      ],
+      "modus": "RGB",
+      "format": "JPEG"
+    },
+    {
+      "fil": "referanser/zak-fmtowns.png",
+      "bytes": 71071,
+      "sha256": "576fbc7ad50f6fc81ff7bcd56186e8af4a7400534aef06362ac1bc9495d6ffd2",
+      "maal": [
+        640,
+        480
+      ],
+      "modus": "RGB",
+      "format": "PNG"
+    },
+    {
+      "fil": "zak-pilot-v1.png",
+      "bytes": 1881748,
+      "sha256": "c4f721a5a2dbfaa6b688f011b1ba610b96453745df8973125c6b8ed094e5e49a",
+      "maal": [
+        1659,
+        948
+      ],
+      "modus": "RGB",
+      "format": "PNG"
+    },
+    {
+      "fil": "zak-prompt-01.txt",
+      "bytes": 3808,
+      "sha256": "6c5dd8b1905df9279ad490306718606f7b046bffb6d9caf3e687314aa38be6ba"
+    }
+  ]
+}
