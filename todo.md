@@ -51,7 +51,13 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [x] Verb 1 til 17 skjules i panelet når hjulet er på; tastene virker; resten av panelet står
 - [x] `tools/verbhjul_test.sh`: originalpanelet og hjulet gir de samme 8 setningene i rom 1, med venting og avbrudd (bestått 13. oktober)
 - [x] `tools/lag_patcher.sh` lager 0001 og 0002 på nytt; 0001 er byte for byte lik den i Sam & Max
+- [x] Gjennomgang 13. oktober: objektet fra forrige klikk ble med i setningen (Walk to lamp, så Use på ticket kjørte «Use lamp with ticket»). Rettet i PR 4 (`verbhjul-tom-setning`), testen bestått
+- [ ] Tom fletter PR 4 når CI er grønn
+- [ ] Prøv pilene i inventaret mens hjulet venter på objekt nummer to (rettet i PR 4, ikke testet)
 - [ ] Navnet på objektet under pekeren mens hjulet er lukket (What is er skjult)
+- [ ] Vurder valg på vinkel: slipp hvor som helst i sektoren til et verb, ikke bare på ikonet (lettere på mobil og med spillkontroll)
+- [ ] Spillkontroll: en knapp åpner hjulet på objektet under pekeren, stikken velger (hvis spillet skal på Steam Deck eller konsoll)
+- [ ] Rug corner 109 sender alle verb til 107 (oppføring 255); hjulet kunne vist verbene til 107 der (lite viktig)
 - [ ] Prøv med skjerm og mus, i nettleseren og på mobil (langt trykk), og at valget lagres i scummvm.ini
 - [ ] Prøv butikken (Buy, Sell), teleporten, figurbytte og styring av dyr
 - [ ] Tegning i HD-laget når DigHD er portet til Zak
