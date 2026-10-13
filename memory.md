@@ -49,6 +49,8 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 - DigHD er ikke på for Zak. FM-Towns tegner gjennom `towns_drawStripToScreen` (16-bits lag, 640 x 480 i ScummVM), som returnerer før DigHD-kroken i `drawStripToScreen`. Valg: slå av FM-Towns-laget (`DISABLE_TOWNS_DUAL_LAYER_MODE`) så v3 går gjennom vanlig 8-bits tegning, eller kroker i FM-Towns-tegningen. Anbefalt å prøve det første. Se `docs/HD-MOTOR.md`.
 - Tekst tegnes av `CharsetRendererV3`; kroken for HD-glyfer finnes ikke der.
 - Ingen blast-objekter, ingen filmer, ingen tale, ingen fargesykling i Zak.
+- Kostymene (målt 13. oktober): 40 kostymer med 847 ruter, alle med speilflagg av, ingen søppelruter. Skyggeregelen fra Sam & Max (palettindeks 13 gjennom skyggetabellen) gjelder ikke: ScummVM setter `_shadowTable` bare for v5 og nyere, så i v3 er 13 en vanlig farge (kostyme 8 bruker den).
+- Dynamisk lys (normalkart og luminansmaske) er planlagt etter stilpiloten: valgfritt for spilleren, ingen kastede skygger (Tom 13. oktober).
 - ScummVM låst til c9091321, som The Dig og Sam & Max.
 
 ## Arbeidsform
