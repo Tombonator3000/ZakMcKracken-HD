@@ -1,5 +1,7 @@
 # Caponian: avvisning og korrigert designgrunnlag
 
+Historisk grunnlag for v2. Toms nyere presisering av høye øyne, innsnevret hode og øyehull i hatten står i [rettelse 03](CAPONIAN-RETTELSE-03.md) og går foran den jevnbrede hodetolkningen her.
+
 Tom avviste `caponian-pilot-v1.png` og presiserte artens anatomi, forkledning og gange. Hans rettelse har forrang over vår forrige tolkning av illustrasjonen. V1 beholdes bare som historikk og feilbeskrivelse. Den brukes ikke som referanse ved nygenerering.
 
 ## Hva som var feil

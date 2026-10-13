@@ -1,6 +1,6 @@
 {
   "dato": "2026-10-13",
-  "status": "Zak_Annie_v1_og_Caponian_v2_er_kandidater_Caponian_v1_er_avvist",
+  "status": "Zak_Annie_v1_og_Caponian_v3_er_kandidater_Caponian_v1_avvist_v2_erstattet",
   "verktøy": "innebygd ChatGPT-bildegenerator",
   "eksakt_modell": "ikke eksponert",
   "referanser": {
@@ -24,6 +24,18 @@
     "referanser/caponian-fmtowns.png": {
       "rolle": "Vanlig barhodet Caponian til venstre, adskilt fra The King; palettforskjell mot vedlegg",
       "kilde": "https://www.scummvm.org/data/screenshots/scumm/zak/zak_fmtowns_en_1_4_full.png"
+    },
+    "referanser/caponian-rettelse-03/caponians-umaskert.jpg": {
+      "rolle": "Primær anatomi: ekte øyne høyt, smalt midtparti og bredere underansikt; vanlige Caponians i spillscene",
+      "kilde": "1000053240.jpg fra Tom 13. oktober 2026"
+    },
+    "referanser/caponian-rettelse-03/caponian-cowboyhatt.jpg": {
+      "rolle": "Cowboyforkledning: to ekte øyne gjennom høy hattekrone; lavere falske Groucho-briller, nese og bart; drakt og palett",
+      "kilde": "1000053241.jpg fra Tom 13. oktober 2026"
+    },
+    "referanser/caponian-rettelse-03/the-king-anatomi.jpg": {
+      "rolle": "Kun støtte for anatomi og øyeplassering; ikke hår, klær, smykker eller rolle",
+      "kilde": "1000053239.jpg fra Tom 13. oktober 2026"
     }
   },
   "kostymekobling_kilde": "origin/main 31f760ea2b65895484bdd5ec82151c2156a1fef3:docs/figurer.csv og docs/ANALYSE.md",
@@ -125,7 +137,7 @@
       "figur": "Caponian",
       "variant": "v2",
       "kostyme_kobling": 28,
-      "status": "korrigert_konseptkandidat_ikke_brukergodkjent",
+      "status": "erstattet_etter_Toms_rettelse_03_ikke_brukergodkjent",
       "resultat": "caponian-pilot-v2.png",
       "prompt": "caponian-prompt-02.txt",
       "referanser": [
@@ -154,7 +166,46 @@
       "etterbehandling": "ingen",
       "egen_visuell_kontroll": true,
       "ny_uavhengig_visuell_kontroll": true,
-      "palettvalg": "Blågrå pilotpalett, ikke originalens varme hudpalett."
+      "palettvalg": "Blågrå pilotpalett, ikke originalens varme hudpalett.",
+      "kontroll_presisering": "V2 var mye bedre ifølge Tom, men øynene satt for lavt, hodet var for jevnbredt, og øyehull høyt i cowboyhatten manglet. Tidligere positiv kontroll fanget ikke dette opp."
+    },
+    {
+      "figur": "Caponian",
+      "variant": "v3",
+      "kostyme_kobling": 28,
+      "status": "korrigert_konseptkandidat_ikke_brukergodkjent",
+      "resultat": "caponian-pilot-v3.png",
+      "prompt": "caponian-prompt-03.txt",
+      "referanser": [
+        "referanser/caponian-rettelse-03/caponians-umaskert.jpg",
+        "referanser/caponian-rettelse-03/caponian-cowboyhatt.jpg",
+        "referanser/caponian-rettelse-03/the-king-anatomi.jpg",
+        "referanser/purcell-stil.png",
+        "zak-pilot-v1.png"
+      ],
+      "styrende_kilde": "Toms presisering og tre nye vedlegg, gjengitt i CAPONIAN-RETTELSE-03.md",
+      "tidligere_caponian_genereringer_brukt_som_referanse": false,
+      "raakilde": "/home/tombonator3000t/.codex/generated_images/01a136d6-5bdd-78c1-bdb7-4026508ab18f/exec-9e36a76c-0281-4d4e-91c5-d9191d686298.png",
+      "nytt_forsok": 1,
+      "totalt_antall_caponian_forsok": 3,
+      "helfigurer": 2,
+      "umaskerte_helfigurer": 1,
+      "forkledde_helfigurer": 1,
+      "byster": 2,
+      "forkledde_byster": 1,
+      "foreslaatt_storrelse": [
+        1792,
+        1024
+      ],
+      "levert_storrelse": [
+        1660,
+        948
+      ],
+      "etterbehandling": "ingen",
+      "egen_visuell_kontroll": true,
+      "ny_uavhengig_visuell_kontroll": true,
+      "palettvalg": "Korallhud, svart dress, gult slips og gulbrun cowboyhatt fra de nye referansene.",
+      "stilforbehold": "Skalletoppen er bredere og rundere og underkjeven glattere enn den kantete Moai-lesningen av pikseloriginalene."
     }
   ],
   "kontroll": {
@@ -165,7 +216,7 @@
     "originalanimasjon_koblet": false,
     "motorimport": false,
     "spilltest": false,
-    "notat": "Caponian v1 er avvist etter brukerens korreksjon. Ny, separat visuell kontroll av v2 er gjort mot firkantet anatomi, Groucho-masker, dresser og rette ben. Stillbildet beviser ikke knefri gange.",
+    "notat": "V1 er avvist og v2 erstattet etter Toms rettelse. Hovedagent og ny separat kontrollør har sett v3 mot de tre nye originalreferansene. Stillbildekontroll beviser verken animasjon eller brukergodkjenning.",
     "caponian_v2": {
       "langt_firkantet_moai_ansikt": true,
       "levende_hud_uten_steintekstur": true,
@@ -175,25 +226,45 @@
       "rette_ben_i_alle_helfigurer": true,
       "leken_2d_stil": true,
       "gaanimasjon_kontrollert": false,
-      "brukergodkjent": false
+      "brukergodkjent": false,
+      "nyere_rettelse": "Den historiske kontrollen overså høye øyne, innsnevret midtparti og øyehull i hatten. V2 er erstattet."
     },
-    "historiske_bilder_referanser_og_prompt01_uendret": 11
+    "historiske_bilder_referanser_og_prompt01_uendret": 11,
+    "caponian_v3": {
+      "ekte_oyne_hoyt_i_skallen": true,
+      "langt_innsnevret_midtparti": true,
+      "bredere_underansikt": true,
+      "ekte_oyne_gjennom_to_hull_hoyt_i_hattekrone": true,
+      "lavere_falsk_groucho_forkledning": true,
+      "korallhud_svart_dress_gult_slips": true,
+      "rette_ben_i_begge_helfigurer": true,
+      "hovedtrekk_konsistente_i_to_helfigurer_og_to_byster": true,
+      "gaanimasjon_kontrollert": false,
+      "brukergodkjent": false,
+      "stilforbehold": "Skalletoppen er bredere og rundere og underkjeven glattere enn den kantete Moai-lesningen av pikseloriginalene."
+    },
+    "historiske_bilder_referanser_og_prompter_uendret_mot_49f877e": 13
   },
   "filer": [
     {
       "fil": "BRIEF.md",
-      "bytes": 3840,
-      "sha256": "0d264aef3137644b7f09cdf1e2d095b01e925a5f9f62936df031975bf4f599b8"
+      "bytes": 3919,
+      "sha256": "b932d4db959875bc28e2f266a2089ea9fd2eb95e39ef3289f205f0df35b115ba"
+    },
+    {
+      "fil": "CAPONIAN-RETTELSE-03.md",
+      "bytes": 3144,
+      "sha256": "7a490966e20d5b03706918a81b8f3e8569cc136d2d8074804acf3b9500022f51"
     },
     {
       "fil": "CAPONIAN-RETTELSE.md",
-      "bytes": 2368,
-      "sha256": "0751b85dc911871025916e3dc6a353bfdda9304fefb622b8062d9bf094a86dde"
+      "bytes": 2567,
+      "sha256": "f99f800759132ccc6e9f70546d53adbf1fd700a264b360a05dd260e5b01ff7a2"
     },
     {
       "fil": "README.md",
-      "bytes": 3952,
-      "sha256": "a134e1fd1acebf749aa740c5a1b5292f11b36d460fcb12a8600a6171a488050f"
+      "bytes": 4361,
+      "sha256": "939dfffeb625dd68bb87f53204d3c3e9f96dde125334a868aea05ca0f59289f5"
     },
     {
       "fil": "annie-pilot-v1.png",
@@ -234,6 +305,17 @@
       "format": "PNG"
     },
     {
+      "fil": "caponian-pilot-v3.png",
+      "bytes": 1604732,
+      "sha256": "0cfdebba74176f54c9e241e4ece4c9f8bd3d57127d63d6c5958aa5ebcb1725c3",
+      "maal": [
+        1660,
+        948
+      ],
+      "modus": "RGB",
+      "format": "PNG"
+    },
+    {
       "fil": "caponian-prompt-01.txt",
       "bytes": 4775,
       "sha256": "f0023bc7f7f94a46ea9890719f45524f8ec339a96889371770cab4fe0130c22f"
@@ -242,6 +324,11 @@
       "fil": "caponian-prompt-02.txt",
       "bytes": 5292,
       "sha256": "36f4536f448e4563f5610d3176022a5b041871bd6a13c8b6c45275943ec4b3fb"
+    },
+    {
+      "fil": "caponian-prompt-03.txt",
+      "bytes": 5725,
+      "sha256": "90cf32e433f09401fbe87b4858df56e497453dec10de7141fe81d20a59eef495"
     },
     {
       "fil": "referanser/annie-fmtowns-stonehenge.png",
@@ -264,6 +351,39 @@
       ],
       "modus": "RGB",
       "format": "PNG"
+    },
+    {
+      "fil": "referanser/caponian-rettelse-03/caponian-cowboyhatt.jpg",
+      "bytes": 25485,
+      "sha256": "cae5526723a97f1471ae5a77559feecd9244355b50f843d27dbb4de6468f3f9c",
+      "maal": [
+        960,
+        1280
+      ],
+      "modus": "RGB",
+      "format": "JPEG"
+    },
+    {
+      "fil": "referanser/caponian-rettelse-03/caponians-umaskert.jpg",
+      "bytes": 106772,
+      "sha256": "1b1be6a18852e7b7a96fb51a3215037223cda1f4627f26e0e7e375cfdf9c5182",
+      "maal": [
+        1280,
+        960
+      ],
+      "modus": "RGB",
+      "format": "JPEG"
+    },
+    {
+      "fil": "referanser/caponian-rettelse-03/the-king-anatomi.jpg",
+      "bytes": 50811,
+      "sha256": "bf451a65f9c04ceab62735ad126976d8722fffa6fb4970a6cf02275f17fb2199",
+      "maal": [
+        960,
+        1280
+      ],
+      "modus": "RGB",
+      "format": "JPEG"
     },
     {
       "fil": "referanser/purcell-stil.png",
@@ -318,9 +438,12 @@
   "aktive_resultater": [
     "zak-pilot-v1.png",
     "annie-pilot-v1.png",
-    "caponian-pilot-v2.png"
+    "caponian-pilot-v3.png"
   ],
   "avviste_resultater": [
     "caponian-pilot-v1.png"
+  ],
+  "erstattede_resultater": [
+    "caponian-pilot-v2.png"
   ]
 }

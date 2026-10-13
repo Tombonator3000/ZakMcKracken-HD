@@ -34,3 +34,10 @@
 - Ny `caponian-pilot-v2.png` generert fra original FM-Towns-skjerm, Purcell-stilreferanse og Zak-ark som presentasjonsreferanse, styrt av brukerens anatomirettelse. Avvist v1 ble ikke brukt som bildeanker. Rå v1 og prompt 01 er beholdt uendret som historikk.
 - V2 viser tre helfigurer og tre byster, inkludert fedora og cowboyhatt med komplett Groucho-forkledning. Alle synlige ben er rette. Ny uavhengig visuell kontroll er utført mot sju konkrete kriterier. Ingen brukeraksept, motorimport eller knefri gåanimasjon påstås.
 - Ett nytt forsøk med innebygd ChatGPT-bildegenerator, 1659 x 948 RGB PNG. Korrigert brief, separat prompt 02, analyse, avvisningsstatus og proveniens er lagret. Zak- og Annie-bildene er uendret.
+
+## 2026-10-13 22:56 (Codex)
+
+- Tom vurderte Caponian v2 som mye bedre, men korrigerte øyeplassering og hodeform med tre nye vedlegg. Ekte øyne skal sitte høyt og se gjennom hull i cowboyhattens krone; midten av hodet skal være smal. Tidligere kontroll overså dette.
+- Laget `konsept/2026-10-13-figurpiloter/caponian-pilot-v3.png`: to helfigurer og to byster med og uten cowboyforkledning. Høye biologiske øyne er skilt fra lavere Groucho-briller/nese/bart. Korallhud, svart dress, gult slips og gulbrun hatt følger de nye referansene.
+- Ett nytt forsøk med innebygd ChatGPT-bildegenerator, 1660 x 948 RGB PNG. Ingen tidligere Caponian-generering ble brukt som bildeanker. De tre nye vedleggene, faktisk prompt 03, råbilde, kilder og SHA-256 er bevart. Tidligere bilder og prompter er uendret.
+- Hovedagent og uavhengig kontrollør finner de korrigerte trekkene lesbare. Rundere skalletopp og glattere underkjeve enn pikseloriginalens kantete Moai-preg er dokumentert som stilforskjell. V3 er fortsatt en konseptkandidat uten brukergodkjenning, motorimport eller gangtest.

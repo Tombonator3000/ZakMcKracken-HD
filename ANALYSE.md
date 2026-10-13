@@ -82,11 +82,12 @@ Lærdommen som overføres er å fastslå riktig motiv før nytegning, skille per
 
 ## Caponian: Toms designrettelse 13. oktober 2026
 
-Tom avviste første Caponian-pilot og presiserte følgende grunnlag for videre grafikk:
+Tom avviste første Caponian-pilot, vurderte v2 som mye bedre, og presiserte deretter øyeplassering, hodeform og cowboyhattens funksjon med tre nye vedlegg. Gjeldende grunnlag for videre grafikk:
 
-- Lange firkantede, Moai-lignende biologiske ansikter. Ikke foldet myk hodeskalle eller hengende pærenese.
-- Groucho Marx-tøysebriller med påmontert falsk nese og svart bart. Vanlige solbriller er ikke riktig forkledning.
-- Fedora eller stor ten-gallon cowboyhatt, og mørk dress inspirert av Men in Black.
+- Langt Moai-lignende biologisk ansikt med tydelig smalt midtparti mellom bredere øvre skalle og underansikt. Den nyere presiseringen går foran v2 sin jevnbrede, rektangulære tolkning.
+- Ekte øyne sitter helt høyt i skallen. I cowboyforkledningen ser de gjennom to hull høyt i hattekronen.
+- Groucho Marx-tøysebriller med påmontert falsk nese og svart bart sitter lavere under bremmen. Dette falske ansiktet skal ikke flytte de ekte øynene nedover.
+- Stor ten-gallon cowboyhatt og mørk dress inspirert av Men in Black. V3 følger de nye referansenes korallfargede hud, smale gule slips og gulbrune hatt. Fedora var et alternativ i forrige brief, men er ikke tegnet i v3.
 - Ingen knær. Fremtidig gange skal bruke raske, korte, stive trinn, ikke vanlig menneskelig knebøy.
 
-Dette er brukerens korrigerte designgrunnlag. Stillbildet v2 illustrerer det, men gangavspilling er ikke testet. Caponian v1 er avvist og brukes ikke som referanse. Se [rettelsesnotatet](konsept/2026-10-13-figurpiloter/CAPONIAN-RETTELSE.md) og [ny pilot](konsept/2026-10-13-figurpiloter/caponian-pilot-v2.png). Ny pilot er en kandidat, ikke et godkjent produksjonsark.
+Dette er brukerens korrigerte designgrunnlag. V1 er avvist og v2 er erstattet etter den nye rettelsen; ingen av dem brukes som bildeanker for v3. Tidligere positiv stillbildekontroll overså disse feilene. Se [gjeldende rettelsesnotat](konsept/2026-10-13-figurpiloter/CAPONIAN-RETTELSE-03.md) og [ny pilot v3](konsept/2026-10-13-figurpiloter/caponian-pilot-v3.png). Ny pilot er en kandidat, ikke et godkjent produksjonsark. Gangavspilling er ikke laget eller testet.
