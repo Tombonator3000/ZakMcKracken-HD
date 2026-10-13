@@ -51,7 +51,13 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [x] Verb 1 til 17 skjules i panelet når hjulet er på; tastene virker; resten av panelet står
 - [x] `tools/verbhjul_test.sh`: originalpanelet og hjulet gir de samme 8 setningene i rom 1, med venting og avbrudd (bestått 13. oktober)
 - [x] `tools/lag_patcher.sh` lager 0001 og 0002 på nytt; 0001 er byte for byte lik den i Sam & Max
+- [x] Gjennomgang 13. oktober: objektet fra forrige klikk ble med i setningen (Walk to lamp, så Use på ticket kjørte «Use lamp with ticket»). Rettet i PR 4 (`verbhjul-tom-setning`), testen bestått
+- [ ] Tom fletter PR 4 når CI er grønn
+- [ ] Prøv pilene i inventaret mens hjulet venter på objekt nummer to (rettet i PR 4, ikke testet)
 - [ ] Navnet på objektet under pekeren mens hjulet er lukket (What is er skjult)
+- [ ] Vurder valg på vinkel: slipp hvor som helst i sektoren til et verb, ikke bare på ikonet (lettere på mobil og med spillkontroll)
+- [ ] Spillkontroll: en knapp åpner hjulet på objektet under pekeren, stikken velger (hvis spillet skal på Steam Deck eller konsoll)
+- [ ] Rug corner 109 sender alle verb til 107 (oppføring 255); hjulet kunne vist verbene til 107 der (lite viktig)
 - [ ] Prøv med skjerm og mus, i nettleseren og på mobil (langt trykk), og at valget lagres i scummvm.ini
 - [ ] Prøv butikken (Buy, Sell), teleporten, figurbytte og styring av dyr
 - [ ] Tegning i HD-laget når DigHD er portet til Zak
@@ -81,6 +87,16 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [ ] Stilpilot med Tom: rom 1 og kostyme 1 sett i motoren, stilankere, godkjenning
 - [ ] Master-figurark for Zak, Annie, Melissa og Leslie
 - [ ] Aktiver bestillingen (`docs/BESTILLING-CHATGPT.md`) og grafikkrunder med `tools/gpt_runde.sh`
+- [ ] Ta inn grafikkjobbene fra Sam & Max HD (PR 4 der, 13. oktober), tilpasset v3:
+  - [ ] Fast størrelse i figurarkene: mål per rute i figurprompten, `tools/sjekk_leveranse.py` i `verktoy/` i `gpt-arbeid`, `myk.py` versjon 4 (her er den versjon 2)
+  - [ ] Hovedark (`figur.MASTERS`, `master_jobs`) for Zak, Annie, Melissa og Leslie, brukt som bilde to i figurjobbene deres
+  - [ ] Pilotordren: bare stilpiloten i ORDRE.md så lenge `stil/` er tom (`FIG_PILOT` og `PILOT_ROOMS`)
+  - [ ] Ikonark pakket i rader rom for rom med flat bakgrunn, og den omskrevne romprompten (ingenting legges til, fjernes eller ryddes, skilt bokstav for bokstav)
+  - [ ] Palett per kostyme fra skriptene (`tools/kostymer.py` i Sam & Max, `kostymer-i-rom.tsv` her) inn i `docs/kostymefarger.csv` og `zakhd extract`. Kostymepalettene peker på romindekser (for eksempel 225 til 229)
+  - [ ] Ikke ta med skyggeregelen (`figur.SHADOW_INDEX`): i v3 setter ScummVM ingen skyggetabell (bare v5 og nyere, `actor.cpp`), så indeks 13 er en vanlig farge. Kostyme 8 bruker den i 104 piksler (målt 13. oktober). Gjør regelen til et valg per spill
+  - [ ] Søppelrutegrensen (`figur.MAX_CEL`) kan tas med, men ingen av de 847 rutene i Zak er over 640 x 400
+  - [ ] Speilvending som i Sam & Max: alle 40 kostymer har speilflagg av, så rutene mot venstre lages av motoren
+- [ ] Dynamisk lys med normalkart og luminansmaske, etter godkjent stilpilot (Tom 13. oktober): valgfritt for spilleren (av som standard, eget valg i menyen), ingen kastede skygger. Prøv først i ett rom med normalkart regnet ut fra HD-bildene og lyset av og på med en tast. Lyset legges inn før fargeforholdet fra paletten. Samme plan som i Sam & Max HD
 
 ### Spillbart for Tom
 

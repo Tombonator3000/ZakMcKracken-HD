@@ -185,7 +185,9 @@ index 00000000..270aa58e
 +	kZakSwitch = 36,       // Switch; the kids' names are 37 to 40
 +	kZakSentence = 100,    // the sentence line; clicking it runs the sentence
 +	kZakInvFirst = 101,
-+	kZakInvLast = 110
++	kZakInvLast = 110,
++	kZakInvUp = 115,       // inventory arrows: they only scroll (script 20)
++	kZakInvDown = 116
 +};
 +
 +// The verb an icon of the dynamic wheel sends when its group has several
@@ -907,6 +909,11 @@ index 00000000..270aa58e
 +				_swallowLeftUp = true;
 +				return true;
 +			}
++			// The inventory arrows only scroll, and the sentence keeps waiting
++			// (the input script chains to script 20 without touching it)
++			const int slot = _vm->findVerbAtPos(x, y);
++			if (slot > 0 && (_vm->_verbs[slot].verbid == kZakInvUp || _vm->_verbs[slot].verbid == kZakInvDown))
++				return false;
 +			// Another button of the panel: the game handles it
 +			_state = kClosed;
 +		}
@@ -1430,13 +1437,15 @@ index 00000000..088a0c08
 + *
 + * Choosing a verb sends exactly the clicks a player would make on the
 + * original panel, one per frame, through the game's own input script
-+ * (global script 11): the verb, the object (a scene click at the stored
++ * (global script 11): Walk to and the sentence line when something is left
++ * of the last sentence (this clears it), the verb, the object (a scene click at the stored
 + * point, or the inventory slot), then the sentence line (verb 100), which
 + * runs the sentence. No game script is changed. When the sentence waits
 + * for a second object (Use ... with, Give ... to; the input script has set
 + * a preposition), the sentence line is not clicked, since that would clear
 + * the sentence. The wheel closes, and the next left click on an object, a
-+ * person or an inventory item sends that click and then the sentence line. A right click cancels by clicking Walk to, which clears the sentence
++ * person or an inventory item sends that click and then the sentence line.
++ * The inventory arrows scroll without ending the wait. A right click cancels by clicking Walk to, which clears the sentence
 + * the same way the original panel does.
 + *
 + * With the wheel on, the original verb buttons 1 to 17 are not drawn and
