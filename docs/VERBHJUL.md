@@ -145,6 +145,39 @@ Testet for hånd uten skjerm samme natt: «alle verb» (døren får alle tolv pl
 
 Ikke testet: med skjerm og mus, Esc for å lukke hjulet, langt trykk i nettleseren og på mobil, butikken (Buy og Sell), teleporten, figurbytte, styring av dyr, andre rom enn rom 1, og at valget faktisk lagres i scummvm.ini (ScummVM skrev ingen scummvm.ini i testmiljøet, heller ikke ved avslutning).
 
+## Dynamisk hjul (Toms forslag 13. oktober)
+
+Tom spurte om hjulet kan være dynamisk: høyst tre eller fire ikoner per objekt, verbene slått sammen (øye for Look at og Read; hånd for Pick up, Push, Pull, Open og Close etter hva som går an; bryter for Turn on og Turn off; snakkeboble for Talk to), Fly utenfor hjulet (flybillett på skranken åpner kartet), og figurbytte som små portretter i et hjørne.
+
+Målt med `tools/verbhjul_dynamisk.py` (verbtabellene og objektkoden i work/skript, klassene i 00.LFL):
+
+| Ikoner per objekt | I dag | Lik kode slått sammen | Pluss Open/Close og Turn on/off etter tilstand |
+| --- | ---: | ---: | ---: |
+| 1 | 119 | 161 | 184 |
+| 2 | 104 | 112 | 96 |
+| 3 | 58 | 41 | 36 |
+| 4 | 36 | 16 | 14 |
+| 5 til 7 | 20 | 7 | 7 |
+
+Av 337 objekter med verbkode. «Lik kode» betyr at verbene hopper til samme sted i objektkoden, og at koden ikke spør hvilket verb som ble valgt (Var[52], Var[116], Local[1], også i skript den starter). Give holdes alltid for seg (trenger mottaker), og Use for seg når objektet har preposisjonsklasse. 26 objekter har verb med samme kode som likevel må holdes adskilt av disse grunnene, for eksempel boom-boksen: sju verb går til skript 129, som ser på verbet. Kommoden (91) sender verbet videre til skuffen (92) med `startObject(92,Var[52])`.
+
+Tilstand: spillets egen regel for dører og skuffer er 0 lukket og 1 åpen (globalt skript 31 og 32). 30 av 56 objekter med både Open og Close følger den påviselig i koden; de andre går gjennom lokale skript eller andre variabler og må leses før de slås sammen. For Turn on og Turn off er det påvist for 2 av 18; resten bruker klasser (lampen i rom 6 bruker klasse 6) eller variabler. Til de er lest, vises begge.
+
+Fem eller flere etter sammenslåingen: Sushi i fiskebollen (14), kommoden (91), våtdrakten (39), oksygentanken (50), mikrobølgeovnen (260), boom-boksen (71) og fallskjermen (77). De trenger en regel hver, for eksempel Put on eller Take off etter om tingen er på, og Buy og Sell bare i butikken (hjulet viser allerede bare verb som er på i panelet).
+
+Det betyr:
+
+- Høyst fire valg går an uten å miste noe og uten å endre skriptene: 330 av 337 objekter med de to reglene over, og de sju med en regel for hånd.
+- Et fast sett med fire ikoner dekker ikke spillet. Give, Put on, Take off, Buy, Sell og Teleport to finnes på 43 objekter og må være med, og noen objekter har to forskjellige håndhandlinger (strømledningen i rom 2: Pull og Pick up har hver sin kode; rullegardinen i rom 1 har Pull, som veksler, ved siden av Open og Close). Ikonene får derfor faste plasser etter type rundt pekeren, og teksten under hjulet sier hva som skjer («Åpne skuff»). Hånd, øye, tannhjul og bryter kan være motivene.
+- Øye: Zak har ikke Look at. Read finnes (93 objekter), og What is er navnet under pekeren. Øyet kan være ikonet for Read.
+- Snakkeboble: Zak har ikke Talk to. Samtalene startes av skriptene, når man kommer inn i et rom eller gir noe med Give. Et snakkeikon krever nye skript og ny tekst, og AGENTS sier at skriptene ikke lappes uten Toms ja. Ikke anbefalt.
+- Fly: flyreisene virker allerede slik Tom beskriver. Use på reservasjonsterminalen på flyplassen (objekt 194 i rom 8, 220 i rom 9) med CashCard laster reisemålskjermen (rom 45, globalt skript 90, som setter eget inndataskript 92). Terminalen har bare Use og får ett ikon. «Fly to» er Walk to når Zak styrer fuglen (skuespiller 6, globalt skript 24 og 119), og er vanlig klikk, ikke i hjulet.
+- Figurbytte: portretter kan sende de samme kallene som Switch og navnet (verb 36, så 37 til 40), slik ScummVM gjør for F1 til F4 i dag. Ingen skriptendring. Portrettene er grafikk og kommer etter stilpiloten; til da navn eller forbokstav.
+
+Plan hvis Tom sier ja: `tools/verbhjul_dynamisk.py --tsv` lager tabellen med gruppene og tilstandsparene fra spillfilene (i work/ og i moden, ikke i main), motoren leser den når den finnes og oppfører seg som i dag uten. Ikonet sender ett av verbene i gruppen, så setningen er en originalen kunne gitt. `tools/verbhjul_test.sh` utvides med skuffen (Open og Close etter tilstand) og et objekt med delt gruppe.
+
+Ikke testet: hjulet er ikke bygget slik. Tallene kommer fra tekstsøk i den dekompilerte koden; skript som startes gjennom en variabel (`startScript(Var[112],...)`) følges ikke.
+
 ## Det som gjenstår
 
 - Navnet på objektet under pekeren mens hjulet er lukket (i dag gir What is det i originalen; What is er skjult når hjulet er på, men tasten c virker).
