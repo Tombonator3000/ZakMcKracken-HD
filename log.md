@@ -84,3 +84,8 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Sjekket AGENTS, memory, todo og log. Hentet spillfilene (sjekksummene stemmer) og målte kostymene med `v3grafikk.decode_costume_v3`: 40 kostymer, 847 ruter, ingen over 640 x 400, alle med speilflagg av. Bare kostyme 8 (hostellet på Mars, rom 28) har piksler med palettindeks 13 (104 av 287 i 12 ruter).
 - I ScummVM (c9091321) tegnes 13 gjennom skyggetabellen i `byleRLEDecode`, men `_shadowTable` settes bare for v5 og nyere i `actor.cpp` og er ellers null. I Zak er 13 derfor en vanlig farge, og skyggeregelen fra Sam & Max skal ikke tas med. Ikke sett i spillet.
 - Lagt inn i todo: hva som kan tas inn fra Sam & Max PR 4, og dynamisk lys som forsøk etter stilpiloten. memory oppdatert. Ingen kode endret.
+
+## 2026-10-13 10:32 (Claude)
+- Tom viste Bernard, Laverne og Hoagie fra Day of the Tentacle, original og remaster side om side, og ba om at metoden legges i guiden for hvordan originalgrafikk gjøres om til HD.
+- Nytt punkt «Fra piksel til HD-strek, slik DOTT Remastered gjorde det» under Figurstilen i `docs/skills/scumm-hd-remake/SKILL.md`, og en henvisning under forbildene: samme positur, silhuett og proporsjoner, hver pikselklynge tegnet som det den forestiller, samme farge per flate, ren mørk kontur, flate farger med ett skyggetrinn, ingen nye detaljer, hodet ikke større. Med forslag til engelsk prompttekst. Skillen er lik i Dig, Sam & Max og Zak (SHA-256 kontrollert).
+- Kort avsnitt i `docs/HD-REMASTER-METODE.md`. Bildet er ikke lagt i repoet (grafikken tilhører Disney/Lucasfilm).
