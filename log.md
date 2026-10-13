@@ -107,3 +107,7 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Kort avsnitt i `docs/HD-REMASTER-METODE.md`. Bildet er ikke lagt i repoet (grafikken tilhører Disney/Lucasfilm).
 - 10:41 Presisert punktet om rom og objekter i skillen: malte bakgrunner beholder malt lys og fargeoverganger, figurene får flate farger. Skillen er lik i alle tre repoer.
 - 10:46 Codex påpekte at DOTT-punktet i skillen tvang tegneseriestil på alle spill og påsto at Double Fine tegnet over originalen. Rettet: punktene om form (samme figur, pikselklynger blir det de forestiller, farge per flate, ingenting nytt) gjelder alle spill; ren strek og flate farger gjelder bare tegneseriespill (DOTT, Sam & Max, Zak), og The Dig beholder sin malte stil. Overskriften sier nå «sett i DOTT Remastered», ikke «slik de gjorde det». Skillen er lik i alle tre repoer.
+
+## 2026-10-13 12:39 (Claude)
+- Tom: tillat at det deles utenfor repoet, til hans eget private bruk. Regelen i AGENTS er endret: grafikk og annet fra spillet kan deles utenfor repoet til Toms private bruk (for eksempel testsider på GitHub Pages og filer til egne enheter). Spillfilene og alt laget fra dem holdes fortsatt utenfor `main` og kodegrenene.
+- 12:45 Presisert etter Codex (Dig PR 48): privat deling gjelder egne enheter og private steder. Offentlige sider og pakker (GitHub Pages, releaser) har fortsatt ingen spillgrafikk, så README, Linux-pakken, SPILLTEST og PAGES stemmer som de er.
