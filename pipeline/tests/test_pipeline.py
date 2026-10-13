@@ -1554,3 +1554,47 @@ def test_skriptoversikt_tekst():
     assert so._del_argumenter("Var[314],Var[315],-1,-1") == ["Var[314]", "Var[315]", "-1", "-1"]
     # loadRoom( inne i loadRoomWithEgo( skal ikke telles som loadRoom
     assert so._kall("loadRoomWithEgo(84,1,-1,-1);", "loadRoom") == []
+
+
+def test_verbhjul_dynamisk_regler(tmp_path):
+    """tools/verbhjul_dynamisk.py: grupper med lik kode, verb som leses, Give, tilstandspar og tellingen."""
+    import importlib.util
+    sti = Path(__file__).resolve().parents[2] / "tools" / "verbhjul_dynamisk.py"
+    spec = importlib.util.spec_from_file_location("verbhjul_dynamisk", sti)
+    vd = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(vd)
+    rot = tmp_path / "skript"
+    (rot / "globale").mkdir(parents=True)
+    (rot / "rom_01").mkdir()
+    # Skuffen: Open og Pull på samme kode, Push og Close på samme; begge sider sjekker tilstanden
+    (rot / "rom_01" / "obj_0092_verb.txt").write_text(
+        '; Objekt 92 "drawer" i rom 1 (OC). Plass 40,56, 32 x 24, eget bilde: ja\n'
+        "; Verbtabell (verb: offset fra starten av OC-blokken): 1: 0x003C, 2: 0x002F, 6: 0x002F, 7: 0x003C\n"
+        "[002F] (0F) if (getState(92) == 0) {\n[0037] (07)   setState(92,1);\n[003B] (**) }\n"
+        "[003B] (00) stopObjectCode();\n"
+        "[003C] (0F) if (getState(92) == 1) {\n[0044] (07)   setState(92,0);\n[0048] (**) }\n"
+        "[0048] (00) stopObjectCode();\nEND\n", encoding="utf-8")
+    # En ting der koden spør etter verbet (gjennom et globalt skript), og Give på samme kode
+    (rot / "rom_01" / "obj_0070_verb.txt").write_text(
+        '; Objekt 70 "box" i rom 1 (OC). Plass 0,0, 8 x 8, eget bilde: nei\n'
+        "; Verbtabell (verb: offset fra starten av OC-blokken): 8: 0x0020, 11: 0x0020, 12: 0x0020, 14: 0x0024\n"
+        "[0020] (0A) startScript(129,[]);\n[0023] (00) stopObjectCode();\n"
+        "[0024] (0A) startScript(130,[]);\n[0027] (00) stopObjectCode();\nEND\n", encoding="utf-8")
+    (rot / "globale" / "scrp_129.txt").write_text("[0000] (48) if (Var[52] == 12) {\n[0007] (**) }\nEND\n", encoding="utf-8")
+    # Skriving til Var[116] er ikke lesing
+    (rot / "globale" / "scrp_130.txt").write_text("[0000] (1A) Var[116] = 0;\nEND\n", encoding="utf-8")
+    klasser = [0] * 100
+    drawer = vd.Objekt(rot / "rom_01" / "obj_0092_verb.txt")
+    box = vd.Objekt(rot / "rom_01" / "obj_0070_verb.txt")
+    assert vd.regel(drawer, rot, klasser) == "g=1,7;2,6 p=2/7:s"
+    assert vd.regel(box, rot, klasser) == "g=8;11;12;14"
+    # Use med preposisjonsklasse (klasse 2, bit 1) holdes for seg
+    klasser[70] = 0b10
+    assert vd.leser_verbet(rot, box, 0x24) is False
+    assert vd.ikoner("g=1,7;2,6 p=2/7:s", False) == 1
+    # Give i inventaret kommer i tillegg, og i=/r=/x= skjuler verb
+    assert vd.ikoner("g=8;12;14", True) == 4
+    assert vd.ikoner("g=2;5;8;10;11;12;14 p=5/10:c6+b143.0 x=11 i=12 r=8", False) == 4
+    assert vd.ikoner("g=2;5;8;10;11;12;14 p=5/10:c6+b143.0 x=11 i=12 r=8", True) == 4
+    g, par, inv, rom, aldri = vd.tolk("g=4;9 p=4/9:v222=14|16 i=11 r=8")
+    assert g == [[4], [9]] and par == [(4, 9, "v222=14|16")] and inv == {11} and rom == {8} and not aldri

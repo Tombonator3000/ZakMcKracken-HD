@@ -59,9 +59,15 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [ ] Ikonene (15) etter motiv- og designavklaring, godkjent av Tom
 - [ ] Senere, hvis ønsket: A (rom og panel i hver sin skala) og B (ikoninventar), se GRENSESNITT.md
 - [x] Målt et dynamisk hjul (Toms forslag 13. oktober) med `tools/verbhjul_dynamisk.py`: høyst fire ikoner for 330 av 337 objekter uten skriptendring, se VERBHJUL.md
-- [ ] Tom: ja eller nei til dynamisk modus (lik kode og tilstand, regel for hånd for sju objekter) og portretter for figurbytte
-- [ ] Hvis ja: tabellen fra `verbhjul_dynamisk.py --tsv` inn i moden, motoren leser den, testen utvides med skuffen og et objekt med delt gruppe
-- [ ] Hvis ja: les de 26 Open/Close-parene og 16 Turn on/off-parene som ikke følger tilstandsregelen påviselig
+- [x] Tom sa ja til dynamisk modus og portretter, uten snakkeboble (13. oktober)
+- [x] Dynamisk modus bygget: reglene i `verbhjul_zak.h` fra `tools/verbhjul_dynamisk.py --cpp`, par bare når begge sider sjekker tilstanden, 19 regler for hånd, høyst fire ikoner for alle 337 objekter
+- [x] Portretter for figurbytte (som F1 til F4), Switch skjult mens de er på
+- [x] Testen utvidet: Close på åpen skuff, kommoden, katteklokken (Turn off), bytte til Annie, kontroll av alle reglene; bestått
+- [x] Gjennomgang av koden (egen agent): klikk sjekkes igjen når de sendes, kastes ved rombytte, grensesjekk av betingelser, tekstboksen klippes
+- [ ] Prøv reglene for hånd i spillet: Sushi, våtdrakten, oksygentanken, mikrobølgeovnen, boom-boksen, fallskjermen, lighteren, lommelykten, radioen
+- [ ] Prøv figurbytte der Switch kommer i spillet
+- [ ] Taster og klikk mens hjulet sender klikk (tre eller fire rammer) går tapt; ta vare på dem og send dem etterpå
+- [ ] De fire portrettene som tegning, etter stilpiloten
 
 ### Pipeline
 
