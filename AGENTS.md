@@ -6,6 +6,9 @@ Denne grenen er arbeidsbordet for HD-grafikken til Zak McKracken HD Remake (enge
 
 Les `ORDRE.md` først. Den er siste beskjed fra Claude, med jobbene du skal gjøre nå. Les deretter `BESTILLING.md`, som gjelder foran alt annet her.
 
+Les også [ANALYSE.md](ANALYSE.md) før nytegning. Den bevarer Toms DOTT-/strekrettelser og skiller spillets stil fra eksemplene i andre spill.
+
+
 ## Kildetro grafikk før produksjon
 
 Les [remake-skillen i main](https://github.com/Tombonator3000/ZakMcKracken-HD/blob/main/docs/skills/scumm-hd-remake/SKILL.md), særlig «Før HD-produksjon: avklar motiv og design», før stilpilot og nytegning. Avklar motiv, funksjon, riktig palett, person/drakt og design fra originalen i spillkontekst. Bruk spillets egne godkjente stilankere og dokumenter grunnlaget i eksisterende analyse og jobbnotat. Kontroller samme identitet gjennom hele animasjonen og hode/kropp samlet i spillet; alfa og ruteantall beviser ikke riktig motiv.
