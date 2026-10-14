@@ -1,0 +1,61 @@
+{
+  "dato": "2026-10-14",
+  "kilde": "vedlegg fra Tom 14. oktober 2026, sendt som referansebilder til Zak HD",
+  "status": "referanser, ikke godkjente stilankere",
+  "filer": [
+    {
+      "fil": "national-inquisitor-forside.jpg",
+      "vedlegg": "1000053238.jpg",
+      "rolle": "Forsiden av The National Inquisitor, med Caponian i cowboyforkledning",
+      "ny": true,
+      "bytes": 60746,
+      "maal": [466, 650],
+      "format": "JPEG",
+      "sha256": "a1a84ad1f66d5b9695059b026156b9f593eb7e2fb0f385e5235174ece09633c7"
+    },
+    {
+      "fil": "zak-pilot-v1.png",
+      "vedlegg": "1000053298.png",
+      "rolle": "Figurark Zak McKracken",
+      "ny": false,
+      "samme_som": "konsept/2026-10-13-figurpiloter/zak-pilot-v1.png",
+      "bytes": 1881748,
+      "maal": [1659, 948],
+      "format": "PNG",
+      "sha256": "c4f721a5a2dbfaa6b688f011b1ba610b96453745df8973125c6b8ed094e5e49a"
+    },
+    {
+      "fil": "annie-pilot-v1.png",
+      "vedlegg": "1000053299.png",
+      "rolle": "Figurark Annie Larris",
+      "ny": false,
+      "samme_som": "konsept/2026-10-13-figurpiloter/annie-pilot-v1.png",
+      "bytes": 1854944,
+      "maal": [1659, 948],
+      "format": "PNG",
+      "sha256": "08dbef2584e9ff3abea8b508334c249e285f35a6d26d205f48b569983b2af4a7"
+    },
+    {
+      "fil": "caponian-pilot-v3.png",
+      "vedlegg": "1000053300.png",
+      "rolle": "Figurark Caponian v3, uten og med cowboyforkledning",
+      "ny": false,
+      "samme_som": "konsept/2026-10-13-figurpiloter/caponian-pilot-v3.png",
+      "bytes": 1604732,
+      "maal": [1660, 948],
+      "format": "PNG",
+      "sha256": "0cfdebba74176f54c9e241e4ece4c9f8bd3d57127d63d6c5958aa5ebcb1725c3"
+    },
+    {
+      "fil": "zak-rom042-sammax-konsept-v1.png",
+      "vedlegg": "1000053236.png",
+      "rolle": "Rom 42 med Zak i Sam & Max-stil",
+      "ny": false,
+      "samme_som": "konsept/2026-10-13-sammax-stil/zak-rom042-sammax-konsept-v1.png",
+      "bytes": 2217161,
+      "maal": [1983, 793],
+      "format": "PNG",
+      "sha256": "1b5ec38ad798f7d04f56c7011ebb94f459042c47463f3d58f7996929918d437b"
+    }
+  ]
+}

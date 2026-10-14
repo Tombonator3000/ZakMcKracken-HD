@@ -41,3 +41,10 @@
 - Laget `konsept/2026-10-13-figurpiloter/caponian-pilot-v3.png`: to helfigurer og to byster med og uten cowboyforkledning. Høye biologiske øyne er skilt fra lavere Groucho-briller/nese/bart. Korallhud, svart dress, gult slips og gulbrun hatt følger de nye referansene.
 - Ett nytt forsøk med innebygd ChatGPT-bildegenerator, 1660 x 948 RGB PNG. Ingen tidligere Caponian-generering ble brukt som bildeanker. De tre nye vedleggene, faktisk prompt 03, råbilde, kilder og SHA-256 er bevart. Tidligere bilder og prompter er uendret.
 - Hovedagent og uavhengig kontrollør finner de korrigerte trekkene lesbare. Rundere skalletopp og glattere underkjeve enn pikseloriginalens kantete Moai-preg er dokumentert som stilforskjell. V3 er fortsatt en konseptkandidat uten brukergodkjenning, motorimport eller gangtest.
+
+## 2026-10-14 08:45 (Claude)
+
+- Tom sendte fem bilder som referansebilder til Zak HD og ba om at de legges i repoet. Lagt i `referanser/zak-hd-20261014/` med README og manifest (SHA-256, mål, vedleggsnavn).
+- Fire av bildene var byte for byte like konseptene fra 13. oktober: `zak-pilot-v1.png`, `annie-pilot-v1.png`, `caponian-pilot-v3.png` og `zak-rom042-sammax-konsept-v1.png`. Kopiert med samme navn; git lagrer like filer én gang, så kopiene tar ikke ekstra plass.
+- Nytt: forsiden av The National Inquisitor (`national-inquisitor-forside.jpg`, 466 x 650). Tegningen viser en Caponian i cowboyforkledning med to hull høyt i hattekronen og briller, nese og bart lavere, slik rettelse 03 beskriver.
+- Tom sa ikke at bildene er godkjente stilankere. Ingenting er lagt i `stil/`, og ORDRE.md, konseptmappene og statusen deres er uendret.
