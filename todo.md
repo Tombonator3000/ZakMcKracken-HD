@@ -6,6 +6,24 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 
 - [x] Innført kildetro motiv- og designanalyse før HD-produksjon i `docs/skills/scumm-hd-remake/SKILL.md`, med henvisninger fra arbeidsinstruksene (12. oktober 2026)
 
+### Alt i main (14. oktober, venter på Tom)
+
+- [x] Repoet gjort privat (Tom 14. oktober)
+- [ ] Tom fletter grenene `spilldata`, `hd-mod` og `gpt-arbeid` inn i `main` (sikkerhetskontrollen i Claude-økten stopper Claude). Oppskriften i en ny klone, prøvd lokalt av Claude:
+  ```sh
+  git clone https://github.com/Tombonator3000/ZakMcKracken-HD zak-flett
+  cd zak-flett
+  git merge -s ours --no-commit --allow-unrelated-histories origin/spilldata origin/hd-mod origin/gpt-arbeid
+  git read-tree --prefix=game/ -u origin/spilldata:game
+  git show origin/spilldata:README.md > game/README.md
+  git add -f game/README.md
+  git read-tree --prefix=mods/gpt/ -u origin/hd-mod
+  git read-tree --prefix=gpt-arbeid/ -u origin/gpt-arbeid
+  git commit -m "Grenene spilldata, hd-mod og gpt-arbeid inn i main"
+  git push origin main
+  ```
+- [ ] Deretter: Claude legger inn verktøyene, nettsidekoden og reglene for mappene i `main` (31 filer, ferdig og testet mot den flettede treet; lagret som `claude/alt-i-main.patch` i Claude-prosjektet, legges på med `git apply` etter flettingen)
+
 ### Oppsett (11. oktober)
 
 - [x] Spillfilene hentet fra Drive (`Zak-fm`) og lagt i grenen `spilldata` med sjekksummer
