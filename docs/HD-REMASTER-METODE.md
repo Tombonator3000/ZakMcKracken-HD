@@ -132,7 +132,7 @@ Bruk testene som finnes, før nye verktøy lages. Motortestene og romtesten krev
 - Rom: `tools/romtest.sh` og `tools/romtest.sh --objekter`.
 - Manuell sammenligning: Ctrl+H, gult felt og lagrede spill som gjenskaper ekte skripttilstand.
 
-Tillegg Claude bør lage og teste i PR (forslag fra The Dig, ikke laget):
+Tillegg Claude bør lage og teste (forslag fra The Dig, ikke laget):
 
 1. Forhåndsvisning av en animasjon i riktig rekkefølge, med original og myk HD side om side.
 2. Liste over visuell godkjenning, knyttet til ressurs-ID og sjekksum for resultatet, også for myke ruter.
@@ -186,7 +186,7 @@ Nye shadere, ekstra glød og parallakse kommer etter at grafikken er trofast og 
 
 ## 9. Samarbeid og leveranse
 
-- Claude lager kontrollverktøy og motorendringer gjennom PR og CI.
+- Claude lager kontrollverktøy og motorendringer rett i `main`, med testene før push og CI etter (Tom 14. oktober 2026).
 - ChatGPT/Codex lager og retter grafikk i `gpt-arbeid` etter `ORDRE.md`.
 - Tom godkjenner stilen og bevisste avvik.
 - Ikke skriv over en godkjent leveranse med en ny kandidat uten konkret sammenligning.

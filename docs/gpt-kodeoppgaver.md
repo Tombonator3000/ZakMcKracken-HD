@@ -11,4 +11,4 @@ Ingen kodeoppgaver nå. HD-motoren er ikke slått på for Zak, og det finnes ing
    Ta skjermbilder i `rapporter/laptop-test/` og skriv `rapporter/laptop-test.md`: hva du testet, hva som var feil, med rom og omtrentlig sted. Ikke rett i motoren selv. Beskriv feilen, så retter Claude den.
 2. **Mål fart og lyd.** Kjør ett rom i ett minutt med og uten modden. Noter bilder per sekund hvis ScummVM viser det, og om CD-musikken (`Track1.fla` til `Track21.fla`) spilles og om den hakker. Spillet har ingen tale. Uten FLAC i motoren blir det ingen musikk, så sjekk `scummvm --version` først. Skriv det i `rapporter/laptop-test.md`.
 
-Kodeendringer går som PR mot `main`, aldri rett i `main`. Skjermbilder og andre filer fra spillet skal bare ligge i denne grenen.
+Kodeendringer går rett i `main` (Tom 14. oktober 2026), etter testene i `AGENTS.md` i `main`. Skjermbilder og andre filer fra spillet skal bare ligge i denne grenen.

@@ -4,7 +4,7 @@ Utredning 14. oktober 2026 (Claude). Tom ba om å sjekke om koden og motoren kan
 
 ## Kort
 
-- **Patch 0002 var ødelagt i `main`.** Motoren bygget ikke. Rettet i samme PR som dette dokumentet, med en CI-sjekk som stopper samme feil neste gang (del 1).
+- **Patch 0002 var ødelagt i `main`.** Motoren bygget ikke. Rettet sammen med dette dokumentet, med en CI-sjekk som stopper samme feil neste gang (del 1).
 - **ScummVM er ikke flaskehalsen.** Zak i 320 x 240 med 256 farger koster nesten ingenting å kjøre. Det som koster, er HD-laget (DigHD), som regner ut hver HD-piksel på prosessoren.
 - **Den varmeste løkken i HD-laget kan bli 20 til 35 ganger raskere** med en tabell per palettindeks, uten at bildet endres med én byte (målt, del 2). Den er felles med The Dig og Sam & Max, så endringen bør gjøres der HD-laget kjører i dag.
 - **Shadere virker allerede.** ScummVM har libretro-shadere i OpenGL-tegningen, også for WebGL. To egne shadere er laget og prøvd i Zak: en CRT for originalgrafikken og en mild glød for HD-bildet (del 5).
@@ -16,7 +16,7 @@ Utredning 14. oktober 2026 (Claude). Tom ba om å sjekke om koden og motoren kan
 - Flettingen 13. oktober 2026 kl. 11.02 (commit `087fd93`, «Merge branch 'main' into verbhjul-dynamisk», gjort i GitHub) slo sammen to versjoner av `engine/patches/0002-verbhjul.patch` som tekst. Linjene fra begge kom med, men tallene i hunk-hodene ble stående: `verbhjul.cpp` sa 1226 nye linjer og hadde 1233, `verbhjul.h` sa 245 og hadde 247.
 - `git apply` stoler på tallene og hopper over resten uten feilmelding. Filene ble kuttet før slutten, og byggingen stoppet på `unterminated #ifndef` i `verbhjul.h`. `./spill.sh` og `engine/build.sh` feilet derfor fra `main`.
 - CI fanget det ikke: `test.yml` bygger ikke motoren, og `linux.yml` kjøres bare for hånd og om natten.
-- Rettet: patchene er laget på nytt med `tools/lag_patcher.sh` (bare hodene endret seg; innholdet og 0001 er som før). Ny sjekk `tools/sjekk_patcher.py` teller linjene i hver hunk og stopper ved avvik; den kjøres i `test.yml`. Ny arbeidsflyt `motor.yml` bygger motoren når en PR endrer patchene eller byggeskriptet.
+- Rettet: patchene er laget på nytt med `tools/lag_patcher.sh` (bare hodene endret seg; innholdet og 0001 er som før). Ny sjekk `tools/sjekk_patcher.py` teller linjene i hver hunk og stopper ved avvik; den kjøres i `test.yml`. Ny arbeidsflyt `motor.yml` bygger motoren når patchene eller byggeskriptet endres.
 - Testet: `git apply --recount` og bygging, deretter `tools/verbhjul_test.sh` med den flettede koden (bestått, 11 like setninger, venting, avbrudd og figurbytte). Etter at patchene ble laget på nytt: `engine/build.sh` fra ren kopi med vanlig `git apply` (bygget). `tools/sjekk_patcher.py` finner de to feilene i den gamle patchen og ingen i den nye eller i de tre tidligere versjonene.
 - Lærdom: patchfiler skal ikke flettes for hånd. Ved konflikt: lag patchene på nytt fra `engine/scummvm` med `tools/lag_patcher.sh`.
 
@@ -103,7 +103,7 @@ Prøv selv: `engine/run.sh ingen --shader=engine/shadere/klassisk-crt.glslp` (el
 
 ## 9. Forslag til rekkefølge
 
-1. Tom fletter PR-en med rettingen av patch 0002 (motoren bygger ikke fra `main` før det).
+1. Rettingen av patch 0002 inn i `main` (gjort 14. oktober).
 2. Myk rulling som krav i porten av DigHD (del 4).
 3. Optimaliseringen i del 3, punkt 1 til 3, gjort i Sam & Max HD med `DIGHD_BENCH` og `engine/test.sh`, og 0001 kopiert hit.
 4. Effektvalget i menyen (del 6), når HD-laget virker for Zak.

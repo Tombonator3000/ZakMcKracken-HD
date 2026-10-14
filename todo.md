@@ -34,7 +34,7 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 
 - [x] Patch 0002 rettet: flettingen 13. oktober (087fd93) ga feil tall i hunk-hodene, så motoren bygget ikke fra main. Laget på nytt med `tools/lag_patcher.sh`, verbhjul-testen bestått (14. oktober)
 - [x] `tools/sjekk_patcher.py` i `test.yml`, og `motor.yml` som bygger motoren når en PR endrer patchene (14. oktober)
-- [ ] Tom fletter PR 10 med rettingen (`motor-patch-og-ytelse`)
+- [x] Rettingen lagt rett i `main` (Tom 14. oktober: alt i main)
 - [x] Første kjøring av `motor.yml` i GitHub Actions: grønn på PR 10 (14. oktober)
 - [ ] Myk rulling i HD-laget, eller kroker i FM-Towns-tegningen (HD-MOTOR punkt 1, MOTOR-FORBEDRING del 4). Avgjøres i starten av porten
 
@@ -59,7 +59,7 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [x] `tools/verbhjul_test.sh`: originalpanelet og hjulet gir de samme 8 setningene i rom 1, med venting og avbrudd (bestått 13. oktober)
 - [x] `tools/lag_patcher.sh` lager 0001 og 0002 på nytt; 0001 er byte for byte lik den i Sam & Max
 - [x] Gjennomgang 13. oktober: objektet fra forrige klikk ble med i setningen (Walk to lamp, så Use på ticket kjørte «Use lamp with ticket»). Rettet i PR 4 (`verbhjul-tom-setning`), testen bestått
-- [ ] Tom fletter PR 4 når CI er grønn
+- [x] Tom fletter PR 4 når CI er grønn (8eaeb88, 13. oktober)
 - [ ] Prøv pilene i inventaret mens hjulet venter på objekt nummer to (rettet i PR 4, ikke testet)
 - [ ] Navnet på objektet under pekeren mens hjulet er lukket (What is er skjult)
 - [ ] Vurder valg på vinkel: slipp hvor som helst i sektoren til et verb, ikke bare på ikonet (lettere på mobil og med spillkontroll)

@@ -31,8 +31,10 @@ Instrukser for alle KI-agenter som jobber i dette repoet (Claude, Codex, ChatGPT
 - HD er alltid et valg for spilleren. Spilleren velger selv HD eller originalgrafikk, også mens spillet går: med Ctrl+H (finnes i patch 0001) og med en rad i spillets meny, så det virker på mobil uten tastatur. Valget lagres til neste start (`dighd_classic`). Originalgrafikken skal alltid virke, og HD legges oppå originalen uten at spillfilene endres.
 - Repoet er offentlig, som The Dig og Sam & Max. *Zak McKracken and the Alien Mindbenders* tilhører Disney/Lucasfilm. Tom har bestemt at HD-grafikk kan ligge i `main` (14. oktober 2026), og at grafikk og annet fra spillet kan deles utenfor repoet til hans eget, private bruk: som filer til egne maskiner og telefoner, eller på private steder bare han har tilgang til (13. oktober 2026). Offentlige sider og pakker (GitHub Pages, releaser) har fortsatt ingen spillgrafikk.
 - Kjør testene før du committer endringer i pipelinen eller motoren.
-- Kodeendringer går via PR mot `main` og flettes når CI er grønn. Logg, status, todo og minne kan committes rett i `main`.
-- Godkjent grafikk som flyttes fra `gpt-arbeid` til `grafikk/` i `main`, får README og sjekksummer (SHA-256) og går via PR.
+- Alt committes rett i `main`, også kode (Tom 14. oktober 2026). Ingen PR. Hent `main` før du begynner og før du pusher, og push små commits som hver for seg bygger.
+- Før push: testene for det du har endret (under Kommandoer). For motoren minst `python3 tools/sjekk_patcher.py` og `engine/build.sh`, og `tools/verbhjul_test.sh` når hjulet er endret. CI (`test.yml`, og `motor.yml` når patchene endres) kjører etter hver push til `main`; blir den rød, rettes det med en gang i en ny commit.
+- Godkjent grafikk som flyttes fra `gpt-arbeid` til `grafikk/` i `main`, får README og sjekksummer (SHA-256), og legges rett i `main`.
+- Disse reglene gjelder foran flytregelen i remake-skillen (`docs/skills/scumm-hd-remake/SKILL.md`, «kodeendringer går som PR»), som er felles med The Dig og Sam & Max.
 - Ikke lapp spillets skript uten Toms ja. Nye grensesnitt (docs/GRENSESNITT.md) sender de samme verb- og klikkallene som originalen.
 
 ## Roller
@@ -75,7 +77,7 @@ engine/run.sh ingen --shader=engine/shadere/klassisk-crt.glslp   # med en shader
 ## Arbeid med motoren
 
 - Patchene ligger i `engine/patches/` og legges på i rekkefølge: `0001-dighd-hd-grafikk.patch` (HD-motoren, den samme som i Sam & Max) og `0002-verbhjul.patch` (verbhjulet for Zak, `engines/scumm/verbhjul.*`, `verbhjul_zak.h` og krokene). Gjør endringer i `engine/scummvm`, og lag begge på nytt med `tools/lag_patcher.sh`. Ikke lag 0001 med `git diff` av hele kopien; da kommer hjulet med i den.
-- Patchfilene skal aldri flettes eller rettes for hånd, heller ikke i GitHub ved en konflikt: `git apply` kutter filene uten feilmelding når tallene i hunk-hodene ikke stemmer (skjedde 13. oktober 2026). Lag dem på nytt med `tools/lag_patcher.sh`, og sjekk med `python3 tools/sjekk_patcher.py`. Arbeidsflyten `motor.yml` bygger motoren når en PR endrer patchene.
+- Patchfilene skal aldri flettes eller rettes for hånd, heller ikke i GitHub ved en konflikt: `git apply` kutter filene uten feilmelding når tallene i hunk-hodene ikke stemmer (skjedde 13. oktober 2026). Lag dem på nytt med `tools/lag_patcher.sh`, og sjekk med `python3 tools/sjekk_patcher.py`. Arbeidsflyten `motor.yml` bygger motoren når patchene eller byggeskriptet endres.
 - Etter endringer i verbhjulet: `tools/verbhjul_test.sh` (originalpanelet og hjulet skal gi de samme setningene, omtrent fire minutter).
 - Reglene for det dynamiske hjulet (`engines/scumm/verbhjul_zak.h`) lages av `python3 tools/verbhjul_dynamisk.py --cpp engine/scummvm/engines/scumm/verbhjul_zak.h` fra work/skript; regler for hånd står i `HAAND` i verktøyet, med kilden i skriptene. Lag så patchene på nytt og kjør testen.
 - ScummVM-versjonen er låst i `engine/SCUMMVM_COMMIT`. Bytt den bare sammen med en test av patchen.

@@ -63,7 +63,7 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 
 ## Arbeidsform
 - Roller: Claude koden, ChatGPT/Codex grafikken, Tom godkjenner.
-- Claude får ikke flette sine egne PR-er (som i de andre repoene). Tom fletter når CI er grønn.
+- Alt går rett i `main`, også kode, uten PR (Tom 14. oktober 2026: «Omgjør agent regler, legg alt til main»). Testene kjøres før push, og CI kjører etter. Før det gikk kode via PR som Tom flettet, fordi Claude ikke får flette egne PR-er.
 - Stilpilot med ett rom og ett figurark før noe bestilles i mengde. Glatt figurstil med ekte alfa fra starten. Stilankerne ble godkjent 14. oktober (se under); de er ikke sett i motoren ennå.
 
 ## Kildetro grafikk og design (12. oktober 2026)

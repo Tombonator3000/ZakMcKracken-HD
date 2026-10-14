@@ -14,7 +14,7 @@ Regelen gjelder også når jobbformatet ber om ordrett prompt. Ved påvist feil 
 
 ## Faste regler
 
-- Jobb bare i denne grenen (`gpt-arbeid`). Aldri push til `main`, og lag ikke egne grener eller PR-er for grafikken.
+- Grafikken lages bare i denne grenen (`gpt-arbeid`). Push aldri grafikk til `main`, og lag ikke egne grener eller PR-er for den; godkjent grafikk flyttes til `main` av Claude.
 - Endre aldri `referanse.png`, `original_1x.png`, `prompt.txt` eller `jobb.json`.
 - Lever `jobber/<jobb>/resultat.png` og `jobber/<jobb>/notat.md`. Resultatet kan være hele lerretet (1536 x 1024 med grå kant) eller bare bildet i samme sideforhold som utsnittet (16:10 for et rom på 320 x 200; sideforholdet står i `jobb.json`).
 - Bruk `prompt.txt` ordrett når premisset stemmer. Ved påvist feil premiss gjelder rettelsen beskrevet over. Legg ved stilankeret fra `stil/` som bilde to når det finnes, eller det bildet ordren sier.
@@ -24,7 +24,7 @@ Regelen gjelder også når jobbformatet ber om ordrett prompt. Ved påvist feil 
 - Lagjobber (`lagNNN_KK`, for eksempel `lagNNN_01_del2av3`): rommet med små objekter (dører, brytere, lys, ting) tegnet på plass. Mal alt trofast. Objektene klippes ut etter posisjonen, så hvert objekt må ligge nøyaktig der det er, med samme størrelse, omriss og farger, og ingen må mangle. Legg ved det godkjente HD-bildet som står i ordren (`bilde_to` i `jobb.json`) som bilde to i stedet for stilankeret. Står det i ordren at jobben skal lages etter en annen, vent til den er godkjent.
 - Ikonark (`ikonNN`): ikoner i et rutenett på flat bakgrunn. Mal hvert ikon trofast i ruten sin, og hold bakgrunnen flat. Stilankeret som bilde to.
 - Figurark (`figCCC_KK`, kostyme CCC, ark KK): animasjonsruter av samme figur, i den rekkefølgen spillet viser dem. Mal alle rutene som den samme figuren (samme ansikt, klær, farger og lys) i glatt stil med myke kanter, med samme pose og plass som originalen, på gjennomsiktig bakgrunn med ekte alfa. Deler av en figur (for eksempel hode og kropp hver for seg) males som de er. Ark 01 med stilankeret som bilde to, de andre arkene med det godkjente ark 01 (`bilde_to` i `jobb.json`). Skriv hvert levert ark inn under `leveranser` i `rapporter/*/fremdrift.json` med sha256, og lever et rutekart. Claude tar dem inn med `zakhd myke-figurer` (se `docs/BESTILLING-CHATGPT.md` i `main`).
-- Kodeoppgaver i `ORDRE.md` er for den som har laptopen med spillet. Rapporter skrives i `rapporter/` i denne grenen. Kodeendringer går som PR mot `main`.
+- Kodeoppgaver i `ORDRE.md` er for den som har laptopen med spillet. Rapporter skrives i `rapporter/` i denne grenen. Kodeendringer går rett i `main` (Tom 14. oktober 2026), etter testene i `AGENTS.md` i `main`.
 - Skriv på norsk i notater, uten emoji og uten tankestreker.
 - Repoet er offentlig, men spillet tilhører Disney/Lucasfilm. Grafikken herfra skal ikke på offentlige sider eller i offentlige pakker. Godkjent HD-grafikk flyttes til `grafikk/` i `main` av Claude.
 
