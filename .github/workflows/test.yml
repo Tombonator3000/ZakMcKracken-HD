@@ -26,11 +26,15 @@ jobs:
       - name: Tester uten spillfiler
         working-directory: pipeline
         run: pytest -m "not game" -q
-      - name: Ingen spillfiler i grenen
+      # Spillfilene, moden og arbeidsbordet ligger i main (Tom 14. oktober 2026). work/ lages
+      # på maskinen og sjekkes ikke inn, og ingen fil over 90 MB (GitHub stopper ved 100 MB).
+      - name: Ingen work/ og ingen fil over 90 MB
         run: |
-          if git ls-files | grep -iE '\.(lfl|fla|flac)$|^game/|^work/|^mods/'; then
-            echo "Spillfiler eller avledede filer er sjekket inn"; exit 1
+          if git ls-files | grep -E '^work/'; then
+            echo "work/ er sjekket inn"; exit 1
           fi
+          stor=$(git ls-files -z | xargs -0 -r stat -c '%s %n' | awk '$1 > 94371840')
+          if [ -n "$stor" ]; then echo "Filer over 90 MB:"; echo "$stor"; exit 1; fi
       - name: Skallskriptene
         run: for f in spill.sh engine/*.sh tools/*.sh; do bash -n "$f"; done
       # git apply godtar en patch med for lave tall i hunk-hodene og kutter filene uten feil
