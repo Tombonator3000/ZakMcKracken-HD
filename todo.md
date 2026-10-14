@@ -35,7 +35,7 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [x] Patch 0002 rettet: flettingen 13. oktober (087fd93) ga feil tall i hunk-hodene, så motoren bygget ikke fra main. Laget på nytt med `tools/lag_patcher.sh`, verbhjul-testen bestått (14. oktober)
 - [x] `tools/sjekk_patcher.py` i `test.yml`, og `motor.yml` som bygger motoren når en PR endrer patchene (14. oktober)
 - [ ] Tom fletter PR 10 med rettingen (`motor-patch-og-ytelse`)
-- [ ] Første kjøring av `motor.yml` i GitHub Actions (ikke kjørt)
+- [x] Første kjøring av `motor.yml` i GitHub Actions: grønn på PR 10 (14. oktober)
 - [ ] Myk rulling i HD-laget, eller kroker i FM-Towns-tegningen (HD-MOTOR punkt 1, MOTOR-FORBEDRING del 4). Avgjøres i starten av porten
 
 - [ ] Prøv FM-Towns-laget slått av (`DISABLE_TOWNS_DUAL_LAYER_MODE`): starter Zak i 8 bit, og er fargene riktige?
