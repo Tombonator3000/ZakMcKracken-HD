@@ -140,3 +140,8 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - AGENTS: alt committes rett i `main`, også kode. Hent `main` før arbeid og push, små commits som bygger, testene før push (for motoren minst `tools/sjekk_patcher.py` og `engine/build.sh`, og `tools/verbhjul_test.sh` når hjulet er endret), CI etter hver push og rød CI rettes med en gang. Godkjent grafikk legges rett i `main`. Reglene gjelder foran flytregelen i remake-skillen, som er felles med The Dig og Sam & Max og ikke er endret.
 - Samme regel rettet i memory, STATUS, todo, MOTOR-FORBEDRING, HD-REMASTER-METODE, gpt-kodeoppgaver og gpt-arbeid-AGENTS (Codex: kode rett i `main`, grafikk fortsatt bare i `gpt-arbeid`), og i AGENTS.md i grenen `gpt-arbeid`. Todo: PR 4 var flettet (8eaeb88).
 - Grenen `motor-patch-og-ytelse` spolt fram inn i `main` (ingen flettecommit), og PR 10 lukket.
+
+## 2026-10-14 12:07 til 12:15 (Claude)
+- Tom: «Alt inn i main», som svar på om grenene `spilldata`, `hd-mod` og `gpt-arbeid` også skulle inn i `main`.
+- Plan: én flettecommit med alle tre som foreldre, `spilldata` til `game/`, `hd-mod` til `mods/gpt/` og `gpt-arbeid` til `gpt-arbeid/`, og så verktøyene (spill.sh, hent_spilldata.sh, mod_gren.sh, gpt_gren.sh, gpt_runde.sh, linux.yml, test.yml, .gitignore, nettsidekoden) og reglene skrevet om til mappene i `main`.
+- Sikkerhetskontrollen i Claude-økten stoppet flettingen før den startet (begrunnelse: endring av delte ressurser). Trolig fordi spillfilene til Disney/Lucasfilm da havner i standardgrenen til et offentlig repo. Ingenting er endret i noen gren. Venter på Toms valg.
