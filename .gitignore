@@ -1,5 +1,6 @@
-# Spillfiler og alt som lages fra dem skal aldri inn i main (opphavsrett og størrelse).
+# Spillfilene og det som lages automatisk fra dem sjekkes ikke inn (størrelse; de lages på nytt).
 # Spillfilene ligger i grenen "spilldata" og hentes med tools/hent_spilldata.sh.
+# Godkjent HD-grafikk kan ligge i main under grafikk/ (Tom 14. oktober 2026).
 game/
 /game
 work/

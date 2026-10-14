@@ -116,3 +116,11 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Tom sendte fem referansebilder til Zak HD og ba om at de legges i repoet. Sjekket AGENTS, memory, todo og log. Bildene er laget fra spillets figurer og hører ikke hjemme i `main`, så de ligger i `gpt-arbeid` under `referanser/zak-hd-20261014/` (ce4780b), med README og manifest.
 - Fire av dem var byte for byte like konseptene Codex la i `gpt-arbeid` 13. oktober (Zak, Annie, Caponian v3, rom 42). Avisforsiden av The National Inquisitor er ny; Caponian-tegningen der har øyehull høyt i hattekronen, som i rettelse 03.
 - Ikke lagt i `stil/` og ORDRE.md ikke endret, siden Tom ikke har sagt at de er godkjente stilankere. Spørsmålet står i todo.
+
+## 2026-10-14 08:48 til 08:51 (Claude)
+- Tom: «omskriv agents, det er greit å legge HD-grafikk til main. Spillet skal ha HD-valg, så spilleren selv velger HD eller vanlig mens man spiller.» Like etter: «de bildene er godkjente stilankere.»
+- AGENTS skrevet om: HD-grafikk kan ligge i `main` under `grafikk/`; spillfilene ligger fortsatt bare i `spilldata`, og det som lages automatisk fra dem (work/, mods/, uttrekket, dekompilerte skript) sjekkes ikke inn. Ny regel: HD er alltid et valg for spilleren, også mens spillet går, med Ctrl+H (`DigHD::handleKey` i 0001) og en rad i menyen for mobil; valget lagres som `dighd_classic`. Grentabellen oppdatert.
+- De fem bildene lagt i `grafikk/stil/` som godkjente stilankere, med README (stilen, figurenes utseende, kilder) og manifest med SHA-256 (sjekket mot filene). Samme filer i `stil/` i `gpt-arbeid`.
+- Samme regel rettet i README, STATUS, memory, todo, .gitignore, HD-MOTOR (punkt 8), BESTILLING-CHATGPT (status, avsnitt 1, rekkefølgen, opphav) og gpt-arbeid-AGENTS (stilen følger ankrene, også Annies blå genser; innholdet er originalens).
+- Funnet: romprompten i `pipeline/zakhd/gpt.py` (linje 90) ber om originalens pikselstil og farger, som ikke stemmer med ankrene. Lagt i todo; ingen kode endret.
+- Ikke testet: ingenting i motoren er endret. HD-valget for Zak finnes ikke ennå, fordi HD-motoren ikke er portet.

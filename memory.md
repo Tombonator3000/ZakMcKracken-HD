@@ -4,7 +4,7 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 
 ## Mål
 - HD-versjon av *Zak McKracken and the Alien Mindbenders* (FM-Towns-utgaven, SCUMM v3 med 256 farger): HD-bakgrunner, HD-objekter, HD-figurer og HD-tekst, lagt oppå originalen slik som i The Dig HD og Sam & Max HD.
-- Tom vil ha det samme som for The Dig: spillet starter rett inn som originalen, HD eller originalgrafikk velges i spillets egen meny, det virker på mobil, og det finnes en komplett fil til nedlasting (Linux først).
+- Tom vil ha det samme som for The Dig: spillet starter rett inn som originalen, HD eller originalgrafikk velges i spillets egen meny (også mens man spiller, Tom 14. oktober), det virker på mobil, og det finnes en komplett fil til nedlasting (Linux først).
 - Tom ba 11. oktober om en utredning av et mer moderne grensesnitt (verbhjul som i Curse of Monkey Island og Full Throttle, eller ikoninventar som i Monkey Island 2) og større bilde. Utredningen er `docs/GRENSESNITT.md`.
 - Tom valgte 12. oktober C: verbhjul som i Day of the Tentacle Remastered, og godkjente oppførselen samme kveld («Lag det»): urskive med tolv faste plasser (12 Pick up/Buy, 1 Open, 2 Close, 3 Use, 4 Give/Sell, 5 Turn on, 6 Turn off, 7 Put on, 8 Take off, 9 Read, 10 Push/Teleport to, 11 Pull), verb for objektet som standard og «alle verb» som valg, høyreklikk og hold-og-dra, teksten under hjulet, ikonene i samme stilpilot som rom 1. Tre ikoner (øye, hånd, tannhjul) ble frarådet: 97 av 489 objekter med verbkode får da et tvetydig valg.
 - Verbhjulet er bygget som `engine/patches/0002-verbhjul.patch` (13. oktober), oppå 0001, som holdes lik den i Sam & Max. `tools/lag_patcher.sh` lager begge; `tools/verbhjul_test.sh` tester hjulet mot originalpanelet uten skjerm.
@@ -17,7 +17,7 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 - Utgave: engelsk FM-Towns. `00.LFL` MD5 `2d4536a56e01da4b02eb021e7770afa2`, i ScummVMs `scumm-md5.h` ved c9091321: zak, FM-TOWNS, 7520 byte, EN_ANY. `detection_tables.h`: versjon 3, GF_OLD256 | GF_AUDIOTRACKS.
 - Filer: `00.LFL` (indeks), `01.LFL` til `59.LFL` (rom med skript, lyder og kostymer; `47.LFL` har ingen RO-blokk), `98.LFL` og `99.LFL` (tegnsett 1 og 0), `Track1.fla` til `Track21.fla` (CD-musikk, FLAC). 83 filer, 330 040 888 byte.
 - Kopi i grenen `spilldata` (uten felles historikk med `main`) med `game/SHA256SUMS`. Ingen fil er over 90 MB, så ingenting er delt. Pushet i seks commits (rom og tegnsett, så sporene i fem grupper) 11. oktober.
-- Spillfiler og alt laget fra dem (work/, mods/) skal aldri inn i main.
+- Spillfilene ligger bare i `spilldata`. Det som lages automatisk fra dem (work/, mods/) sjekkes ikke inn. Godkjent HD-grafikk kan ligge i `main` under `grafikk/` (Tom 14. oktober 2026).
 
 ## Skriptene (12. oktober)
 - Klikk går til globalt skript 11 (`VAR_VERB_SCRIPT`, satt i skript 7). Setningslinjen (verb 100) må ikke klikkes når en preposisjon venter uten objekt nummer to; da tømmer skript 11 setningen. Setningen: verb Var[116], objekt Var[117] og Var[118], preposisjon Var[119] (129 in, 130 with, 131 on, 132 to), standardverb Var[120] (3, Walk to). Objektet under musen finnes av skript 22 (Var[114]). Setningen kjøres ved andre klikk på samme objekt eller klikk på setningslinjen (verb 100). Skript 18 tømmer setningen. Var[300] er spillets tilstand (3 vanlig spill).
@@ -57,12 +57,14 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 ## Arbeidsform
 - Roller: Claude koden, ChatGPT/Codex grafikken, Tom godkjenner.
 - Claude får ikke flette sine egne PR-er (som i de andre repoene). Tom fletter når CI er grønn.
-- Stilpilot med ett rom og ett figurark før noe bestilles i mengde. Glatt figurstil med ekte alfa fra starten. Forslag til pilot: rom 1 (Zaks leilighet) og kostyme 1 (Zak).
+- Stilpilot med ett rom og ett figurark før noe bestilles i mengde. Glatt figurstil med ekte alfa fra starten. Stilankerne ble godkjent 14. oktober (se under); de er ikke sett i motoren ennå.
 
 ## Kildetro grafikk og design (12. oktober 2026)
 - Tom ba om samme regel i remake-skillen i Dig, Sam & Max og Zak: avklar motiv, funksjon, palett, figuridentitet og design fra riktig originalkontekst før grafisk HD-arbeid, også stilpilot.
 - Skillen ligger i `docs/skills/scumm-hd-remake/SKILL.md`. Den er koblet fra AGENTS, remastermetoden, bestillingen og malen for grafikkgrenen. Spillets egne stilvalg gjelder; Dig sine figurer og materialer er ikke designfasit for de andre spillene.
 - Rett påviste feil i produksjonsgrunnlaget før generering. Beskyttede jobbfiler beholdes; korrigert prompt og kildebegrunnelse leveres i et separat notat.
 - Visuell kontroll av mening, identitet og hele animasjoner i spillet kommer i tillegg til teknisk mottak. Innført regel er ikke bevis for at alle ressursene er analysert eller spilltestet.
-- Referansebilder fra Tom (14. oktober 2026) ligger i `referanser/zak-hd-20261014/` i grenen `gpt-arbeid`: forsiden av The National Inquisitor (Caponian i cowboyforkledning med øyehull i hattekronen), figurarkene for Zak, Annie og Caponian v3 og rom 42 i Sam & Max-stil. Ikke sagt at de er godkjente stilankere.
-- Deling (13. oktober 2026): Tom tillater at grafikk og annet fra spillet deles utenfor repoet til hans eget private bruk (egne enheter, private steder). Offentlige sider og pakker har fortsatt ingen spillgrafikk. Spillfilene og det som lages fra dem holdes fortsatt utenfor `main`.
+- Stilankere (Tom 14. oktober 2026): figurarkene for Zak, Annie og Caponian v3, rom 42 i Sam & Max-stil og forsiden av The National Inquisitor er godkjente stilankere. De ligger i `grafikk/stil/` i `main` og i `stil/` i `gpt-arbeid`, med beskrivelse i `grafikk/stil/README.md`. Stilen er lett Purcell-inspirert tegneserie. Annie har blå genser og svart skulderlangt hår (FM-Towns: rosa/magenta og kortere hår); arket gjelder. Caponianen: korallhud, svart dress, gult slips, øyehull høyt i cowboyhatten. Innholdet (motiv, plassering, positur) er fortsatt originalens.
+- HD-grafikk i `main` (Tom 14. oktober 2026): godkjent HD-grafikk legges under `grafikk/`. Spillfilene ligger fortsatt bare i `spilldata`.
+- HD av og på (Tom 14. oktober 2026): spilleren velger selv HD eller originalgrafikk mens spillet går, med Ctrl+H og en rad i menyen (for mobil). Valget lagres (`dighd_classic`).
+- Deling (13. oktober 2026): Tom tillater at grafikk og annet fra spillet deles utenfor repoet til hans eget private bruk (egne enheter, private steder). Offentlige sider og pakker har fortsatt ingen spillgrafikk.

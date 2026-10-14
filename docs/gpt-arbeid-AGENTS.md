@@ -2,7 +2,7 @@
 
 Denne grenen er arbeidsbordet for HD-grafikken til Zak McKracken HD Remake (engelsk FM-Towns-utgave). Du er grafikeren. Claude skriver koden, Tom godkjenner.
 
-**Ikke aktiv ennå.** Ikke lag grafikk før stilpiloten (ett rom og ett figurark sett i motoren) er godkjent av Tom, og Claude har skrevet en `ORDRE.md` med jobber. Finnes det ingen `ORDRE.md` eller ingen jobber under `jobber/`, er det ingenting å gjøre.
+**Ikke aktiv ennå.** Stilankerne i `stil/` er godkjent av Tom (14. oktober 2026). Ikke lag grafikk før Claude har skrevet en `ORDRE.md` med jobber. Finnes det ingen `ORDRE.md` eller ingen jobber under `jobber/`, er det ingenting å gjøre.
 
 Les `ORDRE.md` først. Den er siste beskjed fra Claude, med jobbene du skal gjøre nå. Les deretter `BESTILLING.md`, som gjelder foran alt annet her.
 
@@ -18,7 +18,7 @@ Regelen gjelder også når jobbformatet ber om ordrett prompt. Ved påvist feil 
 - Endre aldri `referanse.png`, `original_1x.png`, `prompt.txt` eller `jobb.json`.
 - Lever `jobber/<jobb>/resultat.png` og `jobber/<jobb>/notat.md`. Resultatet kan være hele lerretet (1536 x 1024 med grå kant) eller bare bildet i samme sideforhold som utsnittet (16:10 for et rom på 320 x 200; sideforholdet står i `jobb.json`).
 - Bruk `prompt.txt` ordrett når premisset stemmer. Ved påvist feil premiss gjelder rettelsen beskrevet over. Legg ved stilankeret fra `stil/` som bilde to når det finnes, eller det bildet ordren sier.
-- Stilen er trofast HD: samme motiv, former og farger som originalen, med mer detalj. Uttrykket i FM-Towns-utgaven av Zak beholdes. Det finnes ingen offisiell remaster; originalen er fasiten.
+- Innholdet er originalens: samme motiv, ting, former og plassering. Tegnestilen og figurenes utseende følger de godkjente stilankerne i `stil/` (Tom 14. oktober 2026, se `stil/README.md`), også der de avviker fra FM-Towns-fargene, som Annies blå genser. Ellers er originalen fasiten; det finnes ingen offisiell remaster.
 - Jobbene heter `romNNN` (rombakgrunner), `objNNN_SS` (objektjobber: store bilder som spillet tegner over rommet, som nærbilder og kart), `lagNNN_KK` (lagjobber), `ikonNN` (ikonark) eller `figCCC_KK` (figurark). Alle lages og leveres på samme måte. I en objektjobb viser `referanse.png` objektet lagt over rommet. Mal hele bildet som en bakgrunn. Leverer du bare bildet, skal det ha objektets sideforhold (`bilde_i_lerret` i `jobb.json`).
 - Objekter med flere tilstander (`objNNN_01`, `_02` og så videre; i Zak har hvert objekt ett bilde, så dette gjelder trolig ikke): lag tilstand 01 først. For de andre legger du ved `jobber/<objekt>_01/resultat.png` som bilde to i stedet for stilankeret. Claude gjør det som er likt, helt likt etterpå.
 - Lagjobber (`lagNNN_KK`, for eksempel `lagNNN_01_del2av3`): rommet med små objekter (dører, brytere, lys, ting) tegnet på plass. Mal alt trofast. Objektene klippes ut etter posisjonen, så hvert objekt må ligge nøyaktig der det er, med samme størrelse, omriss og farger, og ingen må mangle. Legg ved det godkjente HD-bildet som står i ordren (`bilde_to` i `jobb.json`) som bilde to i stedet for stilankeret. Står det i ordren at jobben skal lages etter en annen, vent til den er godkjent.
@@ -26,7 +26,7 @@ Regelen gjelder også når jobbformatet ber om ordrett prompt. Ved påvist feil 
 - Figurark (`figCCC_KK`, kostyme CCC, ark KK): animasjonsruter av samme figur, i den rekkefølgen spillet viser dem. Mal alle rutene som den samme figuren (samme ansikt, klær, farger og lys) i glatt stil med myke kanter, med samme pose og plass som originalen, på gjennomsiktig bakgrunn med ekte alfa. Deler av en figur (for eksempel hode og kropp hver for seg) males som de er. Ark 01 med stilankeret som bilde to, de andre arkene med det godkjente ark 01 (`bilde_to` i `jobb.json`). Skriv hvert levert ark inn under `leveranser` i `rapporter/*/fremdrift.json` med sha256, og lever et rutekart. Claude tar dem inn med `zakhd myke-figurer` (se `docs/BESTILLING-CHATGPT.md` i `main`).
 - Kodeoppgaver i `ORDRE.md` er for den som har laptopen med spillet. Rapporter skrives i `rapporter/` i denne grenen. Kodeendringer går som PR mot `main`.
 - Skriv på norsk i notater, uten emoji og uten tankestreker.
-- Repoet er offentlig, men spillet tilhører Disney/Lucasfilm. Ingenting herfra skal deles utenfor repoet.
+- Repoet er offentlig, men spillet tilhører Disney/Lucasfilm. Grafikken herfra skal ikke på offentlige sider eller i offentlige pakker. Godkjent HD-grafikk flyttes til `grafikk/` i `main` av Claude.
 
 ## Slik jobber du
 
