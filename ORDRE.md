@@ -1,3 +1,3 @@
 # Ordre
 
-Ingen jobber ennå. Bestillingen er ikke aktiv før stilpiloten (ett rom og ett figurark) er godkjent av Tom. Claude skriver ny ORDRE.md når det finnes jobber.
+Ingen jobber ennå. Stilankerne i `stil/` er godkjent av Tom (14. oktober 2026). Claude skriver ny ORDRE.md når det finnes jobber.

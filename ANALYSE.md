@@ -91,3 +91,5 @@ Tom avviste første Caponian-pilot, vurderte v2 som mye bedre, og presiserte der
 - Ingen knær. Fremtidig gange skal bruke raske, korte, stive trinn, ikke vanlig menneskelig knebøy.
 
 Dette er brukerens korrigerte designgrunnlag. V1 er avvist og v2 er erstattet etter den nye rettelsen; ingen av dem brukes som bildeanker for v3. Tidligere positiv stillbildekontroll overså disse feilene. Se [gjeldende rettelsesnotat](konsept/2026-10-13-figurpiloter/CAPONIAN-RETTELSE-03.md) og [ny pilot v3](konsept/2026-10-13-figurpiloter/caponian-pilot-v3.png). Ny pilot er en kandidat, ikke et godkjent produksjonsark. Gangavspilling er ikke laget eller testet.
+
+Tom godkjente Caponian v3, Zak- og Annie-arket og rom 42-konseptet som stilankere 14. oktober 2026. De ligger i [stil/](stil/README.md).

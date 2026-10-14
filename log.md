@@ -48,3 +48,10 @@
 - Fire av bildene var byte for byte like konseptene fra 13. oktober: `zak-pilot-v1.png`, `annie-pilot-v1.png`, `caponian-pilot-v3.png` og `zak-rom042-sammax-konsept-v1.png`. Kopiert med samme navn; git lagrer like filer én gang, så kopiene tar ikke ekstra plass.
 - Nytt: forsiden av The National Inquisitor (`national-inquisitor-forside.jpg`, 466 x 650). Tegningen viser en Caponian i cowboyforkledning med to hull høyt i hattekronen og briller, nese og bart lavere, slik rettelse 03 beskriver.
 - Tom sa ikke at bildene er godkjente stilankere. Ingenting er lagt i `stil/`, og ORDRE.md, konseptmappene og statusen deres er uendret.
+
+## 2026-10-14 08:55 til 08:52 (Claude)
+
+- Tom: bildene fra i morges er godkjente stilankere, og HD-grafikk kan ligge i `main`. Flyttet de fem bildene fra `referanser/zak-hd-20261014/` til `stil/`, med README (stilen, figurenes utseende, kilder) og manifest med SHA-256. De samme filene ligger i `grafikk/stil/` i `main` (PR 9).
+- AGENTS og BESTILLING kopiert fra `docs/` i PR 9: stilen følger ankrene i `stil/`, også Annies blå genser; innholdet er originalens. Pekeren til ANALYSE.md er beholdt, og en peker til `stil/README.md` er lagt til.
+- `GODKJENT.md` i begge konseptmappene, en linje i ANALYSE.md og ny status i ORDRE.md. README, rettelsesnotater og manifest i konseptmappene er ikke endret, så sjekksummene der stemmer.
+- Merk: `zakhd gpt-pakke` lister bare PNG-filer i `stil/` som ankere, så avisforsiden (JPEG) kommer ikke med av seg selv. Ingen jobber er laget.

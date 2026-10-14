@@ -4,7 +4,7 @@ Til: ChatGPT (bildegenerering, helst som Codex i dette repoet)
 Fra: Tom, med Claude som står for koden
 Dato: 11. oktober 2026 (tilpasset fra bestillingen for Sam & Max)
 
-**Ikke aktiv.** Bestillingen gjelder ikke før stilpiloten (ett rom og ett figurark sett i motoren) er godkjent av Tom. Ikke lag grafikk etter den før det. Status nå:
+**Ikke aktiv.** Stilankerne er godkjent av Tom (14. oktober 2026, `stil/` i grenen og [grafikk/stil](../grafikk/stil/README.md) i `main`), men det finnes ingen jobber. Ikke lag grafikk etter bestillingen før `ORDRE.md` har jobber. Status nå:
 
 - Det finnes ingen jobber. Uttrekket av Zak sine v3-formater (rom, objektbilder og kostymeruter) må virke før noen jobber kan lages. Pipelinen er opprinnelig kopiert fra Sam & Max (SCUMM v6). HD-motoren er ikke slått på for Zak (se [HD-MOTOR.md](HD-MOTOR.md)), så piloten kan heller ikke sees i motoren ennå.
 - Jobbformatet, kontrollene og mottaket er kopiert fra The Dig HD Remake og er ikke prøvd med Zak.
@@ -18,7 +18,7 @@ Regelen gjelder også når jobbformatet ber om ordrett prompt. Ved påvist feil 
 
 ## 1. Hva vi bestiller
 
-Vi lager en HD-versjon av *Zak McKracken and the Alien Mindbenders*, den engelske FM-Towns-utgaven (256 farger, ScummVM-ID `zak`). Spillet kjører i ScummVM med en patch som skal legge HD-bilder nøyaktig oppå originalgrafikken, piksel for piksel. Patchen er ikke slått på for Zak ennå. Vi trenger at du maler grafikken på nytt i 4x oppløsning (1280 x 800 for et rom på 320 x 200; romstørrelsene i Zak er ikke målt ennå), **trofast mot originalen**: samme motiv, samme former på samme sted, samme farger og samme uttrykk. Bare skarpere og med mer detalj. Det finnes ingen offisiell remaster av Zak, så originalen er fasiten.
+Vi lager en HD-versjon av *Zak McKracken and the Alien Mindbenders*, den engelske FM-Towns-utgaven (256 farger, ScummVM-ID `zak`). Spillet kjører i ScummVM med en patch som skal legge HD-bilder nøyaktig oppå originalgrafikken, piksel for piksel. Patchen er ikke slått på for Zak ennå. Vi trenger at du maler grafikken på nytt i 4x oppløsning (1280 x 800 for et rom på 320 x 200; romstørrelsene i Zak er ikke målt ennå), **trofast mot originalens innhold**: samme motiv, samme former på samme sted og det samme som skjer. Tegnestilen og figurenes utseende følger de godkjente stilankerne (lett Purcell-inspirert tegneserie), også der de avviker fra FM-Towns-fargene, som Annies blå genser. Det finnes ingen offisiell remaster av Zak, så ellers er originalen fasiten.
 
 Det som skal males: rombakgrunner, store objektbilder, små objekter (dører, ting) i lagjobber og figurark. Ikonark er trolig ikke aktuelle, siden inventaret i Zak er tekst nederst på skjermen. Hvor mange av hver, er ikke talt ennå. Hver jobb er ett bilde på 1536 x 1024 piksler.
 
@@ -119,8 +119,8 @@ Kostymene skal stå i `docs/figurer.csv` i grenen `main`, med navn, antall ruter
 
 ## 5. Rekkefølge
 
-1. **Stilpilot:** ett rom og ett figurark, sett i motoren. Tom godkjenner. Rommet og figuren er ikke valgt. Piloten kan ikke sees i motoren før HD-motoren er slått på for Zak.
-2. **Stilankere:** de godkjente pilotbildene legges i `stil/` i grenen `gpt-arbeid`. Legg ved det ankeret som passer best, som bilde nummer to i hver jobb (prompten forklarer hvordan). Det holder stilen lik fra rom til rom.
+1. **Stilpilot:** godkjent av Tom 14. oktober 2026 som stilankere: figurarkene for Zak, Annie og Caponian, rom 42 og avisforsiden. De er ikke sett i motoren ennå, fordi HD-motoren ikke er slått på for Zak.
+2. **Stilankere:** de godkjente bildene ligger i `stil/` i grenen `gpt-arbeid` (og i `grafikk/stil/` i `main`). Legg ved det ankeret som passer best, som bilde nummer to i hver jobb (prompten forklarer hvordan). Det holder stilen lik fra rom til rom.
 3. **Løpende ordre:** Claude skriver `ORDRE.md` i grenen etter hver kontroll, med de neste jobbene. Ta dem i den rekkefølgen. Avviste rom- og objektjobber står først. Nye jobber står etter romnummer, med romjobbene før objektjobbene i samme rom. Lagjobbene kommer etter rom- og objektjobbene, og først de der bilde to er godkjent. Så ikonarkene, og til slutt figurarkene utenfor piloten når de er bestilt.
 4. **Retur:** jobber med `retur.md` står først i ordren og gjøres på nytt med teksten der.
 
@@ -250,7 +250,7 @@ Skriv et kort notat: verktøy, dato, antall forsøk, hva som var usikkert.
 
 ## 11. Opphav
 
-*Zak McKracken and the Alien Mindbenders* eies av Disney/Lucasfilm. Repoet er offentlig etter Toms valg, men jobbene, referansene og resultatene ligger bare i grenen `gpt-arbeid` og i `work/`. De skal ikke deles utenfor repoet eller legges i `main`.
+*Zak McKracken and the Alien Mindbenders* eies av Disney/Lucasfilm. Repoet er offentlig etter Toms valg. Jobbene og leveransene ligger i grenen `gpt-arbeid` og i `work/`. Godkjente stilankere og godkjent HD-grafikk kan ligge i `main` under `grafikk/` (Tom 14. oktober 2026). Spillfilene ligger bare i `spilldata`. Grafikken skal ikke på offentlige sider eller i offentlige pakker.
 
 ## 12. Videre arbeidsmetode
 
