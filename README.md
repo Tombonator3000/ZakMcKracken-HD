@@ -4,6 +4,12 @@ HD-utgave av *Zak McKracken and the Alien Mindbenders* (FM-Towns), bygget som Th
 
 Status 11. oktober 2026: repoet er satt opp, spillfilene ligger i grenen `spilldata`, all originalgrafikk er trukket ut, alle skript er dekompilert, og listen over grafikken som skal byttes ut finnes ([docs/grafikkliste.csv](docs/grafikkliste.csv)). HD-motoren er ikke portet til Zak ennå, så spillet vises med originalgrafikken. Se [STATUS.md](STATUS.md).
 
+## Spill i nettleseren
+
+**https://tombonator3000.github.io/ZakMcKracken-HD/**
+
+Siden går rett inn i spillet. Første gang ber den om en lesenøkkel til dette repoet (Contents, Read-only), og spillet hentes herfra og lagres i nettleseren. Nettsiden selv har bare motoren. Se [docs/PAGES.md](docs/PAGES.md).
+
 ## Kom i gang
 
 ```sh

@@ -13,7 +13,7 @@ HD-motoren (DigHD) er ikke slått på for Zak, og det finnes ingen HD-grafikk. S
 | `./spill.sh`, `engine/run.sh` | Ikke testet med Zak |
 | `engine/test.sh`, `tools/romtest.sh` | Kan ikke brukes før DigHD er portet til Zak |
 | `./spill.sh --auto` | Ikke kjørt med Zak. Trenger uttrekket av Zak, som ikke er prøvd |
-| Nettsiden | Repoet `Tombonator3000/ZakMcKracken-HD-Web` finnes ikke. Se [PAGES.md](PAGES.md) |
+| Nettsiden | https://tombonator3000.github.io/ZakMcKracken-HD/ , spilt i Chromium uten skjermkort 14. oktober. Se [PAGES.md](PAGES.md) |
 | Linux-pakken | `tools/pakke_linux.sh` og `.github/workflows/linux.yml` er tilpasset Zak. AppDir laget (83 spillfiler, ingen HD-mod) og startet uten skjerm 11. oktober med SDL dummy: `Using gameid zak, variant FM-TOWNS`, `SCUMM version 3`, `Using MD5 '2d4536a56e01da4b02eb021e7770afa2'`, og spillet kjørte til de 60 sekundene var ute. AppImage og arbeidsflyten er ikke kjørt |
 | ScummVM med patchen og Zak | `engine/scummvm/scummvm` har FLAC og starter Zak (FM-TOWNS, SCUMM v3) uten skjerm. Ikke testet med skjerm, mus og lyd. Patchen har ingen virkning på Zak |
 
@@ -172,7 +172,9 @@ Lagring: lagrede spill og innstillingene ligger i nettleseren (IndexedDB for loc
 
 ## Fra GitHub Pages
 
-Planen er en nettside som går rett inn i spillet, på PC og mobil, og henter spillet og HD-grafikken fra grenene `spilldata` og `hd-mod` med en lesenøkkel. Nettsiderepoet `Tombonator3000/ZakMcKracken-HD-Web` finnes ikke ennå. Se [PAGES.md](PAGES.md).
+https://tombonator3000.github.io/ZakMcKracken-HD/ går rett inn i spillet. Første gang ber den om en lesenøkkel: lag den på https://github.com/settings/personal-access-tokens/new med Repository access, Only select repositories, ZakMcKracken-HD, og Permissions, Contents, Read-only. Spillet hentes fra repoet (`game/` i `main`, ellers grenen `spilldata`) og lagres i nettleseren, så neste start går fortere. `?ny-nokkel` bak adressen ber om en ny nøkkel, `?uten-lyd` starter uten musikk.
+
+Spilt i Chromium uten skjermkort 14. oktober (intro, soverommet, gå og verbhjulet). Ikke prøvd på en ekte telefon, i fullskjerm, med lagring eller i Firefox og Safari. Se [PAGES.md](PAGES.md).
 
 ## Linux: én fil med alt
 

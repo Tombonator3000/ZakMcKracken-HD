@@ -142,7 +142,11 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 
 - [x] `./spill.sh` fra repoet (starter originalspillet)
 - [ ] Linux-pakken: kjør arbeidsflyten for hånd og test AppImage-filen
-- [ ] Nettsiden: lag repoet `ZakMcKracken-HD-Web` (Tom), bygg i Actions (libFLAC for Emscripten er lagt inn i `engine/build-web.sh`, ikke prøvd) og test
+- [x] Nettsiden på GitHub Pages fra dette repoet: `pages.yml` bygger med Emscripten og libFLAC og publiserer, spilt i Chromium uten skjermkort (14. oktober). https://tombonator3000.github.io/ZakMcKracken-HD/
+- [x] Nettsiden leser spillet fra `game/` i `main` og ellers fra `spilldata`, og moden fra `mods/gpt/` eller `hd-mod` bare når det finnes `mod.json` (hd-mod uten mod stoppet siden før)
+- [ ] Tom spiller nettsiden på PC og telefon: lesenøkkel, lyd, fullskjerm, F5-menyen, lagring og lasting etter omlasting
+- [ ] Tom bestemmer om repoet skal være offentlig (Pages virker da) eller privat (da trengs et eget offentlig nettsiderepo eller GitHub Pro). Det ble offentlig igjen 14. oktober 15.27, og `spilldata` er da åpen for alle
+- [ ] Esc forbi introen i nettleseren (et Esc etter 40 sekunder gjorde ingenting synlig i testen); sjekk om det er likt i `./spill.sh`
 
 ## Senere
 

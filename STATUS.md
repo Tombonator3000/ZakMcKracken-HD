@@ -26,7 +26,7 @@ Repoet har samme oppsett som Sam & Max HD og The Dig HD Remake, tilpasset Zak Mc
 | Shadere | `engine/shadere/klassisk-crt.glslp` og `hd-glod.glslp`, og de 451 i ScummVMs `shaders.dat`, med `--shader=` (OpenGL) | 14. oktober under Xvfb med Mesa llvmpipe: rom 1 med begge egne og fire fra ScummVM, alle lastet og ga riktig bilde. Ikke prøvd på ekte skjermkort, i nettleseren eller på mobil. Se docs/MOTOR-FORBEDRING.md |
 | Indeksverktøy | `tools/indeks_info.py game/00.LFL` | Kjørt mot spillfilene |
 | `./spill.sh` | Henter spillfiler og `hd-mod`, bygger motoren og starter spillet | Ikke kjørt i sin helhet her; delene (henting, bygging, `engine/run.sh`) er kjørt hver for seg |
-| Nettsidekoden | `engine/pages` tilpasset Zak (filfilter for LFL og FLA, ingen deler, lerretet venter ikke på DigHD) | `node --test`: 18 bestått. Ikke bygget for nettleser |
+| Nettsiden | https://tombonator3000.github.io/ZakMcKracken-HD/ : ScummVM for nettleseren, bygget og publisert av `.github/workflows/pages.yml` fra dette repoet (14. oktober). Spillet hentes fra `game/` i `main` eller grenen `spilldata` med lesenøkkelen. Se `docs/PAGES.md` | `node --test`: 20 bestått. Actions bygget og publiserte 14. oktober. Spilt i Chromium med SwiftShader mot den publiserte siden: intro med CD-musikk, Zak i soverommet, klikk for å gå og verbhjulet virker. Ikke prøvd: fullskjerm, F5-menyen, lagring, en ekte telefon, Firefox og Safari |
 | Linux-pakken | `tools/pakke_linux.sh` lager pakken uten HD-mod (ZakHD-x86_64.AppImage) | AppDir laget her og startet uten skjerm: spillet kjente igjen utgaven og kjørte i 60 sekunder. AppImage og arbeidsflyten er ikke kjørt |
 | Grener | `spilldata`, `hd-mod` (tom) og `gpt-arbeid` (uten jobber) | Pushet 11. oktober |
 
@@ -37,4 +37,4 @@ Repoet har samme oppsett som Sam & Max HD og The Dig HD Remake, tilpasset Zak Mc
 - `tools/romtest.sh` og `engine/test.sh` trenger DigHD; test.sh sjekker til da bare at spillet starter.
 - Kostymefargene i RGBA-bildene er fra rommet kostymet ligger i; spillet kan vise andre farger.
 - Promptene i `gpt.py` og `figur.py` er grovt tilpasset Zak, ikke prøvd. Bestillingen er ikke aktiv før stilpiloten.
-- Nettsiden: eget repo finnes ikke, ikke bygget eller prøvd.
+- Nettsiden: ikke prøvd på en ekte telefon, i fullskjerm, med F5-menyen og lagring, eller i Firefox og Safari. Den virker bare så lenge repoet er offentlig (Pages).

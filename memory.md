@@ -55,6 +55,13 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 - ScummVM låst til c9091321, som The Dig og Sam & Max.
 - FM-Towns-laget gir myk rulling (én piksel per 1/60 sekund, `smooth_scroll`). Slås laget av, må myk rulling lages i HD-laget (MOTOR-FORBEDRING del 4, 14. oktober).
 
+## Nettsiden (14. oktober)
+- Tom: «gjør så spillet kan kjøres fra github pages». Repoet var da offentlig igjen (endret 15.27) og hadde Pages slått på. Nettsiden publiseres fra dette repoet: https://tombonator3000.github.io/ZakMcKracken-HD/ , av `.github/workflows/pages.yml` ved push til `main` som endrer `engine/`. Ikke noe eget nettsiderepo.
+- Pages fra et privat repo krever GitHub Pro. Blir repoet privat, må `engine/` og arbeidsflyten flyttes til et eget offentlig repo (Tom må lage det; økten får ikke lage repoer).
+- Siden har bare motoren (GPL), temaer, nettsidekode og kildearkivet. Spillet hentes av nettleseren fra `game/` i `main` eller grenen `spilldata`, moden fra `mods/gpt/` eller `hd-mod`, med Toms lesenøkkel (`SOURCES` i `local-files.mjs`). Moden brukes bare med `mod.json`.
+- Nettleserpatchene i `engine/patches-web` (HTTP-filsystemet og lerretet i fullskjerm) er fra Dig-HD-Web a8e4474, og legges på bare av `engine/build-web.sh`. Motorfilene hentes med sjekksum fra `build.json`.
+- Spilt i Chromium med SwiftShader og en dummy-nøkkel gjennom proxyen (`tools/nettsidetest.py`): introen med CD-musikk, soverommet, gå og verbhjulet virker. Introen tar 120 til 175 sekunder i SwiftShader; testen venter til setningslinjen har tekst før den klikker.
+
 ## Ytelse og effekter (14. oktober)
 - Tom ba om å sjekke om motoren kan optimaliseres og få nyere effekter og shadere. Utredningen er `docs/MOTOR-FORBEDRING.md`.
 - ScummVM er ikke flaskehalsen; HD-laget er. Romdelen av `compose()` bruker 12 til 21 ms for hele skjermen (1280 x 960), 0,6 ms med tabell per palettindeks, byte for byte likt (`tools/ytelse/compose_bench.cpp`). Endringen hører hjemme i 0001, som er felles med Sam & Max, så den bør gjøres der.

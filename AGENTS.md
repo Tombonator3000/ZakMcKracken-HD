@@ -66,6 +66,7 @@ engine/build.sh                  # ScummVM med patchen til engine/scummvm (kreve
 cd pipeline && pytest            # etter endringer i pipelinen (game-testene hoppes over uten game/)
 pytest -m "not game"             # det CI kjører
 node --test engine/pages/tests/*.test.mjs   # nettsidekoden
+python3 engine/tests/test-build-pages.py   # patchkontrollen i Pages-pakkeren
 engine/run.sh ingen              # spillet uten mod
 python3 tools/indeks_info.py game/00.LFL
 tools/verbhjul_test.sh           # verbhjulet mot originalpanelet uten skjerm
@@ -81,6 +82,7 @@ engine/run.sh ingen --shader=engine/shadere/klassisk-crt.glslp   # med en shader
 - Etter endringer i verbhjulet: `tools/verbhjul_test.sh` (originalpanelet og hjulet skal gi de samme setningene, omtrent fire minutter).
 - Reglene for det dynamiske hjulet (`engines/scumm/verbhjul_zak.h`) lages av `python3 tools/verbhjul_dynamisk.py --cpp engine/scummvm/engines/scumm/verbhjul_zak.h` fra work/skript; regler for hånd står i `HAAND` i verktøyet, med kilden i skriptene. Lag så patchene på nytt og kjør testen.
 - ScummVM-versjonen er låst i `engine/SCUMMVM_COMMIT`. Bytt den bare sammen med en test av patchen.
+- Nettsiden (https://tombonator3000.github.io/ZakMcKracken-HD/) bygges og publiseres av `.github/workflows/pages.yml` ved hver push til `main` som endrer `engine/`. `engine/build-web.sh` legger på `engine/patches` og så `engine/patches-web` (bare for nettleseren, se README der); `tools/lag_patcher.sh` rører ikke `patches-web`. Se `docs/PAGES.md`.
 - Hva som må portes for Zak: `docs/HD-MOTOR.md`.
 
 ## Grener
