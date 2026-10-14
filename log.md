@@ -111,3 +111,8 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 ## 2026-10-13 12:39 (Claude)
 - Tom: tillat at det deles utenfor repoet, til hans eget private bruk. Regelen i AGENTS er endret: grafikk og annet fra spillet kan deles utenfor repoet til Toms private bruk (for eksempel testsider på GitHub Pages og filer til egne enheter). Spillfilene og alt laget fra dem holdes fortsatt utenfor `main` og kodegrenene.
 - 12:45 Presisert etter Codex (Dig PR 48): privat deling gjelder egne enheter og private steder. Offentlige sider og pakker (GitHub Pages, releaser) har fortsatt ingen spillgrafikk, så README, Linux-pakken, SPILLTEST og PAGES stemmer som de er.
+
+## 2026-10-14 08:47 (Claude)
+- Tom sendte fem referansebilder til Zak HD og ba om at de legges i repoet. Sjekket AGENTS, memory, todo og log. Bildene er laget fra spillets figurer og hører ikke hjemme i `main`, så de ligger i `gpt-arbeid` under `referanser/zak-hd-20261014/` (ce4780b), med README og manifest.
+- Fire av dem var byte for byte like konseptene Codex la i `gpt-arbeid` 13. oktober (Zak, Annie, Caponian v3, rom 42). Avisforsiden av The National Inquisitor er ny; Caponian-tegningen der har øyehull høyt i hattekronen, som i rettelse 03.
+- Ikke lagt i `stil/` og ORDRE.md ikke endret, siden Tom ikke har sagt at de er godkjente stilankere. Spørsmålet står i todo.

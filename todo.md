@@ -86,6 +86,8 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 
 - [ ] Stilpilot med Tom: rom 1 og kostyme 1 sett i motoren, stilankere, godkjenning
 - [ ] Master-figurark for Zak, Annie, Melissa og Leslie
+- [x] Toms referansebilder 14. oktober lagt i `referanser/zak-hd-20261014/` i `gpt-arbeid` (avisforsiden ny, figurarkene for Zak, Annie og Caponian v3 og rom 42-konseptet like konseptene fra 13. oktober)
+- [ ] Tom avklarer om referansebildene 14. oktober er godkjente stilankere eller hovedark; i så fall legges de i `stil/` i `gpt-arbeid`
 - [ ] Aktiver bestillingen (`docs/BESTILLING-CHATGPT.md`) og grafikkrunder med `tools/gpt_runde.sh`
 - [ ] Ta inn grafikkjobbene fra Sam & Max HD (PR 4 der, 13. oktober), tilpasset v3:
   - [ ] Fast størrelse i figurarkene: mål per rute i figurprompten, `tools/sjekk_leveranse.py` i `verktoy/` i `gpt-arbeid`, `myk.py` versjon 4 (her er den versjon 2)
