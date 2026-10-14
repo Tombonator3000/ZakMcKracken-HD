@@ -3,17 +3,19 @@
 
 Kjør engine/build-web.sh først. Denne pakken laster spillfilene fra spillrepoet
 eller brukerens maskin gjennom nettleseren, og skal aldri inneholde game/, mods/
-eller work/. Pakken er tenkt for repoet Tombonator3000/ZakMcKracken-HD-Web, som ikke
-finnes ennå.
+eller work/. Arbeidsflyten .github/workflows/pages.yml bygger og publiserer den på
+GitHub Pages.
 """
 
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
 import tarfile
+import tempfile
 
 HERE = Path(__file__).resolve().parent
 THEMES = {
@@ -22,6 +24,47 @@ THEMES = {
     'scummmodern.zip', 'scummremastered.zip', 'shaders.dat', 'translations.dat',
 }
 UI = ('index.html', 'style.css', 'player.mjs', 'local-files.mjs', 'touch.mjs', 'credits.html')
+
+
+def patch_stack() -> list[Path]:
+    """The patches in the order engine/build-web.sh applies them: the engine (0001 DigHD,
+    0002 verbhjulet) and then the browser fixes in patches-web."""
+    return sorted((HERE / 'patches').glob('*.patch')) + sorted((HERE / 'patches-web').glob('*.patch'))
+
+
+def verify_patches(src: Path, patches: list[Path]) -> set[str]:
+    """Verify the complete patch stack without changing source files or its index.
+
+    Gives the paths the patches touch, so new files (dighd.cpp, verbhjul.cpp, ...) go into
+    the source archive. From Dig-HD-Web (a8e4474, engine/build-pages.py), where checking
+    only 0001 in reverse did not work once more patches were stacked on it."""
+    paths = set()
+    for patch in patches:
+        records = subprocess.check_output(
+            ['git', '-C', str(src), 'apply', '--numstat', '-z', str(patch)]).split(b'\0')
+        position = 0
+        while position < len(records) and records[position]:
+            name = records[position].split(b'\t', 2)[2]
+            position += 1
+            if name:
+                paths.add(os.fsdecode(name))
+            else:  # Renames/copies contain two separate NUL-terminated names.
+                paths.update(os.fsdecode(name) for name in records[position:position + 2])
+                position += 2
+
+    with tempfile.TemporaryDirectory(prefix='dighd-patch-check-') as temporary:
+        env = dict(os.environ, GIT_INDEX_FILE=str(Path(temporary) / 'index'),
+                   GIT_LITERAL_PATHSPECS='1')
+        git = ['git', '-C', str(src)]
+        subprocess.run(git + ['read-tree', 'HEAD'], env=env, check=True)
+        if paths:
+            subprocess.run(git + ['add', '--all', '--', *sorted(paths)], env=env, check=True)
+        # Later patches may edit files created by earlier ones. Peel the stack
+        # from an isolated index, then require the exact upstream tree again.
+        for patch in reversed(patches):
+            subprocess.run(git + ['apply', '--cached', '--reverse', str(patch)], env=env, check=True)
+        subprocess.run(git + ['diff', '--cached', '--exit-code', 'HEAD', '--'], env=env, check=True)
+    return paths
 
 
 def pack(src: Path, out: Path) -> dict:
@@ -34,8 +77,8 @@ def pack(src: Path, out: Path) -> dict:
     actual = subprocess.check_output(['git', '-C', str(src), 'rev-parse', 'HEAD'], text=True).strip()
     if actual != commit:
         raise RuntimeError('ScummVM-kilden er ikke den låste commiten.')
-    subprocess.run(['git', '-C', str(src), 'apply', '--reverse', '--check',
-                    str(HERE / 'patches/0001-dighd-hd-grafikk.patch')], check=True)
+    patches = patch_stack()
+    patched = verify_patches(src, patches)
     if out.exists():
         raise RuntimeError(f'{out} finnes allerede. Velg en ny utmappe eller fjern bare den gamle Pages-pakken.')
     out.mkdir(parents=True)
@@ -71,9 +114,9 @@ def pack(src: Path, out: Path) -> dict:
     shutil.copy2(flac_license, out / 'licenses' / 'COPYING.FLAC')
     (out / '.nojekyll').touch()
 
-    # GPL corresponding source: actual patched tracked sources + new HD files,
-    # together with the exact patch, build scripts and this browser frontend.
-    # The patch and dighd.cpp/.h keep their names from The Dig HD.
+    # GPL corresponding source: actual patched tracked sources + the files the patches add
+    # (dighd.*, verbhjul.*), together with the exact patches, build scripts and this
+    # browser frontend. The patch and dighd.cpp/.h keep their names from The Dig HD.
     # libFLAC er lenket inn i motoren, så kildearkivet (hentet av build-web.sh) følger med.
     tracked = subprocess.check_output(['git', '-C', str(src), 'ls-files', '-z']).decode().split('\0')
     flac_sources = sorted((src / 'dists/emscripten/libs').glob('flac-*.tar.xz'))
@@ -82,11 +125,15 @@ def pack(src: Path, out: Path) -> dict:
     with tarfile.open(out / 'source.tar.gz', 'w:gz') as archive:
         for flac in flac_sources:
             archive.add(flac, arcname='zakmckracken-hd-source/libs/' + flac.name)
-        for name in sorted(set(tracked + ['engines/scumm/dighd.cpp', 'engines/scumm/dighd.h'])):
+        for name in sorted(set(tracked) | patched):
             if name and (src / name).is_file():
                 archive.add(src / name, arcname='zakmckracken-hd-source/scummvm/' + name, recursive=False)
-        for name in ('SCUMMVM_COMMIT', 'build-web.sh', 'build-pages.py', 'patches/0001-dighd-hd-grafikk.patch'):
+        for name in ('SCUMMVM_COMMIT', 'build-web.sh', 'build-pages.py'):
             archive.add(HERE / name, arcname='zakmckracken-hd-source/engine/' + name)
+        for patch in patches:
+            archive.add(patch, arcname='zakmckracken-hd-source/engine/' + patch.parent.name + '/' + patch.name)
+        archive.add(HERE / 'tests', arcname='zakmckracken-hd-source/engine/tests',
+                    filter=lambda info: None if '__pycache__' in info.name else info)
         for name in UI:
             archive.add(HERE / 'pages' / name, arcname='zakmckracken-hd-source/engine/pages/' + name)
         archive.add(HERE.parent / 'docs/PAGES.md', arcname='zakmckracken-hd-source/BUILD.md')

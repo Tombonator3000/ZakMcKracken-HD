@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Bygger ScummVM med HD-patchen fra The Dig HD (DigHD) for nettleseren (WebAssembly med Emscripten).
 # Patchen er ikke slått på for Zak McKracken ennå, så Zak kjører med originalgrafikken.
-# Nettleserversjonen er ikke bygget for Zak ennå.
+# GitHub Actions bygger og publiserer den med .github/workflows/pages.yml (proxyen i
+# Claude-økten stopper nedlastingen av SDL3-porten, så den bygges ikke der).
 #
 # Resultatet kjøres lokalt med engine/run-web.sh på http://localhost:8000.
 # engine/build-pages.py lager en egen offentlig motorpakke som leser private filer
@@ -42,9 +43,11 @@ git -C "$SRC" checkout -q -f FETCH_HEAD
 git -C "$SRC" clean -fdq engines/scumm
 
 echo "Legger på patcher ..."
-for p in "$HERE"/patches/*.patch; do
+# Først motoren (0001 DigHD, 0002 verbhjulet), så rettelsene for nettleseren i patches-web
+# (HTTP-filsystemet og lerretet, fra Dig-HD-Web). De siste gjelder bare Emscripten-bygget.
+for p in "$HERE"/patches/*.patch "$HERE"/patches-web/*.patch; do
 	git -C "$SRC" apply --whitespace=nowarn "$p"
-	echo "  $(basename "$p")"
+	echo "  $(basename "$(dirname "$p")")/$(basename "$p")"
 done
 
 # 2. Emscripten: versjonen ScummVM sin egen byggeoppskrift bruker på denne commiten

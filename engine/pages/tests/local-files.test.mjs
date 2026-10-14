@@ -112,19 +112,42 @@ function memoryLibrary() {
   };
 }
 
-function github(requests, status = 200, {withMod = true} = {}) {
+// The repository as it is now: code in main, the game in spilldata and the mod in hd-mod.
+// hd-mod has only README and SHA256SUMS until the first mod is made.
+const codeTree = [
+  {path: 'README.md', type: 'blob', sha: 'rd', size: 4},
+  {path: 'engine/pages', type: 'tree', sha: 'ep'},
+  {path: 'engine/pages/index.html', type: 'blob', sha: 'ix', size: 4}
+];
+const emptyModTree = [
+  {path: 'README.md', type: 'blob', sha: 'mr', size: 5},
+  {path: 'SHA256SUMS', type: 'blob', sha: 'ms', size: 0}
+];
+// After the merge everything is in main: the game in game/, the mod in mods/gpt/, and the
+// workbench in gpt-arbeid/ (its PNG files must not be taken for the mod)
+const mainTree = [
+  ...codeTree, ...tree,
+  {path: 'gpt-arbeid/jobber/rom022/resultat.png', type: 'blob', sha: 'g', size: 9},
+  {path: 'grafikk/stil/zak-pilot-v1.png', type: 'blob', sha: 's', size: 9},
+  ...modTree.map(item => ({...item, path: 'mods/gpt/' + item.path}))
+];
+
+// branches: name -> tree; a branch not in the map gives 404
+function github(requests, status = 200, branches = {main: codeTree, spilldata: tree, 'hd-mod': modTree}) {
   return async (url, options) => {
     requests.push({url: String(url), auth: options?.headers?.Authorization, accept: options?.headers?.Accept});
     if (status !== 200) return new Response('{}', {status});
     const u = new URL(url);
-    if (u.pathname.endsWith('/git/trees/spilldata')) return Response.json({tree, truncated: false});
-    if (u.pathname.endsWith('/git/trees/hd-mod') && withMod) return Response.json({tree: modTree, truncated: false});
+    const branch = /\/git\/trees\/([^/]+)$/.exec(u.pathname)?.[1];
+    if (branch) return branches[branch] ? Response.json({tree: branches[branch], truncated: false}) : new Response('{}', {status: 404});
     if (u.pathname.includes('/git/blobs/')) return new Response('blob ' + u.pathname.split('/').at(-1));
     return new Response('', {status: 404});
   };
 }
 
-test('files come from the private branches with the key, once per blob id', async () => {
+const trees = requests => requests.filter(r => r.url.includes('/git/trees/')).map(r => new URL(r.url).pathname.split('/').at(-1));
+
+test('before the merge: the game from spilldata and the mod from hd-mod, with the key, once per blob id', async () => {
   const requests = [];
   const library = memoryLibrary();
   const source = new RemoteSource(library, 'KEY', github(requests));
@@ -137,7 +160,9 @@ test('files come from the private branches with the key, once per blob id', asyn
   assert.equal(requests.filter(r => r.url.includes('/git/blobs/l1')).length, 1);
   assert.equal(requests.find(r => r.url.includes('/git/blobs/')).accept, 'application/vnd.github.raw+json');
   assert.equal(await source.read(GAME_ROOT + 'TRACK2.FLA'), undefined);
-  assert.equal(requests.length, 3);
+  // main is read once for both the game and the mod
+  assert.deepEqual(trees(requests), ['main', 'spilldata', 'hd-mod']);
+  assert.equal(requests.length, 4);
   assert.deepEqual([...blobIds(rows)].sort(), ['c3', 'c98', 'c99', 'i0', 'l1', 'm', 'r22', 't1']);
 
   // Offline: the last list is used, and kept files still work
@@ -146,15 +171,42 @@ test('files come from the private branches with the key, once per blob id', asyn
   assert.equal(await (await offline.read(GAME_ROOT + '01.LFL')).text(), 'blob l1');
 });
 
-test('without the hd-mod branch the game starts from spilldata alone', async () => {
-  const requests = [];
-  const source = new RemoteSource(memoryLibrary(), 'KEY', github(requests, 200, {withMod: false}), {sleep: async () => {}});
-  const rows = await source.list();
-  assert.deepEqual(rows.map(row => row.path), ['00.LFL', '01.LFL', '98.LFL', '99.LFL', 'TRACK1.FLA'].map(name => GAME_ROOT + name));
-  // 404 for hd-mod is not tried again
-  assert.equal(requests.filter(r => r.url.includes('/git/trees/hd-mod')).length, 1);
+test('hd-mod without mod.json (as now) or without the branch: the game starts alone', async () => {
+  for (const mod of [emptyModTree, undefined]) {
+    const requests = [];
+    const branches = {main: codeTree, spilldata: tree};
+    if (mod) branches['hd-mod'] = mod;
+    const source = new RemoteSource(memoryLibrary(), 'KEY', github(requests, 200, branches), {sleep: async () => {}});
+    const rows = await source.list();
+    assert.deepEqual(rows.map(row => row.path), ['00.LFL', '01.LFL', '98.LFL', '99.LFL', 'TRACK1.FLA'].map(name => GAME_ROOT + name));
+    // 404 for a branch is not tried again
+    assert.deepEqual(trees(requests), ['main', 'spilldata', 'hd-mod']);
+  }
+});
 
-  // A key without access gets 404 already for spilldata, and that still stops
+test('after the merge: everything from main, one listing, and the old branches are not read', async () => {
+  for (const old of [{}, {spilldata: tree, 'hd-mod': emptyModTree}]) {
+    const requests = [];
+    const source = new RemoteSource(memoryLibrary(), 'KEY', github(requests, 200, {main: mainTree, ...old}));
+    const rows = await source.list();
+    assert.deepEqual(rows.map(row => row.path), [
+      ...['00.LFL', '01.LFL', '98.LFL', '99.LFL', 'TRACK1.FLA'].map(name => GAME_ROOT + name),
+      ...['mod.json', 'rooms/room022.png', 'costumes/costume014_003.png'].map(name => MOD_ROOT + name)]);
+    assert.deepEqual(trees(requests), ['main']);
+  }
+  // main with the game but no mod yet (mods/gpt/ has only README and checksums)
+  const requests = [];
+  const withoutMod = [...codeTree, ...tree, ...emptyModTree.map(item => ({...item, path: 'mods/gpt/' + item.path}))];
+  const rows = await new RemoteSource(memoryLibrary(), 'KEY', github(requests, 200, {main: withoutMod})).list();
+  assert.equal(rows.length, 5);
+  assert.ok(rows.every(row => row.path.startsWith(GAME_ROOT)));
+  assert.deepEqual(trees(requests), ['main', 'hd-mod']);
+});
+
+test('no game anywhere, or a key without access, stops with a message', async () => {
+  const empty = new RemoteSource(memoryLibrary(), 'KEY', github([], 200, {main: codeTree}), {sleep: async () => {}});
+  await assert.rejects(empty.list(), /Fant ikke spillfilene/);
+  // A key without access gets 404 already for main, and that stops
   const denied = new RemoteSource(memoryLibrary(), 'BAD', github([], 404), {sleep: async () => {}});
   await assert.rejects(denied.list(), error => error instanceof ApiError && error.status === 404);
 });
@@ -166,7 +218,7 @@ test('a key GitHub does not accept gives an error the page can show', async () =
   }
 });
 
-test('with the private branches, game paths never go to the site', async () => {
+test('with files from the repository, game paths never go to the site', async () => {
   const requests = [];
   const source = new RemoteSource(memoryLibrary(), 'KEY', github(requests));
   const rows = await source.list();
@@ -180,7 +232,7 @@ test('with the private branches, game paths never go to the site', async () => {
 });
 
 test('no file is put together from parts: names with a part number are left out', () => {
-  // Zak-filene er alle under 90 MB, så spilldata har ingen deler
+  // Zak-filene er alle under 90 MB, så game/ har ingen deler
   const parts = [
     {path: 'game/00.LFL', type: 'blob', sha: 'i0', size: 5},
     {path: 'game/98.LFL', type: 'blob', sha: 'c98', size: 5},

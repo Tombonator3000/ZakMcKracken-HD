@@ -5,14 +5,17 @@
 export const GAME_ROOT = '/data/games/zak/';
 export const MOD_ROOT = '/data/mods/gpt/';
 
-// The game repository and the branches the files come from.
-// Grenen hd-mod finnes ikke ennå for Zak (GitHub svarer 404). list() går da videre
-// uten HD-pakke.
+// The game repository and where in it the files are. Tom vil ha alt i main (14. oktober
+// 2026): spillfilene i game/ og HD-moden i mods/gpt/. Til grenene er flettet inn, ligger
+// spillet i grenen spilldata og moden i grenen hd-mod. Siden ser i main først og bruker
+// grenene når main ikke har filene, så den virker både før og etter flettingen.
+// Moden er valgfri: uten mod.json (hd-mod har bare README og SHA256SUMS til den første
+// moden er laget) starter spillet med originalgrafikken.
 export const REPO = 'Tombonator3000/ZakMcKracken-HD';
-export const SOURCES = [
-  {branch: 'spilldata', prefix: 'game/', kind: 'game'},
-  {branch: 'hd-mod', prefix: '', kind: 'mod'}
-];
+export const SOURCES = {
+  game: [{branch: 'main', prefix: 'game/', marker: '00.LFL'}, {branch: 'spilldata', prefix: 'game/', marker: '00.LFL'}],
+  mod: [{branch: 'main', prefix: 'mods/gpt/', marker: 'mod.json'}, {branch: 'hd-mod', prefix: '', marker: 'mod.json'}]
+};
 const API = 'https://api.github.com/repos/' + REPO + '/';
 
 export function selectFiles(files, kind) {
@@ -124,7 +127,7 @@ async function readBody(response, size, progress) {
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-// The files from the branches of the game repository, fetched when the engine asks for them
+// The files from the game repository (main, or the old branches), fetched when the engine asks for them
 // and kept by git blob id, so a new HD pack only fetches what has changed.
 // A lost connection is tried again and again while the game waits: a file the
 // engine cannot open stops the game.
@@ -171,23 +174,39 @@ export class RemoteSource {
     throw error;
   }
 
-  // The file lists of both branches. Offline, the last list is used.
+  // The file list of one branch, read once per list(). main must be readable: 404 there
+  // means the key has no access. The other branches may be gone after the merge (null).
+  async tree(branch, trees) {
+    if (trees.has(branch)) return trees.get(branch);
+    let tree = null;
+    try {
+      const data = await this.retry(async () =>
+        (await this.get('git/trees/' + branch + '?recursive=1', 'application/vnd.github+json', 'no-store')).json(), 3);
+      if (data.truncated) throw new Error('Fillisten fra GitHub ble avkortet.');
+      tree = data.tree;
+    } catch (error) {
+      if (branch === 'main' || !(error instanceof ApiError && error.status === 404)) throw error;
+    }
+    trees.set(branch, tree);
+    return tree;
+  }
+
+  // The game and, if there is one, the HD pack: from main when it has them, else from
+  // the old branches (SOURCES). Offline, the last list is used.
   async list() {
     let rows = [];
     try {
-      for (const source of SOURCES) {
-        let data;
-        try {
-          data = await this.retry(async () =>
-            (await this.get('git/trees/' + source.branch + '?recursive=1', 'application/vnd.github+json', 'no-store')).json(), 3);
-        } catch (error) {
-          // Ingen hd-mod ennå: nøkkelen har nettopp lest spilldata, så 404 her betyr
-          // at grenen mangler, ikke at nøkkelen mangler tilgang
-          if (source.kind === 'mod' && error instanceof ApiError && error.status === 404) continue;
-          throw error;
+      const trees = new Map();
+      for (const kind of ['game', 'mod']) {
+        let found = false;
+        for (const {branch, prefix, marker} of SOURCES[kind]) {
+          const tree = await this.tree(branch, trees);
+          if (!tree?.some(item => item.type === 'blob' && item.path === prefix + marker)) continue;
+          rows.push(...treeRows(tree, prefix, kind));
+          found = true;
+          break;
         }
-        if (data.truncated) throw new Error('Fillisten fra GitHub ble avkortet.');
-        rows.push(...treeRows(data.tree, source.prefix, source.kind));
+        if (kind === 'game' && !found) throw new Error('Fant ikke spillfilene (game/00.LFL) i ' + REPO + '.');
       }
       await this.library.setMeta('listing', rows);
     } catch (error) {
@@ -321,7 +340,7 @@ export class LocalLibrary {
   }
 }
 
-// source: LocalLibrary (chosen folders) or RemoteSource (the branches of the game repository)
+// source: LocalLibrary (chosen folders) or RemoteSource (the game repository on GitHub)
 export function privateFetch(source, indexes, baseURL, networkFetch) {
   return async (input, options) => {
     const url = new URL(typeof input === 'string' || input instanceof URL ? input : input.url, baseURL);

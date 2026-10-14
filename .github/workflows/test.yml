@@ -13,7 +13,9 @@ jobs:
       - name: Lokale filer, personvern og Pages-prefiks
         run: node --test engine/pages/tests/*.test.mjs
       - name: Kontroller Pages-pakkeren
-        run: python3 -m py_compile engine/build-pages.py
+        run: |
+          python3 -m py_compile engine/build-pages.py
+          python3 engine/tests/test-build-pages.py -v
   pipeline:
     runs-on: ubuntu-latest
     steps:

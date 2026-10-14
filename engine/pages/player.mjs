@@ -192,8 +192,22 @@ async function launch(source, rows) {
   showScreen(null);
   status('Laster spillmotoren …');
   try {
-    const response = await networkFetch(new URL('data/index.json', baseURL));
+    const [response, buildResponse] = await Promise.all([
+      networkFetch(new URL('data/index.json', baseURL)),
+      networkFetch(new URL('build.json', baseURL), {cache: 'no-store'})
+    ]);
     if (!response.ok) throw new Error('Fant ikke spillmotorens data. Last siden på nytt.');
+    if (!buildResponse.ok) throw new Error('Fant ikke spillmotorens versjon. Last siden på nytt.');
+    // GitHub Pages lar nettleseren beholde filene i ti minutter. Etter en ny motor kan
+    // scummvm.js og scummvm.wasm da komme fra hver sin versjon, og motoren stopper.
+    // Motorfilene hentes derfor med sjekksummen fra build.json i adressen (fra Dig-HD-Web).
+    const build = await buildResponse.json();
+    const engineURL = path => {
+      const url = new URL(path, baseURL);
+      const hash = build.sha256?.[path];
+      if (/^[a-f0-9]{64}$/.test(hash)) url.searchParams.set('v', hash);
+      return url.href;
+    };
     const indexes = makeIndexes(rows, await response.json());
     // A file the game could not get is shown, not swallowed
     const reader = {read: path => {
@@ -240,7 +254,7 @@ async function launch(source, rows) {
     Object.defineProperty(navigator, 'requestMIDIAccess', {configurable: true, value: () => new Promise(() => {})});
     window.Module = {
       canvas,
-      locateFile: path => new URL(path, baseURL).href,
+      locateFile: engineURL,
       preRun: [() => {
         for (const [key, value] of Object.entries(env)) ENV[key] = value;
         FS.mkdirTree(env.HOME);
@@ -265,7 +279,7 @@ async function launch(source, rows) {
       if (!statusElement.classList.contains('error')) status('Spillmotoren stoppet: ' + (event.reason?.message || event.reason || 'ukjent feil'), true);
     });
     const script = document.createElement('script');
-    script.src = new URL('scummvm.js', baseURL).href;
+    script.src = engineURL('scummvm.js');
     script.onerror = () => status('Spillmotoren kunne ikke lastes. Last siden på nytt.', true);
     document.body.appendChild(script);
   } catch (error) {

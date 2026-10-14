@@ -6,7 +6,7 @@ lavt, legger den på bare så mange linjer og hopper over resten uten feilmeldin
 skjedde 13. oktober 2026: en fletting i GitHub la sju linjer til i verbhjul.cpp og to i
 verbhjul.h uten å endre tallene, og motoren bygget ikke lenger fra main.
 
-Bruk:  python3 tools/sjekk_patcher.py [patch ...]   (standard: engine/patches/*.patch)
+Bruk:  python3 tools/sjekk_patcher.py [patch ...]   (standard: engine/patches/*.patch og engine/patches-web/*.patch)
 Feil gir kode 1. Rett feilen ved å lage patchene på nytt med tools/lag_patcher.sh.
 """
 import re
@@ -62,7 +62,8 @@ def sjekk(path: Path) -> list[str]:
 
 def main(argv: list[str]) -> int:
     root = Path(__file__).resolve().parent.parent
-    paths = [Path(a) for a in argv] or sorted((root / "engine" / "patches").glob("*.patch"))
+    paths = [Path(a) for a in argv] or (sorted((root / "engine" / "patches").glob("*.patch"))
+                                        + sorted((root / "engine" / "patches-web").glob("*.patch")))
     if not paths:
         print("Fant ingen patcher")
         return 1

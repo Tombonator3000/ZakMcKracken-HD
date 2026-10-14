@@ -1,0 +1,80 @@
+# Bygger ScummVM for nettleseren (Emscripten) og publiserer nettsiden på GitHub Pages:
+# https://tombonator3000.github.io/ZakMcKracken-HD/
+#
+# Pakken har bare motoren (GPL), temaene, nettsidekoden og kildearkivet. Spillfilene og
+# HD-moden hentes av nettleseren fra dette repoet med eierens lesenøkkel, og legges aldri
+# i pakken (engine/build-pages.py har en fast liste over det som tas med, og steget
+# "Ingen spillfiler i pakken" sjekker det).
+#
+# Kjører når nettsiden eller motoren endres i main, og kan startes for hånd. Etter
+# oppsettet til Dig-HD-Web (.github/workflows/pages.yml, a8e4474).
+name: pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'engine/**'
+      - 'docs/PAGES.md'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  bygg:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Bare koden: spillfilene trengs ikke for å bygge motoren
+          sparse-checkout: |
+            engine
+            docs/PAGES.md
+            tools/sjekk_patcher.py
+          sparse-checkout-cone-mode: false
+      - name: Nettsidekoden, patchkontrollen og hunk-hodene
+        run: |
+          node --test engine/pages/tests/*.test.mjs
+          python3 engine/tests/test-build-pages.py -v
+          python3 tools/sjekk_patcher.py
+      - name: Byggepakker
+        run: sudo apt-get update && sudo apt-get install -y pkg-config zip xz-utils
+      - name: Bygg ScummVM for nettleseren (Emscripten, libFLAC, patchene)
+        run: JOBS=$(nproc) engine/build-web.sh
+      - name: HTTP-filsystemet i Wasm (oppslag og minne)
+        run: |
+          EMSDK_QUIET=1 source engine/emsdk/emsdk_env.sh
+          engine/tests/test-http-fs-cache.sh engine/scummvm-web
+      - name: Pakk motoren, temaene og kildekoden
+        run: python3 engine/build-pages.py
+      - name: Ingen spillfiler i pakken
+        run: |
+          funnet=$(find out/pages -type f \( -iname '*.lfl' -o -iname '*.fla' -o -path '*/games/*' -o -path '*/mods/*' -o -iname '*.png' \) -print)
+          if [ -n "$funnet" ]; then echo "Spillfiler eller bilder i pakken:"; echo "$funnet"; exit 1; fi
+          python3 -c "import json; b = json.load(open('out/pages/build.json')); assert not b['includes_game_data'] and not b['includes_hd_images']; print(len(b['sha256']), 'filer')"
+          du -sh out/pages
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: out/pages
+
+  publiser:
+    needs: bygg
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deployment
