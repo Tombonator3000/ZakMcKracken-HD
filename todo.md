@@ -37,7 +37,8 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [ ] Rom og objekter med nearest-mod (0 avvik, `engine/test.sh`); objektbildet `_01` for alle tilstander
 - [ ] Kostymer med krokene fra Sam & Max, og `DIGHD_TEST_COSTUME` med én byte startindeks
 - [ ] Tekst: HD-glyfer i `CharsetRendererV3` (verb og inventar er tekst)
-- [ ] Menyen (raden HD Graphics) og pekeren for FM-Towns-utgaven
+- [ ] HD av og på mens man spiller (Tom 14. oktober): Ctrl+H (finnes i 0001) og raden HD Graphics i menyen for FM-Towns-utgaven, så det går på mobil; valget lagres (`dighd_classic`)
+- [ ] Pekeren for FM-Towns-utgaven
 - [ ] Romtesten i alle 58 rom
 
 ### Grensesnitt: verbhjulet (`docs/VERBHJUL.md`)
@@ -84,10 +85,12 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 
 ### Grafikk
 
-- [ ] Stilpilot med Tom: rom 1 og kostyme 1 sett i motoren, stilankere, godkjenning
-- [ ] Master-figurark for Zak, Annie, Melissa og Leslie
-- [x] Toms referansebilder 14. oktober lagt i `referanser/zak-hd-20261014/` i `gpt-arbeid` (avisforsiden ny, figurarkene for Zak, Annie og Caponian v3 og rom 42-konseptet like konseptene fra 13. oktober)
-- [ ] Tom avklarer om referansebildene 14. oktober er godkjente stilankere eller hovedark; i så fall legges de i `stil/` i `gpt-arbeid`
+- [x] Stilankere godkjent av Tom 14. oktober: figurarkene for Zak, Annie og Caponian v3, rom 42 og avisforsiden. I `grafikk/stil/` i `main` og `stil/` i `gpt-arbeid`
+- [x] AGENTS skrevet om: HD-grafikk kan ligge i `main` under `grafikk/`, og HD er alltid et valg for spilleren (Tom 14. oktober)
+- [ ] Stilankerne sett i motoren (krever HD-motoren for Zak)
+- [ ] Master-figurark: Zak og Annie finnes som godkjente stilankere; Melissa og Leslie mangler
+- [ ] Promptene i `gpt.py` og `figur.py` skrevet om etter stilankerne. I dag ber romprompten om originalens pikselstil og farger (`gpt.py`, linje 90)
+- [ ] Resten av `docs/BESTILLING-CHATGPT.md` gått gjennom etter stilankerne (status, avsnitt 1, rekkefølgen og opphav er rettet 14. oktober)
 - [ ] Aktiver bestillingen (`docs/BESTILLING-CHATGPT.md`) og grafikkrunder med `tools/gpt_runde.sh`
 - [ ] Ta inn grafikkjobbene fra Sam & Max HD (PR 4 der, 13. oktober), tilpasset v3:
   - [ ] Fast størrelse i figurarkene: mål per rute i figurprompten, `tools/sjekk_leveranse.py` i `verktoy/` i `gpt-arbeid`, `myk.py` versjon 4 (her er den versjon 2)

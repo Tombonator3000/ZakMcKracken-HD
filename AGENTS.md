@@ -9,7 +9,7 @@ Instrukser for alle KI-agenter som jobber i dette repoet (Claude, Codex, ChatGPT
 3. Les de siste oppføringene i `log.md`.
 4. Les `STATUS.md` hvis du skal endre noe som er testet eller rapportert der.
 5. Les `docs/ANALYSE.md`, `docs/HD-MOTOR.md` og `docs/HD-REMASTER-METODE.md` ved arbeid med motor, pipeline eller grafikk, og `docs/VERBHJUL.md` og `docs/GRENSESNITT.md` ved arbeid med verb, inventar eller skjermoppsett. Referansene er The Dig HD Remake (github.com/Tombonator3000/Dig-HD-Remake) og Sam & Max HD (github.com/Tombonator3000/Sam-Max-HD), som dette repoet er kopiert fra og tilpasset.
-6. Før grafisk HD-arbeid, også stilpilot: les [remake-skillen](docs/skills/scumm-hd-remake/SKILL.md), særlig «Før HD-produksjon: avklar motiv og design». Avklar originalens betydning, funksjon, palett, figuridentitet og design før nytegning. Teknisk mottak alene er ikke visuell godkjenning.
+6. Før grafisk HD-arbeid: les [remake-skillen](docs/skills/scumm-hd-remake/SKILL.md), særlig «Før HD-produksjon: avklar motiv og design», og [de godkjente stilankerne](grafikk/stil/README.md) (Tom 14. oktober 2026). Innholdet er originalens (motiv, funksjon, plassering, positur); tegnestilen og figurenes utseende følger ankrene. Teknisk mottak alene er ikke visuell godkjenning.
 
 ## Mens du jobber
 
@@ -26,10 +26,13 @@ Instrukser for alle KI-agenter som jobber i dette repoet (Claude, Codex, ChatGPT
 
 ## Regler
 
-- Spillfiler (`*.LFL`, `Track*.fla`) og alt som lages fra dem (`work/`, `mods/`, HD-bilder, dekompilerte skript) skal aldri inn i `main` eller kodegrener. De ligger i egne grener (se under).
-- Repoet er offentlig, som The Dig og Sam & Max. *Zak McKracken and the Alien Mindbenders* tilhører Disney/Lucasfilm. Tom har bestemt (13. oktober 2026) at grafikk og annet fra spillet kan deles utenfor repoet til hans eget, private bruk: som filer til egne maskiner og telefoner, eller på private steder bare han har tilgang til. Offentlige sider og pakker (GitHub Pages, releaser) har fortsatt ingen spillgrafikk. Spillfilene og alt som lages fra dem holdes fortsatt utenfor `main` og kodegrenene.
+- HD-grafikk kan ligge i `main` (Tom 14. oktober 2026). Godkjente stilankere, referansebilder og godkjent HD-grafikk legges under [`grafikk/`](grafikk/README.md). Ingen fil over 90 MB. Jobber og leveranser som ikke er godkjent, ligger i `gpt-arbeid`.
+- Spillfilene (`*.LFL`, `Track*.fla`) ligger bare i grenen `spilldata`. Det som lages automatisk fra dem (`work/`, `mods/`, uttrukket originalgrafikk, dekompilerte skript) sjekkes ikke inn i `main` eller kodegrenene; det lages på nytt med verktøyene. Den ferdigbygde moden ligger i `hd-mod`.
+- HD er alltid et valg for spilleren. Spilleren velger selv HD eller originalgrafikk, også mens spillet går: med Ctrl+H (finnes i patch 0001) og med en rad i spillets meny, så det virker på mobil uten tastatur. Valget lagres til neste start (`dighd_classic`). Originalgrafikken skal alltid virke, og HD legges oppå originalen uten at spillfilene endres.
+- Repoet er offentlig, som The Dig og Sam & Max. *Zak McKracken and the Alien Mindbenders* tilhører Disney/Lucasfilm. Tom har bestemt at HD-grafikk kan ligge i `main` (14. oktober 2026), og at grafikk og annet fra spillet kan deles utenfor repoet til hans eget, private bruk: som filer til egne maskiner og telefoner, eller på private steder bare han har tilgang til (13. oktober 2026). Offentlige sider og pakker (GitHub Pages, releaser) har fortsatt ingen spillgrafikk.
 - Kjør testene før du committer endringer i pipelinen eller motoren.
 - Kodeendringer går via PR mot `main` og flettes når CI er grønn. Logg, status, todo og minne kan committes rett i `main`.
+- Godkjent grafikk som flyttes fra `gpt-arbeid` til `grafikk/` i `main`, får README og sjekksummer (SHA-256) og går via PR.
 - Ikke lapp spillets skript uten Toms ja. Nye grensesnitt (docs/GRENSESNITT.md) sender de samme verb- og klikkallene som originalen.
 
 ## Roller
@@ -79,7 +82,7 @@ python3 tools/verbhjul_dynamisk.py  # ikonene i det dynamiske hjulet, per objekt
 
 | Gren | Innhold |
 | --- | --- |
-| `main` | Kode og dokumentasjon |
+| `main` | Kode, dokumentasjon og godkjent HD-grafikk (`grafikk/`) |
 | `spilldata` | Spillfilene med sjekksummer, uten felles historikk med `main` |
-| `gpt-arbeid` | Arbeidsbordet med ChatGPT/Codex. Startgren uten jobber; ingen jobber før stilpiloten er godkjent |
+| `gpt-arbeid` | Arbeidsbordet med ChatGPT/Codex: jobber, leveranser, konsepter og stilankerne i `stil/` (de samme som `grafikk/stil/` i `main`). Ingen jobber ennå |
 | `hd-mod` | Siste ferdige HD-mod, én commit som erstattes. Startgren uten mod |

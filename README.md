@@ -22,6 +22,9 @@ engine/build.sh                              # ScummVM med patchen (libsdl2-dev,
 - [docs/VERBHJUL.md](docs/VERBHJUL.md): det dynamiske verbhjulet (høyst fire valg) og portrettene for figurbytte (bygget, med midlertidige ikoner)
 - [docs/GRENSESNITT.md](docs/GRENSESNITT.md): verbhjul, ikoninventar og større bilde
 - [docs/HD-REMASTER-METODE.md](docs/HD-REMASTER-METODE.md): arbeidsmetoden og godkjenningene
+- [grafikk/stil/README.md](grafikk/stil/README.md): de godkjente stilankerne (figurene og rom 42)
 - [AGENTS.md](AGENTS.md): regler for agentene som jobber i repoet
 
-Spillet tilhører Disney/Lucasfilm. Spillfilene og alt som lages fra dem ligger aldri i `main`.
+Spilleren velger selv HD eller originalgrafikk, også mens spillet går.
+
+Spillet tilhører Disney/Lucasfilm. Spillfilene ligger i grenen `spilldata`, aldri i `main`. Godkjent HD-grafikk ligger i `main` under `grafikk/`.

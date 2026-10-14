@@ -23,7 +23,7 @@ Sjekket mot ScummVM-kilden ved `c9091321`. Ikke testet.
 5. **Tekst.** Tegnet av `CharsetRendererV3` fra 98.LFL og 99.LFL (8 piksler høye, 1 bit per piksel). Kroken `noteGlyph` finnes ikke der. Verbene og inventaret er tekst, så dette er viktigere i Zak enn i Sam & Max (se docs/GRENSESNITT.md).
 6. **Ingen blast-objekter og ingen filmer.** v3 har ikke BOMP eller SMUSH.
 7. **Ingen fargesykling.** Rommene har ingen CC-blokk, og ScummVM leser fargesykling bare fra versjon 4 (`resetRoomSubBlocks`).
-8. **Menyen og pekeren.** Originalmenyen i FM-Towns-utgaven er en annen enn i v6 og v7; raden HD Graphics og pekerkroken må lages for den. F-tastene i Zak FM-Towns håndteres særskilt (verbs.cpp: F1 til F4 bytter figur, 0x8005 er F5).
+8. **Menyen og pekeren.** Originalmenyen i FM-Towns-utgaven er en annen enn i v6 og v7; raden HD Graphics og pekerkroken må lages for den. F-tastene i Zak FM-Towns håndteres særskilt (verbs.cpp: F1 til F4 bytter figur, 0x8005 er F5). Krav fra Tom (14. oktober 2026): spilleren skal kunne bytte mellom HD og originalgrafikk mens spillet går, med Ctrl+H (`DigHD::handleKey`, finnes) og med menyraden, så det også går på mobil. Valget lagres som `dighd_classic`.
 9. **Skjermen.** 320 x 240: meldingslinjen 0 til 15, rommet 16 til 143 (`SetScreen(16,144)`), verb og inventar 144 til 215. Valget `trim_fmtowns_to_200_pixels` gir 320 x 200. Sideforholdskorrigering trengs ikke (kvadratiske piksler).
 10. **Grensesnittet** (verbhjul, ikoninventar, rom og panel skalert hver for seg) bygges i det samme laget etter at punkt 1 til 5 virker. Se docs/GRENSESNITT.md.
 
