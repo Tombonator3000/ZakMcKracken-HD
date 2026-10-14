@@ -1,0 +1,37 @@
+# Bygger ScummVM med patchene når motoren endres, så en PR som ødelegger byggingen blir
+# stoppet før den flettes. Bare SCUMM-motoren, som engine/build.sh. Spillfilene trengs ikke.
+name: motor
+
+on:
+  pull_request:
+    paths:
+      - 'engine/patches/**'
+      - 'engine/build.sh'
+      - 'engine/SCUMMVM_COMMIT'
+      - 'tools/lag_patcher.sh'
+      - 'tools/sjekk_patcher.py'
+      - '.github/workflows/motor.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'engine/patches/**'
+      - 'engine/build.sh'
+      - 'engine/SCUMMVM_COMMIT'
+  workflow_dispatch:
+
+jobs:
+  bygg:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hunk-hodene i patchene
+        run: python3 tools/sjekk_patcher.py
+      - name: Byggepakker
+        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libsdl2-dev libpng-dev zlib1g-dev libflac-dev
+      - name: Bygg ScummVM med patchene
+        run: JOBS=$(nproc) engine/build.sh
+      - name: Motoren starter
+        run: |
+          engine/scummvm/scummvm --version | tee "$RUNNER_TEMP/versjon.txt"
+          grep "Features compiled in:" "$RUNNER_TEMP/versjon.txt" | grep -q FLAC

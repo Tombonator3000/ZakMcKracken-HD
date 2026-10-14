@@ -1,0 +1,10 @@
+# Klassisk CRT for originalgrafikken. Sett KILDEPIKSEL = 4 når HD-laget (DigHD) viser
+# originalgrafikken i 4x. Se docs/MOTOR-FORBEDRING.md.
+shaders = 1
+
+shader0 = klassisk-crt.glsl
+filter_linear0 = false
+scale_type0 = viewport
+
+parameters = "KILDEPIKSEL;SKANNLINJE;MASKE;SKARPHET;KURVE;LYS"
+KILDEPIKSEL = 1.0

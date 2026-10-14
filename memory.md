@@ -53,6 +53,13 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 - Kostymene (målt 13. oktober): 40 kostymer med 847 ruter, alle med speilflagg av, ingen søppelruter. Skyggeregelen fra Sam & Max (palettindeks 13 gjennom skyggetabellen) gjelder ikke: ScummVM setter `_shadowTable` bare for v5 og nyere, så i v3 er 13 en vanlig farge (kostyme 8 bruker den).
 - Dynamisk lys (normalkart og luminansmaske) er planlagt etter stilpiloten: valgfritt for spilleren, ingen kastede skygger (Tom 13. oktober).
 - ScummVM låst til c9091321, som The Dig og Sam & Max.
+- FM-Towns-laget gir myk rulling (én piksel per 1/60 sekund, `smooth_scroll`). Slås laget av, må myk rulling lages i HD-laget (MOTOR-FORBEDRING del 4, 14. oktober).
+
+## Ytelse og effekter (14. oktober)
+- Tom ba om å sjekke om motoren kan optimaliseres og få nyere effekter og shadere. Utredningen er `docs/MOTOR-FORBEDRING.md`.
+- ScummVM er ikke flaskehalsen; HD-laget er. Romdelen av `compose()` bruker 12 til 21 ms for hele skjermen (1280 x 960), 0,6 ms med tabell per palettindeks, byte for byte likt (`tools/ytelse/compose_bench.cpp`). Endringen hører hjemme i 0001, som er felles med Sam & Max, så den bør gjøres der.
+- ScummVM sine libretro-shadere virker i bygget vårt (`USE_OPENGL_SHADERS`, også GLES2 for nettet). Egne oppsett i `engine/shadere/`: `klassisk-crt` (parameter `KILDEPIKSEL`, 4 med HD-laget) og `hd-glod`. En shader ser bare det ferdige bildet; lys med normalkart og glød bare fra lamper må gjøres i HD-laget.
+- Patchfilene flettes aldri for hånd: flettingen 13. oktober (087fd93) ga feil tall i hunk-hodene i 0002, og `git apply` kuttet verbhjul-filene uten feil. `tools/sjekk_patcher.py` og `motor.yml` stopper det nå.
 
 ## Arbeidsform
 - Roller: Claude koden, ChatGPT/Codex grafikken, Tom godkjenner.

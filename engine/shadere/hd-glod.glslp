@@ -1,0 +1,29 @@
+# HD-glød for HD-bildet: mild glød rundt lyse flater, vignett, metning og kontrast.
+# Passene:
+#   0 lys.glsl     bildet i en firedel av størrelsen, bare det som er lysere enn terskelen
+#   1 blur-v.glsl  gaussisk uskarphet vannrett
+#   2 blur-l.glsl  gaussisk uskarphet loddrett
+#   3 samle.glsl   originalbildet + gløden, vignett, metning og kontrast
+# Se docs/MOTOR-FORBEDRING.md.
+shaders = 4
+
+shader0 = hd-glod/lys.glsl
+filter_linear0 = true
+scale_type0 = source
+scale0 = 0.25
+
+shader1 = hd-glod/blur-v.glsl
+filter_linear1 = true
+scale_type1 = source
+scale1 = 1.0
+
+shader2 = hd-glod/blur-l.glsl
+filter_linear2 = true
+scale_type2 = source
+scale2 = 1.0
+
+shader3 = hd-glod/samle.glsl
+filter_linear3 = true
+scale_type3 = viewport
+
+parameters = "GLOD_TERSKEL;GLOD_BREDDE;GLOD_STYRKE;VIGNETT;METNING;KONTRAST"

@@ -122,10 +122,10 @@ index 20c4b0c5..af9f2fbd 100644
  	byte _completeScreenBuffer[320 * 200];
 diff --git a/engines/scumm/verbhjul.cpp b/engines/scumm/verbhjul.cpp
 new file mode 100644
-index 00000000..270aa58e
+index 00000000..bd1f319b
 --- /dev/null
 +++ b/engines/scumm/verbhjul.cpp
-@@ -0,0 +1,1226 @@
+@@ -0,0 +1,1233 @@
 +/* ScummVM - Graphic Adventure Engine
 + *
 + * ScummVM is the legal property of its developers, whose names
@@ -1361,10 +1361,10 @@ index 00000000..270aa58e
 +} // End of namespace Scumm
 diff --git a/engines/scumm/verbhjul.h b/engines/scumm/verbhjul.h
 new file mode 100644
-index 00000000..088a0c08
+index 00000000..ac7fa880
 --- /dev/null
 +++ b/engines/scumm/verbhjul.h
-@@ -0,0 +1,245 @@
+@@ -0,0 +1,247 @@
 +/* ScummVM - Graphic Adventure Engine
 + *
 + * ScummVM is the legal property of its developers, whose names

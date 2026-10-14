@@ -33,3 +33,7 @@ jobs:
           fi
       - name: Skallskriptene
         run: for f in spill.sh engine/*.sh tools/*.sh; do bash -n "$f"; done
+      # git apply godtar en patch med for lave tall i hunk-hodene og kutter filene uten feil
+      # (fletting i GitHub 13. oktober 2026). Denne sjekken stopper det.
+      - name: Hunk-hodene i motorpatchene
+        run: python3 tools/sjekk_patcher.py
