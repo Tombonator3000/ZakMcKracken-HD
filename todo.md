@@ -22,7 +22,7 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
   git commit -m "Grenene spilldata, hd-mod og gpt-arbeid inn i main"
   git push origin main
   ```
-- [ ] Deretter: Claude legger inn verktøyene, nettsidekoden og reglene for mappene i `main` (31 filer, ferdig og testet mot den flettede treet; lagret som `claude/alt-i-main.patch` i Claude-prosjektet, legges på med `git apply` etter flettingen)
+- [ ] Deretter: Claude legger inn verktøyene, nettsidekoden og reglene for mappene i `main` (31 filer, ferdig og testet mot den flettede treet; lagret som `claude/alt-i-main.patch` i Claude-prosjektet). Etter nettsidearbeidet 14. oktober går den ikke rett på: bruk en full klone og `git apply --3way --exclude=todo.md --exclude=engine/pages/local-files.mjs --exclude=engine/pages/tests/local-files.test.mjs --exclude=docs/PAGES.md` (de tre filene i `main` virker allerede med begge oppsettene), og løs konflikten i STATUS.md. Patchen sier at repoet er privat; rett det etter Toms valg
 
 ### Oppsett (11. oktober)
 
