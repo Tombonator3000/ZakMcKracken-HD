@@ -24,3 +24,6 @@ __pycache__/
 *.egg-info/
 .venv/
 .pytest_cache/
+
+# Logg fra HD-laget når spillet startes fra roten av repoet
+dighd-uten-hd.txt
