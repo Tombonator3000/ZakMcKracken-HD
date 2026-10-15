@@ -1,0 +1,18 @@
+; Globalt skript 135 (SC i 47.LFL, offset 0x8A35)
+
+[0000] (30) setBoxFlags(2,0);
+[0003] (2D) putActorInRoom(10,195);
+[0006] (01) putActor(10,40,118);
+[000C] (30) setBoxFlags(2,64);
+[000F] (11) animateCostume(10,250);
+[0012] (2E) delay(120);
+[0016] (11) animateCostume(10,245);
+[0019] (80) breakHere();
+[001A] (AE) WaitForMessage();
+[001C] (14) print(10,[Text("Greetings!" + wait() + "Our race departed this dimension fifty" + newline() + "millennia ago." + wait() + "We, the Skolarians, were your guardians." + wait() + "We knew of the corrupt Caponians and" + newline() + "took steps to protect you." + wait() + "They will subvert the Earth with their" + newline() + "deadly machines.")]);
+[0108] (AE) WaitForMessage();
+[010A] (14) print(10,[Text("We sent you dreams to lead you here." + wait() + "You must construct our device to" + newline() + "neutralize the Caponian menace." + wait() + "Use these keys to obtain the Power" + newline() + "Crystal." + wait() + "Hurry, before they stop you.")]);
+[01C1] (AE) WaitForMessage();
+[01C3] (18) goto 000F;
+[01C6] (A0) stopObjectCode();
+END

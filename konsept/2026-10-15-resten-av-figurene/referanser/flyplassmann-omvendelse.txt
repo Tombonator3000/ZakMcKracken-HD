@@ -1,0 +1,45 @@
+; Lokalt skript 207 i rom 8 (LS)
+
+Script# 207
+[0000] (40) cutscene([1]);
+[0005] (58) beginOverride();
+[0007] (18) goto 00C0;
+[000A] (14) print(10,[Text("I've heard of dis guru. Lemme see what" + newline() + "he has t'say.")]);
+[0043] (AE) WaitForMessage();
+[0045] (11) animateCostume(10,247);
+[0048] (1A) Var[325] = 1;
+[004D] (2E) delay(180);
+[0051] (14) print(10,[Text("Ah!")]);
+[0058] (46) Var[325]++;
+[005B] (44) unless (Var[325] > 3) goto 004D;
+[0062] (2E) delay(180);
+[0066] (49) faceActor(10,VAR_EGO);
+[006A] (AE) WaitForActor(10);
+[006D] (14) print(10,[Text("I UNDERSTAND now! I don't need this" + newline() + "whiskey any longer! Here, and thank you!")]);
+[00BE] (AE) WaitForMessage();
+[00C0] (1D) if (classOfIs(45,[134])) {
+[00C9] (29)   setOwnerOf(45,0);
+[00CD] (**) }
+[00CD] (1A) Var[74] = 0;
+[00D2] (1A) Var[73] = 14;
+[00D7] (90) VAR_RESULT = getObjectOwner(Var[73]);
+[00DC] (48) if (VAR_RESULT == 10) {
+[00E3] (E9)   setOwnerOf(Var[73],VAR_EGO);
+[00E8] (46)   Var[74]++;
+[00EB] (**) }
+[00EB] (46) Var[73]++;
+[00EE] (44) unless (Var[73] > 83) goto 00D7;
+[00F5] (A8) if (Var[74]) {
+[00FA] (14)   print(10,[Text("And here're all my earthly possessions.")]);
+[0125] (**) }
+[0125] (13) ActorOps(10,[Name("devotee")]);
+[0131] (50) pickupObject(46);
+[0134] (C0) endCutscene();
+[0135] (1A) Var[151 Bit 14 + 1] = 1;
+[013C] (1A) Var[151 Bit 14 + 2] = 1;
+[0143] (1E) walkActorTo(10,80,92);
+[0149] (AE) WaitForActor(10);
+[014C] (0A) startScript(201,[]);
+[014F] (1A) Var[112] = 209;
+[0154] (A0) stopObjectCode();
+END

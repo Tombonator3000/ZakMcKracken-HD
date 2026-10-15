@@ -67,3 +67,9 @@
 - 15 verbikoner og 81 logiske inventarbilder levert med alfa, tilstandsvarianter og aliaser: 141 PNG for 105 objektnumre. Første glatte serie utelatt.
 - Alle filene kontrollert: 512 x 512 RGBA med alfa; build_ui tar inn 141 filer uten pikselendring; identiske aliaser; sjekksummer og kontaktark. Ikke prøvd i motoren og ikke godkjent av Tom.
 - Leveranse, faktiske prompter, rettelser, usikkerhet og forhåndsvisning i rapporter/hjul-inventar-20261015/. Main og spillfilene er ikke endret.
+
+## 2026-10-15 12:54 (Codex)
+- Tom bestilte konseptark for resten av figurene, med godkjent Zak, Annie og Caponian som direkte stilankere.
+- Dekodet originalens 40 kostymer, 847 ruter og 1094 skript for identiteter og rollekoblinger. K23 og K25 holdt atskilt, K21 og K26 dokumentert som delte kostymer. Dyr også kontrollert i rom-/objektdata.
+- Laget 22 valgte karakterark med innebygd image_gen, 24 kall inkludert pilot- og delfinrettelse. Piloten v1 og delfinen v1 beholdes lokalt som erstattede utkast. Ingen eksisterende stilark endret.
+- Hele settet sett visuelt. Manifest, SHA-256, alle 40 kostymer kartlagt, tre kontaktark, faktisk promptsett, galleri og ZIP levert. Konsepter til kontroll, ikke animasjonsruter eller motorimport.

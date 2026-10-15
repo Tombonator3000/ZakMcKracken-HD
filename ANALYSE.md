@@ -97,3 +97,7 @@ Tom godkjente Caponian v3, Zak- og Annie-arket og rom 42-konseptet som stilanker
 ## UI-stilrettelse fra Tom 15. oktober 2026
 
 Verbhjul og inventar skal ha mer av den rare, lekne og humoristiske Purcell-stilen fra Sam & Max-repoet. Farge- og tusjreferansene er sett direkte. Den glattere første serien er utelatt. Figurarkene for Zak og Annie er fortsatt identitetsankere; stilreferansen gir ikke tillatelse til å flytte Sam og Max inn på Zak-gjenstander. Se rapporter/hjul-inventar-20261015/notat.md og STILRETTELSE-02.md i samme mappe.
+
+## Figurkonsepter 15. oktober 2026
+
+Direkte bestilling fra Tom: resten av figurene i samme stil som Caponian, Zak og Annie. Alle 40 kostymer koblet til navn/rolle, gjenstand, effekt eller hovedfigurvariant med originaldata og skript. 22 konseptark, kilder, faktiske prompter, filmanifest og galleri i konsept/2026-10-15-resten-av-figurene/. Piloten revidert for eget ansikt; delfinen revidert for svømmeprofil og anatomi. Nye detaljer og palettusikkerhet dokumentert. Ikke godkjent eller importert i motoren.

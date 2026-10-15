@@ -1,0 +1,384 @@
+{
+  "date": "2026-10-15",
+  "mode": "built-in image_gen",
+  "status": "konsept til kontroll, ikke motorressurser",
+  "anchors": [
+    "../../stil/zak-pilot-v1.png",
+    "../../stil/annie-pilot-v1.png",
+    "../../stil/caponian-pilot-v3.png"
+  ],
+  "images": [
+    {
+      "id": "melissa",
+      "name": "Melissa China",
+      "group": "Spillbare",
+      "file": "ark/melissa-v1.png",
+      "prompt": "prompter/melissa-v1.txt",
+      "source": "referanser/costume007-sheet.png",
+      "costumes": [
+        3,
+        7
+      ],
+      "width": 1659,
+      "height": 948,
+      "sha256": "e61135791536af7c69308f23272199161f98fe3616ebcee3e5fcc0667879bee9",
+      "bytes": 2101438,
+      "note": "Blond bob, blå romdrakt og forsiktige uttrykk. Opprullede ermer viser avslappet drakt i trykksatt rom; utendørsdrakten må lukkes ved animasjonsarbeid.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "leslie",
+      "name": "Leslie Bennett",
+      "group": "Spillbare",
+      "file": "ark/leslie-v1.png",
+      "prompt": "prompter/leslie-v1.txt",
+      "source": "referanser/costume036-sheet.png",
+      "costumes": [
+        4,
+        36
+      ],
+      "width": 1659,
+      "height": 948,
+      "sha256": "8e1030f3358ac4312395c5b810554ef5db56aedab40d4e2a3e7385f7de3ad1c9",
+      "bytes": 2034597,
+      "note": "Brunrød hestehale, rosa romdrakt og mer kantet, selvsikker mimikk. Utendørsdrakten må lukkes ved animasjonsarbeid.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "lou",
+      "name": "Lou",
+      "group": "Biroller",
+      "file": "ark/lou-v1.png",
+      "prompt": "prompter/lou-v1.txt",
+      "source": "referanser/costume016-sheet.png",
+      "costumes": [
+        16
+      ],
+      "width": 1659,
+      "height": 948,
+      "sha256": "7a9be06c25af91c2a51932109303e0bc067ac7905fde4adf600640a057ea6a7b",
+      "bytes": 1886754,
+      "note": "Originalens klær og rolle, med nye vinkler og uttrykk som konseptforslag.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "baker",
+      "name": "Bakeren",
+      "group": "Biroller",
+      "file": "ark/baker-v1.png",
+      "prompt": "prompter/baker-v1.txt",
+      "source": "referanser/costume017-sheet.png",
+      "costumes": [
+        17
+      ],
+      "width": 1660,
+      "height": 948,
+      "sha256": "a22f30502c7a1050c5c7b8cd16aaf506bfa7258f02f7c76c2fdeb6a4c9829572",
+      "bytes": 1879005,
+      "note": "Originalen viser ham i et vindu. Bukser og sko er en konsepttolkning.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "pilot",
+      "name": "Piloten",
+      "group": "Biroller",
+      "file": "ark/pilot-v2.png",
+      "prompt": "prompter/pilot-v2.txt",
+      "source": "referanser/costume010-sheet.png",
+      "costumes": [
+        10
+      ],
+      "width": 1660,
+      "height": 948,
+      "sha256": "fa2772751d7ac444225ee4edda521eb806313cc32e6c4745597d4f5d159df7d2",
+      "bytes": 1942732,
+      "note": "V2 er valgt: eldre, tungøyet ansikt og lang skjev nese skiller ham fra Zak.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "stewardess",
+      "name": "Flyvertinnen",
+      "group": "Biroller",
+      "file": "ark/stewardess-v1.png",
+      "prompt": "prompter/stewardess-v1.txt",
+      "source": "referanser/costume011-sheet.png",
+      "costumes": [
+        11
+      ],
+      "width": 1659,
+      "height": 948,
+      "sha256": "5a7a2816e3b2b3e9aa011a99e0b820e1874c2c975f4cc12774502ef565f8eec3",
+      "bytes": 1885263,
+      "note": "Originalens klær og rolle, med nye vinkler og uttrykk som konseptforslag.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "guru",
+      "name": "Guruen",
+      "group": "Biroller",
+      "file": "ark/guru-v1.png",
+      "prompt": "prompter/guru-v1.txt",
+      "source": "referanser/costume022-sheet.png",
+      "costumes": [
+        22
+      ],
+      "width": 1659,
+      "height": 948,
+      "sha256": "c88f08b6326b5cae2178c2afd6e5bdb9ca0b22f4b5ead5f4ac2380328a13a736",
+      "bytes": 2027286,
+      "note": "Originalens klær og rolle, med nye vinkler og uttrykk som konseptforslag.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "shaman",
+      "name": "Shaman og landsbyboere",
+      "group": "Biroller",
+      "file": "ark/shaman-v1.png",
+      "prompt": "prompter/shaman-v1.txt",
+      "source": "referanser/costume021-sheet.png",
+      "costumes": [
+        21
+      ],
+      "width": 1659,
+      "height": 948,
+      "sha256": "5ff44b939f3c27283f639feab3b2d52c92fe048116ac9a1d475cfec0907b1349",
+      "bytes": 1839521,
+      "note": "Kostyme 21 deles av shamanen og to landsbyboere. De små rollevurderingene er forslag; masken følger originalens blå form.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "devotee",
+      "name": "Bokselgeren",
+      "group": "Biroller",
+      "file": "ark/devotee-v1.png",
+      "prompt": "prompter/devotee-v1.txt",
+      "source": "referanser/costume025-sheet.png",
+      "costumes": [
+        25
+      ],
+      "width": 1660,
+      "height": 948,
+      "sha256": "3d63e10e9783ce6f1c27b02f6cb5d65b46d15c2c90717a10958ddcb0c119cec0",
+      "bytes": 1875119,
+      "note": "Originalens klær og rolle, med nye vinkler og uttrykk som konseptforslag.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "bum",
+      "name": "Flyplassmannen",
+      "group": "Biroller",
+      "file": "ark/bum-v1.png",
+      "prompt": "prompter/bum-v1.txt",
+      "source": "referanser/costume023-sheet.png",
+      "costumes": [
+        23
+      ],
+      "width": 1660,
+      "height": 948,
+      "sha256": "d677b75396ba1331acd6d3b3aa9ce5ad6eca3c7e06c51feccc34976e3ffdc89e",
+      "bytes": 2033230,
+      "note": "Samme mann før og etter at han leser guruens bok. Den opprinnelige bokselgeren er en annen figur.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "sentry",
+      "name": "Stonehenge-vakten",
+      "group": "Biroller",
+      "file": "ark/sentry-v1.png",
+      "prompt": "prompter/sentry-v1.txt",
+      "source": "referanser/costume024-sheet.png",
+      "costumes": [
+        24
+      ],
+      "width": 1659,
+      "height": 948,
+      "sha256": "37ab46af94b8e2c010147f50604854b21a62f333a7ea83ea6e4de5cbc260db25",
+      "bytes": 1799230,
+      "note": "Originalens klær og rolle, med nye vinkler og uttrykk som konseptforslag.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "police",
+      "name": "Nepalsk politi og tempelvakt",
+      "group": "Biroller",
+      "file": "ark/police-v1.png",
+      "prompt": "prompter/police-v1.txt",
+      "source": "referanser/costume026-sheet.png",
+      "costumes": [
+        26
+      ],
+      "width": 1659,
+      "height": 948,
+      "sha256": "83db4d64fc4d7e3503aaebfea415b87d4e9355d077be0f366b5be9106b2f11e4",
+      "bytes": 1915964,
+      "note": "Kostyme 26 deles av politi og tempelvakt. Vaktens separate ansikt og okerfarge er foreløpige forslag.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "king",
+      "name": "The King",
+      "group": "Romvesener",
+      "file": "ark/king-v1.png",
+      "prompt": "prompter/king-v1.txt",
+      "source": "referanser/costume027-sheet.png",
+      "costumes": [
+        27
+      ],
+      "width": 1659,
+      "height": 948,
+      "sha256": "15a79edb152df555be4a1dcec42b575a3cdd59c144752c35352d98756f53e9cc",
+      "bytes": 1789140,
+      "note": "Samme høye øyne, smale midtansikt og korallhud som godkjent Caponian, med hvit scenedrakt og gullsmykker.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "skolarian",
+      "name": "Skolarian-projeksjonen",
+      "group": "Romvesener",
+      "file": "ark/skolarian-v1.png",
+      "prompt": "prompter/skolarian-v1.txt",
+      "source": "referanser/costume029-sheet.png",
+      "costumes": [
+        29
+      ],
+      "width": 1659,
+      "height": 948,
+      "sha256": "08a78e11729fac18c9402657c9ae9c3ecc4fd2e4bb9b4d908f553a58ad7a019c",
+      "bytes": 1783396,
+      "note": "Blå projeksjon med bred skalle og mørk kappe. Skal fortsatt tegnes som en projeksjon i spillet.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "boss",
+      "name": "Redaktøren",
+      "group": "Biroller",
+      "file": "ark/boss-v1.png",
+      "prompt": "prompter/boss-v1.txt",
+      "source": "referanser/costume032-sheet.png",
+      "costumes": [
+        32
+      ],
+      "width": 1659,
+      "height": 948,
+      "sha256": "0e15600cce25bb0e6243ae095da200d35817e3eb339e800adeaa56a264aa755f",
+      "bytes": 1803242,
+      "note": "Originalen viser en byste. Hele kroppen er en konsepttolkning rundt den brede redaktørsilhuetten.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "tv-anchor",
+      "name": "TV-presentatøren",
+      "group": "Biroller",
+      "file": "ark/tv-anchor-v1.png",
+      "prompt": "prompter/tv-anchor-v1.txt",
+      "source": "referanser/costume034-sheet.png",
+      "costumes": [
+        34
+      ],
+      "width": 1659,
+      "height": 948,
+      "sha256": "4ba87cc2ffbec9035709efe3d8d5d3f27706991ad6830647a52d347b6a44b166",
+      "bytes": 1979750,
+      "note": "Originalen viser henne på TV. Skjørt og sko er en konsepttolkning.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "broom-alien",
+      "name": "Kost-romvesenet",
+      "group": "Romvesener",
+      "file": "ark/broom-alien-v1.png",
+      "prompt": "prompter/broom-alien-v1.txt",
+      "source": "referanser/costume033-sheet.png",
+      "costumes": [
+        33
+      ],
+      "width": 1659,
+      "height": 948,
+      "sha256": "fe79dbe13d2f078c79b036f28cf41282cd73d48354bf12c9fd27a0d3c2e874b2",
+      "bytes": 1758876,
+      "note": "Børstehodet er levende, med tungøyde blikk. Skaftet er kroppen; ingen menneskearmer eller ben.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "bird",
+      "name": "Jungelfuglen",
+      "group": "Dyr",
+      "file": "ark/bird-v1.png",
+      "prompt": "prompter/bird-v1.txt",
+      "source": "referanser/fugl-rom042.png",
+      "costumes": [
+        14,
+        15
+      ],
+      "width": 1659,
+      "height": 948,
+      "sha256": "2da0d57b2b3f318bbba476297b60807f10c44732015f4754a0ded532b22af835",
+      "bytes": 1742597,
+      "note": "Mørk blå fugl med gult nebb og føtter, kontrollert mot originalen og godkjent rom 42.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "dolphin",
+      "name": "Delfinen",
+      "group": "Dyr",
+      "file": "ark/dolphin-v2.png",
+      "prompt": "prompter/dolphin-v2.txt",
+      "source": "referanser/kostyme013-rom031.png",
+      "costumes": [
+        12,
+        13
+      ],
+      "width": 1659,
+      "height": 948,
+      "sha256": "53639d2cae9baca6e85eef36347b6ff991d0458beeb535244964d73e1606b9db",
+      "bytes": 1503905,
+      "note": "V2 er valgt: tydelig sideprofil i svømmestilling, ryggfinne og blåsehull.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "two-headed-squirrel",
+      "name": "Tohodet ekorn",
+      "group": "Dyr",
+      "file": "ark/two-headed-squirrel-v1.png",
+      "prompt": "prompter/two-headed-squirrel-v1.txt",
+      "source": "referanser/ekorn-obj269.png",
+      "costumes": [],
+      "width": 1659,
+      "height": 948,
+      "sha256": "bc94651ab9ed336d33a6bbe459288f4857284d2be63673512f55abe01eee94b1",
+      "bytes": 1966080,
+      "note": "To separate hoder, én kropp og én hale. Hvert hode har sitt eget temperament.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "yak",
+      "name": "Jaken",
+      "group": "Dyr",
+      "file": "ark/yak-v1.png",
+      "prompt": "prompter/yak-v1.txt",
+      "source": "referanser/yak-rom017.png",
+      "costumes": [],
+      "width": 1659,
+      "height": 948,
+      "sha256": "df756668b89d5f8dd610f6244f47b6a7c3094f87edc776d8d8a0afa34e04e781",
+      "bytes": 2041943,
+      "note": "Rufsete pels, lyse horn, hovføtter og blå sele fra originalens rombilde.",
+      "status": "konsept til kontroll"
+    },
+    {
+      "id": "sushi",
+      "name": "Sushi",
+      "group": "Dyr",
+      "file": "ark/sushi-v1.png",
+      "prompt": "prompter/sushi-v1.txt",
+      "source": "referanser/sushi-rom001.png",
+      "costumes": [],
+      "width": 1660,
+      "height": 948,
+      "sha256": "0843db3c65731913c8dbf0b6d5359fae817d9efb0684febb18c391093c9d9bac",
+      "bytes": 1928948,
+      "note": "Liten gullfisk, både alene og i glassbollen.",
+      "status": "konsept til kontroll"
+    }
+  ]
+}

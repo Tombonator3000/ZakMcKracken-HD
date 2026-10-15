@@ -1,0 +1,362 @@
+[
+  {
+    "id": "melissa",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/melissa-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume007-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-afa4a3c7-6205-45f5-b969-f6da58544bb6.png",
+    "selected": true
+  },
+  {
+    "id": "leslie",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/leslie-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume036-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-14a1fd6f-cce9-421e-8860-700dd20326eb.png",
+    "selected": true
+  },
+  {
+    "id": "lou",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/lou-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume016-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-950a6c28-85d7-4594-b992-44d4ab51eeac.png",
+    "selected": true
+  },
+  {
+    "id": "baker",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/baker-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume017-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-1c5426fc-426e-4daa-a853-f9d67c696c5c.png",
+    "selected": true
+  },
+  {
+    "id": "pilot",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/pilot-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume010-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-32407ae8-7319-49c4-a5f4-04094244f7e8.png",
+    "selected": false
+  },
+  {
+    "id": "pilot",
+    "version": 2,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in edit",
+    "prompt": "prompter/pilot-v2.txt",
+    "references": [
+      "revisjoner/pilot-v1.png",
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-b2be8ad4-b9ab-4bfc-96d4-3a1562e6c39f.png",
+    "selected": true
+  },
+  {
+    "id": "stewardess",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/stewardess-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume011-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-dd12eae1-6afa-4000-9c73-490ba64c77f7.png",
+    "selected": true
+  },
+  {
+    "id": "guru",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/guru-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume022-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-61982288-f1d5-4c73-9bfc-cd7ccd326d19.png",
+    "selected": true
+  },
+  {
+    "id": "shaman",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/shaman-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume021-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-721cdd9e-1d7c-4ca2-a78b-bef16cbd4161.png",
+    "selected": true
+  },
+  {
+    "id": "devotee",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/devotee-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume025-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-cfd08fa4-86a6-4552-8fb5-53ba09e34f61.png",
+    "selected": true
+  },
+  {
+    "id": "bum",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/bum-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume023-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-4952b567-f772-4369-b877-b96381b90aa9.png",
+    "selected": true
+  },
+  {
+    "id": "sentry",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/sentry-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume024-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-0f04de73-3e17-4521-946b-3dcd875da61f.png",
+    "selected": true
+  },
+  {
+    "id": "police",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/police-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume026-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-121b24ff-eb8d-43a0-8ea0-ea7519a1a1b0.png",
+    "selected": true
+  },
+  {
+    "id": "king",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/king-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume027-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-dd7ce7bb-7394-47a8-8adf-9ff5b8f3372e.png",
+    "selected": true
+  },
+  {
+    "id": "skolarian",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/skolarian-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume029-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-208ca5c8-3697-4770-8d3c-2eb15ec6d408.png",
+    "selected": true
+  },
+  {
+    "id": "boss",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/boss-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume032-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-e3b6d035-8f86-467e-9d0e-669a2b7f93b0.png",
+    "selected": true
+  },
+  {
+    "id": "tv-anchor",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/tv-anchor-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume034-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-778e8e33-2b3f-43e9-ba88-825dcabbc043.png",
+    "selected": true
+  },
+  {
+    "id": "broom-alien",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/broom-alien-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/costume033-sheet.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-85770508-2349-4d71-9e63-37c5aea5bca5.png",
+    "selected": true
+  },
+  {
+    "id": "bird",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/bird-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/fugl-rom042.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-d25ef320-0a0c-4a9e-b4e4-a1a3089e2392.png",
+    "selected": true
+  },
+  {
+    "id": "dolphin",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/dolphin-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/kostyme013-rom031.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-80a6e473-e1e0-41f7-a9cf-328fbdc46387.png",
+    "selected": false
+  },
+  {
+    "id": "dolphin",
+    "version": 2,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in edit",
+    "prompt": "prompter/dolphin-v2.txt",
+    "references": [
+      "revisjoner/dolphin-v1.png",
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-e0003dc6-6bee-4504-b95c-5adcd70ef15a.png",
+    "selected": true
+  },
+  {
+    "id": "two-headed-squirrel",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/two-headed-squirrel-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/ekorn-obj269.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-464aa5c4-e775-445c-9609-dac56421f92a.png",
+    "selected": true
+  },
+  {
+    "id": "yak",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/yak-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/yak-rom017.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-f99a5a44-d645-4bc3-b4af-acfcdd1f928c.png",
+    "selected": true
+  },
+  {
+    "id": "sushi",
+    "version": 1,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in",
+    "prompt": "prompter/sushi-v1.txt",
+    "references": [
+      "../../stil/zak-pilot-v1.png",
+      "../../stil/annie-pilot-v1.png",
+      "../../stil/caponian-pilot-v3.png",
+      "referanser/sushi-rom001.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-de392c98-c6f2-427d-bd5e-9b380afb8d7a.png",
+    "selected": true
+  }
+]
