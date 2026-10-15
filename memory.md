@@ -48,6 +48,7 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 
 ## Teknisk plan (ikke testet for Zak)
 - DigHD er på for Zak fra 15. oktober 2026. Valgt: FM-Towns-lagene av ved bygging (`DISABLE_TOWNS_DUAL_LAYER_MODE` i `config.mk`, lagt inn av `engine/build.sh` og `engine/build-web.sh`), så v3 går gjennom vanlig 8-bits tegning. Prisen er at myk rulling må lages i HD-laget. 0001 er felles med The Dig og Sam & Max og må holdes byte for byte lik.
+- Noen rom farges om av skriptet med `SO_ROOM_COLOR` (`_roomPalette`). Rom 21 og 24 tegnes med hver indeks 144 høyere enn i uttrekket. DigHD viser da originalen, fordi indeksene ikke stemmer. Uttrekket må bruke omfargingen før HD-bildet lages. Rom 31 henger ved testhopp (skriptet, ikke HD).
 - Testmiljø uten egne `XDG_CONFIG_HOME` og `XDG_DATA_HOME` kan gjøre at ScummVM henger ved start uten skjerm; sett dem som `engine/test.sh` gjør.
 - Tekst tegnes av `CharsetRendererV3`; kroken for HD-glyfer finnes ikke der.
 - Ingen blast-objekter, ingen filmer, ingen tale, ingen fargesykling i Zak.

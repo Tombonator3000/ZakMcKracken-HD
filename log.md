@@ -179,3 +179,11 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Testet uten skjerm med en nearest-mod: `engine/test.sh` 3000 bilder, 12 av 12 kontroller uten avvik (rom 46, 58, 51, 55); Esc forbi introen til soverommet, Zak med HD-ruter, 13 av 13; `tools/verbhjul_test.sh` med HD på bestått, hjulet riktig på 1280 x 960; testhoppet til rom 2; fersk `RECONFIGURE=1 engine/build.sh` tar med definisjonen. `engine/test.sh` stopper nå med kode 1 ved avvik.
 - Funnet underveis: uten egne XDG-mapper hang ScummVM ved start uten skjerm (ikke HD-laget).
 - Igjen: myk rulling, HD-tekst i `CharsetRendererV3`, menyraden, pekeren, romtesten i alle rom (kjører), prøving med skjerm.
+
+## 2026-10-15 06:07 (Claude)
+- Den felles 0001 er nå byte for byte lik i alle fire repoene: Dig-HD-Remake PR 55 (8bc0ddc), Sam-Max-HD PR 23 (0bdb64a) og Dig-HD-Web PR 2 (2dc5be3) flettet etter grønn CI. Her var a73125d grønn i test, motor og pages.
+- Romtesten med nearest-mod i alle 59 rom: 52 med HD-bakgrunn, ingen krasj, 0 avvik mot full ombygging. Rom 13 og 55 svarte, 15 og 37 forlatt før første bilde, 46 er startrommet, 47 er tomt.
+- Rom 21 og 24 viste 39 og 42 prosent originalpiksler. Kjørt rom 21 for hånd med gult der HD mangler og `DIGHD_DEBUG_PIXEL`: spillet tegner hver indeks 144 høyere enn uttrekket (26 blir 170, sand i stedet for rødt) fordi skriptet fargelegger om med `SO_ROOM_COLOR` (`_roomPalette`). DigHD gjør rett i å vise originalen der. Uttrekket må ta med omfargingen; står i todo.
+- Rom 31 henger ved testhoppet i rommets eget inngangsskript (gdb: `runEntryScript` > `o5_startScript` > `runScriptNested`, 100 prosent CPU), også med `DIGHD_CLASSIC=1`. Ikke HD-laget.
+- `tools/romtest.py` regner fortsatt med skjermen fra Sam & Max (320 x 200); står i todo.
+- HD-MOTOR, STATUS og todo oppdatert.

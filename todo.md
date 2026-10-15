@@ -61,6 +61,10 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [x] Rom og objekter med nearest-mod (0 avvik, `engine/test.sh`); objektbildet `_01` for alle tilstander (15. oktober)
 - [x] Kostymer med krokene fra Sam & Max: Zak i soverommet med HD-ruter, 0 avvik (15. oktober)
 - [ ] `DIGHD_TEST_COSTUME` med én byte startindeks i v3 (ikke prøvd)
+- [x] Romtesten med nearest-mod i alle 59 rom (15. oktober): 52 med HD-bakgrunn, 0 avvik mot full ombygging. Rom 13 og 55 svarte, 15 og 37 forlatt før første bilde, 46 er startrommet, 47 er tomt (0 x 0)
+- [ ] Rom 21 og 24 farges om av skriptet (`SO_ROOM_COLOR`, `_roomPalette`): spillet tegner hver indeks 144 høyere (26 blir 170), så sand i stedet for rødt. DigHD ser at indeksene ikke stemmer og viser originalpikslene der (39 og 42 prosent av skjermen). Uttrekket må bruke omfargingen fra spillet når rombildet lages, ellers blir HD-bildet rødt. Kan finnes i flere rom; lista `dighd-uten-hd.txt` viser dem når man spiller
+- [ ] Rom 31 henger ved testhopp: inngangsskriptet starter et skript som aldri gir fra seg (`runScriptNested`), også med HD av. Gjelder bare hoppet utenfor vanlig spill; prøv å komme dit i spillet
+- [ ] `tools/romtest.py` regner med skjermen 320 x 200 fra Sam & Max. For Zak: 320 x 240 og spillflaten 16 til 143, ellers hoppes forskyvningssjekken og sømmene over («uventet bildestørrelse 1280x960») og alle rom står som mindre enn skjermen
 - [ ] Tekst: HD-glyfer i `CharsetRendererV3` (verb og inventar er tekst)
 - [ ] HD av og på mens man spiller (Tom 14. oktober): Ctrl+H (finnes i 0001) og raden HD Graphics i menyen for FM-Towns-utgaven, så det går på mobil; valget lagres (`dighd_classic`)
 - [ ] Pekeren for FM-Towns-utgaven
