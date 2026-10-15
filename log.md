@@ -253,4 +253,5 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Testet: bygget uten advarsler; `engine/test.sh` 0 avvik med 16 bit og med OpenGL; bilder fra intro og rom 1, 2 og 8 byte for byte like med gammel motor; `tools/verbhjul_test.sh` bestått, og skjermbildene like med gammel motor utenom fiskebollen (animasjonen et bilde forskjøvet); `tools/lag_patcher.sh` og `--ny-0001` gir de samme patchene; `tools/sjekk_patcher.py` OK.
 - Ikke gjort: 0001 kopiert til Dig-HD-Remake, Sam-Max-HD og Dig-HD-Web (todo). Tabell per palettindeks for nedtoning er ikke laget.
 - Dokumentert i `docs/MOTOR-FORBEDRING.md` del 10, `docs/VERBHJUL.md`, STATUS, memory og todo.
-
+- CI etter push (5782de2): test, motor og pages grønne.
+- Den nye 0001 kopiert til de tre andre repoene som PR, etter reglene der (kode via PR): Sam-Max-HD 25, Dig-HD-Remake 56, Dig-HD-Web 3. Bare patchfila og en loggføring. Før kopien var 0001 i alle tre byte for byte lik den gamle i Zak.
