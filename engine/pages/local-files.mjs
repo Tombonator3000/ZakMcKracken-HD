@@ -41,8 +41,9 @@ export function selectFiles(files, kind) {
   if (kind === 'game' && ['00.LFL', '98.LFL', '99.LFL'].some(name => !selected.has(root + name))) {
     throw new Error('Velg mappen som inneholder 00.LFL, 98.LFL og 99.LFL.');
   }
-  if (kind !== 'game' && (!selected.has(root + 'mod.json') || ![...selected.keys()].some(p => /\/rooms\/room\d+\.png$/.test(p)))) {
-    throw new Error('Velg HD-mappen som inneholder mod.json og rooms.');
+  // En mod med bare grensesnittet (ikoner og inventar) har ingen rom
+  if (kind !== 'game' && !selected.has(root + 'mod.json')) {
+    throw new Error('Velg HD-mappen som inneholder mod.json.');
   }
   return [...selected.values()];
 }

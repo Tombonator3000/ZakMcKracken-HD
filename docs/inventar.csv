@@ -1,124 +1,124 @@
 objekt,navn,rom,bilde_i_rommet,fil,status
-14,Sushi in fish bowl,1,ja,obj014.png,mangler
-15,phone bill,1,ja,obj015.png,mangler
-16,kazoo,1,ja,obj016.png,mangler
-17,torn wallpaper,1,ja,obj017.png,mangler
-18,CashCard,1,ja,obj018.png,mangler
+14,Sushi in fish bowl,1,ja,obj014.png,godkjent
+15,phone bill,1,ja,obj015.png,godkjent
+16,kazoo,1,ja,obj016.png,godkjent
+17,torn wallpaper,1,ja,obj017.png,godkjent
+18,CashCard,1,ja,obj018.png,godkjent
 19,receiver,1,ja,obj019.png,mangler
-20,power cord,2,ja,obj020.png,mangler
-21,remote control,2,ja,obj021.png,mangler
-22,egg,2,ja,obj022.png,mangler
-23,bread crumbs,2,ja,obj023.png,mangler
-24,small key,2,ja,obj024.png,mangler
-25,box of crayons,2,ja,obj025.png,mangler
-26,butter knife,2,ja,obj026.png,mangler
-27,fan club card,3,nei,obj027.png,mangler
-29,stale bread,3,ja,obj029.png,mangler
-30,application,4,ja,obj030.png,mangler
-31,bobby pin sign,5,ja,obj031.png,mangler
-32,CashCard,6,ja,obj032.png,mangler
-33,squirrel nest,13,ja,obj033.png,mangler
-34,tool kit,7,ja,obj034.png,mangler
-37,rope,7,nei,obj037.png,mangler
-39,wet suit,7,ja,obj039.png,mangler
-40,nose glasses,7,ja,obj040.png,mangler
-41,guitar,7,ja,obj041.png,mangler
-43,hat,7,ja,obj043.png,mangler
-44,golf club,7,ja,obj044.png,mangler
-45,book,8,nei,obj045.png,mangler
-46,whiskey,8,nei,obj046.png,mangler
-47,toilet paper,11,ja,obj047.png,mangler
-48,cushion,11,ja,obj048.png,mangler
-49,lighter,11,ja,obj049.png,mangler
-50,oxygen tank,11,ja,obj050.png,mangler
-51,peanuts,11,nei,obj051.png,mangler
-52,tree branch,12,ja,obj052.png,mangler
-53,abandoned bird nest,13,ja,obj053.png,mangler
-54,crystal shard,6,ja,obj054.png,mangler
-55,blue crystal,14,ja,obj055.png,mangler
-56,crystal shard,14,ja,obj056.png,mangler
-57,yellow crystal,44,ja,obj057.png,mangler
-58,white crystal,15,ja,obj058.png,mangler
-59,flagpole,17,ja,obj059.png,mangler
-60,jail key,18,ja,obj060.png,mangler
-61,token,27,nei,obj061.png,mangler
-62,token,27,nei,obj062.png,mangler
-63,token,27,nei,obj063.png,mangler
-64,burnt fuse,28,ja,obj064.png,mangler
-65,helmet,26,nei,obj065.png,mangler
-66,helmet,26,nei,obj066.png,mangler
-67,vinyl tape,28,ja,obj067.png,mangler
-68,broom alien,28,ja,obj068.png,mangler
-69,flashlight,28,ja,obj069.png,mangler
-70,ladder,28,ja,obj070.png,mangler
-71,boom box,30,ja,obj071.png,mangler
-72,Digital Audio Tape,30,ja,obj072.png,mangler
-73,fuse,30,ja,obj073.png,mangler
-74,CashCards,30,ja,obj074.png,mangler
-75,CashCard,30,nei,obj075.png,mangler
-76,golden key,35,ja,obj076.png,mangler
-77,parachute,40,nei,obj077.png,mangler
-78,glowing object,41,ja,obj078.png,mangler
-79,scroll,43,ja,obj079.png,mangler
-80,candelabra,43,ja,obj080.png,mangler
-81,ankh,14,ja,obj081.png,mangler
-82,ticket,59,nei,obj082.png,mangler
-83,ticket,59,nei,obj083.png,mangler
+20,power cord,2,ja,obj020.png,godkjent
+21,remote control,2,ja,obj021.png,godkjent
+22,egg,2,ja,obj022.png,godkjent
+23,bread crumbs,2,ja,obj023.png,godkjent
+24,small key,2,ja,obj024.png,godkjent
+25,box of crayons,2,ja,obj025.png,godkjent
+26,butter knife,2,ja,obj026.png,godkjent
+27,fan club card,3,nei,obj027.png,godkjent
+29,stale bread,3,ja,obj029.png,godkjent
+30,application,4,ja,obj030.png,godkjent
+31,bobby pin sign,5,ja,obj031.png,godkjent
+32,CashCard,6,ja,obj032.png,godkjent
+33,squirrel nest,13,ja,obj033.png,godkjent
+34,tool kit,7,ja,obj034.png,godkjent
+37,rope,7,nei,obj037.png,godkjent
+39,wet suit,7,ja,obj039.png,godkjent
+40,nose glasses,7,ja,obj040.png,godkjent
+41,guitar,7,ja,obj041.png,godkjent
+43,hat,7,ja,obj043.png,godkjent
+44,golf club,7,ja,obj044.png,godkjent
+45,book,8,nei,obj045.png,godkjent
+46,whiskey,8,nei,obj046.png,godkjent
+47,toilet paper,11,ja,obj047.png,godkjent
+48,cushion,11,ja,obj048.png,godkjent
+49,lighter,11,ja,obj049.png,godkjent
+50,oxygen tank,11,ja,obj050.png,godkjent
+51,peanuts,11,nei,obj051.png,godkjent
+52,tree branch,12,ja,obj052.png,godkjent
+53,abandoned bird nest,13,ja,obj053.png,godkjent
+54,crystal shard,6,ja,obj054.png,godkjent
+55,blue crystal,14,ja,obj055.png,godkjent
+56,crystal shard,14,ja,obj056.png,godkjent
+57,yellow crystal,44,ja,obj057.png,godkjent
+58,white crystal,15,ja,obj058.png,godkjent
+59,flagpole,17,ja,obj059.png,godkjent
+60,jail key,18,ja,obj060.png,godkjent
+61,token,27,nei,obj061.png,godkjent
+62,token,27,nei,obj062.png,godkjent
+63,token,27,nei,obj063.png,godkjent
+64,burnt fuse,28,ja,obj064.png,godkjent
+65,helmet,26,nei,obj065.png,godkjent
+66,helmet,26,nei,obj066.png,godkjent
+67,vinyl tape,28,ja,obj067.png,godkjent
+68,broom alien,28,ja,obj068.png,godkjent
+69,flashlight,28,ja,obj069.png,godkjent
+70,ladder,28,ja,obj070.png,godkjent
+71,boom box,30,ja,obj071.png,godkjent
+72,Digital Audio Tape,30,ja,obj072.png,godkjent
+73,fuse,30,ja,obj073.png,godkjent
+74,CashCards,30,ja,obj074.png,godkjent
+75,CashCard,30,nei,obj075.png,godkjent
+76,golden key,35,ja,obj076.png,godkjent
+77,parachute,40,nei,obj077.png,godkjent
+78,glowing object,41,ja,obj078.png,godkjent
+79,scroll,43,ja,obj079.png,godkjent
+80,candelabra,43,ja,obj080.png,godkjent
+81,ankh,14,ja,obj081.png,godkjent
+82,ticket,59,nei,obj082.png,godkjent
+83,ticket,59,nei,obj083.png,godkjent
 87,telephone,1,ja,obj087.png,mangler
 95,cat clock,1,ja,obj095.png,mangler
-106,plastic card,1,ja,obj106.png,mangler
+106,plastic card,1,ja,obj106.png,godkjent
 107,rug corner,1,ja,obj107.png,mangler
 108,loose boards,1,ja,obj108.png,mangler
-110,rope,1,ja,obj110.png,mangler
-119,seat cushion,2,ja,obj119.png,mangler
-130,stale bread,2,ja,obj130.png,mangler
-131,seat cushion,2,ja,obj131.png,mangler
-139,letter,3,ja,obj139.png,mangler
-175,blotter,6,ja,obj175.png,mangler
-176,books,6,nei,obj176.png,mangler
-177,books,6,nei,obj177.png,mangler
-179,Yeti skull,6,nei,obj179.png,mangler
-183,crystal shard,7,ja,obj183.png,mangler
-184,crystal shard,7,ja,obj184.png,mangler
-185,yellow crystal,7,ja,obj185.png,mangler
-186,blue crystal,7,ja,obj186.png,mangler
-187,butter knife,7,ja,obj187.png,mangler
-188,remote control,7,ja,obj188.png,mangler
-189,Lotto,7,nei,obj189.png,mangler
+110,rope,1,ja,obj110.png,godkjent
+119,seat cushion,2,ja,obj119.png,godkjent
+130,stale bread,2,ja,obj130.png,godkjent
+131,seat cushion,2,ja,obj131.png,godkjent
+139,letter,3,ja,obj139.png,godkjent
+175,blotter,6,ja,obj175.png,godkjent
+176,books,6,nei,obj176.png,godkjent
+177,books,6,nei,obj177.png,godkjent
+179,Yeti skull,6,nei,obj179.png,godkjent
+183,crystal shard,7,ja,obj183.png,godkjent
+184,crystal shard,7,ja,obj184.png,godkjent
+185,yellow crystal,7,ja,obj185.png,godkjent
+186,blue crystal,7,ja,obj186.png,godkjent
+187,butter knife,7,ja,obj187.png,godkjent
+188,remote control,7,ja,obj188.png,godkjent
+189,Lotto,7,nei,obj189.png,godkjent
 241,exploded egg,11,ja,obj241.png,mangler
 257,suitcase,11,ja,obj257.png,mangler
 258,suitcase,11,ja,obj258.png,mangler
 259,suitcase,11,ja,obj259.png,mangler
-262,egg,11,ja,obj262.png,mangler
+262,egg,11,ja,obj262.png,godkjent
 264,toilet paper holder,11,nei,obj264.png,mangler
 267,loose dirt,12,ja,obj267.png,mangler
 268,two-headed squirrel,12,ja,obj268.png,mangler
 271,Mt. Rainier,12,nei,obj271.png,mangler
 273,fire pit,13,nei,obj273.png,mangler
 285,two-headed squirrel,13,ja,obj285.png,mangler
-288,paper,13,ja,obj288.png,mangler
-333,rope,16,ja,obj333.png,mangler
-362,yak pie,17,ja,obj362.png,mangler
+288,paper,13,ja,obj288.png,godkjent
+333,rope,16,ja,obj333.png,godkjent
+362,yak pie,17,ja,obj362.png,godkjent
 391,sand pile,21,ja,obj391.png,mangler
-395,bobby pin sign,21,ja,obj395.png,mangler
-427,glowing object,25,ja,obj427.png,mangler
-428,crystalabra,25,ja,obj428.png,mangler
-429,yellow crystal,25,ja,obj429.png,mangler
-430,white crystal,25,ja,obj430.png,mangler
-431,blue crystal,25,ja,obj431.png,mangler
+395,bobby pin sign,21,ja,obj395.png,godkjent
+427,glowing object,25,ja,obj427.png,godkjent
+428,crystalabra,25,ja,obj428.png,godkjent
+429,yellow crystal,25,ja,obj429.png,godkjent
+430,white crystal,25,ja,obj430.png,godkjent
+431,blue crystal,25,ja,obj431.png,godkjent
 451,sand,27,ja,obj451.png,mangler
-471,fuse,28,ja,obj471.png,mangler
+471,fuse,28,ja,obj471.png,godkjent
 478,covers,28,ja,obj478.png,mangler
-479,can of gas,28,nei,obj479.png,mangler
-535,ladder,29,ja,obj535.png,mangler
-536,ladder,29,ja,obj536.png,mangler
-537,ladder,29,ja,obj537.png,mangler
-544,large key,35,ja,obj544.png,mangler
-609,seaweed,41,nei,obj609.png,mangler
-610,seaweed,41,nei,obj610.png,mangler
-614,seaweed,41,nei,obj614.png,mangler
-623,bread crumbs,42,ja,obj623.png,mangler
-645,crystal shard,44,ja,obj645.png,mangler
-646,crystal shard,44,ja,obj646.png,mangler
-647,flagpole,44,ja,obj647.png,mangler
-653,crystal shards,44,ja,obj653.png,mangler
+479,can of gas,28,nei,obj479.png,godkjent
+535,ladder,29,ja,obj535.png,godkjent
+536,ladder,29,ja,obj536.png,godkjent
+537,ladder,29,ja,obj537.png,godkjent
+544,large key,35,ja,obj544.png,godkjent
+609,seaweed,41,nei,obj609.png,godkjent
+610,seaweed,41,nei,obj610.png,godkjent
+614,seaweed,41,nei,obj614.png,godkjent
+623,bread crumbs,42,ja,obj623.png,godkjent
+645,crystal shard,44,ja,obj645.png,godkjent
+646,crystal shard,44,ja,obj646.png,godkjent
+647,flagpole,44,ja,obj647.png,godkjent
+653,crystal shards,44,ja,obj653.png,godkjent

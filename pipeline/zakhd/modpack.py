@@ -62,8 +62,12 @@ VERB_ICONS = {"push", "open", "put-on", "turn-on", "pull", "close", "pick-up", "
               "portrett-zak", "portrett-annie", "portrett-melissa", "portrett-leslie"}
 
 
-def build_ui(out: Path, own: Path | None = None, repo: Path = REPO) -> list[str]:
-    """Ikonene til verbhjulet og bildene til inventaret, fra grafikk/ og fra --egne (egne vinner)."""
+UI_MAX = 256   # største side i modden: ikonene tegnes høyst 112 og rutene rundt 216 x 172 piksler (4x)
+
+
+def build_ui(out: Path, own: Path | None = None, repo: Path = REPO, max_side: int = UI_MAX) -> list[str]:
+    """Ikonene til verbhjulet og bildene til inventaret, fra grafikk/ og fra --egne (egne vinner).
+    Større bilder skaleres ned til max_side (originalene i grafikk/ beholdes), så nettsiden henter mindre."""
     import re
     done = {}
     sources = [(repo / a, b, pat) for a, b, pat in UI_SOURCES]
@@ -84,8 +88,11 @@ def build_ui(out: Path, own: Path | None = None, repo: Path = REPO) -> list[str]
             if min(im.size) < 64:
                 print(f"  Hopper over {f.name}: {im.width}x{im.height} er for lite")
                 continue
+            if max(im.size) > max_side:
+                k = max_side / max(im.size)
+                im = im.resize((max(1, round(im.width * k)), max(1, round(im.height * k))), Image.LANCZOS)
             (out / dst).mkdir(parents=True, exist_ok=True)
-            im.save(out / dst / f.name)
+            im.save(out / dst / f.name, optimize=True)
             done[f"{dst}/{f.name}"] = True
     return sorted(done)
 
@@ -99,6 +106,19 @@ def soft_size_ok(size: tuple[int, int], cel: tuple[int, int], scale: int) -> boo
         return False
     px, py = W // scale - w, H // scale - h
     return px >= 0 and py >= 0 and px % 2 == 0 and py % 2 == 0
+
+
+def build_ui_mod(out: Path, own: Path | None = None, scale: int = 4) -> dict:
+    """En mod med bare grensesnittet: mod.json, ikonene til verbhjulet og bildene til inventaret.
+    Rom, objekter og figurer vises da som originalen."""
+    out.mkdir(parents=True, exist_ok=True)
+    ui = build_ui(out, own)
+    manifest = {"format": 1, "scale": scale, "method": "bare grensesnittet",
+                "created": time.strftime("%Y-%m-%d %H:%M"), "rooms": [], "objects": [], "costumes": [],
+                "costume_cels": 0, "films": [], "fonts": {}, "ui": ui}
+    (out / "mod.json").write_text(json.dumps(manifest, indent=1))
+    print(f"Ferdig: bare grensesnittet, {len(ui)} bilder -> {out}")
+    return manifest
 
 
 def _check_size(im: Image.Image, want: tuple[int, int], name: str) -> bool:

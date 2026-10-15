@@ -46,4 +46,4 @@ Tom har godkjent 21 karakterark, inventaret og verbhjulet visuelt. The King er r
 
 ## Zak spritesheet, 15. oktober
 
-Første pilot ligger i `grafikk/sprites/zak/`: 24 hele stå-/gåruter og 51 motorfragmenter fordelt på tre tegnede ark. Bare Zak kostyme 1. Import: 38 ok, 13 sjekk (munn/utstyr), 0 mangler. Alfa, SHA-256, rutekobling og avklipping kontrollert. Ny grafikk er ikke prøvd i motoren; piloten er til visuell kontroll. The King v2 med Elvis-tupé ligger i karakterleveransen og PR #11.
+Første pilot ligger i `grafikk/sprites/zak/`: 24 hele stå-/gåruter og 51 motorfragmenter fordelt på tre tegnede ark. Bare Zak kostyme 1. Import: 38 ok, 13 sjekk (munn/utstyr), 0 mangler. Alfa, SHA-256, rutekobling og avklipping kontrollert. Ny grafikk er ikke prøvd i motoren; piloten er til visuell kontroll. The King v2 med Elvis-tupé ligger i karakterleveransen. Tupé og spritepilot leveres i en oppfølgings-PR fordi PR #11 allerede er flettet.

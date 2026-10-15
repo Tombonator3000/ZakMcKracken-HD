@@ -246,3 +246,9 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Laget bare Zak, kostyme 1, etter Toms bestilling. Tre image_gen-ark med 51 deler og det godkjente Zak-ankeret. Side 2 v2 forkastet fordi munnfragmenter forsvant; alle valgte ark er v1.
 - Laget transparent spritesheet med 24 sammensatte stå- og gåruter, rutekart, faktiske prompter, kontrollnotat og SHA-256 under grafikk/sprites/zak/. Ingen originalbilder kopiert til kodegrenen.
 - Eksplisitt kobling og eksisterende myk-mottak: 51 importert fra de nye arkene, 38 ok, 13 sjekk, 0 mangler. Alle 24 sammensatte ruter kontrollert for cellekanter og visuelt. De 13 små munn-/utstyrsrutene må fortsatt kontrolleres før motorbruk. Ingen motor- eller pipelinekode endret; grafikken er ikke prøvd i motoren.
+## 2026-10-15 13:27 til 14:10 (Claude)
+- Tom: «gpt har lagd inventory og verb hjul grafikk men integrer dem i spillet.» Codex hadde lagt 15 malte verbikoner i `grafikk/ui/verbhjul-gpt/` og 126 inventarbilder i `grafikk/inventar/` (PR 11, flettet), alle 512 x 512 RGBA. Sett over i kontaktark: motivene stemmer med listen.
+- Ny `zakhd build-mod --kun-ui` (`build_ui_mod`): mod.json og grensesnittet uten rom og figurer. `build_ui` skalerer nå ned til 256 piksler i modden (originalene i `grafikk/` urørt); modden ble 8,3 MB. Nettsiden godtar en mod uten rom (`selectFiles` krevde `rooms/`). Nye tester: pytest 38, nodetester 21.
+- Modden bygget og publisert i grenen `hd-mod` med `tools/mod_gren.sh send` (mod.json, ui/, inventory/, SHA256SUMS).
+- Testet uten skjerm med modden: «19 drawn icons (15 from the HD pack)», de malte ikonene i hjulet (Turn on lamp), inventaret med malte bilder (billett, fiskebolle med Sushi, regning, kazoo, tapet, CashCard, plastkort) og navn for tingene uten bilde (receiver, telephone, cat clock), hjulet åpnet på billetten.
+- `docs/inventar.csv` laget på nytt: status «godkjent» der bildet finnes.

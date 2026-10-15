@@ -1618,3 +1618,18 @@ def test_build_ui_takes_wheel_icons_and_inventory_pictures(tmp_path):
     assert Image.open(out / "inventory/obj082.png").mode == "RGBA"
     assert Image.open(out / "inventory/obj082.png").getpixel((0, 0)) == (5, 5, 5, 255)
 
+
+def test_build_ui_mod_scales_down_and_writes_manifest(tmp_path):
+    import json
+    from PIL import Image
+    from zakhd import modpack
+    repo = tmp_path / "repo"
+    (repo / "grafikk/inventar").mkdir(parents=True)
+    Image.new("RGBA", (512, 512), (1, 2, 3, 255)).save(repo / "grafikk/inventar/obj082.png")
+    out = tmp_path / "mod"
+    done = modpack.build_ui(out, None, repo=repo)
+    assert done == ["inventory/obj082.png"]
+    assert Image.open(out / "inventory/obj082.png").size == (256, 256)
+    m = modpack.build_ui_mod(tmp_path / "mod2")
+    assert json.loads((tmp_path / "mod2/mod.json").read_text())["format"] == 1
+
