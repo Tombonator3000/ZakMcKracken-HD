@@ -1,0 +1,8 @@
+{
+  "file": "obj015-phone-bill.png",
+  "type": "inventory",
+  "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-9cad5ea0-6beb-4037-afc1-d760f5adcfca.png",
+  "prompt": "Edit target reference 1: a folded TELEPHONE BILL, a paper telephone-account statement. Redraw its linework with the whimsical, off-kilter hand-inked comic style and muted flat colours of reference 2. Preserve the folded off-white sheet, telephone handset pictogram, simple printed horizontal lines and billing table from reference 1. Exaggerate the curled paper corners gently. The object is an INVOICE FOR TELEPHONE SERVICE, NOT a banknote or cash. No currency border, oval money portrait, money ornaments, denomination or dollar sign. No readable text, numbers, logos, medallion, scene or ground shadow. One sheet only, fully visible, centred in a square image with 10 percent transparent margin. True alpha background. Fine interior ink lines, darker varied outer contour, one simple paper shadow. The telephone glyph makes the identity clear.",
+  "tool": "image_gen, innebygd",
+  "model": "ikke oppgitt"
+}

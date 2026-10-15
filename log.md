@@ -229,3 +229,10 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Nye testkommandoer: `give=OBJ` (en ting i rommet til inventaret, som pickupObject) og `wheel=up@x/y`.
 - Testet uten skjerm: 12 ting i inventaret, hjulet ned blar to ting fram og pilen opp kommer, hjulet opp tilbake; portrettene med gul ring og navn. Listen til ChatGPT har fått portrettene (del 1b).
 - `tools/verbhjul_test.sh` stoppet først på «portrettene ble ikke vist»: testen leter etter logglinjen fra de gamle boksene. HD-portrettene logger nå det samme («portraits ego 1:...»). Deretter bestått (11 like setninger, figurbyttet med portrettet virker).
+
+## 2026-10-15 13:03 (Codex)
+- Tom bestilte innlegging av alle karakterkonsepter, inventar og verbhjul i repoet med PR og pull. Denne direkte bestillingen gjelder foran den eldre regelen om ingen PR.
+- Kjørte git pull --ff-only origin main til b44ed20 og laget grenen grafikk-karakterer-inventar-verbhjul.
+- Flyttet inn 15 verbikoner, 126 inventarfiler og 22 karakterark med gallerier, faktiske prompter, manifest og SHA-256. Bildene bevares byte for byte; originaluttrekk og skript beholdes i gpt-arbeid.
+- UI-bildene ligger i grafikk/ui/verbhjul-gpt/ og grafikk/inventar/, der build_ui allerede leser dem. Konseptarkene importeres ikke som animasjonsruter. Ingen motor- eller pipelinekode endret.
+- Kontroll før PR: build_ui tok inn alle 141 UI-filer med uendrede dekodede piksler; 172 PNG er byteidentiske med gpt-arbeid, 79 aliaskoblinger stemmer og alle 96 bilder i UI-galleriet finnes. Tre SHA-256-lister kontrollert. 37 pipelinetester bestått (2 spilldatatester utelatt), 21 nettlesertester, 4 Pages-pakkertester og hunk-hoder i 4 patcher bestått.
