@@ -38,6 +38,19 @@ Claude har tegnet en første utgave som er bygget inn i spillet (`grafikk/ui/ver
 
 Zak har ikke Talk to eller Look at, så det er ingen munn eller snakkeboble.
 
+## Del 1b: Portrettene for figurbytte (4)
+
+Når spilleren kan bytte figur, står et portrett av hver figur til høyre for inventaret; et trykk bytter figur, og den man styrer har gul ring. Claude har tegnet enkle portretter (`grafikk/ui/portretter/*.png` i main). Malte portretter leveres med filnavnene under, i samme runde mynt som ikonene: hode og skuldre forfra, glad og vennlig.
+
+| Fil | Figur | Utseende (fra figurarkene og spillets figurer) | Motiv (engelsk) |
+| --- | --- | --- | --- |
+| `portrett-zak.png` | Zak McKracken | Brunt hår med lokk, blå skjorte, rødt slips (arket `zak-pilot-v1.png`) | Head and shoulders of Zak: messy brown hair with a quiff, blue shirt, red tie |
+| `portrett-annie.png` | Annie Larris | Svart skulderlangt hår, blå høyhalset genser (arket `annie-pilot-v1.png`) | Head and shoulders of Annie: black shoulder-length hair, blue turtleneck sweater |
+| `portrett-melissa.png` | Melissa China | Lyst kort hår, blå og lilla romdrakt (spillets figur; ikke noe ark ennå) | Head and shoulders of Melissa: short blonde hair, blue and purple space suit collar |
+| `portrett-leslie.png` | Leslie Bennett | Rødbrunt krøllete hår, rosa romdrakt (spillets figur; ikke noe ark ennå) | Head and shoulders of Leslie: curly auburn hair, pink space suit collar |
+
+Melissa og Leslie har ikke godkjente figurark. Tom bør godkjenne utseendet deres før portrettene males.
+
 ## Del 2: Tingene i inventaret
 
 Filnavn: `objNNN.png` for tingen. Har tingen flere navn i spillet (den endrer seg), lages ett bilde per navn: `objNNN-<navn>.png`, med navnet i små bokstaver og bindestrek mellom ordene (for eksempel `obj014-taped-fish-bowl.png`). Motoren velger bildet som passer navnet tingen har akkurat nå, og bruker `objNNN.png` ellers. Står flere objektnummer på samme rad, er det samme ting flere steder i spillet: lag `objNNN.png` for det første nummeret og bruk samme bilde for de andre (Claude kopierer).

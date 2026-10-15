@@ -58,3 +58,6 @@
 
 ## 2026-10-15 10:01 (Claude)
 - La inn GRAFIKK-HJUL-OG-INVENTAR.md (listen over ikonene til verbhjulet og tingene i inventaret, fra docs/ i main) og en henvisning i AGENTS.md. Ikke bestilt; ORDRE.md er uendret.
+
+## 2026-10-15 10:28 (Claude)
+- GRAFIKK-HJUL-OG-INVENTAR.md oppdatert fra main: portrettene for figurbytte (del 1b).
