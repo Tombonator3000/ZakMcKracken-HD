@@ -52,7 +52,10 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 
 - [x] 15 malte verbikoner og 126 inventarfiler lagt i mappene `build_ui` leser, etter Toms bestilling
 - [x] 22 karakterkonsepter med galleri, prompter, kilder og sjekksummer lagt i `grafikk/konsept/`
-- [ ] Tom vurderer konseptdetaljene og ser de nye UI-bildene i spillet
+- [x] Tom godkjente 21 karakterark, inventaret og verbhjulet (15. oktober)
+- [x] The King rettet med svart Elvis-tupé som v2, til kontroll
+- [ ] Tom ser de nye UI-bildene i spillet
+- [ ] Første spritesheet-leveranse for bare Zak
 
 ### Verbhjulet i HD (15. oktober)
 
@@ -187,3 +190,16 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 
 - [ ] Vurder én felles kode-repo for alle LucasArts-HD-spillene, når Sam & Max og Zak trenger samme motor
 - [ ] Slå på push-utløseren i `.github/workflows/linux.yml` når HD virker
+
+### Zak spritesheet, første pilot 15. oktober
+
+- [x] Bare Zak først: 24 sammensatte ruter, tre ark, 51 deler, faktiske prompter og rutekart.
+- [ ] Tom vurderer spritepiloten og King v2 med Elvis-tupé.
+- [ ] Kontroller de 13 importmerknadene for munn/utstyr og prøv de nye delene i motoren før de tas i bruk.
+
+### Verbhjul: hender og fedora
+- [x] Rettet 11 ikoner med bare hender og fem fingre, fedora i put-on/take-off. Før/etter, prompter og sjekksummer vedlagt.
+- [ ] Tom vurderer den nye rettelsen; se den deretter i motoren.
+
+- [x] Andre retur: tegn buy, give og take-off på nytt med naturlige hender, før/etter og 112-pikslers kontrollark.
+- [ ] Tom vurderer de tre nye hendene i andre retur.

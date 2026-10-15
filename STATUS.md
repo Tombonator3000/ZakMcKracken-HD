@@ -40,3 +40,17 @@ Repoet har samme oppsett som Sam & Max HD og The Dig HD Remake, tilpasset Zak Mc
 - Kostymefargene i RGBA-bildene er fra rommet kostymet ligger i; spillet kan vise andre farger.
 - Promptene i `gpt.py` og `figur.py` er grovt tilpasset Zak, ikke prøvd. Bestillingen er ikke aktiv før stilpiloten.
 - Nettsiden: ikke prøvd på en ekte telefon, i fullskjerm, med F5-menyen og lagring, eller i Firefox og Safari. Den virker bare så lenge repoet er offentlig (Pages).
+
+## Godkjenning 15. oktober
+
+Tom har godkjent 21 karakterark, inventaret og verbhjulet visuelt. The King er rettet som v2 med Elvis-tupé etter hans bestilling; denne rettelsen vises til kontroll. Første spritesheet-leveranse er bestilt for bare Zak.
+
+## Zak spritesheet, 15. oktober
+
+Første pilot ligger i `grafikk/sprites/zak/`: 24 hele stå-/gåruter og 51 motorfragmenter fordelt på tre tegnede ark. Bare Zak kostyme 1. Import: 38 ok, 13 sjekk (munn/utstyr), 0 mangler. Alfa, SHA-256, rutekobling og avklipping kontrollert. Ny grafikk er ikke prøvd i motoren; piloten er til visuell kontroll. The King v2 med Elvis-tupé ligger i karakterleveransen. Tupé og spritepilot leveres i en oppfølgings-PR fordi PR #11 allerede er flettet.
+
+## Verbhjul: ny rettelse 15. oktober
+11 håndikoner er rettet etter Toms retur: tydeligere femfingrede grep, korte bare håndledd uten klær, fedora i begge hattikonene. PNG 512 x 512 RGBA, før/etter og faktiske prompter under grafikk/rapporter/verbhjul-hender-20261015/. Ingen motor- eller pipelinekode endret. Rettelsen er til kontroll og ikke prøvd i motoren.
+
+## Andre retur på tre håndikoner
+Tom avviste buy, give og take-off på nytt. De tre hendene er tegnet om og erstatter forrige runde. Nærbilde, 112-pikslers visning og faktisk eksport finnes i grafikk/rapporter/verbhjul-hender-retur-02-20261015/. Til vurdering, ikke prøvd i motoren.

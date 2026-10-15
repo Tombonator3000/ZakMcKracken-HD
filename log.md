@@ -237,6 +237,15 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - UI-bildene ligger i grafikk/ui/verbhjul-gpt/ og grafikk/inventar/, der build_ui allerede leser dem. Konseptarkene importeres ikke som animasjonsruter. Ingen motor- eller pipelinekode endret.
 - Kontroll før PR: build_ui tok inn alle 141 UI-filer med uendrede dekodede piksler; 172 PNG er byteidentiske med gpt-arbeid, 79 aliaskoblinger stemmer og alle 96 bilder i UI-galleriet finnes. Tre SHA-256-lister kontrollert. 37 pipelinetester bestått (2 spilldatatester utelatt), 21 nettlesertester, 4 Pages-pakkertester og hunk-hoder i 4 patcher bestått.
 
+## 2026-10-15 13:26 (Codex)
+- Tom godkjente resten av grafikkleveransen, men ba om Elvis-hår som tupé på The King. Ett innebygd image_gen-redigeringskall ga king-v2.png med tupé i alle seks visninger. Hodeform, høye øyne, scenedrakt og positurer kontrollert visuelt.
+- Godkjenning, valgt fil, galleri, kontaktoversikt, prompt og sjekksummer oppdatert både i grafikkleveransen og gpt-arbeid. Tidligere King v1 beholdes som ikke godkjent historikk.
+- Tom bestilte deretter spritesheet for bare Zak først. Originalens kostyme 1 har 51 ruter fordelt på tre ark i eksisterende pipeline.
+
+## 2026-10-15: Zak spritesheet (Codex)
+- Laget bare Zak, kostyme 1, etter Toms bestilling. Tre image_gen-ark med 51 deler og det godkjente Zak-ankeret. Side 2 v2 forkastet fordi munnfragmenter forsvant; alle valgte ark er v1.
+- Laget transparent spritesheet med 24 sammensatte stå- og gåruter, rutekart, faktiske prompter, kontrollnotat og SHA-256 under grafikk/sprites/zak/. Ingen originalbilder kopiert til kodegrenen.
+- Eksplisitt kobling og eksisterende myk-mottak: 51 importert fra de nye arkene, 38 ok, 13 sjekk, 0 mangler. Alle 24 sammensatte ruter kontrollert for cellekanter og visuelt. De 13 små munn-/utstyrsrutene må fortsatt kontrolleres før motorbruk. Ingen motor- eller pipelinekode endret; grafikken er ikke prøvd i motoren.
 ## 2026-10-15 13:27 til 14:10 (Claude)
 - Tom: «gpt har lagd inventory og verb hjul grafikk men integrer dem i spillet.» Codex hadde lagt 15 malte verbikoner i `grafikk/ui/verbhjul-gpt/` og 126 inventarbilder i `grafikk/inventar/` (PR 11, flettet), alle 512 x 512 RGBA. Sett over i kontaktark: motivene stemmer med listen.
 - Ny `zakhd build-mod --kun-ui` (`build_ui_mod`): mod.json og grensesnittet uten rom og figurer. `build_ui` skalerer nå ned til 256 piksler i modden (originalene i `grafikk/` urørt); modden ble 8,3 MB. Nettsiden godtar en mod uten rom (`selectFiles` krevde `rooms/`). Nye tester: pytest 38, nodetester 21.
@@ -244,6 +253,10 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Testet uten skjerm med modden: «19 drawn icons (15 from the HD pack)», de malte ikonene i hjulet (Turn on lamp), inventaret med malte bilder (billett, fiskebolle med Sushi, regning, kazoo, tapet, CashCard, plastkort) og navn for tingene uten bilde (receiver, telephone, cat clock), hjulet åpnet på billetten.
 - `docs/inventar.csv` laget på nytt: status «godkjent» der bildet finnes.
 
+## 2026-10-15 16:46 (Codex)
+- Tom ba om bedre fingre og bare hender uten dressjakke på verbikonene. Deretter presiserte han at hattene skal være fedora.
+- Rettet 11 håndikoner med innebygd image_gen, flere målrettede forsøk der fingre manglet eller ble for mange. Begge hattikoner viser samme blå fedora med rødt bånd, med inventarhatten som formreferanse. Fire ikoner uten hender og inventaret er uendret.
+- Faktiske prompter, genereringslogg, gamle bilder, før/etter, kontaktark og SHA-256 i rapporter/verbhjul-hender-20261015 (grafikk/ i kodegrenen). Eksport 512 x 512 RGBA; mottaket tar inn filene som før. Ingen motor- eller pipelinekode endret. Rettelsen er til kontroll, ikke prøvd i motoren.
 ## 2026-10-15 14:20 til 15:35 (Claude)
 - Tom: «Er det mulig å refactor og optimalisere spillkoden? Den er 40 år gammel.» Svar: spillets skript er ikke trege og lappes ikke uten Toms ja; ScummVM er ny. Gevinsten ligger i HD-laget og verbhjulet, som er vår egen kode. Målt i spillet (OpenGL under Xvfb, nearest-mod): `compose()` 4,7 til 5,9 ms for hele skjermen, og overleggene til hjulet og inventaret kostet omtrent like mye.
 - Tom: «Gjør de to grepene.»
@@ -255,3 +268,8 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Dokumentert i `docs/MOTOR-FORBEDRING.md` del 10, `docs/VERBHJUL.md`, STATUS, memory og todo.
 - CI etter push (5782de2): test, motor og pages grønne.
 - Den nye 0001 kopiert til de tre andre repoene som PR, etter reglene der (kode via PR): Sam-Max-HD 25, Dig-HD-Remake 56, Dig-HD-Web 3. Bare patchfila og en loggføring. Før kopien var 0001 i alle tre byte for byte lik den gamle i Zak.
+
+## 2026-10-15 17:26 (Codex)
+- Tom påpekte at buy, give og take-off fortsatt hadde feil fingre/hender. Den forrige kontrollen overså anatomifeilene. Tre hender er tegnet helt om med enklere naturlige grep, kort bart håndledd og mindre skravering. Fedoraen er beholdt.
+- Fire innebygde image_gen-kall: give v1 manglet en synlig finger og ble rettet i v2. Forrige runde er bevart og markert som avvist for disse tre filene. Tolv øvrige ikoner og inventaret er uendret.
+- Før/etter, nærbilder, 112-pikslers kontaktark, faktiske prompter, valg og SHA-256 i rapporter/verbhjul-hender-retur-02-20261015 (grafikk/ i kodegrenen). Filformat, alfa og eksisterende UI-mottak kontrollert. Ny rettelse er til vurdering, ikke prøvd i motoren.

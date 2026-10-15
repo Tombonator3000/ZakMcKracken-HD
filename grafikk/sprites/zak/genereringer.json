@@ -1,0 +1,38 @@
+{
+  "dato": "2026-10-15",
+  "status": "første pilot til kontroll",
+  "kall": [
+    {
+      "jobb": "fig001_01",
+      "verktoy": "image_gen.imagegen",
+      "valgt": true,
+      "prompt": "jobber/fig001_01/prompt-sprite-v1.txt",
+      "resultat": "jobber/fig001_01/resultat-v1.png",
+      "standardfil": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-a9970337-a7ee-43ff-b103-47891d651d0b.png"
+    },
+    {
+      "jobb": "fig001_02",
+      "verktoy": "image_gen.imagegen",
+      "valgt": true,
+      "prompt": "jobber/fig001_02/prompt-sprite-v1.txt",
+      "resultat": "jobber/fig001_02/resultat-v1.png",
+      "standardfil": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-64dc7369-fef5-4c5a-a632-ff64cfaf3203.png"
+    },
+    {
+      "jobb": "fig001_03",
+      "verktoy": "image_gen.imagegen",
+      "valgt": true,
+      "prompt": "jobber/fig001_03/prompt-sprite-v1.txt",
+      "resultat": "jobber/fig001_03/resultat-v1.png",
+      "standardfil": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-21910f64-7acd-47ba-8eaf-076ef400b923.png"
+    },
+    {
+      "jobb": "fig001_02",
+      "verktoy": "image_gen.imagegen",
+      "valgt": false,
+      "versjon": 2,
+      "grunn": "Forkastet: fjernet små munnfragmenter. V1 er valgt.",
+      "standardfil": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-c985d84b-4dfe-4239-a297-615f81feb31d.png"
+    }
+  ]
+}

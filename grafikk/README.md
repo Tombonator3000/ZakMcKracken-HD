@@ -4,6 +4,7 @@ HD-grafikk til Zak McKracken HD Remake. Tom bestemte 14. oktober 2026 at HD-graf
 
 | Mappe | Innhold |
 | --- | --- |
+| [Zak spritesheet](sprites/zak/README.md) | Første pilot: 24 sammensatte ruter, tre komponentark og 51 deler |
 | [stil/](stil/README.md) | Godkjente stilankere: figurarkene for Zak, Annie og Caponian, rom 42 og forsiden av The National Inquisitor |
 | [ui/verbhjul-gpt/](ui/verbhjul-gpt/README.md) | 15 malte verbikoner, 512 x 512 med alfa |
 | [inventar/](inventar/README.md) | 126 PNG, 81 logiske bilder for 105 objektnumre |

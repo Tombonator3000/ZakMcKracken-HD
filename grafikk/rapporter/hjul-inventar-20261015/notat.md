@@ -41,3 +41,14 @@ forhandsvisning.html er en lokal grafikkoversikt med søk, lys og mørk bakgrunn
 ## Innlegging i hovedrepoet, 15. oktober 2026
 
 Tom ba om at hele leveransen legges i repoet via PR. De 15 verbikonene ligger nå i grafikk/ui/verbhjul-gpt/ og de 126 inventarfilene i grafikk/inventar/, slik build_ui forventer. Filene er byteidentiske med leveransen i gpt-arbeid. Manifest, aliaser, galleri og sjekksummer er tilpasset mappene. Produksjonsnotatene over beskriver status ved tegning; innleggingen er ingen påstand om ny spilltest eller visuell godkjenning.
+
+## Toms godkjenning, 15. oktober 2026
+
+Tom godkjente hele inventar- og verbhjulleveransen. Unntaket gjaldt The King i karakterarkene, ikke UI-bildene. Dette er visuell godkjenning og endrer ikke den oppgitte statusen for motorprøving.
+
+## Retur: hender og fedora, 15. oktober
+
+Tom ba om tydelige fingre og bare hender uten dressjakke, og presiserte at begge hattene skal være fedora. 11 ikoner er erstattet; fire ikoner uten hånd og hele inventaret er uendret. Faktiske nye prompter, før/etter, valgte SHA-256 og kontroll står i [rettelsen](../verbhjul-hender-20261015/README.md). Ny rettelse er til kontroll og ikke prøvd i motoren.
+
+## Andre retur på hender
+Buy, give og take-off er tegnet om etter ny retur fra Tom. [Siste rettelse](../verbhjul-hender-retur-02-20261015/README.md) med manuell anatomivurdering og nye prompter.

@@ -1,0 +1,1676 @@
+{
+ "versjon": 2,
+ "ark": {
+  "fig001_01": {
+   "metode": "rutekart",
+   "skala": 0.875,
+   "grupper": 7,
+   "deler_paa_arket": 13,
+   "ruter": {
+    "costume001_000": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_000_hd.png",
+     "sha256": "21a8b537a3b6ac34498ca39246c4e23f27b488c54091e4eb95c6e41dbdd861c6",
+     "storrelse": [
+      72,
+      148
+     ],
+     "marg": [
+      3,
+      3
+     ],
+     "flytt_hd": [
+      -8,
+      -8
+     ],
+     "snitt_union": 0.785,
+     "dekning": 0.924,
+     "deler": 1,
+     "skala": 0.9394,
+     "tilpasset": true,
+     "skala_xy": [
+      0.8267,
+      0.9394
+     ],
+     "kostyme": 1,
+     "rute": 0,
+     "animasjon": 3,
+     "retning": 1,
+     "lag": 0
+    },
+    "costume001_006": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_006_hd.png",
+     "sha256": "cc852518bb82bdc76d43d6337abd7d9e52d39f75ec35f109c2308e00ff2672da",
+     "storrelse": [
+      96,
+      120
+     ],
+     "marg": [
+      2,
+      2
+     ],
+     "flytt_hd": [
+      1,
+      -2
+     ],
+     "snitt_union": 0.871,
+     "dekning": 0.958,
+     "deler": 1,
+     "skala": 0.9394,
+     "tilpasset": true,
+     "skala_xy": [
+      0.9048,
+      0.8387
+     ],
+     "kostyme": 1,
+     "rute": 6,
+     "animasjon": 3,
+     "retning": 2,
+     "lag": 0
+    },
+    "costume001_134": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_134_hd.png",
+     "sha256": "4fc6c4abd8c0c1289279327444a4dc4e902f6df110fe513df6b28833c943206c",
+     "storrelse": [
+      72,
+      120
+     ],
+     "marg": [
+      2,
+      4
+     ],
+     "flytt_hd": [
+      -1,
+      -5
+     ],
+     "snitt_union": 0.879,
+     "dekning": 0.897,
+     "deler": 1,
+     "skala": 0.9505,
+     "tilpasset": true,
+     "skala_xy": [
+      0.8364,
+      0.8364
+     ],
+     "kostyme": 1,
+     "rute": 134,
+     "animasjon": 3,
+     "retning": 1,
+     "lag": 1
+    },
+    "costume001_135": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_135_hd.png",
+     "sha256": "837d135c28bde264f0c963fd0985ed8eb5ed07e79c6529892e087afaf58193ba",
+     "storrelse": [
+      88,
+      112
+     ],
+     "marg": [
+      5,
+      2
+     ],
+     "flytt_hd": [
+      -10,
+      -4
+     ],
+     "snitt_union": 0.713,
+     "dekning": 0.945,
+     "deler": 1,
+     "skala": 0.9505,
+     "tilpasset": true,
+     "skala_xy": [
+      0.8364,
+      0.96
+     ],
+     "kostyme": 1,
+     "rute": 135,
+     "animasjon": 3,
+     "retning": 2,
+     "lag": 1
+    },
+    "costume001_136": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_136_hd.png",
+     "sha256": "7ac028e02a3c8fce9246137b9d81b633e85ce70df2fb70a7bdb129d588115cde",
+     "storrelse": [
+      104,
+      120
+     ],
+     "marg": [
+      8,
+      3
+     ],
+     "flytt_hd": [
+      -26,
+      -5
+     ],
+     "snitt_union": 0.62,
+     "dekning": 0.964,
+     "deler": 1,
+     "skala": 0.9505,
+     "tilpasset": true,
+     "skala_xy": [
+      0.8364,
+      0.9505
+     ],
+     "kostyme": 1,
+     "rute": 136,
+     "animasjon": 3,
+     "retning": 3,
+     "lag": 1
+    },
+    "costume001_256": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_256_hd.png",
+     "sha256": "5ac08d6a5c9acee2e77ea69f37b5c30d6799eaca0f242c5e4211e9dbcb6167fa",
+     "storrelse": [
+      80,
+      104
+     ],
+     "marg": [
+      2,
+      3
+     ],
+     "flytt_hd": [
+      -4,
+      -8
+     ],
+     "snitt_union": 0.852,
+     "dekning": 0.904,
+     "deler": 1,
+     "skala": 0.8333,
+     "tilpasset": true,
+     "skala_xy": [
+      0.8312,
+      0.8333
+     ],
+     "kostyme": 1,
+     "rute": 256,
+     "animasjon": 3,
+     "retning": 1,
+     "lag": 2
+    },
+    "costume001_257": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_257_hd.png",
+     "sha256": "152775a47c91b28423b5ef86883d64edaabc75def7344e1d4d13e91a1499990e",
+     "storrelse": [
+      80,
+      104
+     ],
+     "marg": [
+      2,
+      3
+     ],
+     "flytt_hd": [
+      -4,
+      -4
+     ],
+     "snitt_union": 0.854,
+     "dekning": 0.88,
+     "deler": 1,
+     "skala": 0.8333,
+     "tilpasset": true,
+     "skala_xy": [
+      0.8571,
+      0.8081
+     ],
+     "kostyme": 1,
+     "rute": 257,
+     "animasjon": 3,
+     "retning": 2,
+     "lag": 2
+    },
+    "costume001_258": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_258_hd.png",
+     "sha256": "c4c9eff91ee644db2a652ce1c2d84386df5159a94791f5e763ffccc75a12a1ec",
+     "storrelse": [
+      80,
+      100
+     ],
+     "marg": [
+      3,
+      3
+     ],
+     "flytt_hd": [
+      -7,
+      -8
+     ],
+     "snitt_union": 0.879,
+     "dekning": 0.909,
+     "deler": 1,
+     "skala": 0.8333,
+     "tilpasset": true,
+     "skala_xy": [
+      0.7333,
+      0.8444
+     ],
+     "kostyme": 1,
+     "rute": 258,
+     "animasjon": 3,
+     "retning": 3,
+     "lag": 2
+    },
+    "costume001_388": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_388_hd.png",
+     "sha256": "1657bd80ef23aee07657fb3acbf168057d5041424138eb3612243a904e8ee201",
+     "storrelse": [
+      40,
+      52
+     ],
+     "marg": [
+      2,
+      4
+     ],
+     "flytt_hd": [
+      -3,
+      -9
+     ],
+     "snitt_union": 0.795,
+     "dekning": 0.926,
+     "deler": 1,
+     "skala": 0.875,
+     "tilpasset": true,
+     "skala_xy": [
+      0.77,
+      0.9524
+     ],
+     "kostyme": 1,
+     "rute": 388,
+     "animasjon": 1,
+     "retning": 1,
+     "lag": 3
+    },
+    "costume001_513": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_513_hd.png",
+     "sha256": "39c811ac1cfb97e2e39675718fe5b5b2e41f92b250be07573208ee134ed6a394",
+     "storrelse": [
+      56,
+      108
+     ],
+     "marg": [
+      4,
+      3
+     ],
+     "flytt_hd": [
+      -2,
+      -8
+     ],
+     "snitt_union": 0.754,
+     "dekning": 0.916,
+     "deler": 1,
+     "skala": 0.8842,
+     "tilpasset": true,
+     "skala_xy": [
+      0.7781,
+      0.8842
+     ],
+     "kostyme": 1,
+     "rute": 513,
+     "animasjon": 3,
+     "retning": 2,
+     "lag": 4
+    },
+    "costume001_516": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_516_hd.png",
+     "sha256": "611789eb127ab28f64720a16d4170002aed5e09830f2382e5fec361dd868d79f",
+     "storrelse": [
+      48,
+      108
+     ],
+     "marg": [
+      3,
+      3
+     ],
+     "flytt_hd": [
+      -5,
+      -7
+     ],
+     "snitt_union": 0.822,
+     "dekning": 0.936,
+     "deler": 1,
+     "skala": 0.8842,
+     "tilpasset": true,
+     "skala_xy": [
+      0.7781,
+      0.8936
+     ],
+     "kostyme": 1,
+     "rute": 516,
+     "animasjon": 3,
+     "retning": 3,
+     "lag": 4
+    },
+    "costume001_644": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_644_hd.png",
+     "sha256": "2fc8233e0283d6c504b8bff9b5d050a43389ecaceae59504f76bf65c270b2e42",
+     "storrelse": [
+      48,
+      116
+     ],
+     "marg": [
+      2,
+      4
+     ],
+     "flytt_hd": [
+      -4,
+      -1
+     ],
+     "snitt_union": 0.818,
+     "dekning": 0.942,
+     "deler": 1,
+     "skala": 0.875,
+     "tilpasset": true,
+     "skala_xy": [
+      0.77,
+      0.875
+     ],
+     "kostyme": 1,
+     "rute": 644,
+     "animasjon": 3,
+     "retning": 2,
+     "lag": 5
+    },
+    "costume001_641": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_641_hd.png",
+     "sha256": "cacec19bf5c28059d4e83b856abf52cf4b85ed06ea73fdbdcff09d5e76a201dd",
+     "storrelse": [
+      48,
+      116
+     ],
+     "marg": [
+      3,
+      4
+     ],
+     "flytt_hd": [
+      -8,
+      -9
+     ],
+     "snitt_union": 0.753,
+     "dekning": 0.911,
+     "deler": 1,
+     "skala": 0.875,
+     "tilpasset": true,
+     "skala_xy": [
+      0.77,
+      0.875
+     ],
+     "kostyme": 1,
+     "rute": 641,
+     "animasjon": 1,
+     "retning": 3,
+     "lag": 5
+    }
+   },
+   "resultat": "jobber/fig001_01/resultat-v1.png",
+   "sha256": "4430bf7d06220288f2afda87726e03e75641c3bdc976daf1e9b364ea67176944",
+   "nokkel": "4784639db51ae61323cdf2345ffcb3df2c4caab2fda12cf6f5868c27a9b2ce42",
+   "forhandsvisning": "myk_fig001_01.png"
+  },
+  "fig001_02": {
+   "metode": "rutekart",
+   "skala": 0.9561,
+   "grupper": 10,
+   "deler_paa_arket": 25,
+   "ruter": {
+    "costume001_133": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_133_hd.png",
+     "sha256": "32dbf471118c5648e8b1a5d0585e2c777a1d41e7f17e0a47d72e5065a6adb59e",
+     "storrelse": [
+      104,
+      228
+     ],
+     "marg": [
+      3,
+      4
+     ],
+     "flytt_hd": [
+      -7,
+      -2
+     ],
+     "snitt_union": 0.875,
+     "dekning": 0.956,
+     "deler": 1,
+     "skala": 0.9561,
+     "tilpasset": true,
+     "skala_xy": [
+      0.9524,
+      0.9561
+     ],
+     "kostyme": 1,
+     "rute": 133,
+     "animasjon": 2,
+     "retning": 1,
+     "lag": 1
+    },
+    "costume001_128": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_128_hd.png",
+     "sha256": "add7c621d7511ca66d45bda791d49d04e038d981e9418ccea18cf319294e0a15",
+     "storrelse": [
+      176,
+      228
+     ],
+     "marg": [
+      2,
+      4
+     ],
+     "flytt_hd": [
+      -1,
+      -2
+     ],
+     "snitt_union": 0.871,
+     "dekning": 0.945,
+     "deler": 1,
+     "skala": 0.9561,
+     "tilpasset": true,
+     "skala_xy": [
+      0.95,
+      0.9703
+     ],
+     "kostyme": 1,
+     "rute": 128,
+     "animasjon": 2,
+     "retning": 1,
+     "lag": 1
+    },
+    "costume001_129": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_129_hd.png",
+     "sha256": "9aa7fad6cabbc430e0ebd1e09b23d58e3a3f39f4f2acbc86ca0eb7cff85b3929",
+     "storrelse": [
+      152,
+      220
+     ],
+     "marg": [
+      3,
+      3
+     ],
+     "flytt_hd": [
+      -6,
+      -3
+     ],
+     "snitt_union": 0.871,
+     "dekning": 0.951,
+     "deler": 1,
+     "skala": 0.9561,
+     "tilpasset": true,
+     "skala_xy": [
+      0.9466,
+      0.9608
+     ],
+     "kostyme": 1,
+     "rute": 129,
+     "animasjon": 2,
+     "retning": 1,
+     "lag": 1
+    },
+    "costume001_130": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_130_hd.png",
+     "sha256": "8eaf2308e30ecba8e7aba192a2a631b7f9454c619a691f55e59236b12db3ea4d",
+     "storrelse": [
+      104,
+      220
+     ],
+     "marg": [
+      3,
+      3
+     ],
+     "flytt_hd": [
+      -8,
+      -4
+     ],
+     "snitt_union": 0.9,
+     "dekning": 0.945,
+     "deler": 1,
+     "skala": 0.9561,
+     "tilpasset": true,
+     "skala_xy": [
+      0.9744,
+      0.9561
+     ],
+     "kostyme": 1,
+     "rute": 130,
+     "animasjon": 2,
+     "retning": 1,
+     "lag": 1
+    },
+    "costume001_131": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_131_hd.png",
+     "sha256": "efab804d22cbdeb3f7c88d0a64959b27c050a87d2823683e065466cc805d3a77",
+     "storrelse": [
+      152,
+      220
+     ],
+     "marg": [
+      2,
+      3
+     ],
+     "flytt_hd": [
+      0,
+      -8
+     ],
+     "snitt_union": 0.88,
+     "dekning": 0.931,
+     "deler": 1,
+     "skala": 0.9561,
+     "tilpasset": true,
+     "skala_xy": [
+      0.8767,
+      0.9561
+     ],
+     "kostyme": 1,
+     "rute": 131,
+     "animasjon": 2,
+     "retning": 1,
+     "lag": 1
+    },
+    "costume001_132": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_132_hd.png",
+     "sha256": "8a96bde31a01235e82343a01784b603ca03dc8e7ccb7ff782378835027f188aa",
+     "storrelse": [
+      136,
+      212
+     ],
+     "marg": [
+      2,
+      3
+     ],
+     "flytt_hd": [
+      -1,
+      -5
+     ],
+     "snitt_union": 0.854,
+     "dekning": 0.913,
+     "deler": 1,
+     "skala": 0.9561,
+     "tilpasset": true,
+     "skala_xy": [
+      0.8889,
+      0.9495
+     ],
+     "kostyme": 1,
+     "rute": 132,
+     "animasjon": 2,
+     "retning": 1,
+     "lag": 1
+    },
+    "costume001_391": {
+     "status": "sjekk",
+     "kilde": "arket",
+     "fil": "costumes/costume001_391_hd.png",
+     "sha256": "8aaf9610ef85164076504102398c5632788d0e07a09bf59132906f3e0fb37f72",
+     "storrelse": [
+      88,
+      80
+     ],
+     "marg": [
+      8,
+      7
+     ],
+     "flytt_hd": [
+      -28,
+      -24
+     ],
+     "snitt_union": 0.271,
+     "dekning": 1.0,
+     "deler": 1,
+     "skala": 1.9048,
+     "tilpasset": true,
+     "skala_xy": [
+      1.6762,
+      1.6762
+     ],
+     "kostyme": 1,
+     "rute": 391,
+     "animasjon": 4,
+     "retning": 1,
+     "lag": 3
+    },
+    "costume001_385": {
+     "status": "sjekk",
+     "kilde": "arket",
+     "fil": "costumes/costume001_385_hd.png",
+     "sha256": "ddcce04360de538ae217b8904bc2f0b7365b45903c8ccd5e73baff0cf40bc115",
+     "storrelse": [
+      88,
+      60
+     ],
+     "marg": [
+      9,
+      7
+     ],
+     "flytt_hd": [
+      -30,
+      -21
+     ],
+     "snitt_union": 0.092,
+     "dekning": 1.0,
+     "deler": 1,
+     "skala": 1.9048,
+     "tilpasset": true,
+     "skala_xy": [
+      1.6762,
+      1.6762
+     ],
+     "kostyme": 1,
+     "rute": 385,
+     "animasjon": 4,
+     "retning": 2,
+     "lag": 3
+    },
+    "costume001_384": {
+     "status": "sjekk",
+     "kilde": "arket",
+     "fil": "costumes/costume001_384_hd.png",
+     "sha256": "90e2d8b647d0380afdab55d4fc686326b2db1ada9cace96b0fe04c814b1656cd",
+     "storrelse": [
+      96,
+      84
+     ],
+     "marg": [
+      9,
+      8
+     ],
+     "flytt_hd": [
+      -30,
+      -28
+     ],
+     "snitt_union": 0.287,
+     "dekning": 1.0,
+     "deler": 1,
+     "skala": 1.9048,
+     "tilpasset": true,
+     "skala_xy": [
+      1.6762,
+      1.6762
+     ],
+     "kostyme": 1,
+     "rute": 384,
+     "animasjon": 4,
+     "retning": 2,
+     "lag": 3
+    },
+    "costume001_007": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_007_hd.png",
+     "sha256": "e15152792bb9980ec7a7e98cd3d97a26297cfe4f49e61417ea768010990861ac",
+     "storrelse": [
+      72,
+      120
+     ],
+     "marg": [
+      3,
+      3
+     ],
+     "flytt_hd": [
+      -6,
+      -6
+     ],
+     "snitt_union": 0.92,
+     "dekning": 0.953,
+     "deler": 1,
+     "skala": 0.8929,
+     "tilpasset": true,
+     "skala_xy": [
+      0.9057,
+      0.8889
+     ],
+     "kostyme": 1,
+     "rute": 7,
+     "animasjon": 2,
+     "retning": 2,
+     "lag": 0
+    },
+    "costume001_008": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_008_hd.png",
+     "sha256": "1af7c2914228a97d74eb74915a1bde1207ef49adaff0fb2950efa0b41ae24fa4",
+     "storrelse": [
+      80,
+      124
+     ],
+     "marg": [
+      3,
+      3
+     ],
+     "flytt_hd": [
+      -8,
+      -6
+     ],
+     "snitt_union": 0.919,
+     "dekning": 0.946,
+     "deler": 1,
+     "skala": 0.8929,
+     "tilpasset": true,
+     "skala_xy": [
+      0.8814,
+      0.8929
+     ],
+     "kostyme": 1,
+     "rute": 8,
+     "animasjon": 2,
+     "retning": 2,
+     "lag": 0
+    },
+    "costume001_009": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_009_hd.png",
+     "sha256": "796d8ad3a79eb4378c71fcf7b699ccbf5ce197cd7155e615363dd7b8c3582e8e",
+     "storrelse": [
+      72,
+      120
+     ],
+     "marg": [
+      2,
+      3
+     ],
+     "flytt_hd": [
+      1,
+      -8
+     ],
+     "snitt_union": 0.903,
+     "dekning": 0.97,
+     "deler": 1,
+     "skala": 0.8929,
+     "tilpasset": true,
+     "skala_xy": [
+      0.9412,
+      0.9057
+     ],
+     "kostyme": 1,
+     "rute": 9,
+     "animasjon": 2,
+     "retning": 2,
+     "lag": 0
+    },
+    "costume001_010": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_010_hd.png",
+     "sha256": "c84b64e7cfced1bb6016bf9c323d499e9cee07c56f59c96c243d501571f7fab7",
+     "storrelse": [
+      72,
+      124
+     ],
+     "marg": [
+      2,
+      3
+     ],
+     "flytt_hd": [
+      -1,
+      -5
+     ],
+     "snitt_union": 0.916,
+     "dekning": 0.947,
+     "deler": 1,
+     "skala": 0.8929,
+     "tilpasset": true,
+     "skala_xy": [
+      0.8667,
+      0.9009
+     ],
+     "kostyme": 1,
+     "rute": 10,
+     "animasjon": 2,
+     "retning": 2,
+     "lag": 0
+    },
+    "costume001_515": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_515_hd.png",
+     "sha256": "851529ce4fd37f40ebfdf2d1b221e264d6e2f9a4f558e8195b37feb8dbe37aa4",
+     "storrelse": [
+      48,
+      100
+     ],
+     "marg": [
+      3,
+      3
+     ],
+     "flytt_hd": [
+      -6,
+      -2
+     ],
+     "snitt_union": 0.813,
+     "dekning": 0.923,
+     "deler": 1,
+     "skala": 0.9048,
+     "tilpasset": true,
+     "skala_xy": [
+      0.7962,
+      0.9048
+     ],
+     "kostyme": 1,
+     "rute": 515,
+     "animasjon": 2,
+     "retning": 2,
+     "lag": 4
+    },
+    "costume001_514": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_514_hd.png",
+     "sha256": "61ad83fd967a0c37ab2985dbc7b8170221b6f0a8b0d286a003e6a35117943816",
+     "storrelse": [
+      56,
+      100
+     ],
+     "marg": [
+      4,
+      4
+     ],
+     "flytt_hd": [
+      -6,
+      -2
+     ],
+     "snitt_union": 0.794,
+     "dekning": 0.879,
+     "deler": 1,
+     "skala": 0.9048,
+     "tilpasset": true,
+     "skala_xy": [
+      0.7962,
+      0.8293
+     ],
+     "kostyme": 1,
+     "rute": 514,
+     "animasjon": 2,
+     "retning": 2,
+     "lag": 4
+    },
+    "costume001_643": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_643_hd.png",
+     "sha256": "471c121cbc84bc1e39c9cbc0e555ffa72cb0fd16578269f28c1620c854646ead",
+     "storrelse": [
+      48,
+      100
+     ],
+     "marg": [
+      2,
+      4
+     ],
+     "flytt_hd": [
+      -2,
+      -1
+     ],
+     "snitt_union": 0.773,
+     "dekning": 0.876,
+     "deler": 1,
+     "skala": 0.8941,
+     "tilpasset": true,
+     "skala_xy": [
+      0.7868,
+      0.8395
+     ],
+     "kostyme": 1,
+     "rute": 643,
+     "animasjon": 2,
+     "retning": 2,
+     "lag": 5
+    },
+    "costume001_642": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_642_hd.png",
+     "sha256": "a7e01b4bbabeef442644c4281c49b4ad40e5b63e89919837a172fc0b2f64eadb",
+     "storrelse": [
+      48,
+      100
+     ],
+     "marg": [
+      2,
+      3
+     ],
+     "flytt_hd": [
+      -4,
+      -7
+     ],
+     "snitt_union": 0.821,
+     "dekning": 0.91,
+     "deler": 1,
+     "skala": 0.8941,
+     "tilpasset": true,
+     "skala_xy": [
+      0.8276,
+      0.8941
+     ],
+     "kostyme": 1,
+     "rute": 642,
+     "animasjon": 2,
+     "retning": 2,
+     "lag": 5
+    },
+    "costume001_013": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_013_hd.png",
+     "sha256": "93aa448b082fc1132598ce3c42c4790cd812ffd0bcb3db5984a5aa473203b5c7",
+     "storrelse": [
+      80,
+      116
+     ],
+     "marg": [
+      3,
+      3
+     ],
+     "flytt_hd": [
+      -6,
+      -8
+     ],
+     "snitt_union": 0.815,
+     "dekning": 0.985,
+     "deler": 1,
+     "skala": 0.9709,
+     "tilpasset": true,
+     "skala_xy": [
+      0.9492,
+      0.902
+     ],
+     "kostyme": 1,
+     "rute": 13,
+     "animasjon": 2,
+     "retning": 3,
+     "lag": 0
+    },
+    "costume001_014": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_014_hd.png",
+     "sha256": "c0021d48d927b8ca9a456dd8741eba97f5028344d7333ef7ca08ab780c37e8c7",
+     "storrelse": [
+      72,
+      124
+     ],
+     "marg": [
+      2,
+      3
+     ],
+     "flytt_hd": [
+      -3,
+      -8
+     ],
+     "snitt_union": 0.903,
+     "dekning": 0.955,
+     "deler": 1,
+     "skala": 0.9709,
+     "tilpasset": true,
+     "skala_xy": [
+      0.9123,
+      0.9709
+     ],
+     "kostyme": 1,
+     "rute": 14,
+     "animasjon": 2,
+     "retning": 3,
+     "lag": 0
+    },
+    "costume001_015": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_015_hd.png",
+     "sha256": "3dfb86e3e574097a7d55da0af777cd0e0866157d4e35a5194e138f4a2dc53ef6",
+     "storrelse": [
+      80,
+      144
+     ],
+     "marg": [
+      3,
+      4
+     ],
+     "flytt_hd": [
+      -1,
+      -10
+     ],
+     "snitt_union": 0.878,
+     "dekning": 0.99,
+     "deler": 1,
+     "skala": 0.9709,
+     "tilpasset": true,
+     "skala_xy": [
+      0.9655,
+      0.9825
+     ],
+     "kostyme": 1,
+     "rute": 15,
+     "animasjon": 2,
+     "retning": 3,
+     "lag": 0
+    },
+    "costume001_016": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_016_hd.png",
+     "sha256": "626ddcc404ba33c0f34522e59c5f26f96054fd95021ad00e3a8776b329490729",
+     "storrelse": [
+      72,
+      124
+     ],
+     "marg": [
+      2,
+      3
+     ],
+     "flytt_hd": [
+      0,
+      -5
+     ],
+     "snitt_union": 0.896,
+     "dekning": 0.971,
+     "deler": 1,
+     "skala": 0.9709,
+     "tilpasset": true,
+     "skala_xy": [
+      0.9123,
+      0.9434
+     ],
+     "kostyme": 1,
+     "rute": 16,
+     "animasjon": 2,
+     "retning": 3,
+     "lag": 0
+    },
+    "costume001_389": {
+     "status": "sjekk",
+     "kilde": "arket",
+     "fil": "costumes/costume001_389_hd.png",
+     "sha256": "ef28d48784eecd10c4555b6c09f01f97bea692078e3b37eabf52bc977079c602",
+     "storrelse": [
+      80,
+      108
+     ],
+     "marg": [
+      7,
+      11
+     ],
+     "flytt_hd": [
+      -24,
+      -37
+     ],
+     "snitt_union": 0.189,
+     "dekning": 1.0,
+     "deler": 1,
+     "skala": 1.9048,
+     "tilpasset": true,
+     "skala_xy": [
+      1.6762,
+      1.6762
+     ],
+     "kostyme": 1,
+     "rute": 389,
+     "animasjon": 6,
+     "retning": 1,
+     "lag": 3
+    },
+    "costume001_386": {
+     "status": "sjekk",
+     "kilde": "arket",
+     "fil": "costumes/costume001_386_hd.png",
+     "sha256": "f09aabdd09f7e575c5a6788eb149b4cf002fee60df41305e63e75e67541c33ec",
+     "storrelse": [
+      80,
+      56
+     ],
+     "marg": [
+      7,
+      6
+     ],
+     "flytt_hd": [
+      -23,
+      -20
+     ],
+     "snitt_union": 0.14,
+     "dekning": 1.0,
+     "deler": 1,
+     "skala": 1.9048,
+     "tilpasset": true,
+     "skala_xy": [
+      1.6762,
+      1.6762
+     ],
+     "kostyme": 1,
+     "rute": 386,
+     "animasjon": 6,
+     "retning": 2,
+     "lag": 3
+    },
+    "costume001_390": {
+     "status": "sjekk",
+     "kilde": "arket",
+     "fil": "costumes/costume001_390_hd.png",
+     "sha256": "1993160a9bd5b65016fb8e971df6a8bb39cd892948ae5297e84cf1b3bc13e20d",
+     "storrelse": [
+      96,
+      84
+     ],
+     "marg": [
+      9,
+      8
+     ],
+     "flytt_hd": [
+      -30,
+      -27
+     ],
+     "snitt_union": 0.193,
+     "dekning": 1.0,
+     "deler": 1,
+     "skala": 1.9048,
+     "tilpasset": true,
+     "skala_xy": [
+      1.6762,
+      1.6762
+     ],
+     "kostyme": 1,
+     "rute": 390,
+     "animasjon": 7,
+     "retning": 1,
+     "lag": 3
+    },
+    "costume001_387": {
+     "status": "sjekk",
+     "kilde": "arket",
+     "fil": "costumes/costume001_387_hd.png",
+     "sha256": "e58784d81f5d5377667d969d6440c8585bba25774fa7d43956b3ad835fb202c8",
+     "storrelse": [
+      80,
+      80
+     ],
+     "marg": [
+      6,
+      5
+     ],
+     "flytt_hd": [
+      -15,
+      -16
+     ],
+     "snitt_union": 0.227,
+     "dekning": 0.905,
+     "deler": 1,
+     "skala": 1.9048,
+     "tilpasset": true,
+     "skala_xy": [
+      1.6762,
+      1.9048
+     ],
+     "kostyme": 1,
+     "rute": 387,
+     "animasjon": 7,
+     "retning": 2,
+     "lag": 3
+    }
+   },
+   "resultat": "jobber/fig001_02/resultat-v1.png",
+   "sha256": "62971481e6a26f4f4823c1273fdbc18a210f590c490ec07e5fafdb50d78e8511",
+   "nokkel": "75cf003512b67287123e1aeb9d3c21102044383ba7030fd08ae4b29fe13f72af",
+   "forhandsvisning": "myk_fig001_02.png"
+  },
+  "fig001_03": {
+   "metode": "rutekart",
+   "skala": 0.6265,
+   "grupper": 8,
+   "deler_paa_arket": 14,
+   "ruter": {
+    "costume001_011": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_011_hd.png",
+     "sha256": "fa10f6736ff9cd73da4dc50f0904478e1e0acc70f908798e5bc79712b5e2c9c0",
+     "storrelse": [
+      104,
+      68
+     ],
+     "marg": [
+      2,
+      2
+     ],
+     "flytt_hd": [
+      -2,
+      -4
+     ],
+     "snitt_union": 0.838,
+     "dekning": 0.92,
+     "deler": 1,
+     "skala": 0.6265,
+     "tilpasset": true,
+     "skala_xy": [
+      0.7017,
+      0.6265
+     ],
+     "kostyme": 1,
+     "rute": 11,
+     "animasjon": 8,
+     "retning": 1,
+     "lag": 0
+    },
+    "costume001_261": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_261_hd.png",
+     "sha256": "d7d68e563ea21f0be138131bb19591e1b4c13a5c05390c621a4fdfea7deb1070",
+     "storrelse": [
+      88,
+      104
+     ],
+     "marg": [
+      3,
+      3
+     ],
+     "flytt_hd": [
+      0,
+      -7
+     ],
+     "snitt_union": 0.864,
+     "dekning": 0.879,
+     "deler": 1,
+     "skala": 0.6107,
+     "tilpasset": true,
+     "skala_xy": [
+      0.625,
+      0.6107
+     ],
+     "kostyme": 1,
+     "rute": 261,
+     "animasjon": 8,
+     "retning": 2,
+     "lag": 2
+    },
+    "costume001_012": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_012_hd.png",
+     "sha256": "7fdddedaffa896c419cc70bf058371a27cb0f3e289ad860f67646604b1732d8f",
+     "storrelse": [
+      112,
+      100
+     ],
+     "marg": [
+      2,
+      3
+     ],
+     "flytt_hd": [
+      2,
+      -6
+     ],
+     "snitt_union": 0.856,
+     "dekning": 0.96,
+     "deler": 1,
+     "skala": 0.623,
+     "tilpasset": true,
+     "skala_xy": [
+      0.6423,
+      0.623
+     ],
+     "kostyme": 1,
+     "rute": 12,
+     "animasjon": 9,
+     "retning": 1,
+     "lag": 0
+    },
+    "costume001_769": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_769_hd.png",
+     "sha256": "57bf91102e484597a3b34085e70fc14e53974d127ea1d131991a59f637e913a8",
+     "storrelse": [
+      48,
+      56
+     ],
+     "marg": [
+      2,
+      2
+     ],
+     "flytt_hd": [
+      -4,
+      -4
+     ],
+     "snitt_union": 0.731,
+     "dekning": 0.869,
+     "deler": 1,
+     "skala": 0.6349,
+     "tilpasset": true,
+     "skala_xy": [
+      0.5587,
+      0.6349
+     ],
+     "kostyme": 1,
+     "rute": 769,
+     "animasjon": 10,
+     "retning": 1,
+     "lag": 6
+    },
+    "costume001_768": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_768_hd.png",
+     "sha256": "74c919ba1b312fae4426ff39ebdde85642f984948e98e3f92f0e8ad191057fd2",
+     "storrelse": [
+      56,
+      52
+     ],
+     "marg": [
+      2,
+      2
+     ],
+     "flytt_hd": [
+      -2,
+      -1
+     ],
+     "snitt_union": 0.829,
+     "dekning": 0.915,
+     "deler": 1,
+     "skala": 0.6349,
+     "tilpasset": true,
+     "skala_xy": [
+      0.5902,
+      0.5902
+     ],
+     "kostyme": 1,
+     "rute": 768,
+     "animasjon": 10,
+     "retning": 2,
+     "lag": 6
+    },
+    "costume001_897": {
+     "status": "sjekk",
+     "kilde": "arket",
+     "fil": "costumes/costume001_897_hd.png",
+     "sha256": "32072fc734654ed0f6bc8300a41229601973b18cd692916e730850eb4f85ace1",
+     "storrelse": [
+      96,
+      56
+     ],
+     "marg": [
+      2,
+      3
+     ],
+     "flytt_hd": [
+      4,
+      -1
+     ],
+     "snitt_union": 0.766,
+     "dekning": 0.772,
+     "deler": 1,
+     "skala": 0.5246,
+     "tilpasset": true,
+     "skala_xy": [
+      0.5875,
+      0.5614
+     ],
+     "kostyme": 1,
+     "rute": 897,
+     "animasjon": 12,
+     "retning": 1,
+     "lag": 7
+    },
+    "costume001_896": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_896_hd.png",
+     "sha256": "a1d2493430780ac5827422640678a7f2b8058c89e24246136d3d464d336958d0",
+     "storrelse": [
+      88,
+      56
+     ],
+     "marg": [
+      2,
+      3
+     ],
+     "flytt_hd": [
+      -1,
+      -1
+     ],
+     "snitt_union": 0.871,
+     "dekning": 0.901,
+     "deler": 1,
+     "skala": 0.5246,
+     "tilpasset": true,
+     "skala_xy": [
+      0.5875,
+      0.5246
+     ],
+     "kostyme": 1,
+     "rute": 896,
+     "animasjon": 12,
+     "retning": 2,
+     "lag": 7
+    },
+    "costume001_899": {
+     "status": "sjekk",
+     "kilde": "arket",
+     "fil": "costumes/costume001_899_hd.png",
+     "sha256": "39030756912ce2e4de31967ac175302f7561a11d49fad853561a8a614b720b9d",
+     "storrelse": [
+      120,
+      108
+     ],
+     "marg": [
+      2,
+      3
+     ],
+     "flytt_hd": [
+      -1,
+      -7
+     ],
+     "snitt_union": 0.343,
+     "dekning": 0.762,
+     "deler": 1,
+     "skala": 0.7179,
+     "tilpasset": true,
+     "skala_xy": [
+      0.8041,
+      0.7179
+     ],
+     "kostyme": 1,
+     "rute": 899,
+     "animasjon": 14,
+     "retning": 1,
+     "lag": 7
+    },
+    "costume001_898": {
+     "status": "sjekk",
+     "kilde": "arket",
+     "fil": "costumes/costume001_898_hd.png",
+     "sha256": "f0163791eba8bc5c9ca58b694719170e9d94edac484995e9bce847fa7b78a14b",
+     "storrelse": [
+      128,
+      108
+     ],
+     "marg": [
+      3,
+      3
+     ],
+     "flytt_hd": [
+      -8,
+      -7
+     ],
+     "snitt_union": 0.328,
+     "dekning": 0.759,
+     "deler": 2,
+     "skala": 0.7179,
+     "tilpasset": true,
+     "skala_xy": [
+      0.8041,
+      0.7179
+     ],
+     "kostyme": 1,
+     "rute": 898,
+     "animasjon": 14,
+     "retning": 2,
+     "lag": 7
+    },
+    "costume001_771": {
+     "status": "ok",
+     "kilde": "arket",
+     "fil": "costumes/costume001_771_hd.png",
+     "sha256": "df630fde9df886ca80a1b2abff62816e1a7157430cc62fae6fc7d5a0dac874dc",
+     "storrelse": [
+      56,
+      60
+     ],
+     "marg": [
+      2,
+      2
+     ],
+     "flytt_hd": [
+      2,
+      -2
+     ],
+     "snitt_union": 0.635,
+     "dekning": 0.806,
+     "deler": 1,
+     "skala": 0.5714,
+     "tilpasset": true,
+     "skala_xy": [
+      0.5029,
+      0.5789
+     ],
+     "kostyme": 1,
+     "rute": 771,
+     "animasjon": 15,
+     "retning": 1,
+     "lag": 6
+    },
+    "costume001_770": {
+     "status": "sjekk",
+     "kilde": "arket",
+     "fil": "costumes/costume001_770_hd.png",
+     "sha256": "f38174f33eb92101349f3c05355538be6d913586e642ffec73dd562bcaa63fd6",
+     "storrelse": [
+      56,
+      68
+     ],
+     "marg": [
+      3,
+      3
+     ],
+     "flytt_hd": [
+      -5,
+      -4
+     ],
+     "snitt_union": 0.527,
+     "dekning": 0.89,
+     "deler": 1,
+     "skala": 0.5714,
+     "tilpasset": true,
+     "skala_xy": [
+      0.5029,
+      0.5714
+     ],
+     "kostyme": 1,
+     "rute": 770,
+     "animasjon": 15,
+     "retning": 2,
+     "lag": 6
+    },
+    "costume001_1025": {
+     "status": "sjekk",
+     "kilde": "arket",
+     "fil": "costumes/costume001_1025_hd.png",
+     "sha256": "7b071abbd13167d7208a1a948c478900a4db4d510540b0d5f173e89224b64a82",
+     "storrelse": [
+      104,
+      44
+     ],
+     "marg": [
+      2,
+      2
+     ],
+     "flytt_hd": [
+      5,
+      -5
+     ],
+     "snitt_union": 0.64,
+     "dekning": 0.646,
+     "deler": 1,
+     "skala": 0.6265,
+     "tilpasset": true,
+     "skala_xy": [
+      0.7017,
+      0.7017
+     ],
+     "kostyme": 1,
+     "rute": 1025,
+     "animasjon": 16,
+     "retning": 1,
+     "lag": 8
+    },
+    "costume001_1024": {
+     "status": "sjekk",
+     "kilde": "arket",
+     "fil": "costumes/costume001_1024_hd.png",
+     "sha256": "269360e4027508316bee42b9aac7b07facd653dbe644f63b56046504d75b761a",
+     "storrelse": [
+      104,
+      48
+     ],
+     "marg": [
+      2,
+      3
+     ],
+     "flytt_hd": [
+      2,
+      4
+     ],
+     "snitt_union": 0.604,
+     "dekning": 0.604,
+     "deler": 1,
+     "skala": 0.6265,
+     "tilpasset": true,
+     "skala_xy": [
+      0.7017,
+      0.7017
+     ],
+     "kostyme": 1,
+     "rute": 1024,
+     "animasjon": 16,
+     "retning": 2,
+     "lag": 8
+    }
+   },
+   "resultat": "jobber/fig001_03/resultat-v1.png",
+   "sha256": "372d192db65edd16f8e21bd99aec76957333786102023b97593c28ee465b1c20",
+   "nokkel": "a8d718dc4ee022e79c79033b569408706dffd9399522e5e84b983511000e2ebf",
+   "forhandsvisning": "myk_fig001_03.png"
+  }
+ },
+ "ruter_ok": 38,
+ "ruter_sjekk": 13,
+ "ruter_mangler": 0
+}
