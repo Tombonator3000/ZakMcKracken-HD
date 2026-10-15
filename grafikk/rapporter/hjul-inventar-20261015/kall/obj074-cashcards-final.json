@@ -1,0 +1,9 @@
+{
+  "file": "obj074-cashcards.png",
+  "refs": [
+    "obj074-cashcards.png",
+    "obj018.png"
+  ],
+  "prompt": "Edit only the face designs on the stack of three plastic bank cards in reference 1. Each card must be an IDENTICAL COPY OF THE BLUE CASHCARD IN REFERENCE 2: blue plastic, one broad GOLD horizontal stripe, and a small GOLD chip in the upper-left area. Remove the white curved wave decoration entirely. Preserve reference 1's three-card stack, offset edges, bent comic perspective, scale, position, linework and true alpha background. Show gold stripe glimpses on lower cards. No text, brands, extra cards, hand, frame, medallion or ground shadow.",
+  "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-12b464ba-1bfd-4f6e-999d-4f04e2cbabb0.png"
+}

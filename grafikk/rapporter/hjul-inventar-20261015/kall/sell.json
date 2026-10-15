@@ -1,0 +1,11 @@
+{
+  "type": "verb",
+  "file": "sell.png",
+  "prompt": "Create a finished verb-wheel icon for a point-and-click adventure game. Draw A gold coin with a dollar sign, a red arrow pointing up (out). Hand-inked adventure-comic drawing, whimsical oddball humour, endearingly crooked and asymmetric shapes, elastic angular caricature, tapering pen lines with varied weight, thin interior accents and a few decisive dark shadow wedges. Muted warm flat colours with one simple cel shade. Economical details and bold readable silhouette. No uniform fat vector outlines, slick mascot design, glossy rendering, 3D, gradients, paper texture, gratuitous faces on objects or added props. Reference 1 gives the comic linework and palette; reference 2 gives the same-set style and medallion. Place the subject inside the same flat cream circular medallion and dark rim as reference 2. Keep the whole medallion inside the square canvas with transparent alpha outside it. One dollar symbol on the gold coin is required. No logo or watermark. Single icon only.",
+  "referenceMode": "purcell-farge-og-ny-stilprove",
+  "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-c8437c08-eb83-46bb-8aa9-e719743509b5.png",
+  "refs": [
+    "/home/tom/Documents/Codex/2026-10-15-sjekk-sam-max-repo-vi-var/grafikk/referanser/purcell-farge-20261013.png",
+    "/home/tom/Documents/Codex/2026-10-15-lag-verb-hjul-og-inventory-grafikk/grafikk/ui/verbhjul/pick-up.png"
+  ]
+}

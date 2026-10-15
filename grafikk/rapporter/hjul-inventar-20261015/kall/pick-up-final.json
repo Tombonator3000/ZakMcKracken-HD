@@ -1,0 +1,12 @@
+{
+  "file": "pick-up.png",
+  "type": "verb",
+  "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-d2075632-59e4-4575-be87-5068f1533767.png",
+  "prompt": "Use case: stylized-concept. Draw ONE finished inventory verb icon for Zak McKracken: PICK UP. STYLE: use the first two supplied images as the DIRECT drawing style references, Steve Purcell's Sam & Max comic drawings. Strongly whimsical, oddball, humorous and deliberately off-kilter. Angular, cockeyed, elastic caricature, confidently wonky perspective, beautifully economical scratchy-tapered pen lines, changes of line weight, small decisive black shadow wedges, comic exaggeration of a few structural shapes. Warm muted flat ink-and-colour palette, ONE simple cel shadow, restrained highlights. Strange and charming, with a slightly scruffy lived-in personality. Keep inner details much finer than the outer silhouette. No rigid geometric vector icons, no uniform fat outline, no slick generic mascot cartoon, no Disney/Pixar cuteness, no glossy rendering, no gradient shading, no 3D, no paper grain or grunge, no gratuitous faces on inanimate props. Do not copy Sam or Max characters or their props into the icon. A thin slightly imperfect hand-drawn dark ink rim around a flat cream circular medallion filling 92 percent of square canvas. In the medallion, a comically lanky, knuckly HUMAN HAND with Zak's blue shirt cuff reaches downward and hooks its asymmetrically bent fingers around a small red ball. One bold simple GREEN ARROW points UP on the right. Funny exaggerated gesture, long thin wrist, slightly chunky fingertip ends, off-centre lively arrangement, believable thumb opposing fingers. It should feel like a prop drawn for the supplied Purcell comic, with specific amusing proportions. A few economical ink crease marks, no detailed fingernails. Crisp flat muted colours, no shine except one tiny flat fleck on ball. Entire circular medallion inside canvas, real alpha outside it. No text, labels, characters, background or ground shadow. Single icon only, square canvas.",
+  "refs": [
+    "/home/tom/Documents/Codex/2026-10-15-sjekk-sam-max-repo-vi-var/grafikk/referanser/purcell-farge-20261013.png",
+    "/home/tom/Documents/Codex/2026-10-15-sjekk-sam-max-repo-vi-var/grafikk/referanser/purcell-tusj-20261013.png"
+  ],
+  "tool": "image_gen, innebygd",
+  "model": "ikke oppgitt"
+}

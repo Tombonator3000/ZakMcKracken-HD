@@ -1,0 +1,6 @@
+{
+  "file": "obj025-yellow-crayon.png",
+  "base": "obj025-box-of-crayons.png",
+  "prompt": "Create a single isolated YELLOW CRAYON matching the yellow crayon in the supplied box: same broad shape, yellow paper wrapper, two dark wrapper bands, blunt yellow wax tip and humorous hand-inked comic style. Draw only that one crayon, removed from the box. No box, other crayons, hand, text, labels, background, frame, medallion or ground shadow. Three-quarter view, diagonal, fully visible and centred with 10 percent transparent margin in a square canvas. True alpha background. Flat yellow and one cel shade, thin pen detail.",
+  "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-eb6bd26b-b692-4e07-91b7-82a12ee1efb7.png"
+}

@@ -1,0 +1,8 @@
+{
+  "file": "obj014-fish-bowl.png",
+  "type": "inventory",
+  "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-0c1ec307-fb6e-4824-8b4a-65c89ae0b0cf.png",
+  "prompt": "Create one fresh clean inventory drawing of the EMPTY GLASS BOWL from the reference. Match the slightly lopsided round silhouette, tilted oval rim, exact viewpoint and the humorous hand-inked linework. The bowl contains NO fish, NO water and NO objects. Render it as a clean glass outline with TWO simple white reflection shapes and a very faint uniform pale blue translucent glass fill. Keep smooth, coherent anti-aliased edges everywhere. Do not make a ragged cut-out hole or erase pixels; draw a fresh clear glass bowl. No noise, coloured speckles, mottled patches or rainbow fringes. Real alpha background outside the bowl. The glass interior may have a clean faint translucent tint. No medallion, ground shadow, text or background. Entire bowl centred in square canvas with 10 percent transparent margin.",
+  "tool": "image_gen, innebygd",
+  "model": "ikke oppgitt"
+}

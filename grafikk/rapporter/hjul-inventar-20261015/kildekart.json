@@ -1,0 +1,1342 @@
+{
+  "verbs": [
+    {
+      "file": "pick-up.png",
+      "verb": "Pick up",
+      "subject": "A cartoon hand reaching down and grabbing a small red ball, a green arrow pointing up"
+    },
+    {
+      "file": "open.png",
+      "verb": "Open",
+      "subject": "A wooden door swung half open, warm yellow light coming through the gap"
+    },
+    {
+      "file": "close.png",
+      "verb": "Close",
+      "subject": "A closed wooden panel door with a brass knob"
+    },
+    {
+      "file": "use.png",
+      "verb": "Use",
+      "subject": "A grey metal cog wheel"
+    },
+    {
+      "file": "give.png",
+      "verb": "Give",
+      "subject": "An open hand, palm up, offering a small red gift box with a yellow ribbon"
+    },
+    {
+      "file": "turn-on.png",
+      "verb": "Turn on",
+      "subject": "A glowing yellow light bulb with short light rays"
+    },
+    {
+      "file": "turn-off.png",
+      "verb": "Turn off",
+      "subject": "A grey, unlit light bulb"
+    },
+    {
+      "file": "put-on.png",
+      "verb": "Put on",
+      "subject": "A blue hat with a red band, a green arrow pointing down onto it"
+    },
+    {
+      "file": "take-off.png",
+      "verb": "Take off",
+      "subject": "A blue hat with a red band lifted up, a green arrow pointing up"
+    },
+    {
+      "file": "read.png",
+      "verb": "Read",
+      "subject": "A wide-open cartoon eye with a blue iris and three eyelashes"
+    },
+    {
+      "file": "push.png",
+      "verb": "Push",
+      "subject": "A hand with the palm forward pushing a wooden crate, motion lines behind the hand"
+    },
+    {
+      "file": "pull.png",
+      "verb": "Pull",
+      "subject": "A fist gripping a red handle on a metal bar, a green arrow pointing left"
+    },
+    {
+      "file": "buy.png",
+      "verb": "Buy",
+      "subject": "A gold coin with a dollar sign, a green arrow pointing down (into the pocket)"
+    },
+    {
+      "file": "sell.png",
+      "verb": "Sell",
+      "subject": "A gold coin with a dollar sign, a red arrow pointing up (out)"
+    },
+    {
+      "file": "teleport.png",
+      "verb": "Teleport to",
+      "subject": "A purple four-pointed sparkle with small golden sparkles around it"
+    }
+  ],
+  "inventory": [
+    {
+      "ids": [
+        14
+      ],
+      "files": [
+        "obj014-sushi-in-fish-bowl.png",
+        "obj014-fish-bowl.png",
+        "obj014-taped-fish-bowl.png"
+      ],
+      "names": [
+        "Sushi in fish bowl",
+        "fish bowl",
+        "taped fish bowl"
+      ],
+      "status": "ja",
+      "description": "Rund glassbolle med vann. Med Sushi: en liten oransje gullfisk i bollen. Tom: bare bollen. Teipet: bollen med grå teip rundt kanten (brukes som hjelm under vann)",
+      "subject": "A round glass fish bowl with water and a small orange goldfish / the same bowl empty / the empty bowl with grey duct tape around the rim"
+    },
+    {
+      "ids": [
+        15
+      ],
+      "files": [
+        "obj015-phone-bill.png",
+        "obj015-phone-bill-map.png"
+      ],
+      "names": [
+        "phone bill",
+        "phone bill map"
+      ],
+      "status": "ja",
+      "description": "Telefonregning, et ark med linjer og et beløp. Etter at Zak har tegnet: kartet fra drømmen tegnet med gult fargestift på baksiden",
+      "subject": "A folded paper bill with printed lines / the same paper with a simple map drawn in yellow crayon"
+    },
+    {
+      "ids": [
+        16
+      ],
+      "files": [
+        "obj016.png"
+      ],
+      "names": [
+        "kazoo"
+      ],
+      "status": "ja",
+      "description": "Liten kazoo, et kort blåseinstrument formet som en ubåt",
+      "subject": "A small metal kazoo"
+    },
+    {
+      "ids": [
+        17
+      ],
+      "files": [
+        "obj017-torn-wallpaper.png",
+        "obj017-wallpaper-map.png"
+      ],
+      "names": [
+        "torn wallpaper",
+        "wallpaper map"
+      ],
+      "status": "ja",
+      "description": "En revet bit tapet med mønster. Senere med kart tegnet med fargestift",
+      "subject": "A torn strip of patterned wallpaper / the same strip with a crayon map drawn on it"
+    },
+    {
+      "ids": [
+        18,
+        32,
+        75
+      ],
+      "files": [
+        "obj018.png"
+      ],
+      "names": [
+        "CashCard"
+      ],
+      "status": "ja",
+      "description": "Plastkort som et bankkort, blått med gull-stripe",
+      "subject": "A blue plastic bank card with a gold stripe and a chip"
+    },
+    {
+      "ids": [
+        74
+      ],
+      "files": [
+        "obj074-cashcards.png",
+        "obj074-cashcard.png"
+      ],
+      "names": [
+        "CashCards",
+        "CashCard"
+      ],
+      "status": "ja",
+      "description": "En liten bunke slike kort / ett kort",
+      "subject": "A small stack of blue plastic bank cards / a single card"
+    },
+    {
+      "ids": [
+        21,
+        188
+      ],
+      "files": [
+        "obj021.png"
+      ],
+      "names": [
+        "remote control"
+      ],
+      "status": "ja",
+      "description": "Svart fjernkontroll med knapper",
+      "subject": "A black TV remote control with coloured buttons"
+    },
+    {
+      "ids": [
+        22,
+        262
+      ],
+      "files": [
+        "obj022.png"
+      ],
+      "names": [
+        "egg"
+      ],
+      "status": "ja",
+      "description": "Et hvitt egg",
+      "subject": "A white egg"
+    },
+    {
+      "ids": [
+        23,
+        623
+      ],
+      "files": [
+        "obj023.png"
+      ],
+      "names": [
+        "bread crumbs"
+      ],
+      "status": "ja",
+      "description": "En liten håndfull brødsmuler",
+      "subject": "A small pile of bread crumbs"
+    },
+    {
+      "ids": [
+        29,
+        130
+      ],
+      "files": [
+        "obj029.png"
+      ],
+      "names": [
+        "stale bread"
+      ],
+      "status": "ja",
+      "description": "Et gammelt, hardt brødstykke",
+      "subject": "A hard, stale loaf of bread"
+    },
+    {
+      "ids": [
+        24
+      ],
+      "files": [
+        "obj024.png"
+      ],
+      "names": [
+        "small key"
+      ],
+      "status": "ja",
+      "description": "Liten messingnøkkel",
+      "subject": "A small brass key"
+    },
+    {
+      "ids": [
+        25
+      ],
+      "files": [
+        "obj025-box-of-crayons.png",
+        "obj025-yellow-crayon.png"
+      ],
+      "names": [
+        "box of crayons",
+        "yellow crayon"
+      ],
+      "status": "ja",
+      "description": "Eske med fargestifter / én gul fargestift",
+      "subject": "A cardboard box of crayons / a single yellow crayon"
+    },
+    {
+      "ids": [
+        26,
+        187
+      ],
+      "files": [
+        "obj026-butter-knife.png",
+        "obj026-bent-butter-knife.png"
+      ],
+      "names": [
+        "butter knife",
+        "bent butter knife"
+      ],
+      "status": "ja",
+      "description": "Smørkniv / samme kniv bøyd",
+      "subject": "A plain butter knife / the same knife bent at an angle"
+    },
+    {
+      "ids": [
+        31,
+        395
+      ],
+      "files": [
+        "obj031.png"
+      ],
+      "names": [
+        "bobby pin sign"
+      ],
+      "status": "ja",
+      "description": "Et lite skilt med en hårnål festet på (hårnålen brukes som dirk)",
+      "subject": "A small cardboard sign with a black hair bobby pin clipped to it"
+    },
+    {
+      "ids": [
+        34
+      ],
+      "files": [
+        "obj034.png"
+      ],
+      "names": [
+        "tool kit"
+      ],
+      "status": "ja",
+      "description": "Rød verktøykasse",
+      "subject": "A red metal tool box"
+    },
+    {
+      "ids": [
+        37,
+        110,
+        333
+      ],
+      "files": [
+        "obj037.png"
+      ],
+      "names": [
+        "rope"
+      ],
+      "status": "ja",
+      "description": "Kveil med tau",
+      "subject": "A coiled brown rope"
+    },
+    {
+      "ids": [
+        39
+      ],
+      "files": [
+        "obj039.png"
+      ],
+      "names": [
+        "wet suit"
+      ],
+      "status": "ja",
+      "description": "Svart våtdrakt",
+      "subject": "A black diving wet suit"
+    },
+    {
+      "ids": [
+        40
+      ],
+      "files": [
+        "obj040.png"
+      ],
+      "names": [
+        "nose glasses"
+      ],
+      "status": "ja",
+      "description": "Falske briller med stor nese og bart (som på lagreskjermen og avisforsiden)",
+      "subject": "Novelty disguise glasses with a big pink nose and a black moustache"
+    },
+    {
+      "ids": [
+        41
+      ],
+      "files": [
+        "obj041.png"
+      ],
+      "names": [
+        "guitar"
+      ],
+      "status": "ja",
+      "description": "Akustisk gitar",
+      "subject": "An acoustic guitar"
+    },
+    {
+      "ids": [
+        43
+      ],
+      "files": [
+        "obj043.png"
+      ],
+      "names": [
+        "hat"
+      ],
+      "status": "ja",
+      "description": "Hatt (motivet usikkert; trolig en enkel filthatt)",
+      "subject": "A brown felt hat"
+    },
+    {
+      "ids": [
+        44
+      ],
+      "files": [
+        "obj044.png"
+      ],
+      "names": [
+        "golf club"
+      ],
+      "status": "ja",
+      "description": "Golfkølle",
+      "subject": "A golf club"
+    },
+    {
+      "ids": [
+        45
+      ],
+      "files": [
+        "obj045.png"
+      ],
+      "names": [
+        "book"
+      ],
+      "status": "ja",
+      "description": "Pocketbok",
+      "subject": "A paperback book"
+    },
+    {
+      "ids": [
+        46
+      ],
+      "files": [
+        "obj046.png"
+      ],
+      "names": [
+        "whiskey"
+      ],
+      "status": "ja",
+      "description": "Liten flaske whisky",
+      "subject": "A small bottle of whiskey"
+    },
+    {
+      "ids": [
+        47
+      ],
+      "files": [
+        "obj047.png"
+      ],
+      "names": [
+        "toilet paper"
+      ],
+      "status": "ja",
+      "description": "Dorull",
+      "subject": "A roll of toilet paper"
+    },
+    {
+      "ids": [
+        48
+      ],
+      "files": [
+        "obj048.png"
+      ],
+      "names": [
+        "cushion"
+      ],
+      "status": "ja",
+      "description": "Setepute fra flyet",
+      "subject": "A small blue airplane seat cushion"
+    },
+    {
+      "ids": [
+        49
+      ],
+      "files": [
+        "obj049-lighter.png",
+        "obj049-lit-lighter.png"
+      ],
+      "names": [
+        "lighter",
+        "lit lighter"
+      ],
+      "status": "ja",
+      "description": "Sigarettenner / samme med flamme",
+      "subject": "A cigarette lighter / the same lighter with a small flame"
+    },
+    {
+      "ids": [
+        50
+      ],
+      "files": [
+        "obj050.png"
+      ],
+      "names": [
+        "oxygen tank"
+      ],
+      "status": "ja",
+      "description": "Liten oksygenflaske med maske",
+      "subject": "A small oxygen tank with a face mask"
+    },
+    {
+      "ids": [
+        51
+      ],
+      "files": [
+        "obj051.png"
+      ],
+      "names": [
+        "peanuts"
+      ],
+      "status": "ja",
+      "description": "Liten pose peanøtter",
+      "subject": "A small bag of airline peanuts"
+    },
+    {
+      "ids": [
+        52
+      ],
+      "files": [
+        "obj052.png"
+      ],
+      "names": [
+        "tree branch"
+      ],
+      "status": "ja",
+      "description": "Grein fra et tre",
+      "subject": "A broken tree branch"
+    },
+    {
+      "ids": [
+        53
+      ],
+      "files": [
+        "obj053.png"
+      ],
+      "names": [
+        "abandoned bird nest"
+      ],
+      "status": "ja",
+      "description": "Fuglereir av kvister",
+      "subject": "An empty bird nest made of twigs"
+    },
+    {
+      "ids": [
+        33
+      ],
+      "files": [
+        "obj033.png"
+      ],
+      "names": [
+        "squirrel nest"
+      ],
+      "status": "usikker",
+      "description": "Ekornreir",
+      "subject": "A messy squirrel nest of leaves and twigs"
+    },
+    {
+      "ids": [
+        54,
+        56,
+        183,
+        184,
+        645,
+        646
+      ],
+      "files": [
+        "obj054.png"
+      ],
+      "names": [
+        "crystal shard"
+      ],
+      "status": "ja",
+      "description": "Bit av en krystall",
+      "subject": "A small sharp shard of clear crystal"
+    },
+    {
+      "ids": [
+        653
+      ],
+      "files": [
+        "obj653.png"
+      ],
+      "names": [
+        "crystal shards"
+      ],
+      "status": "ja",
+      "description": "Flere krystallbiter",
+      "subject": "A few sharp crystal shards"
+    },
+    {
+      "ids": [
+        55,
+        186,
+        431
+      ],
+      "files": [
+        "obj055.png"
+      ],
+      "names": [
+        "blue crystal"
+      ],
+      "status": "ja",
+      "description": "Blå krystall",
+      "subject": "A glowing blue crystal"
+    },
+    {
+      "ids": [
+        57,
+        185,
+        429
+      ],
+      "files": [
+        "obj057.png"
+      ],
+      "names": [
+        "yellow crystal"
+      ],
+      "status": "ja",
+      "description": "Gul krystall",
+      "subject": "A glowing yellow crystal"
+    },
+    {
+      "ids": [
+        58,
+        430
+      ],
+      "files": [
+        "obj058.png"
+      ],
+      "names": [
+        "white crystal"
+      ],
+      "status": "ja",
+      "description": "Hvit krystall",
+      "subject": "A glowing white crystal"
+    },
+    {
+      "ids": [
+        428
+      ],
+      "files": [
+        "obj428.png"
+      ],
+      "names": [
+        "crystalabra"
+      ],
+      "status": "ja",
+      "description": "Lysestake med krystaller i stedet for lys",
+      "subject": "A candelabra holding crystals instead of candles"
+    },
+    {
+      "ids": [
+        80
+      ],
+      "files": [
+        "obj080.png"
+      ],
+      "names": [
+        "candelabra"
+      ],
+      "status": "ja",
+      "description": "Lysestake i messing med tre armer",
+      "subject": "A brass three-armed candelabra"
+    },
+    {
+      "ids": [
+        59,
+        647
+      ],
+      "files": [
+        "obj059.png"
+      ],
+      "names": [
+        "flagpole"
+      ],
+      "status": "ja",
+      "description": "Flaggstang",
+      "subject": "A long flagpole"
+    },
+    {
+      "ids": [
+        60
+      ],
+      "files": [
+        "obj060.png"
+      ],
+      "names": [
+        "jail key"
+      ],
+      "status": "ja",
+      "description": "Stor jernnøkkel",
+      "subject": "A large iron jail key"
+    },
+    {
+      "ids": [
+        61,
+        62,
+        63
+      ],
+      "files": [
+        "obj061.png"
+      ],
+      "names": [
+        "token"
+      ],
+      "status": "ja",
+      "description": "Polet til trikken",
+      "subject": "A small metal transit token"
+    },
+    {
+      "ids": [
+        64
+      ],
+      "files": [
+        "obj064.png"
+      ],
+      "names": [
+        "burnt fuse"
+      ],
+      "status": "ja",
+      "description": "Brent sikring",
+      "subject": "A burnt-out glass fuse, blackened"
+    },
+    {
+      "ids": [
+        73,
+        471
+      ],
+      "files": [
+        "obj073.png"
+      ],
+      "names": [
+        "fuse"
+      ],
+      "status": "ja",
+      "description": "Sikring",
+      "subject": "A glass cartridge fuse"
+    },
+    {
+      "ids": [
+        65,
+        66
+      ],
+      "files": [
+        "obj065.png"
+      ],
+      "names": [
+        "helmet"
+      ],
+      "status": "ja",
+      "description": "Romhjelm",
+      "subject": "A round space helmet with a visor"
+    },
+    {
+      "ids": [
+        67
+      ],
+      "files": [
+        "obj067.png"
+      ],
+      "names": [
+        "vinyl tape"
+      ],
+      "status": "ja",
+      "description": "Rull med grå teip",
+      "subject": "A roll of grey duct tape"
+    },
+    {
+      "ids": [
+        68
+      ],
+      "files": [
+        "obj068.png"
+      ],
+      "names": [
+        "broom alien"
+      ],
+      "status": "ja",
+      "description": "Et koste-romvesen fra Mars (en kost med øyne)",
+      "subject": "A broom with small alien eyes, a Martian broom creature"
+    },
+    {
+      "ids": [
+        69
+      ],
+      "files": [
+        "obj069-flashlight.png",
+        "obj069-lit-flashlight.png"
+      ],
+      "names": [
+        "flashlight",
+        "lit flashlight"
+      ],
+      "status": "ja",
+      "description": "Lommelykt / samme med lys",
+      "subject": "A flashlight / the same flashlight switched on with a beam"
+    },
+    {
+      "ids": [
+        70,
+        535,
+        536,
+        537
+      ],
+      "files": [
+        "obj070.png"
+      ],
+      "names": [
+        "ladder"
+      ],
+      "status": "ja",
+      "description": "Stige",
+      "subject": "A wooden ladder"
+    },
+    {
+      "ids": [
+        71
+      ],
+      "files": [
+        "obj071-boom-box.png",
+        "obj071-recording-boom-box.png"
+      ],
+      "names": [
+        "boom box",
+        "recording boom box"
+      ],
+      "status": "ja",
+      "description": "Stor kassettspiller / samme med rødt opptakslys",
+      "subject": "A large portable boom box / the same with a red recording light on"
+    },
+    {
+      "ids": [
+        72
+      ],
+      "files": [
+        "obj072.png"
+      ],
+      "names": [
+        "Digital Audio Tape"
+      ],
+      "status": "ja",
+      "description": "Liten lydkassett",
+      "subject": "A small digital audio tape cassette"
+    },
+    {
+      "ids": [
+        76
+      ],
+      "files": [
+        "obj076.png"
+      ],
+      "names": [
+        "golden key"
+      ],
+      "status": "ja",
+      "description": "Gullnøkkel",
+      "subject": "An ornate golden key"
+    },
+    {
+      "ids": [
+        544
+      ],
+      "files": [
+        "obj544.png"
+      ],
+      "names": [
+        "large key"
+      ],
+      "status": "ja",
+      "description": "Stor nøkkel",
+      "subject": "A large old key"
+    },
+    {
+      "ids": [
+        77
+      ],
+      "files": [
+        "obj077.png"
+      ],
+      "names": [
+        "parachute"
+      ],
+      "status": "ja",
+      "description": "Fallskjermsekk",
+      "subject": "A parachute pack with straps"
+    },
+    {
+      "ids": [
+        78,
+        427
+      ],
+      "files": [
+        "obj078.png"
+      ],
+      "names": [
+        "glowing object"
+      ],
+      "status": "ja",
+      "description": "Lysende gjenstand",
+      "subject": "A small mysterious object glowing with light"
+    },
+    {
+      "ids": [
+        79
+      ],
+      "files": [
+        "obj079.png"
+      ],
+      "names": [
+        "scroll"
+      ],
+      "status": "ja",
+      "description": "Gammel papyrusrull",
+      "subject": "An old rolled-up papyrus scroll"
+    },
+    {
+      "ids": [
+        81
+      ],
+      "files": [
+        "obj081.png"
+      ],
+      "names": [
+        "ankh"
+      ],
+      "status": "ja",
+      "description": "Egyptisk ankh i gull",
+      "subject": "A golden Egyptian ankh"
+    },
+    {
+      "ids": [
+        82,
+        83
+      ],
+      "files": [
+        "obj082.png"
+      ],
+      "names": [
+        "ticket"
+      ],
+      "status": "ja",
+      "description": "Flybillett",
+      "subject": "A paper airline ticket"
+    },
+    {
+      "ids": [
+        189
+      ],
+      "files": [
+        "obj189.png"
+      ],
+      "names": [
+        "Lotto"
+      ],
+      "status": "ja",
+      "description": "Lottokupong",
+      "subject": "A lottery ticket"
+    },
+    {
+      "ids": [
+        609,
+        610,
+        614
+      ],
+      "files": [
+        "obj609.png"
+      ],
+      "names": [
+        "seaweed"
+      ],
+      "status": "ja",
+      "description": "Tang",
+      "subject": "A strand of green seaweed"
+    },
+    {
+      "ids": [
+        27
+      ],
+      "files": [
+        "obj027.png"
+      ],
+      "names": [
+        "fan club card"
+      ],
+      "status": "usikker",
+      "description": "Medlemskort i en fanklubb",
+      "subject": "A small fan club membership card"
+    },
+    {
+      "ids": [
+        30
+      ],
+      "files": [
+        "obj030.png"
+      ],
+      "names": [
+        "application"
+      ],
+      "status": "usikker",
+      "description": "Søknadsskjema",
+      "subject": "A paper application form"
+    },
+    {
+      "ids": [
+        20
+      ],
+      "files": [
+        "obj020.png"
+      ],
+      "names": [
+        "power cord"
+      ],
+      "status": "usikker",
+      "description": "Strømledning",
+      "subject": "A coiled electrical power cord with a plug"
+    },
+    {
+      "ids": [
+        106
+      ],
+      "files": [
+        "obj106.png"
+      ],
+      "names": [
+        "plastic card"
+      ],
+      "status": "usikker",
+      "description": "Plastkort",
+      "subject": "A blank plastic card"
+    },
+    {
+      "ids": [
+        139
+      ],
+      "files": [
+        "obj139.png"
+      ],
+      "names": [
+        "letter"
+      ],
+      "status": "usikker",
+      "description": "Brev i konvolutt",
+      "subject": "A letter in an envelope"
+    },
+    {
+      "ids": [
+        175
+      ],
+      "files": [
+        "obj175.png"
+      ],
+      "names": [
+        "blotter"
+      ],
+      "status": "usikker",
+      "description": "Skriveunderlag",
+      "subject": "A desk blotter"
+    },
+    {
+      "ids": [
+        176,
+        177
+      ],
+      "files": [
+        "obj176.png"
+      ],
+      "names": [
+        "books"
+      ],
+      "status": "usikker",
+      "description": "Noen bøker",
+      "subject": "A small stack of books"
+    },
+    {
+      "ids": [
+        179
+      ],
+      "files": [
+        "obj179.png"
+      ],
+      "names": [
+        "Yeti skull"
+      ],
+      "status": "usikker",
+      "description": "Hodeskalle av en yeti",
+      "subject": "A large hairy-browed yeti skull"
+    },
+    {
+      "ids": [
+        288
+      ],
+      "files": [
+        "obj288.png"
+      ],
+      "names": [
+        "paper"
+      ],
+      "status": "usikker",
+      "description": "Et ark",
+      "subject": "A sheet of paper"
+    },
+    {
+      "ids": [
+        362
+      ],
+      "files": [
+        "obj362.png"
+      ],
+      "names": [
+        "yak pie"
+      ],
+      "status": "usikker",
+      "description": "Jakmøkk",
+      "subject": "A flat round yak dung pie"
+    },
+    {
+      "ids": [
+        479
+      ],
+      "files": [
+        "obj479.png"
+      ],
+      "names": [
+        "can of gas"
+      ],
+      "status": "usikker",
+      "description": "Bensinkanne",
+      "subject": "A red gas can"
+    },
+    {
+      "ids": [
+        119,
+        131
+      ],
+      "files": [
+        "obj119.png"
+      ],
+      "names": [
+        "seat cushion"
+      ],
+      "status": "usikker",
+      "description": "Sofapute",
+      "subject": "A sofa seat cushion"
+    },
+    {
+      "ids": [
+        268,
+        285
+      ],
+      "files": [
+        "obj268.png"
+      ],
+      "names": [
+        "two-headed squirrel"
+      ],
+      "status": "trolig ikke",
+      "description": "Ekorn med to hoder",
+      "subject": "A two-headed squirrel"
+    },
+    {
+      "ids": [
+        19
+      ],
+      "files": [
+        "obj019.png"
+      ],
+      "names": [
+        "receiver"
+      ],
+      "status": "trolig ikke",
+      "description": "Telefonrør",
+      "subject": "A telephone receiver"
+    },
+    {
+      "ids": [
+        87
+      ],
+      "files": [
+        "obj087.png"
+      ],
+      "names": [
+        "telephone"
+      ],
+      "status": "trolig ikke",
+      "description": "Telefon",
+      "subject": "An old telephone"
+    },
+    {
+      "ids": [
+        95
+      ],
+      "files": [
+        "obj095.png"
+      ],
+      "names": [
+        "cat clock"
+      ],
+      "status": "trolig ikke",
+      "description": "Katteklokke på veggen",
+      "subject": "A black cat wall clock"
+    },
+    {
+      "ids": [
+        107
+      ],
+      "files": [
+        "obj107.png"
+      ],
+      "names": [
+        "rug corner"
+      ],
+      "status": "trolig ikke",
+      "description": "Hjørnet av et teppe",
+      "subject": ""
+    },
+    {
+      "ids": [
+        108
+      ],
+      "files": [
+        "obj108.png"
+      ],
+      "names": [
+        "loose boards"
+      ],
+      "status": "trolig ikke",
+      "description": "Løse gulvbord",
+      "subject": ""
+    },
+    {
+      "ids": [
+        241
+      ],
+      "files": [
+        "obj241.png"
+      ],
+      "names": [
+        "exploded egg"
+      ],
+      "status": "trolig ikke",
+      "description": "",
+      "subject": ""
+    },
+    {
+      "ids": [
+        257,
+        258,
+        259
+      ],
+      "files": [
+        "obj257.png"
+      ],
+      "names": [
+        "suitcase"
+      ],
+      "status": "trolig ikke",
+      "description": "Koffert",
+      "subject": ""
+    },
+    {
+      "ids": [
+        264
+      ],
+      "files": [
+        "obj264.png"
+      ],
+      "names": [
+        "toilet paper holder"
+      ],
+      "status": "trolig ikke",
+      "description": "",
+      "subject": ""
+    },
+    {
+      "ids": [
+        267
+      ],
+      "files": [
+        "obj267.png"
+      ],
+      "names": [
+        "loose dirt"
+      ],
+      "status": "trolig ikke",
+      "description": "",
+      "subject": ""
+    },
+    {
+      "ids": [
+        271
+      ],
+      "files": [
+        "obj271.png"
+      ],
+      "names": [
+        "Mt. Rainier"
+      ],
+      "status": "trolig ikke",
+      "description": "",
+      "subject": ""
+    },
+    {
+      "ids": [
+        273
+      ],
+      "files": [
+        "obj273.png"
+      ],
+      "names": [
+        "fire pit"
+      ],
+      "status": "trolig ikke",
+      "description": "",
+      "subject": ""
+    },
+    {
+      "ids": [
+        391
+      ],
+      "files": [
+        "obj391.png"
+      ],
+      "names": [
+        "sand pile"
+      ],
+      "status": "trolig ikke",
+      "description": "",
+      "subject": ""
+    },
+    {
+      "ids": [
+        451
+      ],
+      "files": [
+        "obj451.png"
+      ],
+      "names": [
+        "sand"
+      ],
+      "status": "trolig ikke",
+      "description": "",
+      "subject": ""
+    },
+    {
+      "ids": [
+        478
+      ],
+      "files": [
+        "obj478.png"
+      ],
+      "names": [
+        "covers"
+      ],
+      "status": "trolig ikke",
+      "description": "",
+      "subject": ""
+    }
+  ]
+}

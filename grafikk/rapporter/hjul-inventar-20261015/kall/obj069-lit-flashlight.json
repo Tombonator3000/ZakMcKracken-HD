@@ -1,0 +1,6 @@
+{
+  "file": "obj069-lit-flashlight.png",
+  "base": "obj069-flashlight.png",
+  "prompt": "Edit this flashlight to its switched-on state. Keep exactly the same blue flashlight body, red switch, viewpoint, scale and diagonal placement. Change ONLY the lens to a bright warm yellow glow, with a SHORT pale yellow translucent cone of light extending from the lens in its existing facing direction. Keep the entire beam inside the canvas; do not shrink or move the flashlight to accommodate it. Use a simple flat comic light shape rather than photorealistic glare. Preserve the hand-inked lines and true alpha background. No text, scene, background, hand, medallion or ground shadow.",
+  "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-53bc65a2-a440-4094-af5e-1ba5446b0cd6.png"
+}

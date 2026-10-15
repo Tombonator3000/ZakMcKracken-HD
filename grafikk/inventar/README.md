@@ -1,7 +1,7 @@
 # Bilder av tingene i inventaret
 
-Godkjente bilder av tingene i inventaret legges her som `objNNN.png` (objektnummeret med tre sifre), PNG med gjennomsiktig bakgrunn, gjerne 512 x 512. Listen over de 123 tingene står i [docs/inventar.csv](../../docs/inventar.csv) (`tools/inventarliste.py`). `zakhd build-mod` legger bildene i modden under `inventory/`, og motoren viser bildet i ruten i stedet for navnet. En ting uten bilde vises med navnet.
+126 PNG-filer for 105 objektnumre, basert på 81 logiske bilder med navn- og tilstandsvarianter. Lagt inn etter Toms direkte bestilling 15. oktober 2026. Alle er 512 x 512 RGBA med ekte alfa. `zakhd build-mod` leser dem automatisk herfra og skriver `inventory/objNNN.png` og `inventory/objNNN-<navn>.png` til modden.
 
-Har tingen flere navn i spillet (fish bowl, taped fish bowl), lages `objNNN-<navn>.png` per navn. Utseende og filnavn for alle tingene: [docs/GRAFIKK-HJUL-OG-INVENTAR.md](../../docs/GRAFIKK-HJUL-OG-INVENTAR.md).
+[Galleri og produksjonsnotat](../rapporter/hjul-inventar-20261015/notat.md) beskriver prompter, kilder, sjekksummer og usikre motiver. [Spillets inventarliste](../../docs/inventar.csv) og [motivlisten](../../docs/GRAFIKK-HJUL-OG-INVENTAR.md) er fortsatt grunnlaget. De 18 objektnumrene merket «trolig ikke» i motivlisten har ikke fått bilder. Ting uten bilde vises med navn.
 
-Ingen bilder er bestilt eller godkjent ennå (15. oktober 2026). Bestillingen står i `docs/BESTILLING-CHATGPT.md`.
+Import med `build_ui` er kontrollert; dette er ikke en ny spilltest eller visuell godkjenning.

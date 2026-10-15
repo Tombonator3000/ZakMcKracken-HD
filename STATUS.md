@@ -1,10 +1,10 @@
 # Status
 
-Oppdatert 14. oktober 2026.
+Oppdatert 15. oktober 2026.
 
 ## Kort
 
-Repoet har samme oppsett som Sam & Max HD og The Dig HD Remake, tilpasset Zak McKracken (FM-Towns). Spillfilene ligger i `spilldata`, ScummVM med HD-patchen og FLAC bygger og kjører spillet, all originalgrafikk er trukket ut, alle skript er dekompilert, og listen over grafikken som skal byttes ut finnes. HD-laget er på for Zak fra 15. oktober (rom, objekter og figurer, testet med nearest-mod uten avvik), men det finnes ingen HD-grafikk for spillet ennå, så det vises med originalgrafikken. Stilankerne er godkjent (`grafikk/stil/`, 14. oktober), men ingen HD-grafikk er laget for spillet ennå.
+Repoet har samme oppsett som Sam & Max HD og The Dig HD Remake, tilpasset Zak McKracken (FM-Towns). Spillfilene ligger i `spilldata`, ScummVM med HD-patchen og FLAC bygger og kjører spillet, all originalgrafikk er trukket ut, alle skript er dekompilert, og listen over grafikken som skal byttes ut finnes. HD-laget er på for Zak fra 15. oktober (rom, objekter og figurer, testet med nearest-mod uten avvik), rom og figurer vises fortsatt med originalgrafikken fordi de mangler ferdige HD-ressurser. Stilankerne er godkjent (`grafikk/stil/`, 14. oktober). Grafikkleveransen 15. oktober inneholder 15 malte verbikoner, 126 inventarfiler og 22 karakterkonsepter under `grafikk/`. UI-filene importeres av den eksisterende pipelinen; konseptarkene er ikke animasjonsruter. Den nye grafikken er ikke prøvd i spillmotoren.
 
 ## Det som virker
 

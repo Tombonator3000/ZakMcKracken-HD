@@ -48,6 +48,12 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [ ] Hvilket rom og hvilken palett hvert kostyme faktisk vises i, og bruk den i RGBA-bildene
 - [ ] Hvilke ting kan havne i inventaret (pickupObject i skriptene og verb 8), til eventuelle ikoner
 
+### Grafikkleveranse samlet (15. oktober)
+
+- [x] 15 malte verbikoner og 126 inventarfiler lagt i mappene `build_ui` leser, etter Toms bestilling
+- [x] 22 karakterkonsepter med galleri, prompter, kilder og sjekksummer lagt i `grafikk/konsept/`
+- [ ] Tom vurderer konseptdetaljene og ser de nye UI-bildene i spillet
+
 ### Verbhjulet i HD (15. oktober)
 
 - [x] 15 tegnede ikoner og HD-tegning med myke kanter, tekst i Comic Neue; HD-laget også uten HD-pakke
