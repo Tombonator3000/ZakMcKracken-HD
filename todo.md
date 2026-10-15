@@ -192,3 +192,7 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [x] Bare Zak først: 24 sammensatte ruter, tre ark, 51 deler, faktiske prompter og rutekart.
 - [ ] Tom vurderer spritepiloten og King v2 med Elvis-tupé.
 - [ ] Kontroller de 13 importmerknadene for munn/utstyr og prøv de nye delene i motoren før de tas i bruk.
+
+### Verbhjul: hender og fedora
+- [x] Rettet 11 ikoner med bare hender og fem fingre, fedora i put-on/take-off. Før/etter, prompter og sjekksummer vedlagt.
+- [ ] Tom vurderer den nye rettelsen; se den deretter i motoren.

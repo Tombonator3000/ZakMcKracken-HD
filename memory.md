@@ -94,3 +94,6 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 - Tom godkjente alle de 21 øvrige karakterarkene, 15 verbikonene og 126 inventarfilene. The King v1 var unntaket: han skal ha svart Elvis-tupé på Caponian-hodet. Høye ekte øyne og langt smalt midtansikt skal beholdes.
 - The King v2 er rettet med tupé og lagt i PR 11. Ny rettelse registreres ikke automatisk som godkjent.
 - Neste spritesheet-bestilling gjelder bare Zak først, med godkjent Zak-master som identitetsanker.
+
+## Retur på verbhjul, 15. oktober
+- Toms rettelse: hender skal ha fem fingre, uten dressjakke eller erme. Begge hattikonene skal forestille fedora, med lav krone, midtfold og vanlig brem. Ny grafikkrettelse registreres ikke automatisk som godkjent.

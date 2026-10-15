@@ -252,3 +252,8 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Modden bygget og publisert i grenen `hd-mod` med `tools/mod_gren.sh send` (mod.json, ui/, inventory/, SHA256SUMS).
 - Testet uten skjerm med modden: «19 drawn icons (15 from the HD pack)», de malte ikonene i hjulet (Turn on lamp), inventaret med malte bilder (billett, fiskebolle med Sushi, regning, kazoo, tapet, CashCard, plastkort) og navn for tingene uten bilde (receiver, telephone, cat clock), hjulet åpnet på billetten.
 - `docs/inventar.csv` laget på nytt: status «godkjent» der bildet finnes.
+
+## 2026-10-15 16:46 (Codex)
+- Tom ba om bedre fingre og bare hender uten dressjakke på verbikonene. Deretter presiserte han at hattene skal være fedora.
+- Rettet 11 håndikoner med innebygd image_gen, flere målrettede forsøk der fingre manglet eller ble for mange. Begge hattikoner viser samme blå fedora med rødt bånd, med inventarhatten som formreferanse. Fire ikoner uten hender og inventaret er uendret.
+- Faktiske prompter, genereringslogg, gamle bilder, før/etter, kontaktark og SHA-256 i rapporter/verbhjul-hender-20261015 (grafikk/ i kodegrenen). Eksport 512 x 512 RGBA; mottaket tar inn filene som før. Ingen motor- eller pipelinekode endret. Rettelsen er til kontroll, ikke prøvd i motoren.

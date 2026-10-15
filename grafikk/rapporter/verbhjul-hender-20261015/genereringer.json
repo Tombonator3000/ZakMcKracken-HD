@@ -1,0 +1,560 @@
+{
+  "dato": "2026-10-15",
+  "verktoy": "image_gen.imagegen, innebygd",
+  "kall": [
+    {
+      "name": "give",
+      "versjon": 1,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-36015154-8e55-459f-8d9b-8ffdf957553c.png",
+      "prompt": "prompter/give-v1.txt",
+      "resultat": "../../ui/verbhjul-gpt/give.png",
+      "sha256": "5052b698ed8e97e0bb7598c8f38db65a0a014a18f75a243b4336553ddb74b6d8",
+      "bytes": 294203,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "1a4a3b2b2562dc00668b6e38d35132942ba057cd32f2010862bc9696595eb643",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "push",
+      "versjon": 1,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-ed68d5f9-f194-4690-8538-425fea90cf24.png",
+      "prompt": "prompter/push-v1.txt",
+      "resultat": "../../ui/verbhjul-gpt/push.png",
+      "sha256": "a2274bc0face5c93648825f5b7eeee0deb4cb5bee1fa49683f882a229442cef9",
+      "bytes": 307309,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "bb41feeb03d827ead970352585f01f6c57afe60961d215d716e0738215efbf2d",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "use",
+      "versjon": 1,
+      "valgt": false,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-99413bdb-8f96-48b9-bde1-75905ea753c9.png",
+      "prompt": "prompter/use-v1.txt",
+      "resultat": null
+    },
+    {
+      "name": "use",
+      "versjon": 2,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-bd25c3d3-0020-4789-8777-2e26349d9ab8.png",
+      "prompt": "prompter/use-v2.txt",
+      "resultat": "../../ui/verbhjul-gpt/use.png",
+      "sha256": "15207106687d9b8882b88bb87b994e17e6c4e865245bc69a4515781e46aa8202",
+      "bytes": 313456,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "039050f0a2ffefe1df0901bb89c4863c222ed09bdc1cb3ed698865abd26c384a",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "buy",
+      "versjon": 1,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-7410cd65-04b6-4768-8da5-fcbf576dc2e7.png",
+      "prompt": "prompter/buy-v1.txt",
+      "resultat": "../../ui/verbhjul-gpt/buy.png",
+      "sha256": "7876f802f4d38442a05ce835e47f879e219a089bb7d648835495a7d258cd63b3",
+      "bytes": 338262,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "1fceb00a91dec08ae8133e87dd236631f436685c01855cbd20ec6fe3dd872539",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "open",
+      "versjon": 1,
+      "valgt": false,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-a5aeb427-e243-4319-a49e-182af07b2f5d.png",
+      "prompt": "prompter/open-v1.txt",
+      "resultat": null
+    },
+    {
+      "name": "open",
+      "versjon": 2,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-a66d7f9f-0206-4251-8aa0-e025c5fedb5c.png",
+      "prompt": "prompter/open-v2.txt",
+      "resultat": "../../ui/verbhjul-gpt/open.png",
+      "sha256": "2170353b7bf3187e04deb4d941c20a9d00ec8f2e3ebcfa9f7cd45881085a48b5",
+      "bytes": 339932,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "06a9d8a1bf1f16a8702d0757cd70690cb50c9880fa11815f054993299d3c1b73",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "pick-up",
+      "versjon": 1,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-a479fe5d-c170-4f43-80d6-d4620d353b88.png",
+      "prompt": "prompter/pick-up-v1.txt",
+      "resultat": "../../ui/verbhjul-gpt/pick-up.png",
+      "sha256": "032b0338e5f53bdd362cb4469152e36ab9177ac88381dc4db805fe4b7b8414a0",
+      "bytes": 294802,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "e5517dd4d12e6b07053e4e904380b8d0d6a5e2039836daa56a468f5e3ab93b68",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "pull",
+      "versjon": 1,
+      "valgt": false,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-9708a6d2-eccb-42f8-b862-471074865ae0.png",
+      "prompt": "prompter/pull-v1.txt",
+      "resultat": null
+    },
+    {
+      "name": "pull",
+      "versjon": 2,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-6492157f-9e37-43cf-a39b-15036ddaaa5a.png",
+      "prompt": "prompter/pull-v2.txt",
+      "resultat": "../../ui/verbhjul-gpt/pull.png",
+      "sha256": "f03ea3f1889fd86e54bea7321c320a641f3c8d3f39f1b4c283ba1ae4100a3010",
+      "bytes": 299739,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "d19d921f228aa5b7f5d89afa8bd27ce2689ac67cec3c777f6d59988fb5528d06",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "put-on",
+      "versjon": 1,
+      "valgt": false,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-59d7d82f-dfdd-43ca-82ee-f49065a470af.png",
+      "prompt": "prompter/put-on-v1.txt",
+      "resultat": null
+    },
+    {
+      "name": "put-on",
+      "versjon": 2,
+      "valgt": false,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-ff17c287-8b0e-4ea7-abb1-b7935471422a.png",
+      "prompt": "prompter/put-on-v2.txt",
+      "resultat": null
+    },
+    {
+      "name": "put-on",
+      "versjon": 3,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-1a93d82a-a9e7-4d9c-bf28-c328067d709d.png",
+      "prompt": "prompter/put-on-v3.txt",
+      "resultat": "../../ui/verbhjul-gpt/put-on.png",
+      "sha256": "209fc14b7bd8bbd2529e3eb3b2736424a81a79740ca529c1bee9e038d257b7a2",
+      "bytes": 325326,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "b2998dbe3af9439623e6e3211a6d91ae98b881914f02e4f62198da22e0d2d62f",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "take-off",
+      "versjon": 1,
+      "valgt": false,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-1e9198e8-18ac-492d-8a79-2c452b467a53.png",
+      "prompt": "prompter/take-off-v1.txt",
+      "resultat": null
+    },
+    {
+      "name": "take-off",
+      "versjon": 2,
+      "valgt": false,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-3d5cd253-3b08-49dc-8cec-f31aa6736179.png",
+      "prompt": "prompter/take-off-v2.txt",
+      "resultat": null
+    },
+    {
+      "name": "take-off",
+      "versjon": 3,
+      "valgt": false,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-e60b984b-066d-4eb5-bb5f-63c64461a9a3.png",
+      "prompt": "prompter/take-off-v3.txt",
+      "resultat": null
+    },
+    {
+      "name": "take-off",
+      "versjon": 4,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-3756d38c-8616-4562-bb18-6c098b95b9bd.png",
+      "prompt": "prompter/take-off-v4.txt",
+      "resultat": "../../ui/verbhjul-gpt/take-off.png",
+      "sha256": "89eed2956ab63faf5ed31bb6b51a8f94d10eb3393aa64213fd5b15194c268661",
+      "bytes": 312211,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "780cba3f170e45fb6fab2c1ea1f112bd842b51aa5b7a9d9ba5c3afca20e3670a",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "turn-off",
+      "versjon": 1,
+      "valgt": false,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-889d223f-b297-43f1-bfea-27fafbbdf4f4.png",
+      "prompt": "prompter/turn-off-v1.txt",
+      "resultat": null
+    },
+    {
+      "name": "turn-off",
+      "versjon": 2,
+      "valgt": false,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-8c952c34-7182-43f6-b2e2-0b9416c16899.png",
+      "prompt": "prompter/turn-off-v2.txt",
+      "resultat": null
+    },
+    {
+      "name": "turn-off",
+      "versjon": 3,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-1ad5c3b8-78eb-45a0-92ce-82cc01ffc413.png",
+      "prompt": "prompter/turn-off-v3.txt",
+      "resultat": "../../ui/verbhjul-gpt/turn-off.png",
+      "sha256": "f3dcb18aaaba24772ea5c99414e773b5144eae507cdd448725b74554a724f3a6",
+      "bytes": 283830,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "2574d35883ba96aba55f463a12a3609cb7779f9431aec32cc39d79accc8b2279",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "turn-on",
+      "versjon": 1,
+      "valgt": false,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-9560679c-28f3-473c-9dcc-9c021ea6b8e9.png",
+      "prompt": "prompter/turn-on-v1.txt",
+      "resultat": null
+    },
+    {
+      "name": "turn-on",
+      "versjon": 2,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-ebc9ee70-b8eb-4c28-9da9-21e6f6cedfcd.png",
+      "prompt": "prompter/turn-on-v2.txt",
+      "resultat": "../../ui/verbhjul-gpt/turn-on.png",
+      "sha256": "65e49ce92aa6bfc06db053d3e588bcc3992a9bbc000d7ef00cd2b1c90058ddf1",
+      "bytes": 309986,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "6376f25bf47b12ea21c29241561ef55d0bfee376879beccae92fcd3c165e381a",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    }
+  ],
+  "antall_kall": 22,
+  "valgte": [
+    {
+      "name": "give",
+      "versjon": 1,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-36015154-8e55-459f-8d9b-8ffdf957553c.png",
+      "prompt": "prompter/give-v1.txt",
+      "resultat": "../../ui/verbhjul-gpt/give.png",
+      "sha256": "5052b698ed8e97e0bb7598c8f38db65a0a014a18f75a243b4336553ddb74b6d8",
+      "bytes": 294203,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "1a4a3b2b2562dc00668b6e38d35132942ba057cd32f2010862bc9696595eb643",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "push",
+      "versjon": 1,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-ed68d5f9-f194-4690-8538-425fea90cf24.png",
+      "prompt": "prompter/push-v1.txt",
+      "resultat": "../../ui/verbhjul-gpt/push.png",
+      "sha256": "a2274bc0face5c93648825f5b7eeee0deb4cb5bee1fa49683f882a229442cef9",
+      "bytes": 307309,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "bb41feeb03d827ead970352585f01f6c57afe60961d215d716e0738215efbf2d",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "use",
+      "versjon": 2,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-bd25c3d3-0020-4789-8777-2e26349d9ab8.png",
+      "prompt": "prompter/use-v2.txt",
+      "resultat": "../../ui/verbhjul-gpt/use.png",
+      "sha256": "15207106687d9b8882b88bb87b994e17e6c4e865245bc69a4515781e46aa8202",
+      "bytes": 313456,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "039050f0a2ffefe1df0901bb89c4863c222ed09bdc1cb3ed698865abd26c384a",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "buy",
+      "versjon": 1,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-7410cd65-04b6-4768-8da5-fcbf576dc2e7.png",
+      "prompt": "prompter/buy-v1.txt",
+      "resultat": "../../ui/verbhjul-gpt/buy.png",
+      "sha256": "7876f802f4d38442a05ce835e47f879e219a089bb7d648835495a7d258cd63b3",
+      "bytes": 338262,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "1fceb00a91dec08ae8133e87dd236631f436685c01855cbd20ec6fe3dd872539",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "open",
+      "versjon": 2,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-a66d7f9f-0206-4251-8aa0-e025c5fedb5c.png",
+      "prompt": "prompter/open-v2.txt",
+      "resultat": "../../ui/verbhjul-gpt/open.png",
+      "sha256": "2170353b7bf3187e04deb4d941c20a9d00ec8f2e3ebcfa9f7cd45881085a48b5",
+      "bytes": 339932,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "06a9d8a1bf1f16a8702d0757cd70690cb50c9880fa11815f054993299d3c1b73",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "pick-up",
+      "versjon": 1,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-a479fe5d-c170-4f43-80d6-d4620d353b88.png",
+      "prompt": "prompter/pick-up-v1.txt",
+      "resultat": "../../ui/verbhjul-gpt/pick-up.png",
+      "sha256": "032b0338e5f53bdd362cb4469152e36ab9177ac88381dc4db805fe4b7b8414a0",
+      "bytes": 294802,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "e5517dd4d12e6b07053e4e904380b8d0d6a5e2039836daa56a468f5e3ab93b68",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "pull",
+      "versjon": 2,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-6492157f-9e37-43cf-a39b-15036ddaaa5a.png",
+      "prompt": "prompter/pull-v2.txt",
+      "resultat": "../../ui/verbhjul-gpt/pull.png",
+      "sha256": "f03ea3f1889fd86e54bea7321c320a641f3c8d3f39f1b4c283ba1ae4100a3010",
+      "bytes": 299739,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "d19d921f228aa5b7f5d89afa8bd27ce2689ac67cec3c777f6d59988fb5528d06",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "put-on",
+      "versjon": 3,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-1a93d82a-a9e7-4d9c-bf28-c328067d709d.png",
+      "prompt": "prompter/put-on-v3.txt",
+      "resultat": "../../ui/verbhjul-gpt/put-on.png",
+      "sha256": "209fc14b7bd8bbd2529e3eb3b2736424a81a79740ca529c1bee9e038d257b7a2",
+      "bytes": 325326,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "b2998dbe3af9439623e6e3211a6d91ae98b881914f02e4f62198da22e0d2d62f",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "take-off",
+      "versjon": 4,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-3756d38c-8616-4562-bb18-6c098b95b9bd.png",
+      "prompt": "prompter/take-off-v4.txt",
+      "resultat": "../../ui/verbhjul-gpt/take-off.png",
+      "sha256": "89eed2956ab63faf5ed31bb6b51a8f94d10eb3393aa64213fd5b15194c268661",
+      "bytes": 312211,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "780cba3f170e45fb6fab2c1ea1f112bd842b51aa5b7a9d9ba5c3afca20e3670a",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "turn-off",
+      "versjon": 3,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-1ad5c3b8-78eb-45a0-92ce-82cc01ffc413.png",
+      "prompt": "prompter/turn-off-v3.txt",
+      "resultat": "../../ui/verbhjul-gpt/turn-off.png",
+      "sha256": "f3dcb18aaaba24772ea5c99414e773b5144eae507cdd448725b74554a724f3a6",
+      "bytes": 283830,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "2574d35883ba96aba55f463a12a3609cb7779f9431aec32cc39d79accc8b2279",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    },
+    {
+      "name": "turn-on",
+      "versjon": 2,
+      "valgt": true,
+      "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-ebc9ee70-b8eb-4c28-9da9-21e6f6cedfcd.png",
+      "prompt": "prompter/turn-on-v2.txt",
+      "resultat": "../../ui/verbhjul-gpt/turn-on.png",
+      "sha256": "65e49ce92aa6bfc06db053d3e588bcc3992a9bbc000d7ef00cd2b1c90058ddf1",
+      "bytes": 309986,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "for_sha256": "6376f25bf47b12ea21c29241561ef55d0bfee376879beccae92fcd3c165e381a",
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+    }
+  ],
+  "status": "rettet etter Toms bestilling, til kontroll"
+}
