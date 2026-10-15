@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs><clipPath id="inne"><circle cx="64" cy="64" r="53"/></clipPath></defs><circle cx="64" cy="64" r="57" fill="#2a1b12"/><circle cx="64" cy="64" r="53" fill="#f7ecd3"/><path d="M 108 50 A 46 46 0 0 1 50 108 A 52 52 0 0 0 108 50 Z" fill="#e6d3ab"/>
+<g clip-path="url(#inne)">
+<ellipse cx="64" cy="90" rx="34" ry="9" fill="#2a1b12" stroke="#2a1b12" stroke-width="10" stroke-linejoin="round"/>
+<rect x="44" y="62" width="40" height="28" rx="10" fill="#2a1b12" stroke="#2a1b12" stroke-width="10" stroke-linejoin="round"/>
+<rect x="44" y="78" width="40" height="7" rx="0" fill="#2a1b12" stroke="#2a1b12" stroke-width="10" stroke-linejoin="round"/>
+<polygon points="69.6,40.0 69.6,48.0 76.0,48.0 64.0,59.2 52.0,48.0 58.4,48.0 58.4,40.0" fill="#2a1b12" stroke="#2a1b12" stroke-width="10" stroke-linejoin="round"/>
+<ellipse cx="64" cy="90" rx="34" ry="9" fill="#4271c4"/>
+<rect x="44" y="62" width="40" height="28" rx="10" fill="#4271c4"/>
+<rect x="44" y="78" width="40" height="7" rx="0" fill="#d34a31"/>
+<polygon points="69.6,40.0 69.6,48.0 76.0,48.0 64.0,59.2 52.0,48.0 58.4,48.0 58.4,40.0" fill="#62b250"/>
+<path d="M 34 91 Q 64 101 94 91" stroke="#2d539a" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<circle cx="64" cy="64" r="55" fill="none" stroke="#2a1b12" stroke-width="5"/>
+</svg>

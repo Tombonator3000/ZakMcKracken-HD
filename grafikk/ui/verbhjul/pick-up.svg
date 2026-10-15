@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs><clipPath id="inne"><circle cx="64" cy="64" r="53"/></clipPath></defs><circle cx="64" cy="64" r="57" fill="#2a1b12"/><circle cx="64" cy="64" r="53" fill="#f7ecd3"/><path d="M 108 50 A 46 46 0 0 1 50 108 A 52 52 0 0 0 108 50 Z" fill="#e6d3ab"/>
+<g clip-path="url(#inne)">
+<ellipse cx="56" cy="92" rx="13" ry="12" fill="#2a1b12" stroke="#2a1b12" stroke-width="10" stroke-linejoin="round"/>
+<line x1="58" y1="24" x2="58" y2="36" stroke="#2a1b12" stroke-width="30" stroke-linecap="round"/>
+<rect x="42" y="34" width="32" height="28" rx="12" fill="#2a1b12" stroke="#2a1b12" stroke-width="10" stroke-linejoin="round"/>
+<line x1="46" y1="56" x2="44.2" y2="70.4" stroke="#2a1b12" stroke-width="17.5" stroke-linecap="round"/>
+<line x1="54" y1="56" x2="53.4" y2="72.8" stroke="#2a1b12" stroke-width="17.5" stroke-linecap="round"/>
+<line x1="62" y1="56" x2="62.6" y2="72.8" stroke="#2a1b12" stroke-width="17.5" stroke-linecap="round"/>
+<line x1="70" y1="56" x2="71.8" y2="70.4" stroke="#2a1b12" stroke-width="17.5" stroke-linecap="round"/>
+<line x1="72" y1="46" x2="80" y2="62" stroke="#2a1b12" stroke-width="18" stroke-linecap="round"/>
+<polygon points="88.4,76.0 88.4,68.0 82.0,68.0 94.0,56.8 106.0,68.0 99.6,68.0 99.6,76.0" fill="#2a1b12" stroke="#2a1b12" stroke-width="10" stroke-linejoin="round"/>
+<ellipse cx="56" cy="92" rx="13" ry="12" fill="#d34a31"/>
+<line x1="58" y1="24" x2="58" y2="36" stroke="#4271c4" stroke-width="20" stroke-linecap="round"/>
+<rect x="42" y="34" width="32" height="28" rx="12" fill="#f2bb8c"/>
+<line x1="46" y1="56" x2="44.2" y2="70.4" stroke="#f2bb8c" stroke-width="7.5" stroke-linecap="round"/>
+<line x1="54" y1="56" x2="53.4" y2="72.8" stroke="#f2bb8c" stroke-width="7.5" stroke-linecap="round"/>
+<line x1="62" y1="56" x2="62.6" y2="72.8" stroke="#f2bb8c" stroke-width="7.5" stroke-linecap="round"/>
+<line x1="70" y1="56" x2="71.8" y2="70.4" stroke="#f2bb8c" stroke-width="7.5" stroke-linecap="round"/>
+<line x1="72" y1="46" x2="80" y2="62" stroke="#f2bb8c" stroke-width="8" stroke-linecap="round"/>
+<polygon points="88.4,76.0 88.4,68.0 82.0,68.0 94.0,56.8 106.0,68.0 99.6,68.0 99.6,76.0" fill="#62b250"/>
+<ellipse cx="51" cy="88" rx="4" ry="3" fill="#ffffff" opacity="0.8"/>
+</g>
+<circle cx="64" cy="64" r="55" fill="none" stroke="#2a1b12" stroke-width="5"/>
+</svg>

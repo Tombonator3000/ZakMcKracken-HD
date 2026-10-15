@@ -187,3 +187,13 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Rom 31 henger ved testhoppet i rommets eget inngangsskript (gdb: `runEntryScript` > `o5_startScript` > `runScriptNested`, 100 prosent CPU), også med `DIGHD_CLASSIC=1`. Ikke HD-laget.
 - `tools/romtest.py` regner fortsatt med skjermen fra Sam & Max (320 x 200); står i todo.
 - HD-MOTOR, STATUS og todo oppdatert.
+
+## 2026-10-15 08:24 til 09:05 (Claude)
+- Tom: «kan man lage verb hjul som ser bedre ut og med grafikk? feks hand munn etc sånn som day of tentacle og sam og max? se veldig pixelert ut nå.» Sjekket AGENTS, memory, log (HD-laget ble slått på for Zak i natt) og VERBHJUL.
+- Årsak til pikslene: uten HD-pakke var HD-laget av, så hjulet ble tegnet på spillets 320 x 240-skjerm med tre bokstaver i konsollskriften. Med HD-laget var det runde flater uten myke kanter.
+- Svart Tom: Zak har ikke Talk to, så en munn har ingen jobb i hjulet uten nye skript.
+- Nytt `tools/verbhjul_ikoner.py`: 15 ikoner tegnet som SVG (hånd som dytter, neve som drar, hånd som griper, hånd som gir, dør åpen og lukket, lyspære på og av, hatt på og av, øye, tannhjul, mynter, glimt), egne tegninger i stilen fra stilankerne. SVG og PNG i `grafikk/ui/verbhjul/`, skriften Comic Neue Bold (OFL, fra google/fonts) i `grafikk/ui/skrift/`. Skriptet lager `engines/scumm/verbhjul_ikoner.h` med PNG-ene og skriftbildet i base64 (270 kB).
+- Patch 0002: hjulet tegnes i HD med myke kanter (skygge, gul ring og større ikon under pekeren, tekstboks med verbet i gult), ikonene glir ut fra klikket, og pikslene under tas vare på så kantene ikke mørkner ramme for ramme. HD-laget går nå også uten HD-pakke for Zak (`VerbWheel::defaultHD`, `ZAKHD_LAV=1` slår det av). 16 og 32 bits skjerm. 0001 uendret. `tools/lag_patcher.sh` kjenner den nye filen; den kunne ikke trekke fra krokene i den gamle 0002 fordi kroken i scumm.cpp fikk nye linjer ved siden av, så 0002 ble laget én gang ved å diffe mot commit + 0001. Etterpå gir `lag_patcher.sh` den samme 0002 byte for byte.
+- Testet: uten skjerm med programvaretegning (lampen, katteklokken, billetten i inventaret, med pekeren på ikonet, og lukket igjen: pikslene tilbake), under Xvfb med OpenGL (skuffen), `tools/verbhjul_test.sh` bestått (11 like setninger), hele stakken med nettleserpatchene lagt på c9091321, `sjekk_patcher.py`, `test-build-pages.py`, nodetestene (20).
+- Nettsiden: lisensen til skriften legges i `licenses/`, og credits nevner den.
+- Ikke testet: med ekte mus og skjerm, på telefon. Ikonene er ikke godkjent av Tom.

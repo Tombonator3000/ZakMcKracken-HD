@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs><clipPath id="inne"><circle cx="64" cy="64" r="53"/></clipPath></defs><circle cx="64" cy="64" r="57" fill="#2a1b12"/><circle cx="64" cy="64" r="53" fill="#f7ecd3"/><path d="M 108 50 A 46 46 0 0 1 50 108 A 52 52 0 0 0 108 50 Z" fill="#e6d3ab"/>
+<g clip-path="url(#inne)">
+<ellipse cx="58" cy="60" rx="24" ry="24" fill="#2a1b12" stroke="#2a1b12" stroke-width="10" stroke-linejoin="round"/>
+<polygon points="95.25,86.0 95.25,93.5 101.25,93.5 90.0,104.0 78.75,93.5 84.75,93.5 84.75,86.0" fill="#2a1b12" stroke="#2a1b12" stroke-width="10" stroke-linejoin="round"/>
+<ellipse cx="58" cy="60" rx="24" ry="24" fill="#f5c534"/>
+<polygon points="95.25,86.0 95.25,93.5 101.25,93.5 90.0,104.0 78.75,93.5 84.75,93.5 84.75,86.0" fill="#62b250"/>
+<circle cx="58" cy="60" r="17" fill="none" stroke="#d39a17" stroke-width="3"/>
+<text x="58" y="70" font-family="DejaVu Sans" font-weight="bold" font-size="28" text-anchor="middle" fill="#d39a17">$</text>
+</g>
+<circle cx="64" cy="64" r="55" fill="none" stroke="#2a1b12" stroke-width="5"/>
+</svg>

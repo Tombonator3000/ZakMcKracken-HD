@@ -112,6 +112,8 @@ def pack(src: Path, out: Path) -> dict:
     if not flac_license.is_file():
         raise RuntimeError(f'Mangler {flac_license}. Kjør engine/build-web.sh, som bygger libFLAC.')
     shutil.copy2(flac_license, out / 'licenses' / 'COPYING.FLAC')
+    # Skriften under verbhjulet (Comic Neue Bold, tegnet inn i motoren) er OFL-lisensiert
+    shutil.copy2(HERE.parent / 'grafikk/ui/skrift/OFL.txt', out / 'licenses' / 'OFL-ComicNeue.txt')
     (out / '.nojekyll').touch()
 
     # GPL corresponding source: actual patched tracked sources + the files the patches add

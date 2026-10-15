@@ -48,6 +48,13 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [ ] Hvilket rom og hvilken palett hvert kostyme faktisk vises i, og bruk den i RGBA-bildene
 - [ ] Hvilke ting kan havne i inventaret (pickupObject i skriptene og verb 8), til eventuelle ikoner
 
+### Verbhjulet i HD (15. oktober)
+
+- [x] 15 tegnede ikoner og HD-tegning med myke kanter, tekst i Comic Neue; HD-laget også uten HD-pakke
+- [ ] Tom ser på ikonene og sier ja eller hva som skal endres (eller om ChatGPT skal male dem i ankerstilen)
+- [ ] Portrettene for figurbytte i samme stil
+- [ ] Prøve med ekte mus, på telefon og i nettleseren
+
 ### Motor (`docs/HD-MOTOR.md`)
 
 - [x] Patch 0002 rettet: flettingen 13. oktober (087fd93) ga feil tall i hunk-hodene, så motoren bygget ikke fra main. Laget på nytt med `tools/lag_patcher.sh`, verbhjul-testen bestått (14. oktober)

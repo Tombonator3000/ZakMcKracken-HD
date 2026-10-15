@@ -106,9 +106,18 @@ Motsatte par står ved siden av hverandre. Use er det mest brukte verbet (171 ob
 
 ## Ikonene
 
-Listen står i [verbhjul-verb.csv](verbhjul-verb.csv): verbnummer, tekst, tast, plass i panelet, hvor mange objekter som har kode for verbet, og et forslag til motiv. Hjulet trenger 15 ikoner: Push, Pull, Open, Close, Pick up, Put on, Take off, Turn on, Turn off, Give, Read, Use, Buy, Sell og Teleport to. Walk to og What is trenger ikke ikon.
+Tegnet 15. oktober 2026 (Tom: «verb hjul som ser bedre ut og med grafikk, hånd, munn osv. som Day of the Tentacle og Sam & Max»). 15 ikoner i en kremfarget mynt med mørk kontur og flate farger, i stilen fra stilankerne: hånd som dytter, neve som drar, hånd som griper, hånd som gir, dør åpen og lukket, lyspære på og av, hatt på og av, øye for Read, tannhjul for Use, mynter for Buy og Sell og glimt for Teleport to. Liste og kilder: [grafikk/ui/README.md](../grafikk/ui/README.md). Zak har ikke Talk to, så det er ingen munn.
 
-Bestillingen er ikke aktiv. Etter remake-skillen (docs/skills/scumm-hd-remake/SKILL.md, "Før HD-produksjon") skal motiv og design avklares først: ikonene skal passe til grafikken i FM-Towns-utgaven, være lesbare i 32 til 64 piksler, være ett sett i samme stil, og godkjennes av Tom sammen med stilpiloten. Motivene i CSV-filen er forslag.
+Ikonene er egne tegninger (SVG fra `tools/verbhjul_ikoner.py`), ikke laget fra spillets grafikk. De ligger som PNG i base64 i `engines/scumm/verbhjul_ikoner.h`, sammen med skriften Comic Neue Bold (OFL). Motoren trenger ingen filer ved siden av seg, og det samme gjelder nettsiden.
+
+Ikke godkjent av Tom ennå. Kan erstattes av ikoner malt av ChatGPT med de samme filnavnene.
+
+## Tegningen i HD
+
+- Hjulet tegnes i HD-laget (1280 x 960) med myke kanter: ikonene skalert ned fra 160 x 160 med flatemiddel, en skygge under hver mynt, en gul ring og større ikon under pekeren, og teksten under hjulet i en avrundet boks med verbet i gult og objektet i hvitt («Turn on lamp»). Ikonene glir ut fra punktet som ble klikket (140 ms).
+- Pikslene under hjulet tas vare på, så de myke kantene blandes med spillets egne piksler i hver ramme, også der spillet tegner under hjulet. Når hjulet lukkes, legges de tilbake.
+- HD-laget går nå også uten HD-pakke (originalpikslene fire ganger så store), så hjulet alltid er skarpt. `ZAKHD_LAV=1` gir spillets egen skjerm på 320 x 240, og da tegnes de gamle runde ikonene med bokstaver. Virker med 16 og 32 bits farger (programvaretegning og OpenGL).
+- Portrettene for figurbytte er fortsatt de enkle boksene.
 
 ## Arbeidet i motoren
 
@@ -117,6 +126,7 @@ Patch 0002 ligger oppå HD-patchen (0001, den samme som i The Dig og Sam & Max).
 | Sted | Hva |
 | --- | --- |
 | `engines/scumm/verbhjul.cpp`, `verbhjul.h` | Klassen `VerbWheel`: urskiven, verbene for objektet, det dynamiske utvalget, portrettene, klikkene, ventingen på objekt nummer to, tegningen og testdriveren. Bare for `zak` på FM-Towns |
+| `engines/scumm/verbhjul_ikoner.h` | Ikonene og skriften som PNG i base64, laget av `tools/verbhjul_ikoner.py` |
 | `engines/scumm/verbhjul_zak.h` | Reglene for det dynamiske hjulet, 337 objekter, laget av `tools/verbhjul_dynamisk.py --cpp` (bare objekt- og verbnummer) |
 | `input.cpp`, `ScummEngine::parseEvent` | Hjulet ser hver hendelse først (høyreklikk, klikk mens hjulet er åpent, Ctrl+W) |
 | `verbs.cpp`, `checkExecVerbs` | Ett klikk fra hjulet per ramme, før spillets egne klikk |
@@ -126,7 +136,7 @@ Patch 0002 ligger oppå HD-patchen (0001, den samme som i The Dig og Sam & Max).
 
 Klikkene hjulet og portrettene sender, sjekkes en gang til når de sendes, siden et skript kan ha endret noe i rammen imellom: et verb som ikke lenger er på i panelet, eller en figur som ikke kan velges, stopper hele setningen. Bytter spillet rom (eller lastes et lagret spill) mens klikk venter eller hjulet venter på objekt nummer to, kastes de. Betingelsene i reglene sjekkes mot spillets antall variabler og objekter før de brukes. Dette kom etter en gjennomgang av koden 13. oktober.
 
-Tegningen er foreløpig enkel: runde ikoner med tre bokstaver i ScummVMs konsollskrift på spillets egen skjerm (320 x 240). Når HD-motoren er portet, tegnes hjulet i HD med de tegnede ikonene.
+Hjulet tegnes i HD med de tegnede ikonene (se «Tegningen i HD»). Uten HD-lag tegnes runde ikoner med tre bokstaver i ScummVMs konsollskrift.
 
 ## Tester
 
@@ -220,8 +230,7 @@ Portrettene virker også med hjulet av (Ctrl+W). Valget er `verbhjul_portretter`
 - Mens hjulet sender klikkene sine (tre eller fire rammer), og i rammen etter et klikk på et portrett, tar ikke spillet imot andre taster og klikk; de går tapt. Gjelder bare svært raske trykk.
 - Navnet på objektet under pekeren mens hjulet er lukket (i dag gir What is det i originalen; What is er skjult når hjulet er på, men tasten c virker).
 - Valgene i spillets meny (F5) i stedet for bare Ctrl+W og scummvm.ini.
-- De 15 ikonene og de fire portrettene, etter motiv- og designavklaringen i remake-skillen, godkjent av Tom (gjerne sammen med stilpiloten i rom 1).
-- Tegning i HD når HD-motoren er portet til Zak.
+- Toms godkjenning av de 15 ikonene (tegnet 15. oktober), og de fire portrettene.
 - Prøve med skjerm, i nettleseren og på mobil, og i butikken, teleporten, ved figurbytte der Switch kommer i spillet og når man styrer dyr. Prøve reglene for hånd i spillet (Sushi, våtdrakten, oksygentanken, mikrobølgeovnen, boom-boksen, fallskjermen).
 
 ## Kilder

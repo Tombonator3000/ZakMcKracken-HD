@@ -38,6 +38,7 @@ jobs:
             engine
             docs/PAGES.md
             tools/sjekk_patcher.py
+            grafikk/ui/skrift/OFL.txt
           sparse-checkout-cone-mode: false
       - name: Nettsidekoden, patchkontrollen og hunk-hodene
         run: |

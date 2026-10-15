@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<defs><clipPath id="inne"><circle cx="64" cy="64" r="53"/></clipPath></defs><circle cx="64" cy="64" r="57" fill="#2a1b12"/><circle cx="64" cy="64" r="53" fill="#f7ecd3"/><path d="M 108 50 A 46 46 0 0 1 50 108 A 52 52 0 0 0 108 50 Z" fill="#e6d3ab"/>
+<g clip-path="url(#inne)">
+<path d="M 22 64 Q 64 24 106 64 Q 64 104 22 64 Z" fill="#2a1b12" stroke="#2a1b12" stroke-width="10" stroke-linejoin="round"/>
+<ellipse cx="64" cy="64" rx="17" ry="17" fill="#2a1b12" stroke="#2a1b12" stroke-width="10" stroke-linejoin="round"/>
+<path d="M 22 64 Q 64 24 106 64 Q 64 104 22 64 Z" fill="#ffffff"/>
+<ellipse cx="64" cy="64" rx="17" ry="17" fill="#4271c4"/>
+<circle cx="64" cy="64" r="8" fill="#2a1b12"/>
+<circle cx="59" cy="58" r="4" fill="#ffffff"/>
+<path d="M 26 54 Q 64 18 102 54" stroke="#2a1b12" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="40" y1="38" x2="36" y2="30" stroke="#2a1b12" stroke-width="4" stroke-linecap="round"/>
+<line x1="64" y1="31" x2="64" y2="23" stroke="#2a1b12" stroke-width="4" stroke-linecap="round"/>
+<line x1="88" y1="38" x2="92" y2="30" stroke="#2a1b12" stroke-width="4" stroke-linecap="round"/>
+</g>
+<circle cx="64" cy="64" r="55" fill="none" stroke="#2a1b12" stroke-width="5"/>
+</svg>
