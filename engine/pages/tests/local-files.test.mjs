@@ -287,8 +287,8 @@ test('a lost connection is tried again until the file comes', async () => {
 
 test('pictures for the verb wheel and the inventory come with the HD pack', () => {
   const rows = selectFiles([file('gpt/mod.json'), file('gpt/rooms/room022.png'),
-    file('gpt/ui/verbhjul/pick-up.png'), file('gpt/ui/verbhjul/use.png'), file('gpt/inventory/obj082.png'),
+    file('gpt/ui/verbhjul/pick-up.png'), file('gpt/ui/verbhjul/use.png'), file('gpt/inventory/obj082.png'), file('gpt/inventory/obj014-taped-fish-bowl.png'),
     file('gpt/ui/verbhjul/../../x.png'), file('gpt/ui/annet/a.png'), file('gpt/inventory/ticket.png')], 'mod');
-  assert.deepEqual(rows.map(row => row.path).sort(), ['inventory/obj082.png', 'mod.json', 'rooms/room022.png',
+  assert.deepEqual(rows.map(row => row.path).sort(), ['inventory/obj014-taped-fish-bowl.png', 'inventory/obj082.png', 'mod.json', 'rooms/room022.png',
     'ui/verbhjul/pick-up.png', 'ui/verbhjul/use.png'].map(name => MOD_ROOT + name).sort());
 });

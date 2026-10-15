@@ -54,7 +54,10 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [ ] Tom ser på ikonene og sier ja eller hva som skal endres (eller om ChatGPT skal male dem i ankerstilen)
 - [x] Motoren leser malte ikoner (`ui/verbhjul/`) og bilder av tingene i inventaret (`inventory/objNNN.png`) fra modden; inventaret som rutenett i HD (15. oktober)
 - [x] `docs/inventar.csv` (123 ting), `tools/inventarliste.py`, `build_ui` i modpack, bestillingen beskrevet
-- [ ] Lage jobbene til ChatGPT for ikonene og inventarbildene når Tom vil (format i BESTILLING-CHATGPT)
+- [x] Listen til ChatGPT: `docs/GRAFIKK-HJUL-OG-INVENTAR.md` (15 ikoner, 123 ting med utseende og varianter)
+- [x] Rutenettet fyller hele området under scenen; varianter per navn (`objNNN-<navn>.png`)
+- [ ] Sjekke radene merket «usikker» og «trolig ikke» i spillet, og ting som mangler i listen
+- [ ] Lage jobbene til ChatGPT for ikonene og inventarbildene når Tom vil
 - [ ] Prøve pilene i inventaret med mer enn ti ting, og når panelet viser figurnavnene
 - [ ] Portrettene for figurbytte i samme stil
 - [ ] Prøve med ekte mus, på telefon og i nettleseren

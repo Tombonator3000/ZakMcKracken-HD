@@ -32,7 +32,7 @@ export function selectFiles(files, kind) {
       // 99.LFL, og CD-musikken Track1.fla til Track21.fla
       if (!/^(\d\d\.LFL|TRACK\d+\.FLA)$/.test(relative)) continue;
     } else {
-      if (!/^(mod\.json|rooms\/room\d+(_idx)?\.png|objects\/obj\d+_[0-9a-fA-F]{2}(_idx)?\.png|costumes\/costume\d+_\d+(_idx|_hd)?\.png|fonts\/[a-z0-9-]+\.(txt|png)|ui\/verbhjul\/[a-z-]+\.png|inventory\/obj\d+\.png)$/.test(relative)) continue;
+      if (!/^(mod\.json|rooms\/room\d+(_idx)?\.png|objects\/obj\d+_[0-9a-fA-F]{2}(_idx)?\.png|costumes\/costume\d+_\d+(_idx|_hd)?\.png|fonts\/[a-z0-9-]+\.(txt|png)|ui\/verbhjul\/[a-z-]+\.png|inventory\/obj\d+(-[a-z0-9-]+)?\.png)$/.test(relative)) continue;
     }
     const path = root + relative;
     if (selected.has(path)) throw new Error('To filer har samme navn: ' + relative);

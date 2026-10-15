@@ -32,7 +32,7 @@ HD-skriften for teksten (fonts/map.txt og fonts/<mappe>/NNN.png, se skrift.py) l
 i alle modder, uten --uten-skrift.
 
 Grensesnittet (Zak, verbhjulet): ikonene til hjulet (ui/verbhjul/<navn>.png, navnene i
-grafikk/ui/README.md) og bildene av tingene i inventaret (inventory/objNNN.png) tas med fra
+grafikk/ui/README.md) og bildene av tingene i inventaret (inventory/objNNN.png, eller objNNN-<navn>.png for en variant) tas med fra
 den godkjente grafikken i grafikk/ (verbhjul-gpt/ og inventar/) og fra --egne (ui/verbhjul/ og
 inventory/). PNG med alfa, helst kvadratiske og minst 256 piksler. Motoren skalerer dem selv og
 bruker de innebygde ikonene og navnene der det ikke finnes noe.
@@ -54,9 +54,9 @@ MARGIN = 8  # piksler med bakgrunn rundt et objekt når det skaleres
 REPO = Path(__file__).resolve().parents[2]
 UI_SOURCES = [  # (mappe i repoet eller i --egne, mappe i modden, navnemønster)
     ("grafikk/ui/verbhjul-gpt", "ui/verbhjul", r"[a-z-]+\.png"),
-    ("grafikk/inventar", "inventory", r"obj\d{3}\.png"),
+    ("grafikk/inventar", "inventory", r"obj\d{3}(-[a-z0-9-]+)?\.png"),
 ]
-UI_OWN = [("ui/verbhjul", "ui/verbhjul", r"[a-z-]+\.png"), ("inventory", "inventory", r"obj\d{3}\.png")]
+UI_OWN = [("ui/verbhjul", "ui/verbhjul", r"[a-z-]+\.png"), ("inventory", "inventory", r"obj\d{3}(-[a-z0-9-]+)?\.png")]
 VERB_ICONS = {"push", "open", "put-on", "turn-on", "pull", "close", "pick-up", "take-off", "turn-off",
               "give", "read", "use", "buy", "sell", "teleport"}
 

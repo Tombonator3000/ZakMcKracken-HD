@@ -119,12 +119,7 @@ Kostymene skal stå i `docs/figurer.csv` i grenen `main`, med navn, antall ruter
 
 ### Ikoner til verbhjulet og bilder til inventaret (forberedt 15. oktober 2026, ikke bestilt)
 
-Motoren er klar for begge; ingen jobber er laget ennå, og Tom har ikke bestilt dem.
-
-- **Verbhjulet:** 15 ikoner, ett per verb, med motivene og filnavnene i [grafikk/ui/README.md](../grafikk/ui/README.md) (`pick-up.png`, `use.png` og så videre). Claude har tegnet en første utgave som er bygget inn i motoren. Malte ikoner erstatter dem ett og ett. Format: kvadratisk PNG med alfa, 512 x 512, motivet i en rund mynt som fyller bildet, lesbart i 96 piksler. Stilen fra stilankerne.
-- **Inventaret:** ett bilde per ting i [inventar.csv](inventar.csv) (123 ting), filnavn `objNNN.png`. Format: PNG med gjennomsiktig bakgrunn, helst 512 x 512 (motoren bevarer formen), tingen alene, sett litt ovenfra eller forfra, i stilen fra ankrene. Har tingen bilde i rommet (`bilde_i_rommet` ja), er `work/extract/objects/objNNN_01.png` fasiten for motiv og farger; ellers navnet og stedet i spillet.
-- Leveres i `gpt-arbeid/ui/verbhjul/` og `gpt-arbeid/inventory/`. Godkjente bilder flyttes til `grafikk/ui/verbhjul-gpt/` og `grafikk/inventar/` med README og sjekksummer, og `zakhd build-mod` tar dem med i modden (`ui/verbhjul/` og `inventory/`).
-- Det som mangler, vises som før: de innebygde ikonene i hjulet, og navnet i ruten i inventaret.
+Listen over alle ikonene og tingene, med filnavn, utseende og motiv på engelsk, står i [GRAFIKK-HJUL-OG-INVENTAR.md](GRAFIKK-HJUL-OG-INVENTAR.md). Motoren er klar for begge; det som mangler, vises som før (de innebygde ikonene, og navnet i ruten). Tom bestemmer når de bestilles.
 
 ## 5. Rekkefølge
 

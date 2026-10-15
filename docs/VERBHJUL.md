@@ -127,12 +127,13 @@ Motoren leser bilder fra HD-modden når de finnes, og bruker det innebygde eller
 | --- | --- | --- |
 | `ui/verbhjul/<navn>.png` | Ikonet til et verb i hjulet, i stedet for det innebygde (navnene i [grafikk/ui/README.md](../grafikk/ui/README.md)) | `grafikk/ui/verbhjul-gpt/` og `--egne` |
 | `inventory/objNNN.png` | Bildet av en ting i inventaret, i stedet for navnet | `grafikk/inventar/` og `--egne` |
+| `inventory/objNNN-<navn>.png` | Bildet for tingen når den har dette navnet (for eksempel `obj014-taped-fish-bowl.png`, `obj049-lit-lighter.png`); vinner over `objNNN.png` | samme |
 
-PNG med alfa i hvilken som helst størrelse (minst 64 piksler); motoren skalerer ned med flatemiddel og bevarer formen. `zakhd build-mod` legger dem i modden (`build_ui` i `pipeline/zakhd/modpack.py`), og nettsiden tar dem med (`local-files.mjs`). Bestillingen står i [BESTILLING-CHATGPT.md](BESTILLING-CHATGPT.md), og tingene i [inventar.csv](inventar.csv) (`tools/inventarliste.py`).
+PNG med alfa i hvilken som helst størrelse (minst 64 piksler); motoren skalerer ned med flatemiddel og bevarer formen. `zakhd build-mod` legger dem i modden (`build_ui` i `pipeline/zakhd/modpack.py`), og nettsiden tar dem med (`local-files.mjs`). Listen til ChatGPT med utseende og filnavn: [GRAFIKK-HJUL-OG-INVENTAR.md](GRAFIKK-HJUL-OG-INVENTAR.md). Tingene i [inventar.csv](inventar.csv) (`tools/inventarliste.py`).
 
 ## Inventaret som bilder
 
-Med hjulet på og HD-laget i gang vises inventaret som et rutenett i HD der verbpanelet og tekstinventaret var: fem ruter i to rader (spillets y 154 til 216), og pilene som gule trekanter i en kolonne til høyre. Portrettene står under, som før.
+Med hjulet på og HD-laget i gang vises inventaret som et rutenett i HD som fyller hele området under setningslinjen, der verbpanelet og tekstinventaret var (Tom 15. oktober): fem ruter i to rader (spillets x 1 til 271, y 153 til 239). Kolonnen til høyre har pilene som gule trekanter øverst og nederst, og portrettene for figurbytte to og to mellom dem.
 
 - En ting med bilde i modden vises som bildet. Pekeren over ruten gir en gul ramme og navnet i en boks over ruten.
 - En ting uten bilde vises med navnet i HD-skriften, på én eller to linjer.

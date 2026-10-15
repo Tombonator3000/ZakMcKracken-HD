@@ -146,10 +146,10 @@ index 20c4b0c5..af9f2fbd 100644
  	byte _completeScreenBuffer[320 * 200];
 diff --git a/engines/scumm/verbhjul.cpp b/engines/scumm/verbhjul.cpp
 new file mode 100644
-index 00000000..73ead344
+index 00000000..42a0e9da
 --- /dev/null
 +++ b/engines/scumm/verbhjul.cpp
-@@ -0,0 +1,1904 @@
+@@ -0,0 +1,1942 @@
 +/* ScummVM - Graphic Adventure Engine
 + *
 + * ScummVM is the legal property of its developers, whose names
@@ -225,6 +225,14 @@ index 00000000..73ead344
 +// Portraits: four boxes in the bottom right corner of the 320 x 240 screen,
 +// under the inventory, where the panel draws nothing
 +static const int kPortraitW = 22, kPortraitH = 18, kPortraitGap = 2;
++
++// The inventory as a grid of pictures (HD layer, wheel on), in game pixels:
++// five cells in two rows filling everything under the sentence line, where the
++// verb panel and the text inventory were (Tom 15 October 2026). A column to the
++// right has the arrows at the top and bottom and the portraits between them.
++static const int kInvTop = 153, kInvBottom = 239;
++static const int kInvLeft = 1, kInvCellsRight = 271, kInvRight = 319;
++static const int kInvArrowH = 19;
 +
 +// Clock positions 12, 1, 2 ... 11; the second verb takes the place when the
 +// first is not in the panel (shop, teleport).
@@ -672,6 +680,12 @@ index 00000000..73ead344
 +}
 +
 +Common::Rect VerbWheel::portraitRect(int kid) const {
++	if (_invGridOn) {
++		// Two by two in the column right of the inventory grid, between the arrows
++		const int x = kInvCellsRight + 3 + ((kid - 1) % 2) * (kPortraitW + kPortraitGap);
++		const int y = kInvTop + kInvArrowH + 4 + ((kid - 1) / 2) * (kPortraitH + kPortraitGap);
++		return Common::Rect(x, y, x + kPortraitW, y + kPortraitH);
++	}
 +	const int total = 4 * kPortraitW + 3 * kPortraitGap;
 +	const int x = _vm->_screenWidth - 2 - total + (kid - 1) * (kPortraitW + kPortraitGap);
 +	const int y = _vm->_screenHeight - 2 - kPortraitH;
@@ -1230,11 +1244,6 @@ index 00000000..73ead344
 +static const int kIconHD = 12;
 +static const int kIconHoverHD = 14;
 +
-+// The inventory as a grid of pictures (HD layer, wheel on), in game pixels:
-+// five cells in two rows where the verb panel and the text inventory were,
-+// the arrows in a column to the right. The portraits stay in the corner below.
-+static const int kInvTop = 154, kInvBottom = 216;
-+static const int kInvLeft = 2, kInvCellsRight = 296, kInvRight = 318;
 +
 +static bool decodePng(Common::SeekableReadStream &st, int &w, int &h, Common::Array<byte> &px) {
 +	Image::PNGDecoder dec;
@@ -1358,21 +1367,42 @@ index 00000000..73ead344
 +	return &_iconCache[key];
 +}
 +
-+// The picture of an inventory object (inventory/objNNN.png in the HD pack), or nullptr
-+const VerbWheel::Img *VerbWheel::inventoryImage(int obj, int w, int h) {
-+	if (!_invSrc.contains(obj)) {
-+		Img img;
-+		if (loadModPng(Common::String::format("inventory/obj%03d.png", obj), img))
-+			debug("Verbhjul: inventory picture for object %d (%d x %d)", obj, img.w, img.h);
-+		_invSrc[obj] = img;   // empty: none, and not looked for again
++// The picture of an inventory object, or nullptr. Many things change name with
++// their look (fish bowl, taped fish bowl, lit lighter), so a picture for the
++// current name wins: inventory/objNNN-<name>.png (lower case, other letters
++// than a-z and 0-9 as '-'), else inventory/objNNN.png.
++static Common::String nameSlug(const Common::String &name) {
++	Common::String out;
++	for (uint i = 0; i < name.size(); i++) {
++		const char c = name[i];
++		if (Common::isAlnum(c))
++			out += (char)tolower(c);
++		else if (!out.empty() && out.lastChar() != '-')
++			out += '-';
 +	}
-+	const Img &src = _invSrc[obj];
++	while (!out.empty() && out.lastChar() == '-')
++		out.deleteLastChar();
++	return out;
++}
++
++const VerbWheel::Img *VerbWheel::inventoryImage(int obj, int w, int h) {
++	const Common::String slug = nameSlug(objectName(obj));
++	const Common::String key = Common::String::format("%d:%s", obj, slug.c_str());
++	if (!_invSrc.contains(key)) {
++		Img img;
++		const Common::String named = Common::String::format("inventory/obj%03d-%s.png", obj, slug.c_str());
++		const Common::String plain = Common::String::format("inventory/obj%03d.png", obj);
++		if ((!slug.empty() && loadModPng(named, img)) || loadModPng(plain, img))
++			debug("Verbhjul: inventory picture for object %d \"%s\" (%d x %d)", obj, slug.c_str(), img.w, img.h);
++		_invSrc[key] = img;   // empty: none, and not looked for again
++	}
++	const Img &src = _invSrc[key];
 +	if (!src.w)
 +		return nullptr;
-+	const int key = obj * 1000000 + w * 1000 + h;
-+	if (!_invCache.contains(key))
-+		scaleImg(src, w, h, _invCache[key]);
-+	return &_invCache[key];
++	const Common::String ck = Common::String::format("%s:%dx%d", key.c_str(), w, h);
++	if (!_invCache.contains(ck))
++		scaleImg(src, w, h, _invCache[ck]);
++	return &_invCache[ck];
 +}
 +
 +int VerbWheel::textWidth(const Common::String &text, float f) const {
@@ -1687,6 +1717,12 @@ index 00000000..73ead344
 +		return;
 +	_invGridOn = on;
 +	debug("Verbhjul: inventory as pictures %s", on ? "on" : "off");
++	// The portraits move to the column by the grid (or back to the corner)
++	if (!_portraitDrawn.isEmpty()) {
++		restoreScreenRect(_portraitDrawn);
++		_portraitDrawn = Common::Rect();
++		_portraitShown.clear();
++	}
 +	// The text inventory and the arrows are hidden or drawn again
 +	_vm->redrawVerbs();
 +}
@@ -1713,9 +1749,8 @@ index 00000000..73ead344
 +}
 +
 +Common::Rect VerbWheel::inventoryArrow(bool down) const {
-+	const int mid = (kInvTop + kInvBottom) / 2;
-+	return down ? Common::Rect(kInvCellsRight + 2, mid + 1, kInvRight, kInvBottom - 1)
-+	            : Common::Rect(kInvCellsRight + 2, kInvTop + 1, kInvRight, mid - 1);
++	return down ? Common::Rect(kInvCellsRight + 2, kInvBottom - kInvArrowH, kInvRight, kInvBottom)
++	            : Common::Rect(kInvCellsRight + 2, kInvTop, kInvRight, kInvTop + kInvArrowH);
 +}
 +
 +int VerbWheel::inventoryVerbAt(int x, int y) const {
@@ -1768,8 +1803,11 @@ index 00000000..73ead344
 +		hoverRect = toScr(inventoryCell(i));
 +		if (inventoryImage(obj, hoverRect.width(), hoverRect.height())) {
 +			hoverText = objectName(obj);
-+			label = labelBox(hoverText, f * 0.85f, (hoverRect.left + hoverRect.right) / 2, hoverRect.top - (int)(46 * f * 0.85f),
-+			                 s.h, hoverRect.top, s.w);
++			// The name at the bottom of the cell, over the picture (the sentence line is above)
++			label = labelBox(hoverText, f * 0.8f, (hoverRect.left + hoverRect.right) / 2, 0, s.h, 0, s.w);
++			label.translate(0, hoverRect.bottom - label.bottom - (int)(4 * f));
++			if (label.left < hoverRect.left - (int)(20 * f) || label.right > hoverRect.right + (int)(20 * f))
++				label.translate(CLIP<int>((hoverRect.left + hoverRect.right) / 2 - (label.left + label.right) / 2, -label.left, s.w - label.right), 0);
 +			box.extend(label);
 +		}
 +	}
@@ -1844,7 +1882,7 @@ index 00000000..73ead344
 +		}
 +	}
 +	if (!label.isEmpty())
-+		drawLabel(cv, label, hoverText, 0, f * 0.85f);
++		drawLabel(cv, label, hoverText, 0, f * 0.8f);
 +	endOverlay(s, _invOv, cv);
 +}
 +
@@ -2056,7 +2094,7 @@ index 00000000..73ead344
 +} // End of namespace Scumm
 diff --git a/engines/scumm/verbhjul.h b/engines/scumm/verbhjul.h
 new file mode 100644
-index 00000000..565a6fe4
+index 00000000..f99be0a7
 --- /dev/null
 +++ b/engines/scumm/verbhjul.h
 @@ -0,0 +1,309 @@
@@ -2307,8 +2345,8 @@ index 00000000..565a6fe4
 +
 +	Common::HashMap<int, Img> _iconSrc;
 +	Common::HashMap<int, Img> _iconCache;   // verb * 1000 + size
-+	Common::HashMap<int, Img> _invSrc;      // object -> picture (empty: none)
-+	Common::HashMap<int, Img> _invCache;
++	Common::HashMap<Common::String, Img> _invSrc;     // "object:name" -> picture (empty: none)
++	Common::HashMap<Common::String, Img> _invCache;
 +	Img _font;
 +	bool _hdLoaded = false;
 +	Overlay _wheelOv, _invOv;

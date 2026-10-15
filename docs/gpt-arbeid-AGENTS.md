@@ -4,7 +4,7 @@ Denne grenen er arbeidsbordet for HD-grafikken til Zak McKracken HD Remake (enge
 
 **Ikke aktiv ennå.** Stilankerne i `stil/` er godkjent av Tom (14. oktober 2026). Ikke lag grafikk før Claude har skrevet en `ORDRE.md` med jobber. Finnes det ingen `ORDRE.md` eller ingen jobber under `jobber/`, er det ingenting å gjøre.
 
-Les `ORDRE.md` først. Den er siste beskjed fra Claude, med jobbene du skal gjøre nå. Les deretter `BESTILLING.md`, som gjelder foran alt annet her.
+Les `ORDRE.md` først. Grafikken til verbhjulet og inventaret (ikoner og bilder av tingene) er beskrevet i [GRAFIKK-HJUL-OG-INVENTAR.md](https://github.com/Tombonator3000/ZakMcKracken-HD/blob/main/docs/GRAFIKK-HJUL-OG-INVENTAR.md); den er ikke bestilt før ORDRE.md sier det. Den er siste beskjed fra Claude, med jobbene du skal gjøre nå. Les deretter `BESTILLING.md`, som gjelder foran alt annet her.
 
 ## Kildetro grafikk før produksjon
 
