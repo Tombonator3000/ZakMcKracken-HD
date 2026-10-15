@@ -109,6 +109,9 @@ def _upscale_kw(a) -> dict:
 
 def cmd_build_mod(a) -> int:
     out = Path(a.out) if a.out else Path(a.mods) / a.name
+    if a.kun_ui:
+        modpack.build_ui_mod(out, Path(a.egne) if a.egne else None, a.scale)
+        return 0
     costumes = {-1} if a.kostymer == "alle" else _rooms(a.kostymer)
     modpack.build_mod(Path(a.extract), out, scale=a.scale, method=a.method, rooms=_rooms(a.rooms),
                       own=Path(a.egne) if a.egne else None, with_objects=not a.uten_objekter,
@@ -234,6 +237,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--filmer", help="filmer som skal skaleres, for eksempel SQ1,TRAM1, eller 'alle' (tar mye plass)")
     p.add_argument("--san", default=str(root / "work" / "san"), help="utdata fra zakhd san")
     p.add_argument("--uten-skrift", action="store_true", help="uten HD-skriften (Exo 2) for teksten")
+    p.add_argument("--kun-ui", action="store_true", help="bare ikonene til verbhjulet og bildene til inventaret "
+                   "(fra grafikk/ og --egne), uten rom og figurer; trenger ikke uttrekket")
 
     p = sub.add_parser("compare", help="sammenlign oppskaleringsmetoder på ett rom")
     up(p)

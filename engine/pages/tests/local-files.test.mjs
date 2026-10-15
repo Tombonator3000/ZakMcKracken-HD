@@ -28,7 +28,9 @@ test('HD references, prompts and film frames are excluded; an incomplete mod is 
   // Zak har ingen SMUSH-filmer, så san/ (filmrutene i The Dig) er ikke med i modden
   const rows = selectFiles([file('gpt/mod.json'), file('gpt/rooms/room022.png'), file('gpt/rooms/room022_idx.png'), file('gpt/prompt.txt'), file('gpt/referanse.png'), file('gpt/san/INTRO/00001.png')], 'mod');
   assert.equal(rows.length, 3);
-  assert.throws(() => selectFiles([file('gpt/mod.json')], 'mod'), /HD-mappen/);
+  // A mod with only the interface (wheel icons, inventory) has no rooms and is fine
+  assert.equal(selectFiles([file('gpt/mod.json'), file('gpt/inventory/obj082.png')], 'mod').length, 2);
+  assert.throws(() => selectFiles([file('gpt/rooms/room022.png')], 'mod'), /HD-mappen/);
   assert.throws(() => selectFiles([file('gpt/mod.json'), file('gpt/rooms/room022.png'), file('gpt/rooms/room022.png')], 'mod'), /samme navn/);
 });
 

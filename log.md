@@ -236,3 +236,10 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Flyttet inn 15 verbikoner, 126 inventarfiler og 22 karakterark med gallerier, faktiske prompter, manifest og SHA-256. Bildene bevares byte for byte; originaluttrekk og skript beholdes i gpt-arbeid.
 - UI-bildene ligger i grafikk/ui/verbhjul-gpt/ og grafikk/inventar/, der build_ui allerede leser dem. Konseptarkene importeres ikke som animasjonsruter. Ingen motor- eller pipelinekode endret.
 - Kontroll før PR: build_ui tok inn alle 141 UI-filer med uendrede dekodede piksler; 172 PNG er byteidentiske med gpt-arbeid, 79 aliaskoblinger stemmer og alle 96 bilder i UI-galleriet finnes. Tre SHA-256-lister kontrollert. 37 pipelinetester bestått (2 spilldatatester utelatt), 21 nettlesertester, 4 Pages-pakkertester og hunk-hoder i 4 patcher bestått.
+
+## 2026-10-15 13:27 til 14:10 (Claude)
+- Tom: «gpt har lagd inventory og verb hjul grafikk men integrer dem i spillet.» Codex hadde lagt 15 malte verbikoner i `grafikk/ui/verbhjul-gpt/` og 126 inventarbilder i `grafikk/inventar/` (PR 11, flettet), alle 512 x 512 RGBA. Sett over i kontaktark: motivene stemmer med listen.
+- Ny `zakhd build-mod --kun-ui` (`build_ui_mod`): mod.json og grensesnittet uten rom og figurer. `build_ui` skalerer nå ned til 256 piksler i modden (originalene i `grafikk/` urørt); modden ble 8,3 MB. Nettsiden godtar en mod uten rom (`selectFiles` krevde `rooms/`). Nye tester: pytest 38, nodetester 21.
+- Modden bygget og publisert i grenen `hd-mod` med `tools/mod_gren.sh send` (mod.json, ui/, inventory/, SHA256SUMS).
+- Testet uten skjerm med modden: «19 drawn icons (15 from the HD pack)», de malte ikonene i hjulet (Turn on lamp), inventaret med malte bilder (billett, fiskebolle med Sushi, regning, kazoo, tapet, CashCard, plastkort) og navn for tingene uten bilde (receiver, telephone, cat clock), hjulet åpnet på billetten.
+- `docs/inventar.csv` laget på nytt: status «godkjent» der bildet finnes.

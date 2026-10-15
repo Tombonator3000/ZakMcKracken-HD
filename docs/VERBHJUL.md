@@ -132,6 +132,8 @@ Motoren leser bilder fra HD-modden når de finnes, og bruker det innebygde eller
 
 PNG med alfa i hvilken som helst størrelse (minst 64 piksler); motoren skalerer ned med flatemiddel og bevarer formen. `zakhd build-mod` legger dem i modden (`build_ui` i `pipeline/zakhd/modpack.py`), og nettsiden tar dem med (`local-files.mjs`). Listen til ChatGPT med utseende og filnavn: [GRAFIKK-HJUL-OG-INVENTAR.md](GRAFIKK-HJUL-OG-INVENTAR.md). Tingene i [inventar.csv](inventar.csv) (`tools/inventarliste.py`).
 
+Lagt inn 15. oktober 2026: de malte ikonene fra ChatGPT (15) og bildene av tingene i inventaret (126 filer for 105 objekter), fra `grafikk/ui/verbhjul-gpt/` og `grafikk/inventar/`. `zakhd build-mod --kun-ui` lager en mod med bare grensesnittet (mod.json, `ui/verbhjul/`, `inventory/`, bildene skalert ned til 256 piksler, 8,3 MB), og `tools/mod_gren.sh send` publiserer den i grenen `hd-mod`. Nettsiden og `./spill.sh` henter den derfra. Rom og figurer vises fortsatt som originalen. Når rommene får HD-grafikk, tar den vanlige `zakhd build-mod` med grensesnittet av seg selv.
+
 ## Inventaret som bilder
 
 Med hjulet på og HD-laget i gang vises inventaret som et rutenett i HD som fyller hele området under setningslinjen, der verbpanelet og tekstinventaret var (Tom 15. oktober): fem ruter i to rader (spillets x 1 til 271, y 153 til 239). Kolonnen til høyre har pilene som gule trekanter øverst og nederst, og portrettene for figurbytte to og to mellom dem.
