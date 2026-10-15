@@ -1,0 +1,41 @@
+[
+  {
+    "jobb": "fig001_01",
+    "forventede_ruter": 13,
+    "alfadeler": 13,
+    "koblet": 13,
+    "mangler": [],
+    "rgba": [
+      1536,
+      1024
+    ],
+    "alfa_min": 0,
+    "alfa_max": 254
+  },
+  {
+    "jobb": "fig001_02",
+    "forventede_ruter": 25,
+    "alfadeler": 25,
+    "koblet": 25,
+    "mangler": [],
+    "rgba": [
+      1536,
+      1024
+    ],
+    "alfa_min": 0,
+    "alfa_max": 254
+  },
+  {
+    "jobb": "fig001_03",
+    "forventede_ruter": 13,
+    "alfadeler": 14,
+    "koblet": 13,
+    "mangler": [],
+    "rgba": [
+      1536,
+      1024
+    ],
+    "alfa_min": 0,
+    "alfa_max": 254
+  }
+]

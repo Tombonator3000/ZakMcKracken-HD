@@ -73,3 +73,7 @@
 - Dekodet originalens 40 kostymer, 847 ruter og 1094 skript for identiteter og rollekoblinger. K23 og K25 holdt atskilt, K21 og K26 dokumentert som delte kostymer. Dyr også kontrollert i rom-/objektdata.
 - Laget 22 valgte karakterark med innebygd image_gen, 24 kall inkludert pilot- og delfinrettelse. Piloten v1 og delfinen v1 beholdes lokalt som erstattede utkast. Ingen eksisterende stilark endret.
 - Hele settet sett visuelt. Manifest, SHA-256, alle 40 kostymer kartlagt, tre kontaktark, faktisk promptsett, galleri og ZIP levert. Konsepter til kontroll, ikke animasjonsruter eller motorimport.
+
+## 2026-10-15: Zak spritesheet
+
+Tom ba om bare Zak først. Tre valgte v1-ark, 51 deler, 24 sammensatte ruter. 38 ok, 13 sjekk, 0 mangler i mottaket. Dokumentasjon og faktiske prompter i sprites/zak/. Side 2 v2 forkastet, lagret lokalt i ignorert revisjoner/. Ikke prøvd i motoren.

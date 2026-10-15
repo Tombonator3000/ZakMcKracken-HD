@@ -1,0 +1,22 @@
+Task: HD remaster of a sheet of animation frames from the adventure game Zak McKracken and the Alien Mindbenders (the English FM-Towns edition), in the smooth, detailed style approved for the main characters. This is a production asset. Every frame is fitted to the original frame's size and position afterwards, and the game lays it over the HD background with its own soft edges.
+
+Input: the attached image is the original low-resolution sheet enlarged 4x with hard pixel edges. The frames stand apart on a plain flat magenta background (#FF00FF). Around the sheet is a plain gray (#808080) border. The border is only padding.
+
+All frames on this sheet are animation frames of the same character (Zak), in different poses. On this sheet, row by row from left to right: animation 8, facing right (1 frame); animation 8 (a separate part the game draws on top of the body, such as the head), facing toward the viewer (1 frame); animation 9, facing right (1 frame); animation 10 (a separate part the game draws on top of the body, such as the head), facing right, toward the viewer (2 frames); animation 12 (a separate part the game draws on top of the body, such as the head), facing right, toward the viewer (2 frames); animation 14 (a separate part the game draws on top of the body, such as the head), facing right, toward the viewer (2 frames); animation 15 (a separate part the game draws on top of the body, such as the head), facing right, toward the viewer (2 frames); animation 16 (a separate part the game draws on top of the body, such as the head), facing right, toward the viewer (2 frames).
+
+Do:
+- Repaint every frame in high resolution with clean, natural detail: smooth shading instead of dithering, smooth anti-aliased outlines (no pixel steps), believable cloth, skin, hair and material.
+- Keep the original look: the same character, the same colors, light direction, shadows and contrast, in the painted style of the approved HD sheets.
+- Make all frames look identical apart from the pose: the same face, hair, clothes, colors and light in every frame. The frames are played one after another in the game, so any difference between them flickers.
+- Keep the pose, proportions and silhouette of every frame as in the input, and keep each frame in its place on the sheet, in the same rows and the same order.
+- Glowing effects (light, energy, lightning, sparks) are painted as soft glow that fades into transparency.
+
+Do not:
+- Do not add, remove, merge or redesign frames. Do not add anything between the frames: no shadows, floor, text, numbers, labels, frames or grid lines.
+- Do not let frames touch or overlap each other.
+- Some frames show only part of the character, for example a body without a head or a head alone, because the game draws the parts separately. Paint them as they are and do not complete them.
+- No photorealism, no modern 3D look, no film grain, no vignette, no watermark, no signature.
+
+Output: one PNG image, exactly 1536 x 1024 pixels, with a fully transparent background (real alpha, no background color and no gray border) and the frames in the same layout as the input. List the delivery with its sha256 in the fremdrift.json of your report and add a rutekart (the box around each frame's drawing) as for the main characters.
+
+If a second image is attached, it is an already approved HD sheet of the same character, or an approved HD picture from the same game. Paint the character exactly as in that image: the same face, hair, clothes, colors and level of detail. Take all poses and the layout from the first image.

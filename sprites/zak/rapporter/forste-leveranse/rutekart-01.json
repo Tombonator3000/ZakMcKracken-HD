@@ -1,0 +1,627 @@
+{
+  "fig001_01": {
+    "koblinger": [
+      {
+        "bilde": "costume001_000",
+        "native_analyseboks_alfa128": [
+          70,
+          43,
+          58,
+          132
+        ],
+        "deler": [
+          1
+        ]
+      },
+      {
+        "bilde": "costume001_006",
+        "native_analyseboks_alfa128": [
+          155,
+          50,
+          84,
+          124
+        ],
+        "deler": [
+          2
+        ]
+      },
+      {
+        "bilde": "costume001_134",
+        "native_analyseboks_alfa128": [
+          63,
+          203,
+          61,
+          108
+        ],
+        "deler": [
+          4
+        ]
+      },
+      {
+        "bilde": "costume001_135",
+        "native_analyseboks_alfa128": [
+          145,
+          203,
+          73,
+          100
+        ],
+        "deler": [
+          5
+        ]
+      },
+      {
+        "bilde": "costume001_136",
+        "native_analyseboks_alfa128": [
+          234,
+          202,
+          86,
+          101
+        ],
+        "deler": [
+          3
+        ]
+      },
+      {
+        "bilde": "costume001_256",
+        "native_analyseboks_alfa128": [
+          65,
+          327,
+          77,
+          96
+        ],
+        "deler": [
+          7
+        ]
+      },
+      {
+        "bilde": "costume001_257",
+        "native_analyseboks_alfa128": [
+          170,
+          324,
+          70,
+          99
+        ],
+        "deler": [
+          6
+        ]
+      },
+      {
+        "bilde": "costume001_258",
+        "native_analyseboks_alfa128": [
+          264,
+          328,
+          71,
+          90
+        ],
+        "deler": [
+          8
+        ]
+      },
+      {
+        "bilde": "costume001_388",
+        "native_analyseboks_alfa128": [
+          72,
+          441,
+          24,
+          21
+        ],
+        "deler": [
+          9
+        ]
+      },
+      {
+        "bilde": "costume001_513",
+        "native_analyseboks_alfa128": [
+          65,
+          490,
+          34,
+          95
+        ],
+        "deler": [
+          10
+        ]
+      },
+      {
+        "bilde": "costume001_516",
+        "native_analyseboks_alfa128": [
+          127,
+          490,
+          35,
+          94
+        ],
+        "deler": [
+          11
+        ]
+      },
+      {
+        "bilde": "costume001_644",
+        "native_analyseboks_alfa128": [
+          72,
+          604,
+          36,
+          96
+        ],
+        "deler": [
+          12
+        ]
+      },
+      {
+        "bilde": "costume001_641",
+        "native_analyseboks_alfa128": [
+          73,
+          720,
+          36,
+          96
+        ],
+        "deler": [
+          13
+        ]
+      }
+    ]
+  },
+  "fig001_02": {
+    "koblinger": [
+      {
+        "bilde": "costume001_133",
+        "native_analyseboks_alfa128": [
+          77,
+          43,
+          84,
+          205
+        ],
+        "deler": [
+          1
+        ]
+      },
+      {
+        "bilde": "costume001_128",
+        "native_analyseboks_alfa128": [
+          188,
+          46,
+          160,
+          202
+        ],
+        "deler": [
+          5
+        ]
+      },
+      {
+        "bilde": "costume001_129",
+        "native_analyseboks_alfa128": [
+          373,
+          44,
+          131,
+          204
+        ],
+        "deler": [
+          4
+        ]
+      },
+      {
+        "bilde": "costume001_130",
+        "native_analyseboks_alfa128": [
+          537,
+          43,
+          78,
+          205
+        ],
+        "deler": [
+          2
+        ]
+      },
+      {
+        "bilde": "costume001_131",
+        "native_analyseboks_alfa128": [
+          650,
+          43,
+          146,
+          205
+        ],
+        "deler": [
+          3
+        ]
+      },
+      {
+        "bilde": "costume001_132",
+        "native_analyseboks_alfa128": [
+          812,
+          51,
+          126,
+          198
+        ],
+        "deler": [
+          6
+        ]
+      },
+      {
+        "bilde": "costume001_391",
+        "native_analyseboks_alfa128": [
+          74,
+          274,
+          27,
+          27
+        ],
+        "deler": [
+          7
+        ]
+      },
+      {
+        "bilde": "costume001_385",
+        "native_analyseboks_alfa128": [
+          136,
+          927,
+          19,
+          13
+        ],
+        "deler": [
+          23
+        ]
+      },
+      {
+        "bilde": "costume001_384",
+        "native_analyseboks_alfa128": [
+          122,
+          330,
+          22,
+          21
+        ],
+        "deler": [
+          8
+        ]
+      },
+      {
+        "bilde": "costume001_007",
+        "native_analyseboks_alfa128": [
+          77,
+          376,
+          53,
+          108
+        ],
+        "deler": [
+          11
+        ]
+      },
+      {
+        "bilde": "costume001_008",
+        "native_analyseboks_alfa128": [
+          157,
+          374,
+          59,
+          112
+        ],
+        "deler": [
+          9
+        ]
+      },
+      {
+        "bilde": "costume001_009",
+        "native_analyseboks_alfa128": [
+          242,
+          379,
+          51,
+          106
+        ],
+        "deler": [
+          12
+        ]
+      },
+      {
+        "bilde": "costume001_010",
+        "native_analyseboks_alfa128": [
+          323,
+          375,
+          60,
+          111
+        ],
+        "deler": [
+          10
+        ]
+      },
+      {
+        "bilde": "costume001_515",
+        "native_analyseboks_alfa128": [
+          74,
+          513,
+          33,
+          84
+        ],
+        "deler": [
+          13
+        ]
+      },
+      {
+        "bilde": "costume001_514",
+        "native_analyseboks_alfa128": [
+          133,
+          517,
+          36,
+          82
+        ],
+        "deler": [
+          14
+        ]
+      },
+      {
+        "bilde": "costume001_643",
+        "native_analyseboks_alfa128": [
+          77,
+          629,
+          34,
+          81
+        ],
+        "deler": [
+          16
+        ]
+      },
+      {
+        "bilde": "costume001_642",
+        "native_analyseboks_alfa128": [
+          136,
+          623,
+          29,
+          85
+        ],
+        "deler": [
+          15
+        ]
+      },
+      {
+        "bilde": "costume001_013",
+        "native_analyseboks_alfa128": [
+          77,
+          744,
+          59,
+          102
+        ],
+        "deler": [
+          20
+        ]
+      },
+      {
+        "bilde": "costume001_014",
+        "native_analyseboks_alfa128": [
+          166,
+          743,
+          57,
+          103
+        ],
+        "deler": [
+          19
+        ]
+      },
+      {
+        "bilde": "costume001_015",
+        "native_analyseboks_alfa128": [
+          252,
+          732,
+          58,
+          114
+        ],
+        "deler": [
+          17
+        ]
+      },
+      {
+        "bilde": "costume001_016",
+        "native_analyseboks_alfa128": [
+          339,
+          740,
+          57,
+          106
+        ],
+        "deler": [
+          18
+        ]
+      },
+      {
+        "bilde": "costume001_389",
+        "native_analyseboks_alfa128": [
+          74,
+          870,
+          26,
+          27
+        ],
+        "deler": [
+          21
+        ]
+      },
+      {
+        "bilde": "costume001_386",
+        "native_analyseboks_alfa128": [
+          123,
+          885,
+          24,
+          12
+        ],
+        "deler": [
+          22
+        ]
+      },
+      {
+        "bilde": "costume001_390",
+        "native_analyseboks_alfa128": [
+          75,
+          946,
+          26,
+          26
+        ],
+        "deler": [
+          24
+        ]
+      },
+      {
+        "bilde": "costume001_387",
+        "native_analyseboks_alfa128": [
+          127,
+          951,
+          29,
+          21
+        ],
+        "deler": [
+          25
+        ]
+      }
+    ]
+  },
+  "fig001_03": {
+    "koblinger": [
+      {
+        "bilde": "costume001_011",
+        "native_analyseboks_alfa128": [
+          66,
+          35,
+          118,
+          83
+        ],
+        "deler": [
+          1
+        ]
+      },
+      {
+        "bilde": "costume001_261",
+        "native_analyseboks_alfa128": [
+          59,
+          137,
+          96,
+          131
+        ],
+        "deler": [
+          2
+        ]
+      },
+      {
+        "bilde": "costume001_012",
+        "native_analyseboks_alfa128": [
+          58,
+          290,
+          137,
+          122
+        ],
+        "deler": [
+          3
+        ]
+      },
+      {
+        "bilde": "costume001_769",
+        "native_analyseboks_alfa128": [
+          58,
+          440,
+          58,
+          63
+        ],
+        "deler": [
+          4
+        ]
+      },
+      {
+        "bilde": "costume001_768",
+        "native_analyseboks_alfa128": [
+          161,
+          442,
+          61,
+          61
+        ],
+        "deler": [
+          5
+        ]
+      },
+      {
+        "bilde": "costume001_897",
+        "native_analyseboks_alfa128": [
+          48,
+          545,
+          114,
+          57
+        ],
+        "deler": [
+          7
+        ]
+      },
+      {
+        "bilde": "costume001_896",
+        "native_analyseboks_alfa128": [
+          186,
+          542,
+          104,
+          61
+        ],
+        "deler": [
+          6
+        ]
+      },
+      {
+        "bilde": "costume001_899",
+        "native_analyseboks_alfa128": [
+          54,
+          636,
+          124,
+          117
+        ],
+        "deler": [
+          8
+        ]
+      },
+      {
+        "bilde": "costume001_898",
+        "native_analyseboks_alfa128": [
+          206,
+          636,
+          124,
+          117
+        ],
+        "deler": [
+          9,
+          10
+        ]
+      },
+      {
+        "bilde": "costume001_771",
+        "native_analyseboks_alfa128": [
+          49,
+          789,
+          68,
+          76
+        ],
+        "deler": [
+          11
+        ]
+      },
+      {
+        "bilde": "costume001_770",
+        "native_analyseboks_alfa128": [
+          150,
+          790,
+          65,
+          77
+        ],
+        "deler": [
+          12
+        ]
+      },
+      {
+        "bilde": "costume001_1025",
+        "native_analyseboks_alfa128": [
+          61,
+          924,
+          93,
+          24
+        ],
+        "deler": [
+          13
+        ]
+      },
+      {
+        "bilde": "costume001_1024",
+        "native_analyseboks_alfa128": [
+          188,
+          925,
+          96,
+          24
+        ],
+        "deler": [
+          14
+        ]
+      }
+    ]
+  }
+}
