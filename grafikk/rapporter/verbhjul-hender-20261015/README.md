@@ -18,3 +18,6 @@ Begge hattikonene bruker en blå fedora med rødt bånd, lav krone, midtfold, in
 - SHA-256, alfa, størrelser, eksisterende mottak i `build_ui` og visuell kontroll av kontaktarket er kontrollert. Mottaket skalerer til 256 piksler som før. Piler og handlingsrekvisitter er bevart.
 
 De nye rettelsene er ikke prøvd i spillmotoren og er ikke registrert som visuelt godkjent av Tom. De inngår i oppdateringen av grafikk-PR-en, uten motor- eller pipelineendringer. Tidligere visuell godkjenning gjelder den eldre leveransen; denne rettelsen følger hans konkrete retur.
+
+## Andre retur
+Tom avviste buy, give og take-off på nytt. De tre hendene er erstattet. [Ny tegning, kontroll og prompter](../verbhjul-hender-retur-02-20261015/README.md) gjelder foran anatomivurderingen over. Gamle valgte SHA-256 peker nå på de bevarte avviste filene i den nye rapportens for/-mappe.

@@ -257,3 +257,19 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Tom ba om bedre fingre og bare hender uten dressjakke på verbikonene. Deretter presiserte han at hattene skal være fedora.
 - Rettet 11 håndikoner med innebygd image_gen, flere målrettede forsøk der fingre manglet eller ble for mange. Begge hattikoner viser samme blå fedora med rødt bånd, med inventarhatten som formreferanse. Fire ikoner uten hender og inventaret er uendret.
 - Faktiske prompter, genereringslogg, gamle bilder, før/etter, kontaktark og SHA-256 i rapporter/verbhjul-hender-20261015 (grafikk/ i kodegrenen). Eksport 512 x 512 RGBA; mottaket tar inn filene som før. Ingen motor- eller pipelinekode endret. Rettelsen er til kontroll, ikke prøvd i motoren.
+## 2026-10-15 14:20 til 15:35 (Claude)
+- Tom: «Er det mulig å refactor og optimalisere spillkoden? Den er 40 år gammel.» Svar: spillets skript er ikke trege og lappes ikke uten Toms ja; ScummVM er ny. Gevinsten ligger i HD-laget og verbhjulet, som er vår egen kode. Målt i spillet (OpenGL under Xvfb, nearest-mod): `compose()` 4,7 til 5,9 ms for hele skjermen, og overleggene til hjulet og inventaret kostet omtrent like mye.
+- Tom: «Gjør de to grepene.»
+- 1: `compose()` i `dighd.cpp` kopierer HD-pikslene rett når fargen er uendret, uten tak og med 32-bits skjerm i samme format (alfa 255 som før). 1,6 til 2,7 ms for hele skjermen. 0001 laget på nytt med `tools/lag_patcher.sh --ny-0001`; bare `dighd.cpp` endret.
+- 1b: overleggene i verbhjulet har en nøkkel for det som vises og tegnes bare når den endres og pikslene under er våre. Fra omtrent 10 til 1,5 prosent i `perf`.
+- 2: `verbhjul.cpp` (2086 linjer) delt i `verbhjul.cpp` (1033), `verbhjul_hd.cpp` (770), `verbhjul_test.cpp` (269) og `verbhjul_intern.h` (konstantene). Bare flyttet. `module.mk` og `tools/lag_patcher.sh` (ny liste `HJUL`) oppdatert.
+- Testet: bygget uten advarsler; `engine/test.sh` 0 avvik med 16 bit og med OpenGL; bilder fra intro og rom 1, 2 og 8 byte for byte like med gammel motor; `tools/verbhjul_test.sh` bestått, og skjermbildene like med gammel motor utenom fiskebollen (animasjonen et bilde forskjøvet); `tools/lag_patcher.sh` og `--ny-0001` gir de samme patchene; `tools/sjekk_patcher.py` OK.
+- Ikke gjort: 0001 kopiert til Dig-HD-Remake, Sam-Max-HD og Dig-HD-Web (todo). Tabell per palettindeks for nedtoning er ikke laget.
+- Dokumentert i `docs/MOTOR-FORBEDRING.md` del 10, `docs/VERBHJUL.md`, STATUS, memory og todo.
+- CI etter push (5782de2): test, motor og pages grønne.
+- Den nye 0001 kopiert til de tre andre repoene som PR, etter reglene der (kode via PR): Sam-Max-HD 25, Dig-HD-Remake 56, Dig-HD-Web 3. Bare patchfila og en loggføring. Før kopien var 0001 i alle tre byte for byte lik den gamle i Zak.
+
+## 2026-10-15 17:26 (Codex)
+- Tom påpekte at buy, give og take-off fortsatt hadde feil fingre/hender. Den forrige kontrollen overså anatomifeilene. Tre hender er tegnet helt om med enklere naturlige grep, kort bart håndledd og mindre skravering. Fedoraen er beholdt.
+- Fire innebygde image_gen-kall: give v1 manglet en synlig finger og ble rettet i v2. Forrige runde er bevart og markert som avvist for disse tre filene. Tolv øvrige ikoner og inventaret er uendret.
+- Før/etter, nærbilder, 112-pikslers kontaktark, faktiske prompter, valg og SHA-256 i rapporter/verbhjul-hender-retur-02-20261015 (grafikk/ i kodegrenen). Filformat, alfa og eksisterende UI-mottak kontrollert. Ny rettelse er til vurdering, ikke prøvd i motoren.

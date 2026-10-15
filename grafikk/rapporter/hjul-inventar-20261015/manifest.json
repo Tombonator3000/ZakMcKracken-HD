@@ -2735,9 +2735,9 @@
     },
     {
       "path": "ui/verbhjul-gpt/buy.png",
-      "sha256": "7876f802f4d38442a05ce835e47f879e219a089bb7d648835495a7d258cd63b3",
-      "git_sha": "95e4afd170af41a407be419f09376253ccb0046f",
-      "bytes": 338262,
+      "sha256": "ecb4c1bd1983620f35e8fa009f16f0e9dd0fc5df000179600dbc3ec958486abb",
+      "git_sha": "1803d52ab076a50769faa2f917a6ef1ce6ffaa90",
+      "bytes": 321008,
       "size": [
         512,
         512
@@ -2747,7 +2747,7 @@
         0,
         255
       ],
-      "revision": "verbhjul-hender-20261015"
+      "revision": "verbhjul-hender-retur-02-20261015"
     },
     {
       "path": "ui/verbhjul-gpt/close.png",
@@ -2766,9 +2766,9 @@
     },
     {
       "path": "ui/verbhjul-gpt/give.png",
-      "sha256": "5052b698ed8e97e0bb7598c8f38db65a0a014a18f75a243b4336553ddb74b6d8",
-      "git_sha": "5afea09bcaffd75fd511032113e15fb4587279cd",
-      "bytes": 294203,
+      "sha256": "35caf0c59c2e919c257f571cca3beeb2e4d3d63d536637bac2148ee284fb6d38",
+      "git_sha": "ff0fc32f74672f83fb07a7b4314e6fe60a08ee2a",
+      "bytes": 291626,
       "size": [
         512,
         512
@@ -2778,7 +2778,7 @@
         0,
         255
       ],
-      "revision": "verbhjul-hender-20261015"
+      "revision": "verbhjul-hender-retur-02-20261015"
     },
     {
       "path": "ui/verbhjul-gpt/open.png",
@@ -2892,9 +2892,9 @@
     },
     {
       "path": "ui/verbhjul-gpt/take-off.png",
-      "sha256": "89eed2956ab63faf5ed31bb6b51a8f94d10eb3393aa64213fd5b15194c268661",
-      "git_sha": "a2944fa5e19601519f1a84e7da19c8bcd53ac3e4",
-      "bytes": 312211,
+      "sha256": "b2c3aaa52342d2269c2cff54a00aeaf470f86857b769881ff93852a8b84b3529",
+      "git_sha": "c7aaf56b76b89748363648803f5562cfef71f39d",
+      "bytes": 301831,
       "size": [
         512,
         512
@@ -2904,7 +2904,7 @@
         0,
         255
       ],
-      "revision": "verbhjul-hender-20261015"
+      "revision": "verbhjul-hender-retur-02-20261015"
     },
     {
       "path": "ui/verbhjul-gpt/teleport.png",
@@ -2975,5 +2975,5 @@
     "date": "2026-10-15T13:26:47+02:00",
     "scope": "alle 15 verbikoner og 126 inventarfiler; ingen bildefiler endret"
   },
-  "hand_revision": "../verbhjul-hender-20261015/README.md"
+  "hand_revision": "../verbhjul-hender-retur-02-20261015/README.md"
 }

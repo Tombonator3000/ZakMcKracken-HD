@@ -72,6 +72,7 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 ## Ytelse og effekter (14. oktober)
 - Tom ba om å sjekke om motoren kan optimaliseres og få nyere effekter og shadere. Utredningen er `docs/MOTOR-FORBEDRING.md`.
 - ScummVM er ikke flaskehalsen; HD-laget er. Romdelen av `compose()` bruker 12 til 21 ms for hele skjermen (1280 x 960), 0,6 ms med tabell per palettindeks, byte for byte likt (`tools/ytelse/compose_bench.cpp`). Endringen hører hjemme i 0001, som er felles med Sam & Max, så den bør gjøres der.
+- 15. oktober (Tom: «Gjør de to grepene»): kopi av uendrede HD-piksler i `compose()` (0001, 32-bits skjerm) og overlegg i verbhjulet som bare tegnes ved endring (0002); `verbhjul.cpp` delt i fire filer. Målt i spillet: `compose()` 4,7 til 5,9 ms ned til 1,6 til 2,7 ms. 0001 er da endret her og må kopieres til de tre andre repoene. Spillets skript refaktoreres ikke.
 - ScummVM sine libretro-shadere virker i bygget vårt (`USE_OPENGL_SHADERS`, også GLES2 for nettet). Egne oppsett i `engine/shadere/`: `klassisk-crt` (parameter `KILDEPIKSEL`, 4 med HD-laget) og `hd-glod`. En shader ser bare det ferdige bildet; lys med normalkart og glød bare fra lamper må gjøres i HD-laget.
 - Patchfilene flettes aldri for hånd: flettingen 13. oktober (087fd93) ga feil tall i hunk-hodene i 0002, og `git apply` kuttet verbhjul-filene uten feil. `tools/sjekk_patcher.py` og `motor.yml` stopper det nå.
 
@@ -97,3 +98,5 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 
 ## Retur på verbhjul, 15. oktober
 - Toms rettelse: hender skal ha fem fingre, uten dressjakke eller erme. Begge hattikonene skal forestille fedora, med lav krone, midtfold og vanlig brem. Ny grafikkrettelse registreres ikke automatisk som godkjent.
+
+- Andre retur på verbikoner 15. oktober: Tom avviste buy/give/take-off på nytt. Tellbare fingre alene er ikke nok; kontroller sammenhengende håndflate, tommelplassering og naturlig grep. Nye hender erstatter de tre avviste filene, uten automatisk godkjenning.

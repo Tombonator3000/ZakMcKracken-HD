@@ -44,14 +44,16 @@ index 3b27bf68..50f31f2a 100644
  		showMainMenu();
  		return;
 diff --git a/engines/scumm/module.mk b/engines/scumm/module.mk
-index 42985c9e..ace26be3 100644
+index 42985c9e..f58c2314 100644
 --- a/engines/scumm/module.mk
 +++ b/engines/scumm/module.mk
-@@ -2,6 +2,7 @@ MODULE := engines/scumm
+@@ -2,6 +2,9 @@ MODULE := engines/scumm
  
  MODULE_OBJS := \
  	dighd.o \
 +	verbhjul.o \
++	verbhjul_hd.o \
++	verbhjul_test.o \
  	actor.o \
  	akos.o \
  	base-costume.o \
@@ -146,10 +148,10 @@ index 20c4b0c5..af9f2fbd 100644
  	byte _completeScreenBuffer[320 * 200];
 diff --git a/engines/scumm/verbhjul.cpp b/engines/scumm/verbhjul.cpp
 new file mode 100644
-index 00000000..6a783c9f
+index 00000000..3ac293d7
 --- /dev/null
 +++ b/engines/scumm/verbhjul.cpp
-@@ -0,0 +1,2016 @@
+@@ -0,0 +1,1033 @@
 +/* ScummVM - Graphic Adventure Engine
 + *
 + * ScummVM is the legal property of its developers, whose names
@@ -193,113 +195,10 @@ index 00000000..6a783c9f
 +#include "scumm/scumm.h"
 +#include "scumm/verbs.h"
 +#include "scumm/verbhjul.h"
++#include "scumm/verbhjul_intern.h"
 +#include "scumm/verbhjul_zak.h"
-+#include "scumm/verbhjul_ikoner.h"
 +
 +namespace Scumm {
-+
-+// What the input script of Zak FM-Towns (global script 11) uses; read from
-+// the decompiled scripts (see docs/VERBHJUL.md).
-+enum {
-+	kVarVerb = 116,         // verb of the sentence being built
-+	kVarObjA = 117,         // first object
-+	kVarObjB = 118,         // second object
-+	kVarPrep = 119,         // preposition (129 in, 130 with, 131 on, 132 to), 0 = none
-+	kVarInventory = 102,    // objects shown in inventory slots 101..110
-+	kZakWalkTo = 3,
-+	kZakGive = 11,
-+	kZakSell = 16,
-+	kZakSwitch = 36,       // Switch; the kids' names are 37 to 40
-+	kZakSentence = 100,    // the sentence line; clicking it runs the sentence
-+	kZakInvFirst = 101,
-+	kZakInvLast = 110,
-+	kZakInvUp = 115,       // inventory arrows: they only scroll (script 20)
-+	kZakInvDown = 116
-+};
-+
-+// The verb an icon of the dynamic wheel sends when its group has several
-+static const int kPriority[] = { 2, 7, 8, 5, 10, 4, 9, 12, 14, 1, 6, 11, 15, 16, 17 };
-+
-+static const char *const kKidLabel[4] = { "Zak", "Ann", "Mel", "Les" };
-+
-+// Portraits: four boxes in the bottom right corner of the 320 x 240 screen,
-+// under the inventory, where the panel draws nothing
-+static const int kPortraitW = 22, kPortraitH = 18, kPortraitGap = 2;
-+
-+// The inventory as a grid of pictures (HD layer, wheel on), in game pixels:
-+// five cells in two rows filling everything under the sentence line, where the
-+// verb panel and the text inventory were (Tom 15 October 2026). A column to the
-+// right has the arrows at the top and bottom and the portraits between them.
-+static const int kInvTop = 153, kInvBottom = 239;
-+static const int kInvLeft = 1, kInvCellsRight = 271, kInvRight = 319;
-+static const int kInvArrowH = 19;
-+
-+// Clock positions 12, 1, 2 ... 11; the second verb takes the place when the
-+// first is not in the panel (shop, teleport).
-+static const int kClock[12][2] = {
-+	{ 8, 15 },   // Pick up / Buy
-+	{ 2, 0 },    // Open
-+	{ 7, 0 },    // Close
-+	{ 14, 0 },   // Use
-+	{ 11, 16 },  // Give / Sell
-+	{ 5, 0 },    // Turn on
-+	{ 10, 0 },   // Turn off
-+	{ 4, 0 },    // Put on
-+	{ 9, 0 },    // Take off
-+	{ 12, 0 },   // Read
-+	{ 1, 17 },   // Push / Teleport to
-+	{ 6, 0 }     // Pull
-+};
-+
-+// Placeholder icons until the drawn icons exist: at most three letters, so
-+// they fit in the icon on the 320 x 240 screen. The text under the wheel
-+// shows the whole verb while the pointer is on an icon.
-+static const char *verbLabel(int v) {
-+	switch (v) {
-+	case 1: return "Psh";
-+	case 2: return "Opn";
-+	case 4: return "Put";
-+	case 5: return "On";
-+	case 6: return "Pul";
-+	case 7: return "Cls";
-+	case 8: return "Get";
-+	case 9: return "Rem";
-+	case 10: return "Off";
-+	case 11: return "Giv";
-+	case 12: return "Rd";
-+	case 14: return "Use";
-+	case 15: return "Buy";
-+	case 16: return "Sel";
-+	case 17: return "Tp";
-+	default: return "?";
-+	}
-+}
-+
-+static const char *verbFallbackName(int v) {
-+	switch (v) {
-+	case 1: return "Push";
-+	case 2: return "Open";
-+	case 4: return "Put on";
-+	case 5: return "Turn on";
-+	case 6: return "Pull";
-+	case 7: return "Close";
-+	case 8: return "Pick up";
-+	case 9: return "Take off";
-+	case 10: return "Turn off";
-+	case 11: return "Give";
-+	case 12: return "Read";
-+	case 14: return "Use";
-+	case 15: return "Buy";
-+	case 16: return "Sell";
-+	case 17: return "Teleport to";
-+	default: return "";
-+	}
-+}
-+
-+// Size of the wheel in game pixels. Twelve icons on a circle touch when the
-+// radius is 3.86 times the icon radius (2 * sin 15 degrees = 0.518).
-+static const int kRadius = 40;     // centre to icon centre
-+static const int kIcon = 10;       // icon radius
 +
 +VerbWheel *VerbWheel::create(ScummEngine *vm) {
 +	if (vm->_game.id != GID_ZAK || vm->_game.platform != Common::kPlatformFMTowns || vm->_game.version != 3)
@@ -1178,13 +1077,29 @@ index 00000000..6a783c9f
 +void VerbWheel::draw() {
 +	drawPortraits();
 +	setInventoryGrid(inventoryGridWanted());
-+	if (_wheelOv.drawn || _invOv.drawn || _invGridOn) {
++	_wheelKeep = false;
++	if (_wheelOv.drawn || _invOv.drawn || _invGridOn || _state == kOpen) {
 +		if (Graphics::Surface *s = g_system->lockScreen()) {
++			const bool tc = s->format.bytesPerPixel == 2 || s->format.bytesPerPixel == 4;
++			// Nothing changed (the same things to show, and the screen still has
++			// what the overlay wrote): the overlay stays as it is. Before 15 October
++			// both were built again every frame, which cost as much as the HD layer.
++			const Common::String ik = (_invGridOn && tc) ? inventoryKey(*s) : Common::String();
++			const Common::String wk = (_state == kOpen && tc) ? wheelKey(*s) : Common::String();
++			const bool invKeep = !ik.empty() && _invOv.drawn && _invOv.key == ik &&
++			                     overlayIntact(*s, _invOv, _wheelOv.drawn ? &_wheelOv.box : nullptr);
++			_wheelKeep = (invKeep || !_invGridOn) && !wk.empty() && _wheelOv.drawn && _wheelOv.key == wk &&
++			             overlayIntact(*s, _wheelOv, nullptr);
 +			// Off the screen first, the wheel before the inventory it may lie on
-+			restoreOverlay(*s, _wheelOv);
-+			restoreOverlay(*s, _invOv);
-+			if (_invGridOn && (s->format.bytesPerPixel == 2 || s->format.bytesPerPixel == 4))
-+				drawInventory(*s);
++			if (!_wheelKeep)
++				restoreOverlay(*s, _wheelOv);
++			if (!invKeep) {
++				restoreOverlay(*s, _invOv);
++				if (!ik.empty()) {
++					drawInventory(*s);
++					_invOv.key = ik;
++				}
++			}
 +			g_system->unlockScreen();
 +		}
 +	}
@@ -1269,13 +1184,383 @@ index 00000000..6a783c9f
 +		_textRect = box;
 +}
 +
-+// ------------------------------------------------------------------ HD drawing
++} // End of namespace Scumm
+diff --git a/engines/scumm/verbhjul.h b/engines/scumm/verbhjul.h
+new file mode 100644
+index 00000000..9106d59b
+--- /dev/null
++++ b/engines/scumm/verbhjul.h
+@@ -0,0 +1,315 @@
++/* ScummVM - Graphic Adventure Engine
++ *
++ * ScummVM is the legal property of its developers, whose names
++ * are too numerous to list here. Please refer to the COPYRIGHT
++ * file distributed with this source distribution.
++ *
++ * This program is free software: you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation, either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
 +
-+// Size of the drawn icons in game pixels (radius). Slightly larger than the
-+// hit radius of the placeholder icons, so neighbours may touch in "all verbs".
-+static const int kIconHD = 12;
-+static const int kIconHoverHD = 14;
++/*
++ * Verb wheel (verbhjul) for Zak McKracken, FM-Towns (SCUMM v3), in the
++ * style of Day of the Tentacle Remastered. See docs/VERBHJUL.md in the
++ * ZakMcKracken-HD repository.
++ *
++ * Right click (or a long press, which the web player sends as a right
++ * click) on an object or an inventory item opens a wheel around the
++ * pointer. The wheel has twelve fixed clock positions, one per action verb:
++ *
++ *   12 Pick up (Buy)   1 Open     2 Close    3 Use
++ *    4 Give (Sell)     5 Turn on  6 Turn off 7 Put on
++ *    8 Take off        9 Read    10 Push (Teleport to)  11 Pull
++ *
++ * Buy, Sell and Teleport to take the place of the verb they replace in the
++ * original verb panel. A verb is only shown while its slot in the original
++ * panel is switched on, so the shop and the teleport modes need no special
++ * handling. Inventory items always get Give (or Sell in the shop), which the
++ * game's sentence script handles for any item.
++ *
++ * Which icons an object gets:
++ *  - Dynamic (default): at most four. Verbs that run the same object code
++ *    share one icon, Open/Close and Turn on/Turn off show only the one that
++ *    fits the object's state, and a few objects have hand-made rules. The
++ *    rules come from verbhjul_zak.h, generated by tools/verbhjul_dynamisk.py
++ *    from the game's scripts. One rule per object, words separated by spaces:
++ *      g=2,6;1,7;14   the icons; the verbs of a group run the same code
++ *      p=2/7:s        of the icons with verb 2 and verb 7 only one is shown:
++ *                     the one with 7 when the condition holds. s = the
++ *                     object's state is not 0, s92 = the state of object 92,
++ *                     c6 = class 6 is set, C6 = class 6 is not set,
++ *                     v222=14|16 = Var[222] is 14 or 16, b143.0 = bit 0
++ *                     of Var[143] is set; several joined by + mean "or"
++ *      i=11 / r=8     these verbs only in the inventory / only in the room
++ *      x=11           these verbs never (they only give a remark)
++ *    An icon sends one verb of its group (the pair's verb, or the first of
++ *    Open, Close, Pick up, Turn on, Turn off, Put on, Take off, Read, Use,
++ *    Push, Pull, Give, Buy, Sell, Teleport to) and sits at that verb's clock
++ *    position. Objects without a rule get one icon per verb.
++ *  - The object's verbs (verbhjul_dynamisk off): one icon per verb in the
++ *    object's verb table (its OC block).
++ *  - All verbs (verbhjul_alle): every active verb.
++ *
++ * Character portraits: while the game lets the player switch kid (the
++ * Switch verb is on), small portraits of the kids that can be chosen stand in
++ * the bottom right corner, the current one highlighted. Clicking one sends
++ * the same click as choosing the kid's name after Switch (verbs 37 to 40),
++ * as ScummVM's F1 to F4 do. The Switch button itself is then hidden. This
++ * works with the wheel on or off.
++ *
++ * Choosing a verb sends exactly the clicks a player would make on the
++ * original panel, one per frame, through the game's own input script
++ * (global script 11): Walk to and the sentence line when something is left
++ * of the last sentence (this clears it), the verb, the object (a scene click at the stored
++ * point, or the inventory slot), then the sentence line (verb 100), which
++ * runs the sentence. No game script is changed. When the sentence waits
++ * for a second object (Use ... with, Give ... to; the input script has set
++ * a preposition), the sentence line is not clicked, since that would clear
++ * the sentence. The wheel closes, and the next left click on an object, a
++ * person or an inventory item sends that click and then the sentence line.
++ * The inventory arrows scroll without ending the wait. A right click cancels by clicking Walk to, which clears the sentence
++ * the same way the original panel does.
++ *
++ * With the wheel on, the original verb buttons 1 to 17 are not drawn and
++ * not clickable; their keyboard shortcuts still work. All other verbs (the
++ * sentence line, the inventory, Switch, the kids' names and the special
++ * verbs when playing an animal) stay as they are.
++ *
++ * Settings (application domain): verbhjul (on/off, default on),
++ * verbhjul_dynamisk (dynamic icons, default on), verbhjul_alle (all verbs,
++ * default off), verbhjul_portretter (portraits, default on). Environment
++ * variables with the same names in capitals override them.
++ * Ctrl+W switches the wheel on and off while playing.
++ *
++ * Test hooks for running without a screen:
++ *   VERBHJUL_TEST=frame:command,...  commands: esc, key=<ascii>, ctrl=<ascii>, fkey=<n>,
++ *       click=x/y, rclick=x/y, rdrag=x/y>verb, pick=verb, portrait=<1..4>,
++ *       setvar=n/value, setbit=n.bit/value, script=n, rules, dump=name, log, quit.
++ *       rules: writes every parsed rule back and compares it with verbhjul_zak.h.
++ *       Coordinates are game pixels (320 x 240); frames are calls to tick().
++ *   VERBHJUL_DUMP_DIR  where dump=name writes name.png (the screen).
++ * Every injected click, every wheel opened and every doSentence is logged
++ * with debug() as "Verbhjul: ...".
++ */
 +
++#ifndef SCUMM_VERBHJUL_H
++#define SCUMM_VERBHJUL_H
++
++#include "common/array.h"
++#include "common/events.h"
++#include "common/hashmap.h"
++#include "common/rect.h"
++#include "common/str.h"
++
++namespace Graphics {
++struct Surface;
++}
++
++namespace Scumm {
++
++class ScummEngine;
++
++class VerbWheel {
++public:
++	/** Returns a wheel for Zak McKracken FM-Towns, nullptr for other games. */
++	static VerbWheel *create(ScummEngine *vm);
++	/**
++	 * Zak McKracken HD: the HD layer runs also without an HD pack (the original
++	 * pixels, 4 times as large), so the wheel is drawn sharp. Called before
++	 * DigHD::create. ZAKHD_LAV=1 keeps the game's own 320 x 240 screen.
++	 */
++	void defaultHD();
++	/**
++	 * With the inventory as a grid: the verb slot under a point (0 for an empty
++	 * cell), or -1 when the point is outside the grid or the grid is off.
++	 */
++	int inventoryVerbAt(int x, int y) const;
++	~VerbWheel();
++
++	/** First look at every event. True means the engine must not see it. */
++	bool handleEvent(const Common::Event &ev);
++	/** Called once per frame at the start of checkExecVerbs. True: this frame's input is used. */
++	bool tick();
++	/** Draws the wheel on the system screen, right before updateScreen. */
++	void draw();
++	/** True for the original verb buttons the wheel replaces, while it is on. */
++	bool hidesVerb(int verbid) const;
++	/** Logs every sentence the game runs (for the tests). */
++	void noteSentence(int verb, int objA, int objB);
++
++	bool isEnabled() const { return _enabled; }
++
++private:
++	enum State { kClosed, kOpen, kWaitTarget };
++	enum StepType { kStepVerb, kStepScene, kStepCheck, kStepKid };
++	struct Step { StepType type; int a, b; };
++	struct TestCmd { int frame; Common::String cmd, arg; };
++
++	// A rule of the dynamic wheel (see verbhjul_zak.h)
++	struct Cond {
++		char type;               // 's' state, 'c' class set, 'C' class not set, 'v' variable, 'b' bit
++		int arg;                 // object (0 = this one), class or variable
++		int bit;
++		Common::Array<int> values;
++	};
++	struct Pair {
++		int a, b;
++		Common::Array<Cond> conds;   // any of them true: show b
++	};
++	struct Rule {
++		Common::Array<Common::Array<int> > groups;
++		Common::Array<Pair> pairs;
++		uint32 invOnly = 0, roomOnly = 0, never = 0;   // bit per verb
++	};
++
++	explicit VerbWheel(ScummEngine *vm);
++
++	// What is under a point (game screen coordinates): object or inventory slot
++	bool targetAt(int x, int y, int &obj, int &invVerb, Common::Point &virt);
++	bool open(int x, int y, bool byPress);
++	void close();
++	void choose(int slotIndex);
++	void queueTarget(int obj, int invVerb, const Common::Point &virt);
++	void queueStep(StepType type, int a, int b);
++	void collectVerbs(int obj, bool inventory);
++	void collectDynamic(const Rule &rule, int obj, bool inventory);
++	bool condition(const Cond &c, int obj) const;
++	void placeVerb(int v);
++	void loadRules();
++	static Common::String ruleText(const Rule &rule);   // the rule written back (test: rules)
++	bool verbActive(int verbid) const;
++
++	// Character portraits
++	bool portraitsShown() const;
++	bool kidAvailable(int kid) const;
++	Common::Rect portraitRect(int kid) const;   // game screen coordinates
++	int portraitAt(int x, int y) const;
++	void drawPortraits();
++	int hoverAt(int x, int y) const;
++	Common::Point slotCenter(int i) const;
++	Common::String verbName(int verbid) const;
++	Common::String objectName(int obj) const;
++	Common::String previewText() const;
++	void setEnabled(bool on);
++
++	// Drawing in HD: the icons and the font are PNGs built into the engine
++	// (verbhjul_ikoner.h, from tools/verbhjul_ikoner.py), alpha blended on a
++	// true colour screen (the HD layer). Pictures painted by the artists can
++	// come from the HD pack: ui/verbhjul/<name>.png for the wheel, and
++	// inventory/objNNN.png for the inventory. Each overlay keeps the game's
++	// pixels under it and puts them back before the next frame is drawn.
++public:
++	struct Img {
++		int w = 0, h = 0;
++		Common::Array<byte> px;   // RGBA, straight alpha
++	};
++private:
++	struct Canvas;
++	struct Overlay {
++		bool drawn = false;
++		Common::Rect box;
++		Common::Array<uint32> under;   // the game's pixels
++		Common::Array<uint32> last;    // what the overlay wrote
++		Common::String key;            // what it showed (wheelKey, inventoryKey)
++	};
++	bool overlayIntact(const Graphics::Surface &s, const Overlay &ov, const Common::Rect *skip) const;
++	Common::String wheelKey(const Graphics::Surface &s) const;
++	Common::String inventoryKey(const Graphics::Surface &s) const;
++	bool _wheelKeep = false;
++	void loadHD();
++	bool loadModPng(const Common::String &rel, Img &img) const;
++	static void scaleImg(const Img &src, int w, int h, Img &dst);
++	const Img *iconAt(int verb, int size);
++	const Img *inventoryImage(int obj, int w, int h);
++	bool drawHD(Graphics::Surface &s);
++	int textWidth(const Common::String &text, float f) const;
++	void drawText(Canvas &cv, const Common::Rect &clip, const Common::String &text, int split, float x, int baseline, float f) const;
++	void drawLabel(Canvas &cv, const Common::Rect &box, const Common::String &text, int split, float f) const;
++	Common::Rect labelBox(const Common::String &text, float f, int centerX, int top, int bottomLimit, int altBottom, int screenW) const;
++	void restoreOverlay(Graphics::Surface &s, Overlay &ov);
++	void beginOverlay(Graphics::Surface &s, Overlay &ov, Canvas &cv, const Common::Rect &box);
++	void endOverlay(Graphics::Surface &s, Overlay &ov, const Canvas &cv);
++
++	// The inventory as pictures (or names in HD) in a grid, with the wheel on
++	bool inventoryGridWanted() const;
++	void setInventoryGrid(bool on);
++	Common::Rect inventoryCell(int i) const;     // game screen coordinates
++	Common::Rect inventoryArrow(bool down) const;
++	void drawInventory(Graphics::Surface &s);
++
++	Common::HashMap<int, Img> _iconSrc;
++	Common::HashMap<int, Img> _iconCache;   // verb * 1000 + size
++	Common::HashMap<Common::String, Img> _invSrc;     // "object:name" -> picture (empty: none)
++	Common::HashMap<Common::String, Img> _invCache;
++	Img _font;
++	bool _hdLoaded = false;
++	Overlay _wheelOv, _invOv;
++	bool _invGrid = true;                   // verbhjul_inventar
++	bool _invGridOn = false;
++	Common::String _hdPortraitShown;        // the portraits in HD, for the log
++	uint32 _openedAt = 0;
++
++	// Drawing on the system screen
++	uint32 color(const Graphics::Surface &s, byte r, byte g, byte b) const;
++	void fillCircle(Graphics::Surface &s, int cx, int cy, int rad, uint32 c) const;
++	void restoreScreenRect(const Common::Rect &r);
++	Common::Rect toScreen(const Common::Rect &r) const;
++
++	// Tests
++	void parseTests(const char *spec);
++	void runTests();
++	void pushMouse(Common::EventType type, int x, int y);
++	void pushKey(Common::KeyCode code, uint16 ascii, byte flags = 0);
++	void dumpScreen(const Common::String &name);
++
++	ScummEngine *_vm;
++	bool _enabled = true;
++	bool _allVerbs = false;
++	bool _dynamic = true;
++	bool _portraits = true;
++	Common::HashMap<int, Rule> _rules;
++	Common::Rect _portraitDrawn;   // screen rectangle of the portraits drawn last time
++	Common::String _portraitShown; // what was drawn (kids and the current one)
++	State _state = kClosed;
++	bool _openedByPress = false;
++	bool _pressMoved = false;
++	Common::Point _center;   // game screen coordinates of the wheel
++	Common::Point _press;    // where the right button went down
++	int _obj = 0;
++	int _invVerb = 0;        // 101..110 when the wheel is on an inventory item
++	Common::Point _virt;     // room coordinates of the object click
++	int _slots[12];          // verb id per clock position, 0 = empty
++	int _hover = -1;
++	Common::Rect _drawn;     // screen rectangle drawn last time
++	Common::Rect _textRect;  // screen rectangle of the preview text
++	Common::String _shownText;
++	bool _restoreAll = false;
++	Common::Array<Step> _steps;
++	int _waitVerb = 0;
++	int _waitObj = 0;
++	int _stepRoom = -1;      // the room the queued clicks and the waiting sentence belong to
++	uint32 _frame = 0;
++	Common::Array<TestCmd> _tests;
++	Common::String _dumpDir;
++	int _rdragVerb = 0;      // test: verb to drag to after a right press
++	int _upFrame = -1;       // test: frame to release a pending button
++	bool _upRight = false;
++	Common::Point _upPos;
++	bool _swallowLeftUp = false;
++	bool _swallowRightUp = false;
++};
++
++} // End of namespace Scumm
++
++#endif
+diff --git a/engines/scumm/verbhjul_hd.cpp b/engines/scumm/verbhjul_hd.cpp
+new file mode 100644
+index 00000000..34188deb
+--- /dev/null
++++ b/engines/scumm/verbhjul_hd.cpp
+@@ -0,0 +1,772 @@
++/* ScummVM - Graphic Adventure Engine
++ *
++ * ScummVM is the legal property of its developers, whose names
++ * are too numerous to list here. Please refer to the COPYRIGHT
++ * file distributed with this source distribution.
++ *
++ * This program is free software: you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation, either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++// Drawing the wheel, the inventory grid and the portraits on the HD layer.
++
++#define FORBIDDEN_SYMBOL_EXCEPTION_getenv
++
++#include "common/algorithm.h"
++#include "common/base64.h"
++#include "common/memstream.h"
++#include "common/config-manager.h"
++#include "common/debug.h"
++#include "common/endian.h"
++#include "common/fs.h"
++#include "common/system.h"
++#include "common/textconsole.h"
++#include "common/tokenizer.h"
++#include "graphics/font.h"
++#include "graphics/fontman.h"
++#include "graphics/surface.h"
++#include "image/png.h"
++
++#include "scumm/gfx.h"
++#include "scumm/object.h"
++#include "scumm/scumm.h"
++#include "scumm/verbs.h"
++#include "scumm/verbhjul.h"
++#include "scumm/verbhjul_intern.h"
++#include "scumm/verbhjul_ikoner.h"
++
++namespace Scumm {
 +
 +static bool decodePng(Common::SeekableReadStream &st, int &w, int &h, Common::Array<byte> &px) {
 +	Image::PNGDecoder dec;
@@ -1630,6 +1915,57 @@ index 00000000..6a783c9f
 +	ov.last.clear();
 +}
 +
++// Whether the screen still shows what the overlay wrote (outside `skip`)
++bool VerbWheel::overlayIntact(const Graphics::Surface &s, const Overlay &ov, const Common::Rect *skip) const {
++	if (!ov.drawn || ov.box.right > s.w || ov.box.bottom > s.h || ov.box.isEmpty())
++		return false;
++	const int w = ov.box.width();
++	for (int y = ov.box.top; y < ov.box.bottom; y++) {
++		const uint32 *last = &ov.last[(y - ov.box.top) * w];
++		for (int x = ov.box.left; x < ov.box.right; x++) {
++			if (skip && skip->contains(x, y))
++				continue;
++			if (getPx(s, x, y) != last[x - ov.box.left])
++				return false;
++		}
++	}
++	return true;
++}
++
++// What the wheel shows; the same key means the same picture
++Common::String VerbWheel::wheelKey(const Graphics::Surface &s) const {
++	const uint32 t = g_system->getMillis() - _openedAt;
++	Common::String k = Common::String::format("%dx%d %d,%d o%d h%d %s", s.w, s.h, _center.x, _center.y, _obj, _hover,
++		t < 160 ? Common::String::format("t%u", t).c_str() : "done");
++	for (int i = 0; i < 12; i++)
++		k += Common::String::format(" %d", _slots[i]);
++	return k + " " + objectName(_obj);
++}
++
++// What the inventory grid shows: the things, their names, the arrows, the
++// portraits and what is under the pointer
++Common::String VerbWheel::inventoryKey(const Graphics::Surface &s) const {
++	Common::String k = Common::String::format("%dx%d s%d m%d,%d", s.w, s.h, (int)_state,
++		_state == kClosed ? inventoryVerbAt(_vm->_mouse.x, _vm->_mouse.y) : -1,
++		_state == kClosed ? portraitAt(_vm->_mouse.x, _vm->_mouse.y) : 0);
++	for (int i = 0; i < 10; i++) {
++		const int slot = _vm->getVerbSlot(kZakInvFirst + i, 0);
++		const int obj = _vm->_scummVars[kVarInventory + i];
++		const bool on = slot > 0 && _vm->_verbs[slot].curmode == 1 && obj > 0;
++		k += on ? Common::String::format("|%d:", obj) + objectName(obj) : Common::String("|-");
++	}
++	for (int d = 0; d < 2; d++) {
++		const int slot = _vm->getVerbSlot(d ? kZakInvDown : kZakInvUp, 0);
++		k += (slot > 0 && _vm->_verbs[slot].curmode == 1) ? "A" : "a";
++	}
++	if (portraitsShown()) {
++		k += Common::String::format(" ego%d ", _vm->_scummVars[_vm->VAR_EGO]);
++		for (int kid = 1; kid <= 4; kid++)
++			k += kidAvailable(kid) ? '1' : '0';
++	}
++	return k;
++}
++
 +// Starts an overlay: the canvas holds the game's pixels in the box
 +void VerbWheel::beginOverlay(Graphics::Surface &s, Overlay &ov, Canvas &cv, const Common::Rect &box) {
 +	ov.box = box;
@@ -1669,6 +2005,8 @@ index 00000000..6a783c9f
 +	loadHD();
 +	if (_iconSrc.empty() || _font.w == 0)
 +		return false;
++	if (_wheelKeep)
++		return true;   // unchanged since the last frame (draw())
 +	const float sx = (float)s.w / _vm->_screenWidth, sy = (float)s.h / _vm->_screenHeight;
 +	const float f = sx / 4;   // the font and the details are made for a screen 4 times the original
 +	const float t = MIN(1.0f, (g_system->getMillis() - _openedAt) / 140.0f);
@@ -1739,6 +2077,7 @@ index 00000000..6a783c9f
 +	if (!label.isEmpty())
 +		drawLabel(cv, label, text, split, f);
 +	endOverlay(s, _wheelOv, cv);
++	_wheelOv.key = wheelKey(s);
 +	return true;
 +}
 +
@@ -1944,544 +2283,7 @@ index 00000000..6a783c9f
 +	endOverlay(s, _invOv, cv);
 +}
 +
-+
-+// ------------------------------------------------------------------ tests
-+
-+void VerbWheel::parseTests(const char *spec) {
-+	Common::StringTokenizer tok(spec, ",");
-+	while (!tok.empty()) {
-+		const Common::String item = tok.nextToken();
-+		const size_t colon = item.find(':');
-+		if (colon == Common::String::npos)
-+			continue;
-+		TestCmd t;
-+		t.frame = atoi(item.substr(0, colon).c_str());
-+		Common::String rest = item.substr(colon + 1);
-+		const size_t eq = rest.find('=');
-+		t.cmd = eq == Common::String::npos ? rest : rest.substr(0, eq);
-+		t.arg = eq == Common::String::npos ? Common::String() : rest.substr(eq + 1);
-+		_tests.push_back(t);
-+	}
-+	debug("Verbhjul: %d test commands", (int)_tests.size());
-+}
-+
-+void VerbWheel::pushMouse(Common::EventType type, int x, int y) {
-+	const int sw = g_system->getWidth(), sh = g_system->getHeight();
-+	Common::Event ev;
-+	ev.type = type;
-+	ev.mouse = Common::Point(x * sw / _vm->_screenWidth + sw / _vm->_screenWidth / 2,
-+	                         y * sh / _vm->_screenHeight + sh / _vm->_screenHeight / 2);
-+	g_system->getEventManager()->pushEvent(ev);
-+}
-+
-+void VerbWheel::pushKey(Common::KeyCode code, uint16 ascii, byte flags) {
-+	Common::Event ev;
-+	ev.type = Common::EVENT_KEYDOWN;
-+	ev.kbd = Common::KeyState(code, ascii, flags);
-+	g_system->getEventManager()->pushEvent(ev);
-+	ev.type = Common::EVENT_KEYUP;
-+	g_system->getEventManager()->pushEvent(ev);
-+}
-+
-+static bool parseXY(const Common::String &s, int &x, int &y) {
-+	const size_t slash = s.find('/');
-+	if (slash == Common::String::npos)
-+		return false;
-+	x = atoi(s.substr(0, slash).c_str());
-+	y = atoi(s.substr(slash + 1).c_str());
-+	return true;
-+}
-+
-+void VerbWheel::runTests() {
-+	if (_upFrame == (int)_frame) {
-+		Common::Point p = _upPos;
-+		if (_rdragVerb) {
-+			for (int i = 0; i < 12; i++)
-+				if (_slots[i] == _rdragVerb && _state == kOpen)
-+					p = slotCenter(i);
-+			pushMouse(Common::EVENT_MOUSEMOVE, p.x, p.y);
-+			_rdragVerb = 0;
-+		}
-+		pushMouse(_upRight ? Common::EVENT_RBUTTONUP : Common::EVENT_LBUTTONUP, p.x, p.y);
-+		_upFrame = -1;
-+	}
-+	for (uint i = 0; i < _tests.size(); i++) {
-+		const TestCmd &t = _tests[i];
-+		if (t.frame != (int)_frame)
-+			continue;
-+		int x = 0, y = 0;
-+		debug("Verbhjul: test %s %s at frame %u (room %d)", t.cmd.c_str(), t.arg.c_str(), _frame, _vm->_currentRoom);
-+		if (t.cmd == "esc") {
-+			pushKey(Common::KEYCODE_ESCAPE, Common::ASCII_ESCAPE);
-+		} else if (t.cmd == "key" && !t.arg.empty()) {
-+			pushKey((Common::KeyCode)t.arg[0], t.arg[0]);
-+		} else if (t.cmd == "ctrl" && !t.arg.empty()) {
-+			pushKey((Common::KeyCode)t.arg[0], t.arg[0], Common::KBD_CTRL);
-+		} else if (t.cmd == "fkey") {
-+			const int n = atoi(t.arg.c_str());
-+			if (n >= 1 && n <= 12)
-+				pushKey((Common::KeyCode)(Common::KEYCODE_F1 + n - 1), Common::ASCII_F1 + n - 1);
-+		} else if (t.cmd == "portrait") {
-+			const int k = atoi(t.arg.c_str());
-+			if (k >= 1 && k <= 4) {
-+				const Common::Rect r = portraitRect(k);
-+				const Common::Point p((r.left + r.right) / 2, (r.top + r.bottom) / 2);
-+				pushMouse(Common::EVENT_MOUSEMOVE, p.x, p.y);
-+				pushMouse(Common::EVENT_LBUTTONDOWN, p.x, p.y);
-+				_upFrame = _frame + 2;
-+				_upRight = false;
-+				_upPos = p;
-+			}
-+		} else if (t.cmd == "setvar" && parseXY(t.arg, x, y)) {
-+			// setvar=n/value
-+			if (x >= 0 && x < _vm->_numVariables)
-+				_vm->_scummVars[x] = y;
-+		} else if (t.cmd == "setbit") {
-+			// setbit=n.bit/value
-+			const size_t dot = t.arg.find('.'), slash = t.arg.find('/');
-+			if (dot != Common::String::npos && slash != Common::String::npos) {
-+				const int n = atoi(t.arg.c_str()), bit = atoi(t.arg.c_str() + dot + 1);
-+				if (n >= 0 && n < _vm->_numVariables && bit >= 0 && bit < 32) {
-+					if (atoi(t.arg.c_str() + slash + 1))
-+						_vm->_scummVars[n] |= (1u << bit);
-+					else
-+						_vm->_scummVars[n] &= ~(1u << bit);
-+				}
-+			}
-+		} else if (t.cmd == "script") {
-+			_vm->runScript(atoi(t.arg.c_str()), false, false, nullptr);
-+		} else if (t.cmd == "rules") {
-+			int n = 0, bad = 0;
-+			for (const VerbWheelRule *r = kZakVerbWheelRules; r->spec; r++, n++) {
-+				Common::Array<Common::String> words;
-+				Common::StringTokenizer tok(r->spec, " ");
-+				while (!tok.empty())
-+					words.push_back(tok.nextToken());
-+				Common::sort(words.begin(), words.end());
-+				Common::String want;
-+				for (uint k = 0; k < words.size(); k++)
-+					want += (k ? " " : "") + words[k];
-+				const Common::String got = _rules.contains(r->obj) ? ruleText(_rules[r->obj]) : Common::String();
-+				if (got != want) {
-+					bad++;
-+					debug("Verbhjul: rule %d differs: \"%s\" read as \"%s\"", r->obj, r->spec, got.c_str());
-+				}
-+			}
-+			debug("Verbhjul: rules checked: %d, %d differ", n, bad);
-+		} else if ((t.cmd == "click" || t.cmd == "rclick") && parseXY(t.arg, x, y)) {
-+			const bool right = t.cmd == "rclick";
-+			pushMouse(Common::EVENT_MOUSEMOVE, x, y);
-+			pushMouse(right ? Common::EVENT_RBUTTONDOWN : Common::EVENT_LBUTTONDOWN, x, y);
-+			_upFrame = _frame + 3;
-+			_upRight = right;
-+			_upPos = Common::Point(x, y);
-+		} else if (t.cmd == "rdrag") {
-+			const size_t gt = t.arg.find('>');
-+			if (gt != Common::String::npos && parseXY(t.arg.substr(0, gt), x, y)) {
-+				pushMouse(Common::EVENT_MOUSEMOVE, x, y);
-+				pushMouse(Common::EVENT_RBUTTONDOWN, x, y);
-+				_rdragVerb = atoi(t.arg.substr(gt + 1).c_str());
-+				_upFrame = _frame + 3;
-+				_upRight = true;
-+				_upPos = Common::Point(x, y);
-+			}
-+		} else if (t.cmd == "pick") {
-+			const int v = atoi(t.arg.c_str());
-+			bool found = false;
-+			for (int k = 0; k < 12 && !found; k++) {
-+				if (_slots[k] == v && _state == kOpen) {
-+					const Common::Point p = slotCenter(k);
-+					pushMouse(Common::EVENT_MOUSEMOVE, p.x, p.y);
-+					pushMouse(Common::EVENT_LBUTTONDOWN, p.x, p.y);
-+					_upFrame = _frame + 2;
-+					_upRight = false;
-+					_upPos = p;
-+					found = true;
-+				}
-+			}
-+			if (!found)
-+				debug("Verbhjul: test pick: verb %d is not in the wheel", v);
-+		} else if (t.cmd == "give") {
-+			// give=OBJ: an object in this room into the inventory, as pickupObject
-+			// does (test of a full inventory)
-+			const int obj = atoi(t.arg.c_str());
-+			if (_vm->whereIsObject(obj) == WIO_ROOM) {
-+				_vm->addObjectToInventory(obj, _vm->_roomResource);
-+				_vm->putOwner(obj, _vm->_scummVars[_vm->VAR_EGO]);
-+				_vm->putClass(obj, kObjectClassUntouchable, 1);
-+				_vm->putState(obj, 1);
-+				_vm->runInventoryScript(1);
-+			}
-+		} else if (t.cmd == "wheel") {
-+			// wheel=up@x/y or wheel=down@x/y
-+			const size_t sl = t.arg.find('@');
-+			if (sl != Common::String::npos && parseXY(t.arg.substr(sl + 1), x, y))
-+				pushMouse(t.arg.hasPrefix("up") ? Common::EVENT_WHEELUP : Common::EVENT_WHEELDOWN, x, y);
-+		} else if (t.cmd == "move" && parseXY(t.arg, x, y)) {
-+			pushMouse(Common::EVENT_MOUSEMOVE, x, y);
-+		} else if (t.cmd == "hover") {
-+			// hover=V: the pointer onto the icon of verb V, without a click
-+			const int v = atoi(t.arg.c_str());
-+			for (int k = 0; k < 12; k++) {
-+				if (_slots[k] == v && _state == kOpen) {
-+					const Common::Point p = slotCenter(k);
-+					pushMouse(Common::EVENT_MOUSEMOVE, p.x, p.y);
-+					break;
-+				}
-+			}
-+		} else if (t.cmd == "dump") {
-+			dumpScreen(t.arg.empty() ? Common::String::format("verbhjul_%05u", _frame) : t.arg);
-+		} else if (t.cmd == "log") {
-+			Common::String sl;
-+			for (int k = 0; k < 12; k++)
-+				sl += Common::String::format(" %d", _slots[k]);
-+			debug("Verbhjul: state %d, room %d, userPut %d, cursor %d, ego %d, verb %d, obj %d, obj2 %d, prep %d, slots%s",
-+			      (int)_state, _vm->_currentRoom, _vm->_userPut, _vm->_cursor.state, _vm->_scummVars[_vm->VAR_EGO],
-+			      _vm->_scummVars[kVarVerb], _vm->_scummVars[kVarObjA], _vm->_scummVars[kVarObjB],
-+			      _vm->_scummVars[kVarPrep], sl.c_str());
-+		} else if (t.cmd == "quit") {
-+			_vm->quitGame();
-+		}
-+	}
-+}
-+
-+void VerbWheel::dumpScreen(const Common::String &name) {
-+	if (_dumpDir.empty())
-+		return;
-+	Graphics::Surface *s = g_system->lockScreen();
-+	if (!s)
-+		return;
-+	Common::FSNode node(Common::FSNode(Common::Path(_dumpDir, Common::Path::kNativeSeparator)).getChild(name + ".png"));
-+	Common::WriteStream *ws = node.createWriteStream();
-+	if (ws) {
-+		if (s->format.bytesPerPixel == 1)
-+			::Image::writePNG(*ws, *s, _vm->_currentPalette);
-+		else
-+			::Image::writePNG(*ws, *s);
-+		ws->finalize();
-+		delete ws;
-+	}
-+	g_system->unlockScreen();
-+	debug("Verbhjul: dumped %s.png", name.c_str());
-+}
-+
 +} // End of namespace Scumm
-diff --git a/engines/scumm/verbhjul.h b/engines/scumm/verbhjul.h
-new file mode 100644
-index 00000000..9a998ced
---- /dev/null
-+++ b/engines/scumm/verbhjul.h
-@@ -0,0 +1,310 @@
-+/* ScummVM - Graphic Adventure Engine
-+ *
-+ * ScummVM is the legal property of its developers, whose names
-+ * are too numerous to list here. Please refer to the COPYRIGHT
-+ * file distributed with this source distribution.
-+ *
-+ * This program is free software: you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation, either version 3 of the License, or
-+ * (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License
-+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+ *
-+ */
-+
-+/*
-+ * Verb wheel (verbhjul) for Zak McKracken, FM-Towns (SCUMM v3), in the
-+ * style of Day of the Tentacle Remastered. See docs/VERBHJUL.md in the
-+ * ZakMcKracken-HD repository.
-+ *
-+ * Right click (or a long press, which the web player sends as a right
-+ * click) on an object or an inventory item opens a wheel around the
-+ * pointer. The wheel has twelve fixed clock positions, one per action verb:
-+ *
-+ *   12 Pick up (Buy)   1 Open     2 Close    3 Use
-+ *    4 Give (Sell)     5 Turn on  6 Turn off 7 Put on
-+ *    8 Take off        9 Read    10 Push (Teleport to)  11 Pull
-+ *
-+ * Buy, Sell and Teleport to take the place of the verb they replace in the
-+ * original verb panel. A verb is only shown while its slot in the original
-+ * panel is switched on, so the shop and the teleport modes need no special
-+ * handling. Inventory items always get Give (or Sell in the shop), which the
-+ * game's sentence script handles for any item.
-+ *
-+ * Which icons an object gets:
-+ *  - Dynamic (default): at most four. Verbs that run the same object code
-+ *    share one icon, Open/Close and Turn on/Turn off show only the one that
-+ *    fits the object's state, and a few objects have hand-made rules. The
-+ *    rules come from verbhjul_zak.h, generated by tools/verbhjul_dynamisk.py
-+ *    from the game's scripts. One rule per object, words separated by spaces:
-+ *      g=2,6;1,7;14   the icons; the verbs of a group run the same code
-+ *      p=2/7:s        of the icons with verb 2 and verb 7 only one is shown:
-+ *                     the one with 7 when the condition holds. s = the
-+ *                     object's state is not 0, s92 = the state of object 92,
-+ *                     c6 = class 6 is set, C6 = class 6 is not set,
-+ *                     v222=14|16 = Var[222] is 14 or 16, b143.0 = bit 0
-+ *                     of Var[143] is set; several joined by + mean "or"
-+ *      i=11 / r=8     these verbs only in the inventory / only in the room
-+ *      x=11           these verbs never (they only give a remark)
-+ *    An icon sends one verb of its group (the pair's verb, or the first of
-+ *    Open, Close, Pick up, Turn on, Turn off, Put on, Take off, Read, Use,
-+ *    Push, Pull, Give, Buy, Sell, Teleport to) and sits at that verb's clock
-+ *    position. Objects without a rule get one icon per verb.
-+ *  - The object's verbs (verbhjul_dynamisk off): one icon per verb in the
-+ *    object's verb table (its OC block).
-+ *  - All verbs (verbhjul_alle): every active verb.
-+ *
-+ * Character portraits: while the game lets the player switch kid (the
-+ * Switch verb is on), small portraits of the kids that can be chosen stand in
-+ * the bottom right corner, the current one highlighted. Clicking one sends
-+ * the same click as choosing the kid's name after Switch (verbs 37 to 40),
-+ * as ScummVM's F1 to F4 do. The Switch button itself is then hidden. This
-+ * works with the wheel on or off.
-+ *
-+ * Choosing a verb sends exactly the clicks a player would make on the
-+ * original panel, one per frame, through the game's own input script
-+ * (global script 11): Walk to and the sentence line when something is left
-+ * of the last sentence (this clears it), the verb, the object (a scene click at the stored
-+ * point, or the inventory slot), then the sentence line (verb 100), which
-+ * runs the sentence. No game script is changed. When the sentence waits
-+ * for a second object (Use ... with, Give ... to; the input script has set
-+ * a preposition), the sentence line is not clicked, since that would clear
-+ * the sentence. The wheel closes, and the next left click on an object, a
-+ * person or an inventory item sends that click and then the sentence line.
-+ * The inventory arrows scroll without ending the wait. A right click cancels by clicking Walk to, which clears the sentence
-+ * the same way the original panel does.
-+ *
-+ * With the wheel on, the original verb buttons 1 to 17 are not drawn and
-+ * not clickable; their keyboard shortcuts still work. All other verbs (the
-+ * sentence line, the inventory, Switch, the kids' names and the special
-+ * verbs when playing an animal) stay as they are.
-+ *
-+ * Settings (application domain): verbhjul (on/off, default on),
-+ * verbhjul_dynamisk (dynamic icons, default on), verbhjul_alle (all verbs,
-+ * default off), verbhjul_portretter (portraits, default on). Environment
-+ * variables with the same names in capitals override them.
-+ * Ctrl+W switches the wheel on and off while playing.
-+ *
-+ * Test hooks for running without a screen:
-+ *   VERBHJUL_TEST=frame:command,...  commands: esc, key=<ascii>, ctrl=<ascii>, fkey=<n>,
-+ *       click=x/y, rclick=x/y, rdrag=x/y>verb, pick=verb, portrait=<1..4>,
-+ *       setvar=n/value, setbit=n.bit/value, script=n, rules, dump=name, log, quit.
-+ *       rules: writes every parsed rule back and compares it with verbhjul_zak.h.
-+ *       Coordinates are game pixels (320 x 240); frames are calls to tick().
-+ *   VERBHJUL_DUMP_DIR  where dump=name writes name.png (the screen).
-+ * Every injected click, every wheel opened and every doSentence is logged
-+ * with debug() as "Verbhjul: ...".
-+ */
-+
-+#ifndef SCUMM_VERBHJUL_H
-+#define SCUMM_VERBHJUL_H
-+
-+#include "common/array.h"
-+#include "common/events.h"
-+#include "common/hashmap.h"
-+#include "common/rect.h"
-+#include "common/str.h"
-+
-+namespace Graphics {
-+struct Surface;
-+}
-+
-+namespace Scumm {
-+
-+class ScummEngine;
-+
-+class VerbWheel {
-+public:
-+	/** Returns a wheel for Zak McKracken FM-Towns, nullptr for other games. */
-+	static VerbWheel *create(ScummEngine *vm);
-+	/**
-+	 * Zak McKracken HD: the HD layer runs also without an HD pack (the original
-+	 * pixels, 4 times as large), so the wheel is drawn sharp. Called before
-+	 * DigHD::create. ZAKHD_LAV=1 keeps the game's own 320 x 240 screen.
-+	 */
-+	void defaultHD();
-+	/**
-+	 * With the inventory as a grid: the verb slot under a point (0 for an empty
-+	 * cell), or -1 when the point is outside the grid or the grid is off.
-+	 */
-+	int inventoryVerbAt(int x, int y) const;
-+	~VerbWheel();
-+
-+	/** First look at every event. True means the engine must not see it. */
-+	bool handleEvent(const Common::Event &ev);
-+	/** Called once per frame at the start of checkExecVerbs. True: this frame's input is used. */
-+	bool tick();
-+	/** Draws the wheel on the system screen, right before updateScreen. */
-+	void draw();
-+	/** True for the original verb buttons the wheel replaces, while it is on. */
-+	bool hidesVerb(int verbid) const;
-+	/** Logs every sentence the game runs (for the tests). */
-+	void noteSentence(int verb, int objA, int objB);
-+
-+	bool isEnabled() const { return _enabled; }
-+
-+private:
-+	enum State { kClosed, kOpen, kWaitTarget };
-+	enum StepType { kStepVerb, kStepScene, kStepCheck, kStepKid };
-+	struct Step { StepType type; int a, b; };
-+	struct TestCmd { int frame; Common::String cmd, arg; };
-+
-+	// A rule of the dynamic wheel (see verbhjul_zak.h)
-+	struct Cond {
-+		char type;               // 's' state, 'c' class set, 'C' class not set, 'v' variable, 'b' bit
-+		int arg;                 // object (0 = this one), class or variable
-+		int bit;
-+		Common::Array<int> values;
-+	};
-+	struct Pair {
-+		int a, b;
-+		Common::Array<Cond> conds;   // any of them true: show b
-+	};
-+	struct Rule {
-+		Common::Array<Common::Array<int> > groups;
-+		Common::Array<Pair> pairs;
-+		uint32 invOnly = 0, roomOnly = 0, never = 0;   // bit per verb
-+	};
-+
-+	explicit VerbWheel(ScummEngine *vm);
-+
-+	// What is under a point (game screen coordinates): object or inventory slot
-+	bool targetAt(int x, int y, int &obj, int &invVerb, Common::Point &virt);
-+	bool open(int x, int y, bool byPress);
-+	void close();
-+	void choose(int slotIndex);
-+	void queueTarget(int obj, int invVerb, const Common::Point &virt);
-+	void queueStep(StepType type, int a, int b);
-+	void collectVerbs(int obj, bool inventory);
-+	void collectDynamic(const Rule &rule, int obj, bool inventory);
-+	bool condition(const Cond &c, int obj) const;
-+	void placeVerb(int v);
-+	void loadRules();
-+	static Common::String ruleText(const Rule &rule);   // the rule written back (test: rules)
-+	bool verbActive(int verbid) const;
-+
-+	// Character portraits
-+	bool portraitsShown() const;
-+	bool kidAvailable(int kid) const;
-+	Common::Rect portraitRect(int kid) const;   // game screen coordinates
-+	int portraitAt(int x, int y) const;
-+	void drawPortraits();
-+	int hoverAt(int x, int y) const;
-+	Common::Point slotCenter(int i) const;
-+	Common::String verbName(int verbid) const;
-+	Common::String objectName(int obj) const;
-+	Common::String previewText() const;
-+	void setEnabled(bool on);
-+
-+	// Drawing in HD: the icons and the font are PNGs built into the engine
-+	// (verbhjul_ikoner.h, from tools/verbhjul_ikoner.py), alpha blended on a
-+	// true colour screen (the HD layer). Pictures painted by the artists can
-+	// come from the HD pack: ui/verbhjul/<name>.png for the wheel, and
-+	// inventory/objNNN.png for the inventory. Each overlay keeps the game's
-+	// pixels under it and puts them back before the next frame is drawn.
-+public:
-+	struct Img {
-+		int w = 0, h = 0;
-+		Common::Array<byte> px;   // RGBA, straight alpha
-+	};
-+private:
-+	struct Canvas;
-+	struct Overlay {
-+		bool drawn = false;
-+		Common::Rect box;
-+		Common::Array<uint32> under;   // the game's pixels
-+		Common::Array<uint32> last;    // what the overlay wrote
-+	};
-+	void loadHD();
-+	bool loadModPng(const Common::String &rel, Img &img) const;
-+	static void scaleImg(const Img &src, int w, int h, Img &dst);
-+	const Img *iconAt(int verb, int size);
-+	const Img *inventoryImage(int obj, int w, int h);
-+	bool drawHD(Graphics::Surface &s);
-+	int textWidth(const Common::String &text, float f) const;
-+	void drawText(Canvas &cv, const Common::Rect &clip, const Common::String &text, int split, float x, int baseline, float f) const;
-+	void drawLabel(Canvas &cv, const Common::Rect &box, const Common::String &text, int split, float f) const;
-+	Common::Rect labelBox(const Common::String &text, float f, int centerX, int top, int bottomLimit, int altBottom, int screenW) const;
-+	void restoreOverlay(Graphics::Surface &s, Overlay &ov);
-+	void beginOverlay(Graphics::Surface &s, Overlay &ov, Canvas &cv, const Common::Rect &box);
-+	void endOverlay(Graphics::Surface &s, Overlay &ov, const Canvas &cv);
-+
-+	// The inventory as pictures (or names in HD) in a grid, with the wheel on
-+	bool inventoryGridWanted() const;
-+	void setInventoryGrid(bool on);
-+	Common::Rect inventoryCell(int i) const;     // game screen coordinates
-+	Common::Rect inventoryArrow(bool down) const;
-+	void drawInventory(Graphics::Surface &s);
-+
-+	Common::HashMap<int, Img> _iconSrc;
-+	Common::HashMap<int, Img> _iconCache;   // verb * 1000 + size
-+	Common::HashMap<Common::String, Img> _invSrc;     // "object:name" -> picture (empty: none)
-+	Common::HashMap<Common::String, Img> _invCache;
-+	Img _font;
-+	bool _hdLoaded = false;
-+	Overlay _wheelOv, _invOv;
-+	bool _invGrid = true;                   // verbhjul_inventar
-+	bool _invGridOn = false;
-+	Common::String _hdPortraitShown;        // the portraits in HD, for the log
-+	uint32 _openedAt = 0;
-+
-+	// Drawing on the system screen
-+	uint32 color(const Graphics::Surface &s, byte r, byte g, byte b) const;
-+	void fillCircle(Graphics::Surface &s, int cx, int cy, int rad, uint32 c) const;
-+	void restoreScreenRect(const Common::Rect &r);
-+	Common::Rect toScreen(const Common::Rect &r) const;
-+
-+	// Tests
-+	void parseTests(const char *spec);
-+	void runTests();
-+	void pushMouse(Common::EventType type, int x, int y);
-+	void pushKey(Common::KeyCode code, uint16 ascii, byte flags = 0);
-+	void dumpScreen(const Common::String &name);
-+
-+	ScummEngine *_vm;
-+	bool _enabled = true;
-+	bool _allVerbs = false;
-+	bool _dynamic = true;
-+	bool _portraits = true;
-+	Common::HashMap<int, Rule> _rules;
-+	Common::Rect _portraitDrawn;   // screen rectangle of the portraits drawn last time
-+	Common::String _portraitShown; // what was drawn (kids and the current one)
-+	State _state = kClosed;
-+	bool _openedByPress = false;
-+	bool _pressMoved = false;
-+	Common::Point _center;   // game screen coordinates of the wheel
-+	Common::Point _press;    // where the right button went down
-+	int _obj = 0;
-+	int _invVerb = 0;        // 101..110 when the wheel is on an inventory item
-+	Common::Point _virt;     // room coordinates of the object click
-+	int _slots[12];          // verb id per clock position, 0 = empty
-+	int _hover = -1;
-+	Common::Rect _drawn;     // screen rectangle drawn last time
-+	Common::Rect _textRect;  // screen rectangle of the preview text
-+	Common::String _shownText;
-+	bool _restoreAll = false;
-+	Common::Array<Step> _steps;
-+	int _waitVerb = 0;
-+	int _waitObj = 0;
-+	int _stepRoom = -1;      // the room the queued clicks and the waiting sentence belong to
-+	uint32 _frame = 0;
-+	Common::Array<TestCmd> _tests;
-+	Common::String _dumpDir;
-+	int _rdragVerb = 0;      // test: verb to drag to after a right press
-+	int _upFrame = -1;       // test: frame to release a pending button
-+	bool _upRight = false;
-+	Common::Point _upPos;
-+	bool _swallowLeftUp = false;
-+	bool _swallowRightUp = false;
-+};
-+
-+} // End of namespace Scumm
-+
-+#endif
 diff --git a/engines/scumm/verbhjul_ikoner.h b/engines/scumm/verbhjul_ikoner.h
 new file mode 100644
 index 00000000..40148dc1
@@ -5903,6 +5705,428 @@ index 00000000..40148dc1
 +} // End of namespace Scumm
 +
 +#endif
+diff --git a/engines/scumm/verbhjul_intern.h b/engines/scumm/verbhjul_intern.h
+new file mode 100644
+index 00000000..fcefa352
+--- /dev/null
++++ b/engines/scumm/verbhjul_intern.h
+@@ -0,0 +1,143 @@
++/* ScummVM - Graphic Adventure Engine
++ *
++ * ScummVM is the legal property of its developers, whose names
++ * are too numerous to list here. Please refer to the COPYRIGHT
++ * file distributed with this source distribution.
++ *
++ * This program is free software: you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation, either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++// Shared by verbhjul.cpp (rules, input, low-res drawing), verbhjul_hd.cpp
++// (drawing on the HD layer) and verbhjul_test.cpp (test commands). Only for
++// these files.
++
++#ifndef SCUMM_VERBHJUL_INTERN_H
++#define SCUMM_VERBHJUL_INTERN_H
++
++#include "common/scummsys.h"
++
++namespace Scumm {
++
++// What the input script of Zak FM-Towns (global script 11) uses; read from
++// the decompiled scripts (see docs/VERBHJUL.md).
++enum {
++	kVarVerb = 116,         // verb of the sentence being built
++	kVarObjA = 117,         // first object
++	kVarObjB = 118,         // second object
++	kVarPrep = 119,         // preposition (129 in, 130 with, 131 on, 132 to), 0 = none
++	kVarInventory = 102,    // objects shown in inventory slots 101..110
++	kZakWalkTo = 3,
++	kZakGive = 11,
++	kZakSell = 16,
++	kZakSwitch = 36,       // Switch; the kids' names are 37 to 40
++	kZakSentence = 100,    // the sentence line; clicking it runs the sentence
++	kZakInvFirst = 101,
++	kZakInvLast = 110,
++	kZakInvUp = 115,       // inventory arrows: they only scroll (script 20)
++	kZakInvDown = 116
++};
++
++// The verb an icon of the dynamic wheel sends when its group has several
++static const int kPriority[] = { 2, 7, 8, 5, 10, 4, 9, 12, 14, 1, 6, 11, 15, 16, 17 };
++
++static const char *const kKidLabel[4] = { "Zak", "Ann", "Mel", "Les" };
++
++// Portraits: four boxes in the bottom right corner of the 320 x 240 screen,
++// under the inventory, where the panel draws nothing
++static const int kPortraitW = 22, kPortraitH = 18, kPortraitGap = 2;
++
++// The inventory as a grid of pictures (HD layer, wheel on), in game pixels:
++// five cells in two rows filling everything under the sentence line, where the
++// verb panel and the text inventory were (Tom 15 October 2026). A column to the
++// right has the arrows at the top and bottom and the portraits between them.
++static const int kInvTop = 153, kInvBottom = 239;
++static const int kInvLeft = 1, kInvCellsRight = 271, kInvRight = 319;
++static const int kInvArrowH = 19;
++
++// Clock positions 12, 1, 2 ... 11; the second verb takes the place when the
++// first is not in the panel (shop, teleport).
++static const int kClock[12][2] = {
++	{ 8, 15 },   // Pick up / Buy
++	{ 2, 0 },    // Open
++	{ 7, 0 },    // Close
++	{ 14, 0 },   // Use
++	{ 11, 16 },  // Give / Sell
++	{ 5, 0 },    // Turn on
++	{ 10, 0 },   // Turn off
++	{ 4, 0 },    // Put on
++	{ 9, 0 },    // Take off
++	{ 12, 0 },   // Read
++	{ 1, 17 },   // Push / Teleport to
++	{ 6, 0 }     // Pull
++};
++
++// Placeholder icons until the drawn icons exist: at most three letters, so
++// they fit in the icon on the 320 x 240 screen. The text under the wheel
++// shows the whole verb while the pointer is on an icon.
++static inline const char *verbLabel(int v) {
++	switch (v) {
++	case 1: return "Psh";
++	case 2: return "Opn";
++	case 4: return "Put";
++	case 5: return "On";
++	case 6: return "Pul";
++	case 7: return "Cls";
++	case 8: return "Get";
++	case 9: return "Rem";
++	case 10: return "Off";
++	case 11: return "Giv";
++	case 12: return "Rd";
++	case 14: return "Use";
++	case 15: return "Buy";
++	case 16: return "Sel";
++	case 17: return "Tp";
++	default: return "?";
++	}
++}
++
++static inline const char *verbFallbackName(int v) {
++	switch (v) {
++	case 1: return "Push";
++	case 2: return "Open";
++	case 4: return "Put on";
++	case 5: return "Turn on";
++	case 6: return "Pull";
++	case 7: return "Close";
++	case 8: return "Pick up";
++	case 9: return "Take off";
++	case 10: return "Turn off";
++	case 11: return "Give";
++	case 12: return "Read";
++	case 14: return "Use";
++	case 15: return "Buy";
++	case 16: return "Sell";
++	case 17: return "Teleport to";
++	default: return "";
++	}
++}
++
++// Size of the wheel in game pixels. Twelve icons on a circle touch when the
++// radius is 3.86 times the icon radius (2 * sin 15 degrees = 0.518).
++static const int kRadius = 40;     // centre to icon centre
++static const int kIcon = 10;       // icon radius
++
++// Size of the drawn icons in game pixels (radius). Slightly larger than the
++// hit radius of the placeholder icons, so neighbours may touch in "all verbs".
++static const int kIconHD = 12;
++static const int kIconHoverHD = 14;
++
++} // End of namespace Scumm
++
++#endif
+diff --git a/engines/scumm/verbhjul_test.cpp b/engines/scumm/verbhjul_test.cpp
+new file mode 100644
+index 00000000..b691038e
+--- /dev/null
++++ b/engines/scumm/verbhjul_test.cpp
+@@ -0,0 +1,267 @@
++/* ScummVM - Graphic Adventure Engine
++ *
++ * ScummVM is the legal property of its developers, whose names
++ * are too numerous to list here. Please refer to the COPYRIGHT
++ * file distributed with this source distribution.
++ *
++ * This program is free software: you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation, either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++// Test commands from VERBHJUL_TEST (tools/verbhjul_test.sh, docs/VERBHJUL.md).
++
++#include "common/algorithm.h"
++#include "common/base64.h"
++#include "common/memstream.h"
++#include "common/config-manager.h"
++#include "common/debug.h"
++#include "common/endian.h"
++#include "common/fs.h"
++#include "common/system.h"
++#include "common/textconsole.h"
++#include "common/tokenizer.h"
++#include "graphics/font.h"
++#include "graphics/fontman.h"
++#include "graphics/surface.h"
++#include "image/png.h"
++
++#include "scumm/gfx.h"
++#include "scumm/object.h"
++#include "scumm/scumm.h"
++#include "scumm/verbs.h"
++#include "scumm/verbhjul.h"
++#include "scumm/verbhjul_intern.h"
++#include "scumm/verbhjul_zak.h"
++
++namespace Scumm {
++
++void VerbWheel::parseTests(const char *spec) {
++	Common::StringTokenizer tok(spec, ",");
++	while (!tok.empty()) {
++		const Common::String item = tok.nextToken();
++		const size_t colon = item.find(':');
++		if (colon == Common::String::npos)
++			continue;
++		TestCmd t;
++		t.frame = atoi(item.substr(0, colon).c_str());
++		Common::String rest = item.substr(colon + 1);
++		const size_t eq = rest.find('=');
++		t.cmd = eq == Common::String::npos ? rest : rest.substr(0, eq);
++		t.arg = eq == Common::String::npos ? Common::String() : rest.substr(eq + 1);
++		_tests.push_back(t);
++	}
++	debug("Verbhjul: %d test commands", (int)_tests.size());
++}
++
++void VerbWheel::pushMouse(Common::EventType type, int x, int y) {
++	const int sw = g_system->getWidth(), sh = g_system->getHeight();
++	Common::Event ev;
++	ev.type = type;
++	ev.mouse = Common::Point(x * sw / _vm->_screenWidth + sw / _vm->_screenWidth / 2,
++	                         y * sh / _vm->_screenHeight + sh / _vm->_screenHeight / 2);
++	g_system->getEventManager()->pushEvent(ev);
++}
++
++void VerbWheel::pushKey(Common::KeyCode code, uint16 ascii, byte flags) {
++	Common::Event ev;
++	ev.type = Common::EVENT_KEYDOWN;
++	ev.kbd = Common::KeyState(code, ascii, flags);
++	g_system->getEventManager()->pushEvent(ev);
++	ev.type = Common::EVENT_KEYUP;
++	g_system->getEventManager()->pushEvent(ev);
++}
++
++static bool parseXY(const Common::String &s, int &x, int &y) {
++	const size_t slash = s.find('/');
++	if (slash == Common::String::npos)
++		return false;
++	x = atoi(s.substr(0, slash).c_str());
++	y = atoi(s.substr(slash + 1).c_str());
++	return true;
++}
++
++void VerbWheel::runTests() {
++	if (_upFrame == (int)_frame) {
++		Common::Point p = _upPos;
++		if (_rdragVerb) {
++			for (int i = 0; i < 12; i++)
++				if (_slots[i] == _rdragVerb && _state == kOpen)
++					p = slotCenter(i);
++			pushMouse(Common::EVENT_MOUSEMOVE, p.x, p.y);
++			_rdragVerb = 0;
++		}
++		pushMouse(_upRight ? Common::EVENT_RBUTTONUP : Common::EVENT_LBUTTONUP, p.x, p.y);
++		_upFrame = -1;
++	}
++	for (uint i = 0; i < _tests.size(); i++) {
++		const TestCmd &t = _tests[i];
++		if (t.frame != (int)_frame)
++			continue;
++		int x = 0, y = 0;
++		debug("Verbhjul: test %s %s at frame %u (room %d)", t.cmd.c_str(), t.arg.c_str(), _frame, _vm->_currentRoom);
++		if (t.cmd == "esc") {
++			pushKey(Common::KEYCODE_ESCAPE, Common::ASCII_ESCAPE);
++		} else if (t.cmd == "key" && !t.arg.empty()) {
++			pushKey((Common::KeyCode)t.arg[0], t.arg[0]);
++		} else if (t.cmd == "ctrl" && !t.arg.empty()) {
++			pushKey((Common::KeyCode)t.arg[0], t.arg[0], Common::KBD_CTRL);
++		} else if (t.cmd == "fkey") {
++			const int n = atoi(t.arg.c_str());
++			if (n >= 1 && n <= 12)
++				pushKey((Common::KeyCode)(Common::KEYCODE_F1 + n - 1), Common::ASCII_F1 + n - 1);
++		} else if (t.cmd == "portrait") {
++			const int k = atoi(t.arg.c_str());
++			if (k >= 1 && k <= 4) {
++				const Common::Rect r = portraitRect(k);
++				const Common::Point p((r.left + r.right) / 2, (r.top + r.bottom) / 2);
++				pushMouse(Common::EVENT_MOUSEMOVE, p.x, p.y);
++				pushMouse(Common::EVENT_LBUTTONDOWN, p.x, p.y);
++				_upFrame = _frame + 2;
++				_upRight = false;
++				_upPos = p;
++			}
++		} else if (t.cmd == "setvar" && parseXY(t.arg, x, y)) {
++			// setvar=n/value
++			if (x >= 0 && x < _vm->_numVariables)
++				_vm->_scummVars[x] = y;
++		} else if (t.cmd == "setbit") {
++			// setbit=n.bit/value
++			const size_t dot = t.arg.find('.'), slash = t.arg.find('/');
++			if (dot != Common::String::npos && slash != Common::String::npos) {
++				const int n = atoi(t.arg.c_str()), bit = atoi(t.arg.c_str() + dot + 1);
++				if (n >= 0 && n < _vm->_numVariables && bit >= 0 && bit < 32) {
++					if (atoi(t.arg.c_str() + slash + 1))
++						_vm->_scummVars[n] |= (1u << bit);
++					else
++						_vm->_scummVars[n] &= ~(1u << bit);
++				}
++			}
++		} else if (t.cmd == "script") {
++			_vm->runScript(atoi(t.arg.c_str()), false, false, nullptr);
++		} else if (t.cmd == "rules") {
++			int n = 0, bad = 0;
++			for (const VerbWheelRule *r = kZakVerbWheelRules; r->spec; r++, n++) {
++				Common::Array<Common::String> words;
++				Common::StringTokenizer tok(r->spec, " ");
++				while (!tok.empty())
++					words.push_back(tok.nextToken());
++				Common::sort(words.begin(), words.end());
++				Common::String want;
++				for (uint k = 0; k < words.size(); k++)
++					want += (k ? " " : "") + words[k];
++				const Common::String got = _rules.contains(r->obj) ? ruleText(_rules[r->obj]) : Common::String();
++				if (got != want) {
++					bad++;
++					debug("Verbhjul: rule %d differs: \"%s\" read as \"%s\"", r->obj, r->spec, got.c_str());
++				}
++			}
++			debug("Verbhjul: rules checked: %d, %d differ", n, bad);
++		} else if ((t.cmd == "click" || t.cmd == "rclick") && parseXY(t.arg, x, y)) {
++			const bool right = t.cmd == "rclick";
++			pushMouse(Common::EVENT_MOUSEMOVE, x, y);
++			pushMouse(right ? Common::EVENT_RBUTTONDOWN : Common::EVENT_LBUTTONDOWN, x, y);
++			_upFrame = _frame + 3;
++			_upRight = right;
++			_upPos = Common::Point(x, y);
++		} else if (t.cmd == "rdrag") {
++			const size_t gt = t.arg.find('>');
++			if (gt != Common::String::npos && parseXY(t.arg.substr(0, gt), x, y)) {
++				pushMouse(Common::EVENT_MOUSEMOVE, x, y);
++				pushMouse(Common::EVENT_RBUTTONDOWN, x, y);
++				_rdragVerb = atoi(t.arg.substr(gt + 1).c_str());
++				_upFrame = _frame + 3;
++				_upRight = true;
++				_upPos = Common::Point(x, y);
++			}
++		} else if (t.cmd == "pick") {
++			const int v = atoi(t.arg.c_str());
++			bool found = false;
++			for (int k = 0; k < 12 && !found; k++) {
++				if (_slots[k] == v && _state == kOpen) {
++					const Common::Point p = slotCenter(k);
++					pushMouse(Common::EVENT_MOUSEMOVE, p.x, p.y);
++					pushMouse(Common::EVENT_LBUTTONDOWN, p.x, p.y);
++					_upFrame = _frame + 2;
++					_upRight = false;
++					_upPos = p;
++					found = true;
++				}
++			}
++			if (!found)
++				debug("Verbhjul: test pick: verb %d is not in the wheel", v);
++		} else if (t.cmd == "give") {
++			// give=OBJ: an object in this room into the inventory, as pickupObject
++			// does (test of a full inventory)
++			const int obj = atoi(t.arg.c_str());
++			if (_vm->whereIsObject(obj) == WIO_ROOM) {
++				_vm->addObjectToInventory(obj, _vm->_roomResource);
++				_vm->putOwner(obj, _vm->_scummVars[_vm->VAR_EGO]);
++				_vm->putClass(obj, kObjectClassUntouchable, 1);
++				_vm->putState(obj, 1);
++				_vm->runInventoryScript(1);
++			}
++		} else if (t.cmd == "wheel") {
++			// wheel=up@x/y or wheel=down@x/y
++			const size_t sl = t.arg.find('@');
++			if (sl != Common::String::npos && parseXY(t.arg.substr(sl + 1), x, y))
++				pushMouse(t.arg.hasPrefix("up") ? Common::EVENT_WHEELUP : Common::EVENT_WHEELDOWN, x, y);
++		} else if (t.cmd == "move" && parseXY(t.arg, x, y)) {
++			pushMouse(Common::EVENT_MOUSEMOVE, x, y);
++		} else if (t.cmd == "hover") {
++			// hover=V: the pointer onto the icon of verb V, without a click
++			const int v = atoi(t.arg.c_str());
++			for (int k = 0; k < 12; k++) {
++				if (_slots[k] == v && _state == kOpen) {
++					const Common::Point p = slotCenter(k);
++					pushMouse(Common::EVENT_MOUSEMOVE, p.x, p.y);
++					break;
++				}
++			}
++		} else if (t.cmd == "dump") {
++			dumpScreen(t.arg.empty() ? Common::String::format("verbhjul_%05u", _frame) : t.arg);
++		} else if (t.cmd == "log") {
++			Common::String sl;
++			for (int k = 0; k < 12; k++)
++				sl += Common::String::format(" %d", _slots[k]);
++			debug("Verbhjul: state %d, room %d, userPut %d, cursor %d, ego %d, verb %d, obj %d, obj2 %d, prep %d, slots%s",
++			      (int)_state, _vm->_currentRoom, _vm->_userPut, _vm->_cursor.state, _vm->_scummVars[_vm->VAR_EGO],
++			      _vm->_scummVars[kVarVerb], _vm->_scummVars[kVarObjA], _vm->_scummVars[kVarObjB],
++			      _vm->_scummVars[kVarPrep], sl.c_str());
++		} else if (t.cmd == "quit") {
++			_vm->quitGame();
++		}
++	}
++}
++
++void VerbWheel::dumpScreen(const Common::String &name) {
++	if (_dumpDir.empty())
++		return;
++	Graphics::Surface *s = g_system->lockScreen();
++	if (!s)
++		return;
++	Common::FSNode node(Common::FSNode(Common::Path(_dumpDir, Common::Path::kNativeSeparator)).getChild(name + ".png"));
++	Common::WriteStream *ws = node.createWriteStream();
++	if (ws) {
++		if (s->format.bytesPerPixel == 1)
++			::Image::writePNG(*ws, *s, _vm->_currentPalette);
++		else
++			::Image::writePNG(*ws, *s);
++		ws->finalize();
++		delete ws;
++	}
++	g_system->unlockScreen();
++	debug("Verbhjul: dumped %s.png", name.c_str());
++}
++
++} // End of namespace Scumm
 diff --git a/engines/scumm/verbhjul_zak.h b/engines/scumm/verbhjul_zak.h
 new file mode 100644
 index 00000000..1a345435

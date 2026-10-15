@@ -8,7 +8,7 @@
       "valgt": true,
       "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-36015154-8e55-459f-8d9b-8ffdf957553c.png",
       "prompt": "prompter/give-v1.txt",
-      "resultat": "../../ui/verbhjul-gpt/give.png",
+      "resultat": "../verbhjul-hender-retur-02-20261015/for/give.png",
       "sha256": "5052b698ed8e97e0bb7598c8f38db65a0a014a18f75a243b4336553ddb74b6d8",
       "bytes": 294203,
       "size": [
@@ -21,7 +21,9 @@
         255
       ],
       "for_sha256": "1a4a3b2b2562dc00668b6e38d35132942ba057cd32f2010862bc9696595eb643",
-      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt",
+      "erstattet_av": "../verbhjul-hender-retur-02-20261015/README.md",
+      "status": "avvist av Tom i andre retur"
     },
     {
       "name": "push",
@@ -79,7 +81,7 @@
       "valgt": true,
       "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-7410cd65-04b6-4768-8da5-fcbf576dc2e7.png",
       "prompt": "prompter/buy-v1.txt",
-      "resultat": "../../ui/verbhjul-gpt/buy.png",
+      "resultat": "../verbhjul-hender-retur-02-20261015/for/buy.png",
       "sha256": "7876f802f4d38442a05ce835e47f879e219a089bb7d648835495a7d258cd63b3",
       "bytes": 338262,
       "size": [
@@ -92,7 +94,9 @@
         255
       ],
       "for_sha256": "1fceb00a91dec08ae8133e87dd236631f436685c01855cbd20ec6fe3dd872539",
-      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt",
+      "erstattet_av": "../verbhjul-hender-retur-02-20261015/README.md",
+      "status": "avvist av Tom i andre retur"
     },
     {
       "name": "open",
@@ -240,7 +244,7 @@
       "valgt": true,
       "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-3756d38c-8616-4562-bb18-6c098b95b9bd.png",
       "prompt": "prompter/take-off-v4.txt",
-      "resultat": "../../ui/verbhjul-gpt/take-off.png",
+      "resultat": "../verbhjul-hender-retur-02-20261015/for/take-off.png",
       "sha256": "89eed2956ab63faf5ed31bb6b51a8f94d10eb3393aa64213fd5b15194c268661",
       "bytes": 312211,
       "size": [
@@ -253,7 +257,9 @@
         255
       ],
       "for_sha256": "780cba3f170e45fb6fab2c1ea1f112bd842b51aa5b7a9d9ba5c3afca20e3670a",
-      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt",
+      "erstattet_av": "../verbhjul-hender-retur-02-20261015/README.md",
+      "status": "avvist av Tom i andre retur"
     },
     {
       "name": "turn-off",
@@ -330,7 +336,7 @@
       "valgt": true,
       "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-36015154-8e55-459f-8d9b-8ffdf957553c.png",
       "prompt": "prompter/give-v1.txt",
-      "resultat": "../../ui/verbhjul-gpt/give.png",
+      "resultat": "../verbhjul-hender-retur-02-20261015/for/give.png",
       "sha256": "5052b698ed8e97e0bb7598c8f38db65a0a014a18f75a243b4336553ddb74b6d8",
       "bytes": 294203,
       "size": [
@@ -343,7 +349,9 @@
         255
       ],
       "for_sha256": "1a4a3b2b2562dc00668b6e38d35132942ba057cd32f2010862bc9696595eb643",
-      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt",
+      "erstattet_av": "../verbhjul-hender-retur-02-20261015/README.md",
+      "status": "avvist av Tom i andre retur"
     },
     {
       "name": "push",
@@ -393,7 +401,7 @@
       "valgt": true,
       "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-7410cd65-04b6-4768-8da5-fcbf576dc2e7.png",
       "prompt": "prompter/buy-v1.txt",
-      "resultat": "../../ui/verbhjul-gpt/buy.png",
+      "resultat": "../verbhjul-hender-retur-02-20261015/for/buy.png",
       "sha256": "7876f802f4d38442a05ce835e47f879e219a089bb7d648835495a7d258cd63b3",
       "bytes": 338262,
       "size": [
@@ -406,7 +414,9 @@
         255
       ],
       "for_sha256": "1fceb00a91dec08ae8133e87dd236631f436685c01855cbd20ec6fe3dd872539",
-      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt",
+      "erstattet_av": "../verbhjul-hender-retur-02-20261015/README.md",
+      "status": "avvist av Tom i andre retur"
     },
     {
       "name": "open",
@@ -498,7 +508,7 @@
       "valgt": true,
       "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-3756d38c-8616-4562-bb18-6c098b95b9bd.png",
       "prompt": "prompter/take-off-v4.txt",
-      "resultat": "../../ui/verbhjul-gpt/take-off.png",
+      "resultat": "../verbhjul-hender-retur-02-20261015/for/take-off.png",
       "sha256": "89eed2956ab63faf5ed31bb6b51a8f94d10eb3393aa64213fd5b15194c268661",
       "bytes": 312211,
       "size": [
@@ -511,7 +521,9 @@
         255
       ],
       "for_sha256": "780cba3f170e45fb6fab2c1ea1f112bd842b51aa5b7a9d9ba5c3afca20e3670a",
-      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt"
+      "visuell_kontroll": "én tommel og fire fingre; bare hånd uten erme; motiv og pil beholdt",
+      "erstattet_av": "../verbhjul-hender-retur-02-20261015/README.md",
+      "status": "avvist av Tom i andre retur"
     },
     {
       "name": "turn-off",
