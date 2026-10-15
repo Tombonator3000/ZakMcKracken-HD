@@ -7,8 +7,8 @@
 #
 # Bruk: engine/test.sh [antall bilder, standard 3000]
 #
-# Zak: DigHD er ikke slått på for Zak ennå (docs/HD-MOTOR.md). Til da sjekker testen bare at
-# spillet starter og kjører uten feil, og den stopper med kode 3 i stedet for å late som HD virker.
+# Zak: motoren må være bygget med FM-Towns-lagene av (engine/build.sh gjør det), ellers er HD av.
+# Testen stopper med kode 1 hvis en kontroll finner avvik.
 set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -31,8 +31,9 @@ export DIGHD_DUMP_DIR="$OUT" DIGHD_DUMP_EVERY=250 DIGHD_QUIT_AT="$FRAMES"
 
 timeout 120 "$SRC/scummvm" --path="$ROOT/game" --gfx-mode=surfacesdl --no-aspect-ratio --debuglevel=1 zak > "$OUT/scummvm.log" 2>&1 || true
 grep -q "Using gameid zak, variant FM-TOWNS" "$OUT/scummvm.log" || { echo "Spillet startet ikke, se $OUT/scummvm.log"; exit 1; }
-if ! grep -E "DigHD: (verify|screen|room)" "$OUT/scummvm.log"; then
-	echo "Spillet startet, men DigHD er ikke på for Zak ennå (ventet). Logg: $OUT/scummvm.log"
-	exit 3
+grep -E "DigHD: (verify|screen|room)" "$OUT/scummvm.log" || { echo "Ingen DigHD-linjer i loggen (bygget med FM-Towns-lagene på?), se $OUT/scummvm.log"; exit 1; }
+if grep -qE "verify frame [0-9]+: [1-9][0-9]* (screen pixels|of)" "$OUT/scummvm.log"; then
+	echo "Avvik funnet, se linjene over og $OUT/scummvm.log"
+	exit 1
 fi
 echo "Bilder: $OUT"

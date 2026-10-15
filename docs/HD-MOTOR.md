@@ -10,6 +10,14 @@ Kort versjon for Zak. Hvordan motoren virker, innstillingene, testkrokene og hva
 - Verbhjulet ligger i en egen patch oppå denne, `engine/patches/0002-verbhjul.patch` (docs/VERBHJUL.md). Hjulet tegnes rett før `updateScreen`, etter FM-Towns-lagene, og må flyttes inn i HD-laget når DigHD er portet.
 - Testet: `engine/build.sh` bygget motoren med patchen og FLAC her, og Zak startet uten skjerm: `Using gameid zak, variant FM-TOWNS`, SCUMM 3, riktig MD5, rommene 49, 1, 47, 9 og 50 ble lest (introen). Ikke spilt med skjerm og lyd.
 
+## Status 15. oktober 2026: HD-laget virker i Zak
+
+- Motoren bygges med FM-Towns-lagene av: `engine/build.sh` og `engine/build-web.sh` legger `-DDISABLE_TOWNS_DUAL_LAYER_MODE` i `config.mk`. Da går Zak gjennom den vanlige 8-bits tegningen der DigHD henger, i 320 x 240 (HD 1280 x 960). Uten definisjonen sier DigHD fra i loggen og er av.
+- I den felles patchen (lik i The Dig og Sam & Max): `DigHD::create` godtar `GID_ZAK`; objektene slår opp `objNNN_01` uansett tilstand i SCUMM v3; testhoppet sammenligner romhøyden med spillflaten (128 linjer i Zak) i stedet for hele skjermen.
+- Rom, objekter og figurer får HD. Kostymene går gjennom krokene fra Sam & Max uten endring. Tekst, verb og inventar (tekstflatene utenfor spillflaten) vises som originalpiksler skalert opp.
+- Testet uten skjerm med en nearest-mod (`zakhd build-mod --name test-nearest --method nearest --kostymer alle`): `engine/test.sh` 3000 bilder gjennom introen (rom 46, 58, 51, 55), 0 avvik mot originalen og mot full ombygging i 12 av 12 kontroller. Esc forbi introen til soverommet: Zak tegnes med HD-ruter, 13 av 13 kontroller uten avvik. `tools/verbhjul_test.sh` med HD på: bestått, hjulet tegnes riktig på 1280 x 960. Testhoppet til rom 2 virker. Fargene ser ut som med FM-Towns-lagene på (sammenlignet med skjermbildene fra verbhjul-testen, ikke målt).
+- Igjen: myk rulling (punkt 1 under, MOTOR-FORBEDRING del 4), HD-glyfer i `CharsetRendererV3`, menyraden HD Graphics i FM-Towns-menyen (Ctrl+H virker), pekeren, og prøving med skjerm, lyd og på nettsiden.
+
 ## Det som må til for Zak
 
 Sjekket mot ScummVM-kilden ved `c9091321`. Ikke testet.

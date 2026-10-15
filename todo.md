@@ -56,10 +56,11 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [x] Første kjøring av `motor.yml` i GitHub Actions: grønn på PR 10 (14. oktober)
 - [ ] Myk rulling i HD-laget, eller kroker i FM-Towns-tegningen (HD-MOTOR punkt 1, MOTOR-FORBEDRING del 4). Avgjøres i starten av porten
 
-- [ ] Prøv FM-Towns-laget slått av (`DISABLE_TOWNS_DUAL_LAYER_MODE`): starter Zak i 8 bit, og er fargene riktige?
-- [ ] Slå på DigHD for `GID_ZAK` (FM-Towns), og testhoppet med HD-blokken i v3
-- [ ] Rom og objekter med nearest-mod (0 avvik, `engine/test.sh`); objektbildet `_01` for alle tilstander
-- [ ] Kostymer med krokene fra Sam & Max, og `DIGHD_TEST_COSTUME` med én byte startindeks
+- [x] Prøv FM-Towns-laget slått av (`DISABLE_TOWNS_DUAL_LAYER_MODE`): Zak starter i 8 bit, fargene ser riktige ut (15. oktober)
+- [x] Slå på DigHD for `GID_ZAK` (FM-Towns), og testhoppet med HD-blokken i v3 (15. oktober)
+- [x] Rom og objekter med nearest-mod (0 avvik, `engine/test.sh`); objektbildet `_01` for alle tilstander (15. oktober)
+- [x] Kostymer med krokene fra Sam & Max: Zak i soverommet med HD-ruter, 0 avvik (15. oktober)
+- [ ] `DIGHD_TEST_COSTUME` med én byte startindeks i v3 (ikke prøvd)
 - [ ] Tekst: HD-glyfer i `CharsetRendererV3` (verb og inventar er tekst)
 - [ ] HD av og på mens man spiller (Tom 14. oktober): Ctrl+H (finnes i 0001) og raden HD Graphics i menyen for FM-Towns-utgaven, så det går på mobil; valget lagres (`dighd_classic`)
 - [ ] Pekeren for FM-Towns-utgaven

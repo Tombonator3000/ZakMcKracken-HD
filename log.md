@@ -172,3 +172,10 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Tom (i Dig-økta): «fiks zak fmtowns». Først den felles motorpatchen inn her, så porten av HD-laget til FM-Towns.
 - `engine/patches/0001-dighd-hd-grafikk.patch` byttet til den felles patchen for The Dig og Sam & Max (byte for byte lik Dig main bf582dc og Sam & Max main 3598f39). 0002 (verbhjulet) legger seg uendret oppå. `engine/patches-web/0001` laget på nytt oppå den nye 0001 (den felles patchen har sin egen retting av lekkasjen i HTTP-filsystemet); filene blir de samme som før.
 - Testet: `engine/build.sh` bygget (spillfilene hentet), `tools/verbhjul_test.sh` bestått (11 like setninger, venting, avbrudd og figurbytte), `tools/sjekk_patcher.py` (4 patcher), `test-build-pages.py`, nodetester (20), og hele stakken med nettleserpatchene lagt på c9091321.
+
+## 2026-10-15 05:51 (Claude)
+- HD-laget slått på for Zak FM-Towns. Valgt vei a) fra HD-MOTOR: FM-Towns-lagene av ved bygging (`DISABLE_TOWNS_DUAL_LAYER_MODE`, lagt i `config.mk` av `engine/build.sh` og `engine/build-web.sh`). Zak går da gjennom den vanlige 8-bits tegningen der DigHD henger.
+- Den felles 0001 endret på tre steder, alt bare for Zak: `DigHD::create` godtar `GID_ZAK` (og sier fra og er av i et bygg med FM-Towns-lagene på), objektene slår opp `_01` uansett tilstand i v3, og testhoppet sammenligner romhøyden med spillflaten. 0001 må kopieres til The Dig, Sam & Max og Dig-HD-Web.
+- Testet uten skjerm med en nearest-mod: `engine/test.sh` 3000 bilder, 12 av 12 kontroller uten avvik (rom 46, 58, 51, 55); Esc forbi introen til soverommet, Zak med HD-ruter, 13 av 13; `tools/verbhjul_test.sh` med HD på bestått, hjulet riktig på 1280 x 960; testhoppet til rom 2; fersk `RECONFIGURE=1 engine/build.sh` tar med definisjonen. `engine/test.sh` stopper nå med kode 1 ved avvik.
+- Funnet underveis: uten egne XDG-mapper hang ScummVM ved start uten skjerm (ikke HD-laget).
+- Igjen: myk rulling, HD-tekst i `CharsetRendererV3`, menyraden, pekeren, romtesten i alle rom (kjører), prøving med skjerm.

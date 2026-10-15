@@ -4,7 +4,7 @@ Oppdatert 14. oktober 2026.
 
 ## Kort
 
-Repoet har samme oppsett som Sam & Max HD og The Dig HD Remake, tilpasset Zak McKracken (FM-Towns). Spillfilene ligger i `spilldata`, ScummVM med HD-patchen og FLAC bygger og kjører spillet, all originalgrafikk er trukket ut, alle skript er dekompilert, og listen over grafikken som skal byttes ut finnes. HD-motoren er ikke portet til Zak, så spillet vises med originalgrafikken. Stilankerne er godkjent (`grafikk/stil/`, 14. oktober), men ingen HD-grafikk er laget for spillet ennå.
+Repoet har samme oppsett som Sam & Max HD og The Dig HD Remake, tilpasset Zak McKracken (FM-Towns). Spillfilene ligger i `spilldata`, ScummVM med HD-patchen og FLAC bygger og kjører spillet, all originalgrafikk er trukket ut, alle skript er dekompilert, og listen over grafikken som skal byttes ut finnes. HD-laget er på for Zak fra 15. oktober (rom, objekter og figurer, testet med nearest-mod uten avvik), men det finnes ingen HD-grafikk for spillet ennå, så det vises med originalgrafikken. Stilankerne er godkjent (`grafikk/stil/`, 14. oktober), men ingen HD-grafikk er laget for spillet ennå.
 
 ## Det som virker
 
@@ -13,7 +13,7 @@ Repoet har samme oppsett som Sam & Max HD og The Dig HD Remake, tilpasset Zak Mc
 | Spillfiler | 83 filer (00.LFL til 59.LFL, 98.LFL, 99.LFL, Track1.fla til Track21.fla) i `spilldata`, hentes og sjekkes med `tools/hent_spilldata.sh` | Størrelsene sjekket mot Drive ved nedlasting. Fersk klone og `tools/hent_spilldata.sh` 11. oktober: 83 filer, SHA-256 stemmer for alle |
 | Utgave | Engelsk FM-Towns | MD5 av 00.LFL funnet i ScummVMs `scumm-md5.h` ved c9091321 |
 | Motor | ScummVM c9091321 med `engine/patches/0001-dighd-hd-grafikk.patch` (Sam & Max sin, uendret), `0002-verbhjul.patch` og FLAC | `engine/build.sh` her 11. oktober. Zak startet fra `game/` uten skjerm i 30 sekunder: `zak`, FM-TOWNS, SCUMM 3, riktig MD5, rommene 49, 1, 47, 9 og 50 lest. Ikke spilt med skjerm og lyd |
-| HD i motoren | Ikke portet. DigHD er av for Zak | `docs/HD-MOTOR.md` sier hva som må til |
+| HD i motoren | På: rom, objekter og figurer. FM-Towns-lagene er av i bygget. Mangler myk rulling, HD-tekst og menyraden | `engine/test.sh` 3000 bilder, 0 avvik i 12 av 12 kontroller; soverommet med Zak 13 av 13; verbhjul-testen med HD bestått (15. oktober, uten skjerm) |
 | Pipeline | `zakhd info`, `zakhd extract`, `zakhd grafikkliste`, `zakhd build-mod` | `pytest`: 36 bestått (34 uten spillfiler), med nye tester for stripekodekene, BM med z-plan og v3-kostymer. `build-mod --method nearest --kostymer 1`: 58 rom, 585 objektbilder, 51 ruter |
 | Uttrekk | 58 rombakgrunner, 585 objektbilder, 847 kostymeruter fra 40 kostymer, 2 tegnsett, med rooms.json, costumes.json og fonts.json | Kjørt mot spillfilene 11. oktober, 0 feil, omtrent 6 sekunder. Kontaktark over alle rom, rom 1 med alle objektene på plass, og største rute fra hvert kostyme sett på. Ikke sammenlignet piksel for piksel med motoren |
 | Grafikkliste | `docs/grafikkliste.csv` (685 rader) og `docs/rom-oversikt.csv` (58 rom) | Laget med `zakhd grafikkliste` fra uttrekket og `work/skript/objekter.tsv` |
@@ -32,9 +32,8 @@ Repoet har samme oppsett som Sam & Max HD og The Dig HD Remake, tilpasset Zak Mc
 
 ## Ikke portet eller ikke testet
 
-- HD-motoren for Zak: FM-Towns-tegningen går forbi krokene. Se `docs/HD-MOTOR.md`.
+- HD-motoren for Zak: myk rulling (kameraet hopper 8 originalpiksler, 32 i HD), HD-tekst og menyraden mangler. Ikke prøvd med skjerm. Se `docs/HD-MOTOR.md`.
 - Verbhjulet er bygget med midlertidige ikoner og portretter og testet uten skjerm i rom 1. Mangler: navnet under pekeren når hjulet er lukket, F5-menyen, HD-tegning, de tegnede ikonene og portrettene, og prøving med skjerm og på mobil. Taster og klikk i de tre eller fire rammene hjulet sender klikk, går tapt. Lagringen av valget er ikke bekreftet (ScummVM skrev ingen scummvm.ini i testmiljøet).
-- `tools/romtest.sh` og `engine/test.sh` trenger DigHD; test.sh sjekker til da bare at spillet starter.
 - Kostymefargene i RGBA-bildene er fra rommet kostymet ligger i; spillet kan vise andre farger.
 - Promptene i `gpt.py` og `figur.py` er grovt tilpasset Zak, ikke prøvd. Bestillingen er ikke aktiv før stilpiloten.
 - Nettsiden: ikke prøvd på en ekte telefon, i fullskjerm, med F5-menyen og lagring, eller i Firefox og Safari. Den virker bare så lenge repoet er offentlig (Pages).

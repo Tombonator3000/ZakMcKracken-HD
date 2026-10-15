@@ -47,7 +47,8 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 - Nettsiderepoet (planlagt `Tombonator3000/ZakMcKracken-HD-Web`) finnes ikke.
 
 ## Teknisk plan (ikke testet for Zak)
-- DigHD er ikke på for Zak. FM-Towns tegner gjennom `towns_drawStripToScreen` (16-bits lag, 640 x 480 i ScummVM), som returnerer før DigHD-kroken i `drawStripToScreen`. Valg: slå av FM-Towns-laget (`DISABLE_TOWNS_DUAL_LAYER_MODE`) så v3 går gjennom vanlig 8-bits tegning, eller kroker i FM-Towns-tegningen. Anbefalt å prøve det første. Se `docs/HD-MOTOR.md`.
+- DigHD er på for Zak fra 15. oktober 2026. Valgt: FM-Towns-lagene av ved bygging (`DISABLE_TOWNS_DUAL_LAYER_MODE` i `config.mk`, lagt inn av `engine/build.sh` og `engine/build-web.sh`), så v3 går gjennom vanlig 8-bits tegning. Prisen er at myk rulling må lages i HD-laget. 0001 er felles med The Dig og Sam & Max og må holdes byte for byte lik.
+- Testmiljø uten egne `XDG_CONFIG_HOME` og `XDG_DATA_HOME` kan gjøre at ScummVM henger ved start uten skjerm; sett dem som `engine/test.sh` gjør.
 - Tekst tegnes av `CharsetRendererV3`; kroken for HD-glyfer finnes ikke der.
 - Ingen blast-objekter, ingen filmer, ingen tale, ingen fargesykling i Zak.
 - Kostymene (målt 13. oktober): 40 kostymer med 847 ruter, alle med speilflagg av, ingen søppelruter. Skyggeregelen fra Sam & Max (palettindeks 13 gjennom skyggetabellen) gjelder ikke: ScummVM setter `_shadowTable` bare for v5 og nyere, så i v3 er 13 en vanlig farge (kostyme 8 bruker den).

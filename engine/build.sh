@@ -43,6 +43,13 @@ if [ ! -f config.mk ] || [ "${RECONFIGURE:-0}" = "1" ]; then
 		--disable-sdlnet --disable-tts --disable-eventrecorder > configure.log
 fi
 
+# Zak HD: FM-Towns-lagene slås av, så spillet går gjennom den vanlige 8-bits tegningen
+# der HD-laget (DigHD) henger. Uten dette er HD av (docs/HD-MOTOR.md).
+if ! grep -q "DISABLE_TOWNS_DUAL_LAYER_MODE" config.mk; then
+	echo "DEFINES += -DDISABLE_TOWNS_DUAL_LAYER_MODE" >> config.mk
+	make clean > /dev/null 2>&1 || true
+fi
+
 echo "Bygger med $JOBS tråder (første gang tar det noen minutter) ..."
 make -j"$JOBS" > build.log 2>&1 || { tail -30 build.log; echo "Bygging feilet, se $SRC/build.log"; exit 1; }
 grep -q "^USE_FLAC = 1" config.mk || echo "Merk: bygget uten FLAC, så CD-musikken spilles ikke. Installer libflac-dev og kjør RECONFIGURE=1 engine/build.sh"

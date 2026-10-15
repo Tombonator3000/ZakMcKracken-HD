@@ -1,5 +1,5 @@
 diff --git a/backends/fs/emscripten/http-fs.cpp b/backends/fs/emscripten/http-fs.cpp
-index 7eecaf22..69f1ac06 100644
+index 7eecaf228..69f1ac06a 100644
 --- a/backends/fs/emscripten/http-fs.cpp
 +++ b/backends/fs/emscripten/http-fs.cpp
 @@ -53,19 +53,23 @@ HTTPFilesystemNode::HTTPFilesystemNode(const Common::String &p) : _path(p), _isV
@@ -136,7 +136,7 @@ index 7eecaf22..69f1ac06 100644
  	return true;
  }
 diff --git a/backends/fs/emscripten/http-fs.h b/backends/fs/emscripten/http-fs.h
-index 75bf8738..3b018481 100644
+index 75bf87389..3b0184813 100644
 --- a/backends/fs/emscripten/http-fs.h
 +++ b/backends/fs/emscripten/http-fs.h
 @@ -33,6 +33,14 @@
@@ -155,7 +155,7 @@ index 75bf8738..3b018481 100644
  	Common::String _path;
  	Common::String _url;
 diff --git a/engines/scumm/akos.cpp b/engines/scumm/akos.cpp
-index 8333a7ed..a16913b5 100644
+index 8333a7ed7..a16913b58 100644
 --- a/engines/scumm/akos.cpp
 +++ b/engines/scumm/akos.cpp
 @@ -20,6 +20,7 @@
@@ -238,7 +238,7 @@ index 8333a7ed..a16913b5 100644
  }
  
 diff --git a/engines/scumm/akos.h b/engines/scumm/akos.h
-index dcfe41db..bd1264b6 100644
+index dcfe41db3..bd1264b68 100644
 --- a/engines/scumm/akos.h
 +++ b/engines/scumm/akos.h
 @@ -67,6 +67,8 @@ protected:
@@ -251,7 +251,7 @@ index dcfe41db..bd1264b6 100644
  	// pointer to various parts of the costume resource
  	const AkosHeader *_akhd; // Header
 diff --git a/engines/scumm/base-costume.cpp b/engines/scumm/base-costume.cpp
-index d93b33e2..e751eeb6 100644
+index d93b33e2c..e751eeb6f 100644
 --- a/engines/scumm/base-costume.cpp
 +++ b/engines/scumm/base-costume.cpp
 @@ -24,6 +24,9 @@
@@ -335,7 +335,7 @@ index d93b33e2..e751eeb6 100644
  
  	do {
 diff --git a/engines/scumm/base-costume.h b/engines/scumm/base-costume.h
-index 2ee3dcf9..053afa4b 100644
+index 2ee3dcf99..053afa4b5 100644
 --- a/engines/scumm/base-costume.h
 +++ b/engines/scumm/base-costume.h
 @@ -117,6 +117,7 @@ public:
@@ -347,7 +347,7 @@ index 2ee3dcf9..053afa4b 100644
  		const byte *maskPtr;
  		int scaleXStep;
 diff --git a/engines/scumm/charset.cpp b/engines/scumm/charset.cpp
-index 190e1818..0cf5f779 100644
+index 190e18181..0cf5f779c 100644
 --- a/engines/scumm/charset.cpp
 +++ b/engines/scumm/charset.cpp
 @@ -21,6 +21,7 @@
@@ -477,7 +477,7 @@ index 190e1818..0cf5f779 100644
  	byte numbits = 8;
  	pitch -= _origWidth;
 diff --git a/engines/scumm/charset.h b/engines/scumm/charset.h
-index 7f288d7b..79a52ab6 100644
+index 7f288d7b4..79a52ab6c 100644
 --- a/engines/scumm/charset.h
 +++ b/engines/scumm/charset.h
 @@ -170,6 +170,10 @@ protected:
@@ -492,7 +492,7 @@ index 7f288d7b..79a52ab6 100644
  	CharsetRendererClassic(ScummEngine *vm, int cjkSpacing) : CharsetRendererPC(vm), _width(0), _height(0), _origWidth(0), _origHeight(0),
  		_cjkSpacing(cjkSpacing), _offsX(0), _offsY(0), _charPtr(nullptr), _drawScreen(kMainVirtScreen) {}
 diff --git a/engines/scumm/costume.cpp b/engines/scumm/costume.cpp
-index aab00a03..d7b0704e 100644
+index aab00a030..d7b0704ed 100644
 --- a/engines/scumm/costume.cpp
 +++ b/engines/scumm/costume.cpp
 @@ -23,6 +23,7 @@
@@ -530,7 +530,7 @@ index aab00a03..d7b0704e 100644
  			baseptr = frameptr + code * 2 + 2;
  		_srcPtr = baseptr + READ_LE_UINT16(frameptr + code * 2);
 diff --git a/engines/scumm/costume.h b/engines/scumm/costume.h
-index 7e14948f..28f427e5 100644
+index 7e14948fb..28f427e57 100644
 --- a/engines/scumm/costume.h
 +++ b/engines/scumm/costume.h
 @@ -101,6 +101,9 @@ protected:
@@ -544,7 +544,7 @@ index 7e14948f..28f427e5 100644
  
  class NESCostumeRenderer : public BaseCostumeRenderer {
 diff --git a/engines/scumm/cursor.cpp b/engines/scumm/cursor.cpp
-index 21938706..17d0c967 100644
+index 219387065..17d0c967b 100644
 --- a/engines/scumm/cursor.cpp
 +++ b/engines/scumm/cursor.cpp
 @@ -28,6 +28,7 @@
@@ -611,10 +611,10 @@ index 21938706..17d0c967 100644
  	width *= 8;
 diff --git a/engines/scumm/dighd.cpp b/engines/scumm/dighd.cpp
 new file mode 100644
-index 00000000..ecaeeb33
+index 000000000..6c3350d3f
 --- /dev/null
 +++ b/engines/scumm/dighd.cpp
-@@ -0,0 +1,5203 @@
+@@ -0,0 +1,5216 @@
 +/* ScummVM - Graphic Adventure Engine
 + *
 + * ScummVM is the legal property of its developers, whose names
@@ -796,11 +796,19 @@ index 00000000..ecaeeb33
 +}
 +
 +DigHD *DigHD::create(ScummEngine *vm) {
-+	// The Dig (SCUMM v7) and Sam & Max Hit the Road (SCUMM v6). In Sam & Max the
-+	// rooms, objects and blast objects get HD; costumes (ClassicCostumeRenderer)
-+	// and text (CharsetRendererClassic) have no hooks yet and show original pixels.
-+	if (vm->_game.id != GID_DIG && vm->_game.id != GID_SAMNMAX)
++	// The Dig (SCUMM v7), Sam & Max Hit the Road (SCUMM v6) and Zak McKracken
++	// (SCUMM v3, FM-Towns).
++	if (vm->_game.id != GID_DIG && vm->_game.id != GID_SAMNMAX && vm->_game.id != GID_ZAK)
 +		return nullptr;
++#ifndef DISABLE_TOWNS_DUAL_LAYER_MODE
++	// FM-Towns draws through its own screen layers (towns_drawStripToScreen),
++	// past the hooks. Zak HD is built with the layers turned off, so the game
++	// goes through the plain 8-bit drawing like the DOS versions.
++	if (vm->_game.platform == Common::kPlatformFMTowns) {
++		warning("DigHD: FM-Towns needs a build with DISABLE_TOWNS_DUAL_LAYER_MODE; HD is off");
++		return nullptr;
++	}
++#endif
 +	Common::String mod = ConfMan.get("dighd_mod");
 +	if (const char *env = getenv("DIGHD_MOD"))
 +		mod = env;
@@ -1265,12 +1273,15 @@ index 00000000..ecaeeb33
 +	if (state <= 0)
 +		return;
 +
-+	uint32 key = ((uint32)obj << 8) | (uint32)state;
++	// SCUMM v3 has one image per object, shown in every state but 0
++	// (getObjectImage() leaves the state out); the mod calls it objNNN_01
++	const int image = _vm->_game.version <= 3 ? 1 : state;
++	uint32 key = ((uint32)obj << 8) | (uint32)image;
 +	Image *img = nullptr;
 +	if (!_objectImages.tryGetVal(key, img)) {
 +		img = new Image();
-+		Common::Path hd(Common::String::format("objects/obj%03d_%02X.png", obj, state));
-+		Common::Path idx(Common::String::format("objects/obj%03d_%02X_idx.png", obj, state));
++		Common::Path hd(Common::String::format("objects/obj%03d_%02X.png", obj, image));
++		Common::Path idx(Common::String::format("objects/obj%03d_%02X_idx.png", obj, image));
 +		if (!loadImage(hd, idx, width, height, *img)) {
 +			delete img;
 +			img = nullptr;
@@ -4801,7 +4812,9 @@ index 00000000..ecaeeb33
 +		const bool v7 = _vm->_game.version >= 7;
 +		const int rw = rmhd ? READ_LE_UINT16(v7 ? &rmhd->v7.width : &rmhd->old.width) : 0;
 +		const int rh = rmhd ? READ_LE_UINT16(v7 ? &rmhd->v7.height : &rmhd->old.height) : 0;
-+		if (rw < _vm->_screenWidth || rh < _vm->_screenHeight) {
++		// The room is shown in the main virtual screen, which in SCUMM v3 is lower than
++		// the screen (Zak: 128 of 240 lines, the rest is text, verbs and inventory)
++		if (rw < _vm->_screenWidth || rh < _vm->_virtscr[kMainVirtScreen].h) {
 +			_testDone = true;
 +			debug("DigHD: test, room %d is %dx%d, smaller than the screen: no jump", _testRoom, rw, rh);
 +		}
@@ -5820,7 +5833,7 @@ index 00000000..ecaeeb33
 +} // End of namespace Scumm
 diff --git a/engines/scumm/dighd.h b/engines/scumm/dighd.h
 new file mode 100644
-index 00000000..26bc7a8e
+index 000000000..26bc7a8ee
 --- /dev/null
 +++ b/engines/scumm/dighd.h
 @@ -0,0 +1,637 @@
@@ -6462,7 +6475,7 @@ index 00000000..26bc7a8e
 +
 +#endif
 diff --git a/engines/scumm/gfx.cpp b/engines/scumm/gfx.cpp
-index bf85f13c..d9721f39 100644
+index bf85f13c3..d9721f397 100644
 --- a/engines/scumm/gfx.cpp
 +++ b/engines/scumm/gfx.cpp
 @@ -21,6 +21,7 @@
@@ -6566,7 +6579,7 @@ index bf85f13c..d9721f39 100644
  	while (now >= _shakeNextTick) {
  		_shakeFrame = (_shakeFrame + 1) % NUM_SHAKE_POSITIONS;
 diff --git a/engines/scumm/gfx_gui.cpp b/engines/scumm/gfx_gui.cpp
-index 133f6ec0..d7431ed7 100644
+index 133f6ec0a..d7431ed78 100644
 --- a/engines/scumm/gfx_gui.cpp
 +++ b/engines/scumm/gfx_gui.cpp
 @@ -20,6 +20,7 @@
@@ -6751,7 +6764,7 @@ index 133f6ec0..d7431ed7 100644
  
  		drawBox(18,
 diff --git a/engines/scumm/input.cpp b/engines/scumm/input.cpp
-index 3525910f..3b27bf68 100644
+index 3525910f1..3b27bf686 100644
 --- a/engines/scumm/input.cpp
 +++ b/engines/scumm/input.cpp
 @@ -28,6 +28,7 @@
@@ -6836,7 +6849,7 @@ index 3525910f..3b27bf68 100644
  	bool isNES = _game.platform == Common::kPlatformNES;
  	bool inSaveRoom = false;
 diff --git a/engines/scumm/module.mk b/engines/scumm/module.mk
-index b0f7e3eb..42985c9e 100644
+index b0f7e3eb3..42985c9e2 100644
 --- a/engines/scumm/module.mk
 +++ b/engines/scumm/module.mk
 @@ -1,6 +1,7 @@
@@ -6848,7 +6861,7 @@ index b0f7e3eb..42985c9e 100644
  	akos.o \
  	base-costume.o \
 diff --git a/engines/scumm/nut_renderer.cpp b/engines/scumm/nut_renderer.cpp
-index f8fc7110..d3add497 100644
+index f8fc71101..d3add4978 100644
 --- a/engines/scumm/nut_renderer.cpp
 +++ b/engines/scumm/nut_renderer.cpp
 @@ -23,6 +23,7 @@
@@ -6914,7 +6927,7 @@ index f8fc7110..d3add497 100644
  		if (hardcodedColors) {
  			for (int j = minY; j < height; j++) {
 diff --git a/engines/scumm/nut_renderer.h b/engines/scumm/nut_renderer.h
-index 7dc15ebe..89e4eec7 100644
+index 7dc15ebec..89e4eec74 100644
 --- a/engines/scumm/nut_renderer.h
 +++ b/engines/scumm/nut_renderer.h
 @@ -50,6 +50,7 @@ protected:
@@ -6926,7 +6939,7 @@ index 7dc15ebe..89e4eec7 100644
  	struct {
  		uint16 width;
 diff --git a/engines/scumm/object.cpp b/engines/scumm/object.cpp
-index 0e97ae97..987dc88e 100644
+index 0e97ae972..987dc88e6 100644
 --- a/engines/scumm/object.cpp
 +++ b/engines/scumm/object.cpp
 @@ -20,6 +20,7 @@
@@ -6994,7 +7007,7 @@ index 0e97ae97..987dc88e 100644
  
  void ScummEngine_v6::restoreBlastObjectsRects() {
 diff --git a/engines/scumm/palette.cpp b/engines/scumm/palette.cpp
-index a3758d7f..ebba1ab3 100644
+index a3758d7f7..ebba1ab3b 100644
 --- a/engines/scumm/palette.cpp
 +++ b/engines/scumm/palette.cpp
 @@ -29,6 +29,7 @@
@@ -7038,7 +7051,7 @@ index a3758d7f..ebba1ab3 100644
  	if (_macGui)
  		_macGui->setPaletteDirty();
 diff --git a/engines/scumm/saveload.cpp b/engines/scumm/saveload.cpp
-index d1d7a764..d28181c8 100644
+index d1d7a7646..d28181c8d 100644
 --- a/engines/scumm/saveload.cpp
 +++ b/engines/scumm/saveload.cpp
 @@ -27,6 +27,7 @@
@@ -7060,7 +7073,7 @@ index d1d7a764..d28181c8 100644
  
  		updateCursor();
 diff --git a/engines/scumm/script.cpp b/engines/scumm/script.cpp
-index bd3c285c..0e09904f 100644
+index bd3c285c2..0e09904fc 100644
 --- a/engines/scumm/script.cpp
 +++ b/engines/scumm/script.cpp
 @@ -1604,6 +1604,7 @@ void ScummEngine::beginCutscene(int *args) {
@@ -7112,7 +7125,7 @@ index bd3c285c..0e09904f 100644
  	if (_game.version >= 4)
  		VAR(VAR_OVERRIDE) = 0;
 diff --git a/engines/scumm/script.h b/engines/scumm/script.h
-index a04ee6cb..d3571302 100644
+index a04ee6cb9..d3571302e 100644
 --- a/engines/scumm/script.h
 +++ b/engines/scumm/script.h
 @@ -128,6 +128,7 @@ enum {
@@ -7124,7 +7137,7 @@ index a04ee6cb..d3571302 100644
  	int16 cutSceneScriptIndex;
  	byte cutSceneStackPointer;
 diff --git a/engines/scumm/script_v6.cpp b/engines/scumm/script_v6.cpp
-index e1e99d50..7ba843ec 100644
+index e1e99d50b..7ba843ec9 100644
 --- a/engines/scumm/script_v6.cpp
 +++ b/engines/scumm/script_v6.cpp
 @@ -33,6 +33,7 @@
@@ -7153,7 +7166,7 @@ index e1e99d50..7ba843ec 100644
  
  void ScummEngine_v6::o6_wait() {
 diff --git a/engines/scumm/scumm.cpp b/engines/scumm/scumm.cpp
-index d1baa70b..8abc0a15 100644
+index d1baa70b0..8abc0a153 100644
 --- a/engines/scumm/scumm.cpp
 +++ b/engines/scumm/scumm.cpp
 @@ -40,6 +40,7 @@
@@ -7205,7 +7218,7 @@ index d1baa70b..8abc0a15 100644
  		cur = _system->getMillis();
  
 diff --git a/engines/scumm/scumm.h b/engines/scumm/scumm.h
-index 356a3602..20c4b0c5 100644
+index 356a36023..20c4b0c5f 100644
 --- a/engines/scumm/scumm.h
 +++ b/engines/scumm/scumm.h
 @@ -93,6 +93,7 @@ class CharsetRenderer;
@@ -7233,7 +7246,7 @@ index 356a3602..20c4b0c5 100644
  	bool _useMacGraphicsSmoothing = true;
  	byte _completeScreenBuffer[320 * 200];
 diff --git a/engines/scumm/scumm_v7.h b/engines/scumm/scumm_v7.h
-index 0e5aa900..15b08f44 100644
+index 0e5aa9000..15b08f448 100644
 --- a/engines/scumm/scumm_v7.h
 +++ b/engines/scumm/scumm_v7.h
 @@ -40,6 +40,7 @@ class TextRenderer_v7;
@@ -7245,7 +7258,7 @@ index 0e5aa900..15b08f44 100644
  	friend class InsaneRebel1;
  	friend class InsaneRebel2;
 diff --git a/engines/scumm/smush/smush_player.cpp b/engines/scumm/smush/smush_player.cpp
-index 1c646316..433a8d34 100644
+index 1c6463160..433a8d34c 100644
 --- a/engines/scumm/smush/smush_player.cpp
 +++ b/engines/scumm/smush/smush_player.cpp
 @@ -32,6 +32,7 @@
@@ -7354,7 +7367,7 @@ index 1c646316..433a8d34 100644
  					_updateNeeded = false;
  				}
 diff --git a/engines/scumm/string_v7.cpp b/engines/scumm/string_v7.cpp
-index 9088be07..5b950d83 100644
+index 9088be072..5b950d837 100644
 --- a/engines/scumm/string_v7.cpp
 +++ b/engines/scumm/string_v7.cpp
 @@ -25,6 +25,7 @@

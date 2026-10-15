@@ -58,7 +58,7 @@ engine/build.sh                  # ScummVM med patchen til engine/scummvm (kreve
 ./spill.sh                       # henter det som mangler, bygger og starter spillet
 ```
 
-`zakhd extract` bruker egne dekodere for SCUMM v3 med 256 farger (`pipeline/zakhd/lfl.py` og `v3grafikk.py`, oversatt fra ScummVM). Rutenummeret i kostymene er lag * 128 + kode. Objektene har ett bilde hver (`objNNN_01`). HD-motoren (DigHD) er ikke slått på for Zak ennå: FM-Towns tegner gjennom `towns_drawStripToScreen`, forbi krokene. Se `docs/HD-MOTOR.md`.
+`zakhd extract` bruker egne dekodere for SCUMM v3 med 256 farger (`pipeline/zakhd/lfl.py` og `v3grafikk.py`, oversatt fra ScummVM). Rutenummeret i kostymene er lag * 128 + kode. Objektene har ett bilde hver (`objNNN_01`). HD-motoren (DigHD) er på for Zak fra 15. oktober 2026: motoren bygges med FM-Towns-lagene av (`DISABLE_TOWNS_DUAL_LAYER_MODE`, `engine/build.sh` gjør det), så spillet går gjennom den vanlige 8-bits tegningen. Myk rulling, HD-tekst og menyraden mangler. Se `docs/HD-MOTOR.md`.
 
 ## Kommandoer
 
@@ -77,7 +77,7 @@ engine/run.sh ingen --shader=engine/shadere/klassisk-crt.glslp   # med en shader
 
 ## Arbeid med motoren
 
-- Patchene ligger i `engine/patches/` og legges på i rekkefølge: `0001-dighd-hd-grafikk.patch` (HD-motoren, den samme som i Sam & Max) og `0002-verbhjul.patch` (verbhjulet for Zak, `engines/scumm/verbhjul.*`, `verbhjul_zak.h` og krokene). Gjør endringer i `engine/scummvm`, og lag begge på nytt med `tools/lag_patcher.sh`. Ikke lag 0001 med `git diff` av hele kopien; da kommer hjulet med i den.
+- Patchene ligger i `engine/patches/` og legges på i rekkefølge: `0001-dighd-hd-grafikk.patch` (HD-motoren, byte for byte den samme som i The Dig og Sam & Max; endres den her, må den kopieres dit) og `0002-verbhjul.patch` (verbhjulet for Zak, `engines/scumm/verbhjul.*`, `verbhjul_zak.h` og krokene). Gjør endringer i `engine/scummvm`, og lag begge på nytt med `tools/lag_patcher.sh`. Ikke lag 0001 med `git diff` av hele kopien; da kommer hjulet med i den.
 - Patchfilene skal aldri flettes eller rettes for hånd, heller ikke i GitHub ved en konflikt: `git apply` kutter filene uten feilmelding når tallene i hunk-hodene ikke stemmer (skjedde 13. oktober 2026). Lag dem på nytt med `tools/lag_patcher.sh`, og sjekk med `python3 tools/sjekk_patcher.py`. Arbeidsflyten `motor.yml` bygger motoren når patchene eller byggeskriptet endres.
 - Etter endringer i verbhjulet: `tools/verbhjul_test.sh` (originalpanelet og hjulet skal gi de samme setningene, omtrent fire minutter).
 - Reglene for det dynamiske hjulet (`engines/scumm/verbhjul_zak.h`) lages av `python3 tools/verbhjul_dynamisk.py --cpp engine/scummvm/engines/scumm/verbhjul_zak.h` fra work/skript; regler for hånd står i `HAAND` i verktøyet, med kilden i skriptene. Lag så patchene på nytt og kjør testen.
