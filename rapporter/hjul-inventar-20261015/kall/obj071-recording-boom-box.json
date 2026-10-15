@@ -1,0 +1,6 @@
+{
+  "file": "obj071-recording-boom-box.png",
+  "base": "obj071-boom-box.png",
+  "prompt": "Edit ONLY one small indicator on the supplied portable blue boom box: add a clearly visible bright RED RECORDING LED beside the cassette door, with a tiny simple red halo. This is the recording-on state. Preserve exactly the same speakers, controls, handle, cassette, buttons, colours, ink lines, scale, placement, perspective and alpha background. Do not change any other button or component, and do not add a microphone, tape, cable or hand. No readable REC text, labels, scene, medallion or ground shadow. One boom box only, fully inside square canvas.",
+  "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-c068d7c1-87aa-463c-bbf1-a2cb91004cff.png"
+}

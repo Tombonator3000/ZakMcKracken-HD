@@ -1,0 +1,318 @@
+[
+  {
+    "source": "inventory/obj018.png",
+    "target": "inventory/obj074-cashcard.png"
+  },
+  {
+    "source": "inventory/obj014-sushi-in-fish-bowl.png",
+    "target": "inventory/obj014.png"
+  },
+  {
+    "source": "inventory/obj015-phone-bill.png",
+    "target": "inventory/obj015.png"
+  },
+  {
+    "source": "inventory/obj017-torn-wallpaper.png",
+    "target": "inventory/obj017.png"
+  },
+  {
+    "source": "inventory/obj018.png",
+    "target": "inventory/obj032.png"
+  },
+  {
+    "source": "inventory/obj018.png",
+    "target": "inventory/obj032.png"
+  },
+  {
+    "source": "inventory/obj018.png",
+    "target": "inventory/obj075.png"
+  },
+  {
+    "source": "inventory/obj018.png",
+    "target": "inventory/obj075.png"
+  },
+  {
+    "source": "inventory/obj074-cashcards.png",
+    "target": "inventory/obj074.png"
+  },
+  {
+    "source": "inventory/obj021.png",
+    "target": "inventory/obj188.png"
+  },
+  {
+    "source": "inventory/obj021.png",
+    "target": "inventory/obj188.png"
+  },
+  {
+    "source": "inventory/obj022.png",
+    "target": "inventory/obj262.png"
+  },
+  {
+    "source": "inventory/obj022.png",
+    "target": "inventory/obj262.png"
+  },
+  {
+    "source": "inventory/obj023.png",
+    "target": "inventory/obj623.png"
+  },
+  {
+    "source": "inventory/obj023.png",
+    "target": "inventory/obj623.png"
+  },
+  {
+    "source": "inventory/obj029.png",
+    "target": "inventory/obj130.png"
+  },
+  {
+    "source": "inventory/obj029.png",
+    "target": "inventory/obj130.png"
+  },
+  {
+    "source": "inventory/obj025-box-of-crayons.png",
+    "target": "inventory/obj025.png"
+  },
+  {
+    "source": "inventory/obj026-butter-knife.png",
+    "target": "inventory/obj026.png"
+  },
+  {
+    "source": "inventory/obj026-butter-knife.png",
+    "target": "inventory/obj187-butter-knife.png"
+  },
+  {
+    "source": "inventory/obj026-bent-butter-knife.png",
+    "target": "inventory/obj187-bent-butter-knife.png"
+  },
+  {
+    "source": "inventory/obj026-butter-knife.png",
+    "target": "inventory/obj187.png"
+  },
+  {
+    "source": "inventory/obj031.png",
+    "target": "inventory/obj395.png"
+  },
+  {
+    "source": "inventory/obj031.png",
+    "target": "inventory/obj395.png"
+  },
+  {
+    "source": "inventory/obj037.png",
+    "target": "inventory/obj110.png"
+  },
+  {
+    "source": "inventory/obj037.png",
+    "target": "inventory/obj110.png"
+  },
+  {
+    "source": "inventory/obj037.png",
+    "target": "inventory/obj333.png"
+  },
+  {
+    "source": "inventory/obj037.png",
+    "target": "inventory/obj333.png"
+  },
+  {
+    "source": "inventory/obj049-lighter.png",
+    "target": "inventory/obj049.png"
+  },
+  {
+    "source": "inventory/obj054.png",
+    "target": "inventory/obj056.png"
+  },
+  {
+    "source": "inventory/obj054.png",
+    "target": "inventory/obj056.png"
+  },
+  {
+    "source": "inventory/obj054.png",
+    "target": "inventory/obj183.png"
+  },
+  {
+    "source": "inventory/obj054.png",
+    "target": "inventory/obj183.png"
+  },
+  {
+    "source": "inventory/obj054.png",
+    "target": "inventory/obj184.png"
+  },
+  {
+    "source": "inventory/obj054.png",
+    "target": "inventory/obj184.png"
+  },
+  {
+    "source": "inventory/obj054.png",
+    "target": "inventory/obj645.png"
+  },
+  {
+    "source": "inventory/obj054.png",
+    "target": "inventory/obj645.png"
+  },
+  {
+    "source": "inventory/obj054.png",
+    "target": "inventory/obj646.png"
+  },
+  {
+    "source": "inventory/obj054.png",
+    "target": "inventory/obj646.png"
+  },
+  {
+    "source": "inventory/obj055.png",
+    "target": "inventory/obj186.png"
+  },
+  {
+    "source": "inventory/obj055.png",
+    "target": "inventory/obj186.png"
+  },
+  {
+    "source": "inventory/obj055.png",
+    "target": "inventory/obj431.png"
+  },
+  {
+    "source": "inventory/obj055.png",
+    "target": "inventory/obj431.png"
+  },
+  {
+    "source": "inventory/obj057.png",
+    "target": "inventory/obj185.png"
+  },
+  {
+    "source": "inventory/obj057.png",
+    "target": "inventory/obj185.png"
+  },
+  {
+    "source": "inventory/obj057.png",
+    "target": "inventory/obj429.png"
+  },
+  {
+    "source": "inventory/obj057.png",
+    "target": "inventory/obj429.png"
+  },
+  {
+    "source": "inventory/obj058.png",
+    "target": "inventory/obj430.png"
+  },
+  {
+    "source": "inventory/obj058.png",
+    "target": "inventory/obj430.png"
+  },
+  {
+    "source": "inventory/obj059.png",
+    "target": "inventory/obj647.png"
+  },
+  {
+    "source": "inventory/obj059.png",
+    "target": "inventory/obj647.png"
+  },
+  {
+    "source": "inventory/obj061.png",
+    "target": "inventory/obj062.png"
+  },
+  {
+    "source": "inventory/obj061.png",
+    "target": "inventory/obj062.png"
+  },
+  {
+    "source": "inventory/obj061.png",
+    "target": "inventory/obj063.png"
+  },
+  {
+    "source": "inventory/obj061.png",
+    "target": "inventory/obj063.png"
+  },
+  {
+    "source": "inventory/obj073.png",
+    "target": "inventory/obj471.png"
+  },
+  {
+    "source": "inventory/obj073.png",
+    "target": "inventory/obj471.png"
+  },
+  {
+    "source": "inventory/obj065.png",
+    "target": "inventory/obj066.png"
+  },
+  {
+    "source": "inventory/obj065.png",
+    "target": "inventory/obj066.png"
+  },
+  {
+    "source": "inventory/obj069-flashlight.png",
+    "target": "inventory/obj069.png"
+  },
+  {
+    "source": "inventory/obj070.png",
+    "target": "inventory/obj535.png"
+  },
+  {
+    "source": "inventory/obj070.png",
+    "target": "inventory/obj535.png"
+  },
+  {
+    "source": "inventory/obj070.png",
+    "target": "inventory/obj536.png"
+  },
+  {
+    "source": "inventory/obj070.png",
+    "target": "inventory/obj536.png"
+  },
+  {
+    "source": "inventory/obj070.png",
+    "target": "inventory/obj537.png"
+  },
+  {
+    "source": "inventory/obj070.png",
+    "target": "inventory/obj537.png"
+  },
+  {
+    "source": "inventory/obj071-boom-box.png",
+    "target": "inventory/obj071.png"
+  },
+  {
+    "source": "inventory/obj078.png",
+    "target": "inventory/obj427.png"
+  },
+  {
+    "source": "inventory/obj078.png",
+    "target": "inventory/obj427.png"
+  },
+  {
+    "source": "inventory/obj082.png",
+    "target": "inventory/obj083.png"
+  },
+  {
+    "source": "inventory/obj082.png",
+    "target": "inventory/obj083.png"
+  },
+  {
+    "source": "inventory/obj609.png",
+    "target": "inventory/obj610.png"
+  },
+  {
+    "source": "inventory/obj609.png",
+    "target": "inventory/obj610.png"
+  },
+  {
+    "source": "inventory/obj609.png",
+    "target": "inventory/obj614.png"
+  },
+  {
+    "source": "inventory/obj609.png",
+    "target": "inventory/obj614.png"
+  },
+  {
+    "source": "inventory/obj176.png",
+    "target": "inventory/obj177.png"
+  },
+  {
+    "source": "inventory/obj176.png",
+    "target": "inventory/obj177.png"
+  },
+  {
+    "source": "inventory/obj119.png",
+    "target": "inventory/obj131.png"
+  },
+  {
+    "source": "inventory/obj119.png",
+    "target": "inventory/obj131.png"
+  }
+]

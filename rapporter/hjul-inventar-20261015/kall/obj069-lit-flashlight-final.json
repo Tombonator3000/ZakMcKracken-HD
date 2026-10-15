@@ -1,0 +1,7 @@
+{
+  "file": "obj069-lit-flashlight.png",
+  "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-c372760d-9ba8-4557-8985-bab0806dab27.png",
+  "prompt": "Edit the supplied UNLIT flashlight into a clean switched-on inventory icon. Preserve the exact same flashlight body, shape, red switch, scale, placement, diagonal angle, ink lines and alpha background. Make the lens glow bright warm yellow. Add only THREE VERY SHORT thin golden light rays immediately around the front rim, each shorter than one quarter of the lens diameter. All light marks must end well before the image boundaries, with at least 8 percent transparent margin. NO long filled light cone, NO rectangular yellow area, NO light reaching or being cut off by the canvas edge. The glowing lens and short rays clearly indicate that it is on. No hand, text, background, medallion or ground shadow. True alpha background.",
+  "tool": "image_gen, innebygd",
+  "model": "ikke oppgitt"
+}

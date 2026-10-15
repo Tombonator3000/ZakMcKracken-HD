@@ -1,0 +1,8 @@
+{
+  "file": "obj026-bent-butter-knife.png",
+  "refs": [
+    "obj026-butter-knife.png"
+  ],
+  "prompt": "Draw the visibly BENT state of the supplied silver butter knife. Keep the same handle, silver material, rounded blunt blade tip and hand-inked comic style. Make a STRONG RIGHT-ANGLE ELBOW BEND in the metal at the base of the blade: the handle still runs from bottom-left toward the centre, but the blade abruptly turns toward the RIGHT AND DOWN, about 90 degrees from the handle direction. The sharp change in direction must be unmistakable at 128 pixels. It must not look straight, mildly warped, or merely rotated as a whole. Same plain blunt butter knife, no sharp cutting tip or jagged edge. Entire bent object centred in square canvas with transparent margin. True alpha background. No hand, text, scene, medallion or ground shadow.",
+  "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-2111f9fe-1fac-4691-b821-63fb69ab888e.png"
+}

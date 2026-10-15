@@ -1,0 +1,8 @@
+{
+  "file": "obj015-phone-bill-map.png",
+  "type": "inventory",
+  "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-a0be66f2-a415-4745-bc59-560701049ea1.png",
+  "prompt": "Edit this folded telephone-bill inventory sprite to show its reverse side with a YELLOW CRAYON MAP on the paper. Keep the same folded sheet silhouette, curled corners, paper colour, viewing angle, size, position, hand-inked comic outline and true alpha background. Replace the phone pictogram and printed billing table with a blank paper reverse bearing only a few bold irregular yellow crayon lines, one small rough circle and two tiny crosses. This is an abstract inventory symbol for a hand-drawn map, not detailed geographical information. No readable labels, numbers, compass text, extra crayon, hand, money symbols, border ornaments, background, ground shadow or medallion. One folded paper sheet only, entirely inside the square canvas.",
+  "tool": "image_gen, innebygd",
+  "model": "ikke oppgitt"
+}

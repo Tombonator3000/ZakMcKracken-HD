@@ -1,0 +1,18 @@
+{
+  "type": "inventory",
+  "file": "obj053.png",
+  "ids": [
+    53
+  ],
+  "status": "ja",
+  "variant": false,
+  "base": "obj053.png",
+  "name": "abandoned bird nest",
+  "prompt": "Create a finished inventory sprite for a point-and-click adventure game. Draw An empty bird nest made of twigs. Hand-inked adventure-comic drawing, whimsical oddball humour, endearingly crooked and asymmetric shapes, elastic angular caricature, tapering pen lines with varied weight, thin interior accents and a few decisive dark shadow wedges. Muted warm flat colours with one simple cel shade. Economical details and bold readable silhouette. No uniform fat vector outlines, slick mascot design, glossy rendering, 3D, gradients, paper texture, gratuitous faces on objects or added props. Reference 1 gives the comic linework and palette; reference 2 gives the same-set style. ONE isolated object, front three-quarter view from slightly above. Centre the whole object in a square image, fill 80 percent with 10 percent transparent margin on every side. NO medallion, frame, scene, hands or ground shadow. True alpha including all empty holes. No aquarium plants or stones. No text or readable labels. No logo or watermark. Single icon only.",
+  "referenceMode": "purcell-farge-og-ny-stilprove",
+  "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-dc4df651-4c52-46a8-8b7f-781129421200.png",
+  "refs": [
+    "/home/tom/Documents/Codex/2026-10-15-sjekk-sam-max-repo-vi-var/grafikk/referanser/purcell-farge-20261013.png",
+    "/home/tom/Documents/Codex/2026-10-15-lag-verb-hjul-og-inventory-grafikk/grafikk/inventory/obj014-sushi-in-fish-bowl.png"
+  ]
+}

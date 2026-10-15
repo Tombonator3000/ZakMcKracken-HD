@@ -1,0 +1,6 @@
+{
+  "file": "obj017-wallpaper-map.png",
+  "base": "obj017-torn-wallpaper.png",
+  "prompt": "Edit the supplied torn wallpaper inventory drawing. Keep exactly the same torn strip, rolled upper edge, silhouette, position, viewing angle, faded blue-and-cream pattern, ink style and true alpha background. Add only a simple visible YELLOW CRAYON MAP SKETCH across its surface: a few irregular intersecting lines and two tiny crosses. The marks are an abstract map symbol, not actual puzzle geography; no readable text, labels, numerals or detailed map. Draw the yellow marks over the wallpaper. No crayon object, hand, background, frame, medallion or shadow. Keep every part fully inside the square canvas.",
+  "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-b7f91c16-29e8-4390-8da6-d5e64ac59a93.png"
+}

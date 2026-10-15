@@ -1,0 +1,18 @@
+{
+  "type": "inventory",
+  "file": "obj016.png",
+  "ids": [
+    16
+  ],
+  "status": "ja",
+  "variant": false,
+  "base": "obj016.png",
+  "name": "kazoo",
+  "prompt": "Use case: stylized-concept. Asset: ONE standalone inventory sprite for Zak McKracken HD. Input images 1 and 2: direct Purcell comic STYLE references. Image 3 if supplied: same-set inventory style or base state reference. STYLE: use the first two supplied images as the DIRECT drawing style references, Steve Purcell's Sam & Max comic drawings. Strongly whimsical, oddball, humorous and deliberately off-kilter. Angular, cockeyed, elastic caricature, confidently wonky perspective, beautifully economical scratchy-tapered pen lines, changes of line weight, small decisive black shadow wedges, comic exaggeration of a few structural shapes. Warm muted flat ink-and-colour palette, ONE simple cel shadow, restrained highlights. Strange and charming, with a slightly scruffy lived-in personality. Keep inner details much finer than the outer silhouette. No rigid geometric vector icons, no uniform fat outline, no slick generic mascot cartoon, no Disney/Pixar cuteness, no glossy rendering, no gradient shading, no 3D, no paper grain or grunge, no gratuitous faces on inanimate props. Do not copy Sam or Max characters or their props into the icon. Draw A small metal kazoo. Identity: kazoo. Give this prop the peculiar, amusing proportions and confident slightly crooked perspective of the references: economy of detail, a few deliberately exaggerated structural shapes, a lively asymmetric silhouette. Do not add components or unrelated objects. Keep the described colour and function intact. NO faces or eyes on inanimate objects, except the broom alien's required eyes. A few fine pen accents, no excessive crosshatching. Front three-quarter view from slightly above, full object centred within square canvas, occupies 80 percent, 10 percent true transparent margin on every side. No lettering, branding, logo, label, coin backing, frame, hands, ground, ground shadow or background. True alpha transparency including holes in the object. One object only unless the subject explicitly calls for a pile or set. Never draw an aquarium plant or stones. Paper map variants use only an abstract yellow crayon sketch, not invented legible puzzle geography.",
+  "source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-ce76ac45-1b9a-41a1-80d0-70dd7ff443fd.png",
+  "refs": [
+    "/home/tom/Documents/Codex/2026-10-15-sjekk-sam-max-repo-vi-var/grafikk/referanser/purcell-farge-20261013.png",
+    "/home/tom/Documents/Codex/2026-10-15-sjekk-sam-max-repo-vi-var/grafikk/referanser/purcell-tusj-20261013.png",
+    "/home/tom/Documents/Codex/2026-10-15-lag-verb-hjul-og-inventory-grafikk/grafikk/inventory/obj014-sushi-in-fish-bowl.png"
+  ]
+}

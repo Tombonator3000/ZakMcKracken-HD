@@ -1,0 +1,2962 @@
+{
+  "date": "2026-10-15T11:45:24+02:00",
+  "status": "til-kontroll",
+  "tool": "image_gen, innebygd",
+  "model": "ikke oppgitt av verktøyet",
+  "verbs": 15,
+  "logical_inventory_images": 81,
+  "inventory_object_ids": [
+    14,
+    15,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    37,
+    39,
+    40,
+    41,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    106,
+    110,
+    119,
+    130,
+    131,
+    139,
+    175,
+    176,
+    177,
+    179,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    262,
+    288,
+    333,
+    362,
+    395,
+    427,
+    428,
+    429,
+    430,
+    431,
+    471,
+    479,
+    535,
+    536,
+    537,
+    544,
+    609,
+    610,
+    614,
+    623,
+    645,
+    646,
+    647,
+    653
+  ],
+  "exported_png_files": 141,
+  "unique_png_contents": 95,
+  "aliases": [
+    {
+      "source": "inventory/obj018.png",
+      "target": "inventory/obj074-cashcard.png"
+    },
+    {
+      "source": "inventory/obj014-sushi-in-fish-bowl.png",
+      "target": "inventory/obj014.png"
+    },
+    {
+      "source": "inventory/obj015-phone-bill.png",
+      "target": "inventory/obj015.png"
+    },
+    {
+      "source": "inventory/obj017-torn-wallpaper.png",
+      "target": "inventory/obj017.png"
+    },
+    {
+      "source": "inventory/obj018.png",
+      "target": "inventory/obj032.png"
+    },
+    {
+      "source": "inventory/obj018.png",
+      "target": "inventory/obj032.png"
+    },
+    {
+      "source": "inventory/obj018.png",
+      "target": "inventory/obj075.png"
+    },
+    {
+      "source": "inventory/obj018.png",
+      "target": "inventory/obj075.png"
+    },
+    {
+      "source": "inventory/obj074-cashcards.png",
+      "target": "inventory/obj074.png"
+    },
+    {
+      "source": "inventory/obj021.png",
+      "target": "inventory/obj188.png"
+    },
+    {
+      "source": "inventory/obj021.png",
+      "target": "inventory/obj188.png"
+    },
+    {
+      "source": "inventory/obj022.png",
+      "target": "inventory/obj262.png"
+    },
+    {
+      "source": "inventory/obj022.png",
+      "target": "inventory/obj262.png"
+    },
+    {
+      "source": "inventory/obj023.png",
+      "target": "inventory/obj623.png"
+    },
+    {
+      "source": "inventory/obj023.png",
+      "target": "inventory/obj623.png"
+    },
+    {
+      "source": "inventory/obj029.png",
+      "target": "inventory/obj130.png"
+    },
+    {
+      "source": "inventory/obj029.png",
+      "target": "inventory/obj130.png"
+    },
+    {
+      "source": "inventory/obj025-box-of-crayons.png",
+      "target": "inventory/obj025.png"
+    },
+    {
+      "source": "inventory/obj026-butter-knife.png",
+      "target": "inventory/obj026.png"
+    },
+    {
+      "source": "inventory/obj026-butter-knife.png",
+      "target": "inventory/obj187-butter-knife.png"
+    },
+    {
+      "source": "inventory/obj026-bent-butter-knife.png",
+      "target": "inventory/obj187-bent-butter-knife.png"
+    },
+    {
+      "source": "inventory/obj026-butter-knife.png",
+      "target": "inventory/obj187.png"
+    },
+    {
+      "source": "inventory/obj031.png",
+      "target": "inventory/obj395.png"
+    },
+    {
+      "source": "inventory/obj031.png",
+      "target": "inventory/obj395.png"
+    },
+    {
+      "source": "inventory/obj037.png",
+      "target": "inventory/obj110.png"
+    },
+    {
+      "source": "inventory/obj037.png",
+      "target": "inventory/obj110.png"
+    },
+    {
+      "source": "inventory/obj037.png",
+      "target": "inventory/obj333.png"
+    },
+    {
+      "source": "inventory/obj037.png",
+      "target": "inventory/obj333.png"
+    },
+    {
+      "source": "inventory/obj049-lighter.png",
+      "target": "inventory/obj049.png"
+    },
+    {
+      "source": "inventory/obj054.png",
+      "target": "inventory/obj056.png"
+    },
+    {
+      "source": "inventory/obj054.png",
+      "target": "inventory/obj056.png"
+    },
+    {
+      "source": "inventory/obj054.png",
+      "target": "inventory/obj183.png"
+    },
+    {
+      "source": "inventory/obj054.png",
+      "target": "inventory/obj183.png"
+    },
+    {
+      "source": "inventory/obj054.png",
+      "target": "inventory/obj184.png"
+    },
+    {
+      "source": "inventory/obj054.png",
+      "target": "inventory/obj184.png"
+    },
+    {
+      "source": "inventory/obj054.png",
+      "target": "inventory/obj645.png"
+    },
+    {
+      "source": "inventory/obj054.png",
+      "target": "inventory/obj645.png"
+    },
+    {
+      "source": "inventory/obj054.png",
+      "target": "inventory/obj646.png"
+    },
+    {
+      "source": "inventory/obj054.png",
+      "target": "inventory/obj646.png"
+    },
+    {
+      "source": "inventory/obj055.png",
+      "target": "inventory/obj186.png"
+    },
+    {
+      "source": "inventory/obj055.png",
+      "target": "inventory/obj186.png"
+    },
+    {
+      "source": "inventory/obj055.png",
+      "target": "inventory/obj431.png"
+    },
+    {
+      "source": "inventory/obj055.png",
+      "target": "inventory/obj431.png"
+    },
+    {
+      "source": "inventory/obj057.png",
+      "target": "inventory/obj185.png"
+    },
+    {
+      "source": "inventory/obj057.png",
+      "target": "inventory/obj185.png"
+    },
+    {
+      "source": "inventory/obj057.png",
+      "target": "inventory/obj429.png"
+    },
+    {
+      "source": "inventory/obj057.png",
+      "target": "inventory/obj429.png"
+    },
+    {
+      "source": "inventory/obj058.png",
+      "target": "inventory/obj430.png"
+    },
+    {
+      "source": "inventory/obj058.png",
+      "target": "inventory/obj430.png"
+    },
+    {
+      "source": "inventory/obj059.png",
+      "target": "inventory/obj647.png"
+    },
+    {
+      "source": "inventory/obj059.png",
+      "target": "inventory/obj647.png"
+    },
+    {
+      "source": "inventory/obj061.png",
+      "target": "inventory/obj062.png"
+    },
+    {
+      "source": "inventory/obj061.png",
+      "target": "inventory/obj062.png"
+    },
+    {
+      "source": "inventory/obj061.png",
+      "target": "inventory/obj063.png"
+    },
+    {
+      "source": "inventory/obj061.png",
+      "target": "inventory/obj063.png"
+    },
+    {
+      "source": "inventory/obj073.png",
+      "target": "inventory/obj471.png"
+    },
+    {
+      "source": "inventory/obj073.png",
+      "target": "inventory/obj471.png"
+    },
+    {
+      "source": "inventory/obj065.png",
+      "target": "inventory/obj066.png"
+    },
+    {
+      "source": "inventory/obj065.png",
+      "target": "inventory/obj066.png"
+    },
+    {
+      "source": "inventory/obj069-flashlight.png",
+      "target": "inventory/obj069.png"
+    },
+    {
+      "source": "inventory/obj070.png",
+      "target": "inventory/obj535.png"
+    },
+    {
+      "source": "inventory/obj070.png",
+      "target": "inventory/obj535.png"
+    },
+    {
+      "source": "inventory/obj070.png",
+      "target": "inventory/obj536.png"
+    },
+    {
+      "source": "inventory/obj070.png",
+      "target": "inventory/obj536.png"
+    },
+    {
+      "source": "inventory/obj070.png",
+      "target": "inventory/obj537.png"
+    },
+    {
+      "source": "inventory/obj070.png",
+      "target": "inventory/obj537.png"
+    },
+    {
+      "source": "inventory/obj071-boom-box.png",
+      "target": "inventory/obj071.png"
+    },
+    {
+      "source": "inventory/obj078.png",
+      "target": "inventory/obj427.png"
+    },
+    {
+      "source": "inventory/obj078.png",
+      "target": "inventory/obj427.png"
+    },
+    {
+      "source": "inventory/obj082.png",
+      "target": "inventory/obj083.png"
+    },
+    {
+      "source": "inventory/obj082.png",
+      "target": "inventory/obj083.png"
+    },
+    {
+      "source": "inventory/obj609.png",
+      "target": "inventory/obj610.png"
+    },
+    {
+      "source": "inventory/obj609.png",
+      "target": "inventory/obj610.png"
+    },
+    {
+      "source": "inventory/obj609.png",
+      "target": "inventory/obj614.png"
+    },
+    {
+      "source": "inventory/obj609.png",
+      "target": "inventory/obj614.png"
+    },
+    {
+      "source": "inventory/obj176.png",
+      "target": "inventory/obj177.png"
+    },
+    {
+      "source": "inventory/obj176.png",
+      "target": "inventory/obj177.png"
+    },
+    {
+      "source": "inventory/obj119.png",
+      "target": "inventory/obj131.png"
+    },
+    {
+      "source": "inventory/obj119.png",
+      "target": "inventory/obj131.png"
+    }
+  ],
+  "uncertain_rows": [
+    {
+      "ids": [
+        33
+      ],
+      "files": [
+        "obj033.png"
+      ],
+      "names": [
+        "squirrel nest"
+      ],
+      "status": "usikker",
+      "description": "Ekornreir",
+      "subject": "A messy squirrel nest of leaves and twigs"
+    },
+    {
+      "ids": [
+        27
+      ],
+      "files": [
+        "obj027.png"
+      ],
+      "names": [
+        "fan club card"
+      ],
+      "status": "usikker",
+      "description": "Medlemskort i en fanklubb",
+      "subject": "A small fan club membership card"
+    },
+    {
+      "ids": [
+        30
+      ],
+      "files": [
+        "obj030.png"
+      ],
+      "names": [
+        "application"
+      ],
+      "status": "usikker",
+      "description": "Søknadsskjema",
+      "subject": "A paper application form"
+    },
+    {
+      "ids": [
+        20
+      ],
+      "files": [
+        "obj020.png"
+      ],
+      "names": [
+        "power cord"
+      ],
+      "status": "usikker",
+      "description": "Strømledning",
+      "subject": "A coiled electrical power cord with a plug"
+    },
+    {
+      "ids": [
+        106
+      ],
+      "files": [
+        "obj106.png"
+      ],
+      "names": [
+        "plastic card"
+      ],
+      "status": "usikker",
+      "description": "Plastkort",
+      "subject": "A blank plastic card"
+    },
+    {
+      "ids": [
+        139
+      ],
+      "files": [
+        "obj139.png"
+      ],
+      "names": [
+        "letter"
+      ],
+      "status": "usikker",
+      "description": "Brev i konvolutt",
+      "subject": "A letter in an envelope"
+    },
+    {
+      "ids": [
+        175
+      ],
+      "files": [
+        "obj175.png"
+      ],
+      "names": [
+        "blotter"
+      ],
+      "status": "usikker",
+      "description": "Skriveunderlag",
+      "subject": "A desk blotter"
+    },
+    {
+      "ids": [
+        176,
+        177
+      ],
+      "files": [
+        "obj176.png"
+      ],
+      "names": [
+        "books"
+      ],
+      "status": "usikker",
+      "description": "Noen bøker",
+      "subject": "A small stack of books"
+    },
+    {
+      "ids": [
+        179
+      ],
+      "files": [
+        "obj179.png"
+      ],
+      "names": [
+        "Yeti skull"
+      ],
+      "status": "usikker",
+      "description": "Hodeskalle av en yeti",
+      "subject": "A large hairy-browed yeti skull"
+    },
+    {
+      "ids": [
+        288
+      ],
+      "files": [
+        "obj288.png"
+      ],
+      "names": [
+        "paper"
+      ],
+      "status": "usikker",
+      "description": "Et ark",
+      "subject": "A sheet of paper"
+    },
+    {
+      "ids": [
+        362
+      ],
+      "files": [
+        "obj362.png"
+      ],
+      "names": [
+        "yak pie"
+      ],
+      "status": "usikker",
+      "description": "Jakmøkk",
+      "subject": "A flat round yak dung pie"
+    },
+    {
+      "ids": [
+        479
+      ],
+      "files": [
+        "obj479.png"
+      ],
+      "names": [
+        "can of gas"
+      ],
+      "status": "usikker",
+      "description": "Bensinkanne",
+      "subject": "A red gas can"
+    },
+    {
+      "ids": [
+        119,
+        131
+      ],
+      "files": [
+        "obj119.png"
+      ],
+      "names": [
+        "seat cushion"
+      ],
+      "status": "usikker",
+      "description": "Sofapute",
+      "subject": "A sofa seat cushion"
+    }
+  ],
+  "excluded_rows": [
+    {
+      "ids": [
+        268,
+        285
+      ],
+      "files": [
+        "obj268.png"
+      ],
+      "names": [
+        "two-headed squirrel"
+      ],
+      "status": "trolig ikke",
+      "description": "Ekorn med to hoder",
+      "subject": "A two-headed squirrel"
+    },
+    {
+      "ids": [
+        19
+      ],
+      "files": [
+        "obj019.png"
+      ],
+      "names": [
+        "receiver"
+      ],
+      "status": "trolig ikke",
+      "description": "Telefonrør",
+      "subject": "A telephone receiver"
+    },
+    {
+      "ids": [
+        87
+      ],
+      "files": [
+        "obj087.png"
+      ],
+      "names": [
+        "telephone"
+      ],
+      "status": "trolig ikke",
+      "description": "Telefon",
+      "subject": "An old telephone"
+    },
+    {
+      "ids": [
+        95
+      ],
+      "files": [
+        "obj095.png"
+      ],
+      "names": [
+        "cat clock"
+      ],
+      "status": "trolig ikke",
+      "description": "Katteklokke på veggen",
+      "subject": "A black cat wall clock"
+    },
+    {
+      "ids": [
+        107
+      ],
+      "files": [
+        "obj107.png"
+      ],
+      "names": [
+        "rug corner"
+      ],
+      "status": "trolig ikke",
+      "description": "Hjørnet av et teppe",
+      "subject": ""
+    },
+    {
+      "ids": [
+        108
+      ],
+      "files": [
+        "obj108.png"
+      ],
+      "names": [
+        "loose boards"
+      ],
+      "status": "trolig ikke",
+      "description": "Løse gulvbord",
+      "subject": ""
+    },
+    {
+      "ids": [
+        241
+      ],
+      "files": [
+        "obj241.png"
+      ],
+      "names": [
+        "exploded egg"
+      ],
+      "status": "trolig ikke",
+      "description": "",
+      "subject": ""
+    },
+    {
+      "ids": [
+        257,
+        258,
+        259
+      ],
+      "files": [
+        "obj257.png"
+      ],
+      "names": [
+        "suitcase"
+      ],
+      "status": "trolig ikke",
+      "description": "Koffert",
+      "subject": ""
+    },
+    {
+      "ids": [
+        264
+      ],
+      "files": [
+        "obj264.png"
+      ],
+      "names": [
+        "toilet paper holder"
+      ],
+      "status": "trolig ikke",
+      "description": "",
+      "subject": ""
+    },
+    {
+      "ids": [
+        267
+      ],
+      "files": [
+        "obj267.png"
+      ],
+      "names": [
+        "loose dirt"
+      ],
+      "status": "trolig ikke",
+      "description": "",
+      "subject": ""
+    },
+    {
+      "ids": [
+        271
+      ],
+      "files": [
+        "obj271.png"
+      ],
+      "names": [
+        "Mt. Rainier"
+      ],
+      "status": "trolig ikke",
+      "description": "",
+      "subject": ""
+    },
+    {
+      "ids": [
+        273
+      ],
+      "files": [
+        "obj273.png"
+      ],
+      "names": [
+        "fire pit"
+      ],
+      "status": "trolig ikke",
+      "description": "",
+      "subject": ""
+    },
+    {
+      "ids": [
+        391
+      ],
+      "files": [
+        "obj391.png"
+      ],
+      "names": [
+        "sand pile"
+      ],
+      "status": "trolig ikke",
+      "description": "",
+      "subject": ""
+    },
+    {
+      "ids": [
+        451
+      ],
+      "files": [
+        "obj451.png"
+      ],
+      "names": [
+        "sand"
+      ],
+      "status": "trolig ikke",
+      "description": "",
+      "subject": ""
+    },
+    {
+      "ids": [
+        478
+      ],
+      "files": [
+        "obj478.png"
+      ],
+      "names": [
+        "covers"
+      ],
+      "status": "trolig ikke",
+      "description": "",
+      "subject": ""
+    }
+  ],
+  "validation": {
+    "rgba_512_alpha": true,
+    "alias_bytes_equal": true,
+    "build_ui_imported": 141,
+    "build_ui_pixel_equal": true,
+    "engine_playtest": false,
+    "tom_approved": false,
+    "preview_search_and_dark_background": true
+  },
+  "assets": [
+    {
+      "path": "inventory/obj014-fish-bowl.png",
+      "sha256": "1eb32b1ed22a32cc1af8c806614f537c767f0a9931015be7f1f20e9032166db2",
+      "git_sha": "637c7d5c007e8836d24e4046b1da74eaee53bcc9",
+      "bytes": 230614,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj014-sushi-in-fish-bowl.png",
+      "sha256": "f174300c08629a69e1a92d8a9d0863619ab205f4ee20bb415863b813d4886af9",
+      "git_sha": "307ba676a73e8afdf5cb08dfdba4b38911644c64",
+      "bytes": 275805,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj014-taped-fish-bowl.png",
+      "sha256": "dc4f07969fae4c85620e8e31b2f198cf939015e1e22e5223ec15d49c68cc8578",
+      "git_sha": "1a29adf30e8e1cdaf7740c6dd1435d9d25a55f1b",
+      "bytes": 226818,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj014.png",
+      "sha256": "f174300c08629a69e1a92d8a9d0863619ab205f4ee20bb415863b813d4886af9",
+      "git_sha": "307ba676a73e8afdf5cb08dfdba4b38911644c64",
+      "bytes": 275805,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj015-phone-bill-map.png",
+      "sha256": "ab3f5f279153aa8f7783cd0ddfd01075a7b87750fa902e18e64a388f302bd3cc",
+      "git_sha": "f732d7ffd4346ab52abda55f912ff254f981f45b",
+      "bytes": 227846,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj015-phone-bill.png",
+      "sha256": "00ca7183a1c6d0435e3c8d4921c84f5caa56fa68ae2ed9ecce9ece41ab95a355",
+      "git_sha": "6ec6773f959d011d82004a2e7f2641e792306478",
+      "bytes": 241810,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj015.png",
+      "sha256": "00ca7183a1c6d0435e3c8d4921c84f5caa56fa68ae2ed9ecce9ece41ab95a355",
+      "git_sha": "6ec6773f959d011d82004a2e7f2641e792306478",
+      "bytes": 241810,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj016.png",
+      "sha256": "57e08f42f285396d28cd65f9adacd6cb155807d3ae9053d7960ea41b148e1e84",
+      "git_sha": "b4a2f8a49d1cc6114e7878f136e5d3799dba854c",
+      "bytes": 146395,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj017-torn-wallpaper.png",
+      "sha256": "6a8e4b64cf4c830a6767ba1aa9130cb24bfb162b2ad8c63fc19714ed91f9de80",
+      "git_sha": "1e6b0849fdc87683864c2c643b2b18fb0461567a",
+      "bytes": 191707,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj017-wallpaper-map.png",
+      "sha256": "bad2463c6588a751864e8ef2a91353985cf33c5097901b651000549bfc303496",
+      "git_sha": "8108414d689b8583ceb3e19cd1a665326a231716",
+      "bytes": 199638,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj017.png",
+      "sha256": "6a8e4b64cf4c830a6767ba1aa9130cb24bfb162b2ad8c63fc19714ed91f9de80",
+      "git_sha": "1e6b0849fdc87683864c2c643b2b18fb0461567a",
+      "bytes": 191707,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj018.png",
+      "sha256": "d517538bf9515992b127220427c9a2fb3af0fa19eafc7fde55b1eeba79129dde",
+      "git_sha": "cc7482ba64665f6c6b03293d36652ee2fd4c5b08",
+      "bytes": 171277,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj020.png",
+      "sha256": "71f9fd82e780a3496a19d859ced7ecff0427eb81d2fa98dd713851390ddb5e1f",
+      "git_sha": "f29bd7dad0b5335d41df4ae916fddb0d34d7fe7e",
+      "bytes": 215034,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj021.png",
+      "sha256": "2f5f8f10496e9c3f1bb0a1431c0ac3d6019899492b3e5fa9f9b0501a4a4e4039",
+      "git_sha": "53328acd6d03945ce2820be3941d25c1bb574c19",
+      "bytes": 175042,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj022.png",
+      "sha256": "13e63e817fef977079a45a24b5d5e877dae3aa5fc4efaf6b52a8e4a6b91df1be",
+      "git_sha": "19479f0721668da07c91a43c935a2ccb968f4048",
+      "bytes": 158633,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj023.png",
+      "sha256": "aca86312eb5cad675c8885d29f650e8df6b858dd33fa2616fe12fcf03f1c7369",
+      "git_sha": "c90bcfc783fdca530560baeae8f26a8e9146829a",
+      "bytes": 161490,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj024.png",
+      "sha256": "618e9b16d456a33ee1e4f2317fc2573be97c8ebfdc8f710f6c913c63788899f2",
+      "git_sha": "9089a6b89de4f7cbc5404257be766dbe77ced9df",
+      "bytes": 132639,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj025-box-of-crayons.png",
+      "sha256": "b3ecbbb7840aee26fe1d9e5c1bdfc2f0878d9a6842da6978bf844a9b1d6e053c",
+      "git_sha": "cab8f6036c24462b7f62a3c608dea57ab297589c",
+      "bytes": 256929,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj025-yellow-crayon.png",
+      "sha256": "bcabf84fd79959833f152d51eddc15d4463cc9aae7922e706b421ae74e205997",
+      "git_sha": "070a6f1d95e68ed4e64037da08ce37b43a94ee60",
+      "bytes": 98128,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj025.png",
+      "sha256": "b3ecbbb7840aee26fe1d9e5c1bdfc2f0878d9a6842da6978bf844a9b1d6e053c",
+      "git_sha": "cab8f6036c24462b7f62a3c608dea57ab297589c",
+      "bytes": 256929,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj026-bent-butter-knife.png",
+      "sha256": "9a088530ac4d1be5b9a1a39cd81c804e8f699a52f562851e294cb399f23ebb08",
+      "git_sha": "c904957447a3988b1c0b1f4c4afdfacee78f7718",
+      "bytes": 115816,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj026-butter-knife.png",
+      "sha256": "437756363fe712e671fcd3fadcf7d7b21c2ca8adebcfdd13a6f003a432697154",
+      "git_sha": "0900e984004bd5c9b207c1b0cf4e8bbe31873db5",
+      "bytes": 97040,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj026.png",
+      "sha256": "437756363fe712e671fcd3fadcf7d7b21c2ca8adebcfdd13a6f003a432697154",
+      "git_sha": "0900e984004bd5c9b207c1b0cf4e8bbe31873db5",
+      "bytes": 97040,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj027.png",
+      "sha256": "d1bbe70cecb5beecdd619e23e1c2630046e974cd292f9e4ab795346b9cb86a91",
+      "git_sha": "a1b3b6c82bb0fff0640d0b388aeea0d887438bf6",
+      "bytes": 224487,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj029.png",
+      "sha256": "34e55624fc05dfffb9d0e8db38eaf0aa8ce4437565ba0c010fe0d8f3a72428fc",
+      "git_sha": "6b15714d7584c09574fa790efd06f19e03376dc8",
+      "bytes": 271534,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj030.png",
+      "sha256": "2be9bb265a66a95985434f9e29884614b3362455bae884e07d46321c9713f36b",
+      "git_sha": "d7ccae641f2885e3c527a19d4c1de755e762d8fd",
+      "bytes": 245748,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj031.png",
+      "sha256": "b06628ce1087a923bb88a5fe699a9967c69a2ff4a4cc4d089785fc6e9017df5f",
+      "git_sha": "f8a0bb23336196886479ce71df3d66009e1723c8",
+      "bytes": 203656,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj032.png",
+      "sha256": "d517538bf9515992b127220427c9a2fb3af0fa19eafc7fde55b1eeba79129dde",
+      "git_sha": "cc7482ba64665f6c6b03293d36652ee2fd4c5b08",
+      "bytes": 171277,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj033.png",
+      "sha256": "8d3f8ccec8313d3029a62ebc2cefc054d44aaca0a88bd94c23c2ae4a11922b46",
+      "git_sha": "b6c8ac6b3804d94a50c8bfbea86ea21364c32381",
+      "bytes": 285341,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj034.png",
+      "sha256": "4122c2f27d0a3cc1451b0e6be6e48ded31b3c777bc2f73ef36fb5080970fb265",
+      "git_sha": "30d13c81f069c3145a9c2e3ace41793ba83fb8a1",
+      "bytes": 199990,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj037.png",
+      "sha256": "fc4456650ab55507cce58ed24df12fe0c7146f2043dae9035fd32f4b8a28bd36",
+      "git_sha": "d6483e00a28f6973c2d822505a55c474626e4c8b",
+      "bytes": 251222,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj039.png",
+      "sha256": "85832d6f3f047f4a2b2315983210be4d62aff78f981da27e36ae45fc10f115e2",
+      "git_sha": "16014010b02cbc4f50342652011ac07981e3d274",
+      "bytes": 153000,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj040.png",
+      "sha256": "6b4ea1d85472988eddfa8807f6409c9dc41d09d9e98090c5057201fca2ffb523",
+      "git_sha": "80f074e1dfd138945d62b7e8c4de715acdabee3b",
+      "bytes": 179789,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj041.png",
+      "sha256": "549f3b1c58d84bfa821b98f1419fe2163a9622e107b8fba91cf475da44d961d9",
+      "git_sha": "5a1ea1ba214f3f847a6beb0d8ec4f502afbee362",
+      "bytes": 165958,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj043.png",
+      "sha256": "c143489079312f0ec0ab99ae58b9b843061f42c1ee27b19b670321116678ed29",
+      "git_sha": "0a3ddbd0ce8f1dd0c447eb352ba126d48424040f",
+      "bytes": 152505,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj044.png",
+      "sha256": "a125a274be4df9d74d4aeae996d553a284ecf0d7160e46f119c33d9d0f5969f6",
+      "git_sha": "fcab5c049c9e29b3fff28bd5431038883a5d7050",
+      "bytes": 106564,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj045.png",
+      "sha256": "625f5f35cee9c3d3fc7d8586a9b46cdb882ebb2189a0470a56606f845367ddf8",
+      "git_sha": "f1b054e3be265f686be9e8c081364e48e033798f",
+      "bytes": 193077,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj046.png",
+      "sha256": "f29fa4091249b76996ee7ace605cdbd410e82bd34a227ff9298ed24875264526",
+      "git_sha": "1dc043abcbbe2af6838dd2715ef056f3f6b80434",
+      "bytes": 183614,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj047.png",
+      "sha256": "91f14adaa79156be642ffe0a34e091d2c5bf88c7321f873c0c56af47d101fac9",
+      "git_sha": "2d8c23acd8deff02085a845ec3321c6eddebb715",
+      "bytes": 187938,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj048.png",
+      "sha256": "1df27958a390012e0285c12085e3478692a10904ec612ffd01a089ad222af8b7",
+      "git_sha": "090d78a06e914c55977e46799399b426e5889cc6",
+      "bytes": 180836,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj049-lighter.png",
+      "sha256": "239c0d56defe942ca8888f192676b9be1a1d691d80df8865aec05da9369ce7b9",
+      "git_sha": "2a0a5354119968848f4690e3b6a9ee1787df3110",
+      "bytes": 195650,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj049-lit-lighter.png",
+      "sha256": "125b8dda71df7858e8a0356ce11e7d566731715498bd9f0414811e7b549a1aae",
+      "git_sha": "d5afd5303ba1f01c0265fe6fd5075f2010e4a230",
+      "bytes": 208619,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj049.png",
+      "sha256": "239c0d56defe942ca8888f192676b9be1a1d691d80df8865aec05da9369ce7b9",
+      "git_sha": "2a0a5354119968848f4690e3b6a9ee1787df3110",
+      "bytes": 195650,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj050.png",
+      "sha256": "ead7eb7732c93b7f05467f32180a7f39c6793cb53c64c4ee5142d958678dd661",
+      "git_sha": "758cc4ae6a23925cead64edf08f90c8066e2ef0b",
+      "bytes": 187026,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj051.png",
+      "sha256": "3f2ab101cb7c74b75f0452c969849c2161afc6fc90e7af45280289ebcc9752d7",
+      "git_sha": "6933760f3bba8b2210596635cf15c7af296f10e7",
+      "bytes": 252128,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj052.png",
+      "sha256": "f816b917fc391fc60d512f9e579d6f248babf9159300b5eaf60e9eed762cc104",
+      "git_sha": "c3073fcc5d3a54896b9255a12c7b24174e4aaccb",
+      "bytes": 145120,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj053.png",
+      "sha256": "2f54ddcc010f33e50077653cb7ec8ec1ea90e46a68d9e85497ffdb5d9de7658d",
+      "git_sha": "93be8d3d3e46b3e7196849400b5e5ebf33bef327",
+      "bytes": 233201,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj054.png",
+      "sha256": "a0d446c099bf5021d5a78a7d97af565491de65a824986e0d87a6ec8ba22c00ed",
+      "git_sha": "f3af323061a3b5d349cb61056e888ed0c9991ed1",
+      "bytes": 164481,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj055.png",
+      "sha256": "a5923d81bdbf0b1b72675218570631a3dc2af2567840eea4c2c166e7f12324fc",
+      "git_sha": "41ca47cd539c3e0aa94724ee1b4f6c35dc5906bd",
+      "bytes": 187041,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj056.png",
+      "sha256": "a0d446c099bf5021d5a78a7d97af565491de65a824986e0d87a6ec8ba22c00ed",
+      "git_sha": "f3af323061a3b5d349cb61056e888ed0c9991ed1",
+      "bytes": 164481,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj057.png",
+      "sha256": "197c7540d0f75ce0501565cd631059d44499bfd666096313ca0f6c32f83bef0e",
+      "git_sha": "3e1249accd3b32a32e1cdf4fd641f582a4765d16",
+      "bytes": 185730,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj058.png",
+      "sha256": "83795d21cdaa90f1786a6b7a866ebb82f40347df0d77f6fe70e849960a7cb438",
+      "git_sha": "5c789ef2e8393b07b88e31e8354617b950b257c5",
+      "bytes": 165226,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj059.png",
+      "sha256": "acd80f1c6405ba7d6246a26bf413b3fcea6d920d9c7c348e22c2238de8bcefe2",
+      "git_sha": "633c97c7cdbaced678992d30a67ccd0a679ea934",
+      "bytes": 58737,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj060.png",
+      "sha256": "f8d60d76fc3cc4f672bb4e8e946e4623076d5c1c89c45bac4d94e26db82bf109",
+      "git_sha": "8841c33c160731e56568bc1a430f57a438543a15",
+      "bytes": 132081,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj061.png",
+      "sha256": "ca43ac2e427a639a071a2b609249fc42c9ba2608708baa17bb604009e76282d9",
+      "git_sha": "4d2eb0b20da781705e0f9fbdee74192a41f6698f",
+      "bytes": 251830,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj062.png",
+      "sha256": "ca43ac2e427a639a071a2b609249fc42c9ba2608708baa17bb604009e76282d9",
+      "git_sha": "4d2eb0b20da781705e0f9fbdee74192a41f6698f",
+      "bytes": 251830,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj063.png",
+      "sha256": "ca43ac2e427a639a071a2b609249fc42c9ba2608708baa17bb604009e76282d9",
+      "git_sha": "4d2eb0b20da781705e0f9fbdee74192a41f6698f",
+      "bytes": 251830,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj064.png",
+      "sha256": "4e1379ee33050fc60af29c54eb7dbe1d2c9e6c1f6414816253035793a13623c8",
+      "git_sha": "2f1a3f1b1b697f9b87a28708492dae219373966a",
+      "bytes": 150916,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj065.png",
+      "sha256": "e25eb2865e2d8dee387fbcd79cb3184c52db403df5a28f6602560aff3f21da3e",
+      "git_sha": "ae86148430c33278f44aa6ee95c95ddfb3547ce0",
+      "bytes": 257858,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj066.png",
+      "sha256": "e25eb2865e2d8dee387fbcd79cb3184c52db403df5a28f6602560aff3f21da3e",
+      "git_sha": "ae86148430c33278f44aa6ee95c95ddfb3547ce0",
+      "bytes": 257858,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj067.png",
+      "sha256": "87745166a930b74dcb959c71c90ede8632bd5d0c3fbdeddfc2b11499799f9870",
+      "git_sha": "bae2b30a63abca8d8fe1f87cedd67777e579decc",
+      "bytes": 199407,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj068.png",
+      "sha256": "63b42a576eda2d950b5ed2f0dcb8b64821ab94dbf7a0181167f7bfde5988a5cd",
+      "git_sha": "df45850c3545c64c20a174ae1e79b9c68328ffa0",
+      "bytes": 139476,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj069-flashlight.png",
+      "sha256": "5455cd91354dd454d11dc6c7bcfccc5fb2bfa80ab9a0c3105421b7b8350d7e8c",
+      "git_sha": "2162e5f72d197149d54574351be8c9e4d5ea44c7",
+      "bytes": 190674,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj069-lit-flashlight.png",
+      "sha256": "700f9826655f3d63e247f6252522ccb13074f79df643501d7cdf8491dbc527d0",
+      "git_sha": "3d7871afac37955b83887e51ef64783a8e3662d2",
+      "bytes": 198919,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj069.png",
+      "sha256": "5455cd91354dd454d11dc6c7bcfccc5fb2bfa80ab9a0c3105421b7b8350d7e8c",
+      "git_sha": "2162e5f72d197149d54574351be8c9e4d5ea44c7",
+      "bytes": 190674,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj070.png",
+      "sha256": "6678526126414fb656da5f171a0c8141c37c8a7dce062664f766ebbde76abf31",
+      "git_sha": "35732fd63fb19f24655a8e387c5ef78ebc5f3eec",
+      "bytes": 164663,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj071-boom-box.png",
+      "sha256": "9341665c7be8c7dd7e05c492607590da6736e9c5b39cce31d02ff4af65039a51",
+      "git_sha": "87e969cc9d66bff78b1b58f26d9095b7c2cd20b2",
+      "bytes": 307827,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj071-recording-boom-box.png",
+      "sha256": "758abd71165c041d0e2e3f0e1dd7052beafb86957f0556a93be137b34dab0624",
+      "git_sha": "a9ec634b4e66ab8c442168ccda6d563eeaa95468",
+      "bytes": 311425,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj071.png",
+      "sha256": "9341665c7be8c7dd7e05c492607590da6736e9c5b39cce31d02ff4af65039a51",
+      "git_sha": "87e969cc9d66bff78b1b58f26d9095b7c2cd20b2",
+      "bytes": 307827,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj072.png",
+      "sha256": "c602b46028b308ab1bd1277af186f8f27d01a5ec9fc7add75409edeb11f0411c",
+      "git_sha": "70acb3d158a3f1aad458a4dcaa2704968d422413",
+      "bytes": 229949,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj073.png",
+      "sha256": "d4afcf22ed2c8d426a0c57ad88294965c8ee38f741adae5e4c28d9b652cb88d6",
+      "git_sha": "789c49dc6bb3a576af682fa7abafad3881ec1627",
+      "bytes": 154648,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj074-cashcard.png",
+      "sha256": "d517538bf9515992b127220427c9a2fb3af0fa19eafc7fde55b1eeba79129dde",
+      "git_sha": "cc7482ba64665f6c6b03293d36652ee2fd4c5b08",
+      "bytes": 171277,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj074-cashcards.png",
+      "sha256": "1f6e4c311fd4d35297c2564f4ef2c502f26bde6d3fcb57ca93f517ebffb3bc20",
+      "git_sha": "4966d678542bb0ebee38a322a61caafc9c9431cc",
+      "bytes": 221857,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj074.png",
+      "sha256": "1f6e4c311fd4d35297c2564f4ef2c502f26bde6d3fcb57ca93f517ebffb3bc20",
+      "git_sha": "4966d678542bb0ebee38a322a61caafc9c9431cc",
+      "bytes": 221857,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj075.png",
+      "sha256": "d517538bf9515992b127220427c9a2fb3af0fa19eafc7fde55b1eeba79129dde",
+      "git_sha": "cc7482ba64665f6c6b03293d36652ee2fd4c5b08",
+      "bytes": 171277,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj076.png",
+      "sha256": "c4ae032552dff17e5958e5661d6b1d65a916d4ff2382c29a80da49db386bb595",
+      "git_sha": "e3f47d154883fafdf41b8d5b89bdcae03278afad",
+      "bytes": 160467,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj077.png",
+      "sha256": "f41899f2e73df7d5623a45fc9adb8eae796a066eeaea380d4cba659ab42cad31",
+      "git_sha": "bdd7be94d33d03b5f37c28955303ac5c2cae08d9",
+      "bytes": 309582,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj078.png",
+      "sha256": "a9e5fd0eb92902629b073081963493ba11713dcb79cc33fcd75a72fa941213e2",
+      "git_sha": "ebd7cbe52a02b2a2cada15b2fbf310ab751613f8",
+      "bytes": 115217,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj079.png",
+      "sha256": "11aacaa61ef56df0bdf8e4ba965e902724631618dd4b4d58594204e6de438725",
+      "git_sha": "db179af56abb09f8e1a8e2369753f77de459e82b",
+      "bytes": 185518,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj080.png",
+      "sha256": "11754ee679ff0e212bb57208d684fad7b7a25ef66ee8e84cafbcce5236b27e18",
+      "git_sha": "4137fa8fc5525f4fe073a9332b013cc68ee109d7",
+      "bytes": 168052,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj081.png",
+      "sha256": "aea88d90b563175b1f0c16dbfea6da8f9944c1e40fabe5c064e78809a8d5ea9a",
+      "git_sha": "24ae11c179040bb89e00344f675718c9e339bf49",
+      "bytes": 141713,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj082.png",
+      "sha256": "41d0ed4152949c32e4bb6d2adab8dbeeff10b3fd95792474572447e3fbf572bb",
+      "git_sha": "6d87fdb5c1ca5b07e86b34cf5ddff9b929dd09c4",
+      "bytes": 165404,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj083.png",
+      "sha256": "41d0ed4152949c32e4bb6d2adab8dbeeff10b3fd95792474572447e3fbf572bb",
+      "git_sha": "6d87fdb5c1ca5b07e86b34cf5ddff9b929dd09c4",
+      "bytes": 165404,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj106.png",
+      "sha256": "87fdc6060278b2aa0f025f2c9a2a5131d91d7ed9e2e541d7f5db7699e9624b04",
+      "git_sha": "647c30c9550b42bf9e0a7bd838b0d52e17dfa8b6",
+      "bytes": 145589,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj110.png",
+      "sha256": "fc4456650ab55507cce58ed24df12fe0c7146f2043dae9035fd32f4b8a28bd36",
+      "git_sha": "d6483e00a28f6973c2d822505a55c474626e4c8b",
+      "bytes": 251222,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj119.png",
+      "sha256": "37116f276e103cbb4932db8d480ce2435b5cb45938439c291523de6c258ee268",
+      "git_sha": "80abedad3eaf2298fb36f355b8f6f1fcc3ae3017",
+      "bytes": 169464,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj130.png",
+      "sha256": "34e55624fc05dfffb9d0e8db38eaf0aa8ce4437565ba0c010fe0d8f3a72428fc",
+      "git_sha": "6b15714d7584c09574fa790efd06f19e03376dc8",
+      "bytes": 271534,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj131.png",
+      "sha256": "37116f276e103cbb4932db8d480ce2435b5cb45938439c291523de6c258ee268",
+      "git_sha": "80abedad3eaf2298fb36f355b8f6f1fcc3ae3017",
+      "bytes": 169464,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj139.png",
+      "sha256": "d7395c497c32a9c4b41c4bba2184d7354731cb1110ed01545594fa5b9e880a99",
+      "git_sha": "35da64d3324c35fb77f60481f1577e064917f9d7",
+      "bytes": 195351,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj175.png",
+      "sha256": "295f8c31ecc6a44e47fa8d31f3214e5c77e33fb46968adda75272f38323db3e9",
+      "git_sha": "e72cda390cee21f0199ed8f2826480203df92fe9",
+      "bytes": 140470,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj176.png",
+      "sha256": "41f16fc6e8fab29a5ddb652619b5ccd2ad3a32c0a1e0f9bc96d09150036f877d",
+      "git_sha": "881652093bdf00521e91ce72c859508579e59d07",
+      "bytes": 273123,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj177.png",
+      "sha256": "41f16fc6e8fab29a5ddb652619b5ccd2ad3a32c0a1e0f9bc96d09150036f877d",
+      "git_sha": "881652093bdf00521e91ce72c859508579e59d07",
+      "bytes": 273123,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj179.png",
+      "sha256": "073b94e6e3c158c3b0cf68e8faaf9eb493108bd7caeff2636d6d237253cf10bd",
+      "git_sha": "e5459a4afead9a4cfd11074db6400ace4de698f1",
+      "bytes": 262039,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj183.png",
+      "sha256": "a0d446c099bf5021d5a78a7d97af565491de65a824986e0d87a6ec8ba22c00ed",
+      "git_sha": "f3af323061a3b5d349cb61056e888ed0c9991ed1",
+      "bytes": 164481,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj184.png",
+      "sha256": "a0d446c099bf5021d5a78a7d97af565491de65a824986e0d87a6ec8ba22c00ed",
+      "git_sha": "f3af323061a3b5d349cb61056e888ed0c9991ed1",
+      "bytes": 164481,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj185.png",
+      "sha256": "197c7540d0f75ce0501565cd631059d44499bfd666096313ca0f6c32f83bef0e",
+      "git_sha": "3e1249accd3b32a32e1cdf4fd641f582a4765d16",
+      "bytes": 185730,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj186.png",
+      "sha256": "a5923d81bdbf0b1b72675218570631a3dc2af2567840eea4c2c166e7f12324fc",
+      "git_sha": "41ca47cd539c3e0aa94724ee1b4f6c35dc5906bd",
+      "bytes": 187041,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj187-bent-butter-knife.png",
+      "sha256": "9a088530ac4d1be5b9a1a39cd81c804e8f699a52f562851e294cb399f23ebb08",
+      "git_sha": "c904957447a3988b1c0b1f4c4afdfacee78f7718",
+      "bytes": 115816,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj187-butter-knife.png",
+      "sha256": "437756363fe712e671fcd3fadcf7d7b21c2ca8adebcfdd13a6f003a432697154",
+      "git_sha": "0900e984004bd5c9b207c1b0cf4e8bbe31873db5",
+      "bytes": 97040,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj187.png",
+      "sha256": "437756363fe712e671fcd3fadcf7d7b21c2ca8adebcfdd13a6f003a432697154",
+      "git_sha": "0900e984004bd5c9b207c1b0cf4e8bbe31873db5",
+      "bytes": 97040,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj188.png",
+      "sha256": "2f5f8f10496e9c3f1bb0a1431c0ac3d6019899492b3e5fa9f9b0501a4a4e4039",
+      "git_sha": "53328acd6d03945ce2820be3941d25c1bb574c19",
+      "bytes": 175042,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj189.png",
+      "sha256": "951330997fa7d75b809285a936c8ce83c2f3d52c252f67120f223cd132bc6776",
+      "git_sha": "d1df195284aa3ee35d8edfadfbda9819de0cfe05",
+      "bytes": 233554,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj262.png",
+      "sha256": "13e63e817fef977079a45a24b5d5e877dae3aa5fc4efaf6b52a8e4a6b91df1be",
+      "git_sha": "19479f0721668da07c91a43c935a2ccb968f4048",
+      "bytes": 158633,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj288.png",
+      "sha256": "3e0030d5c547cd1562b0ea19e79ab00aff34500efbce22a902af1bfcc2f82bdb",
+      "git_sha": "f2a9e0dcf706998d2733fc05652c69e88bdac882",
+      "bytes": 174806,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj333.png",
+      "sha256": "fc4456650ab55507cce58ed24df12fe0c7146f2043dae9035fd32f4b8a28bd36",
+      "git_sha": "d6483e00a28f6973c2d822505a55c474626e4c8b",
+      "bytes": 251222,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj362.png",
+      "sha256": "7ce43c4df398c468e68ca4e0bcbf72918c5bd730e2a7e32572f3f33633d1bbfd",
+      "git_sha": "489e5ea4bbf93f9dccfcd2483f66f0b2eb355dfc",
+      "bytes": 181170,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj395.png",
+      "sha256": "b06628ce1087a923bb88a5fe699a9967c69a2ff4a4cc4d089785fc6e9017df5f",
+      "git_sha": "f8a0bb23336196886479ce71df3d66009e1723c8",
+      "bytes": 203656,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj427.png",
+      "sha256": "a9e5fd0eb92902629b073081963493ba11713dcb79cc33fcd75a72fa941213e2",
+      "git_sha": "ebd7cbe52a02b2a2cada15b2fbf310ab751613f8",
+      "bytes": 115217,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj428.png",
+      "sha256": "5675cadad8e06907e3b28e80de2ffa4602e88e8b1222058ca980dccae847d9f4",
+      "git_sha": "1757e1dfd0b8bb48690287c5dd2f0122a099b08a",
+      "bytes": 199765,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj429.png",
+      "sha256": "197c7540d0f75ce0501565cd631059d44499bfd666096313ca0f6c32f83bef0e",
+      "git_sha": "3e1249accd3b32a32e1cdf4fd641f582a4765d16",
+      "bytes": 185730,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj430.png",
+      "sha256": "83795d21cdaa90f1786a6b7a866ebb82f40347df0d77f6fe70e849960a7cb438",
+      "git_sha": "5c789ef2e8393b07b88e31e8354617b950b257c5",
+      "bytes": 165226,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj431.png",
+      "sha256": "a5923d81bdbf0b1b72675218570631a3dc2af2567840eea4c2c166e7f12324fc",
+      "git_sha": "41ca47cd539c3e0aa94724ee1b4f6c35dc5906bd",
+      "bytes": 187041,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj471.png",
+      "sha256": "d4afcf22ed2c8d426a0c57ad88294965c8ee38f741adae5e4c28d9b652cb88d6",
+      "git_sha": "789c49dc6bb3a576af682fa7abafad3881ec1627",
+      "bytes": 154648,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj479.png",
+      "sha256": "835a9f8126d2cf860d9660c7912eff6380558f73164cef81c74ac6eaeca34881",
+      "git_sha": "ed4a32698110d4fd5a150146537accb45bfca883",
+      "bytes": 210533,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj535.png",
+      "sha256": "6678526126414fb656da5f171a0c8141c37c8a7dce062664f766ebbde76abf31",
+      "git_sha": "35732fd63fb19f24655a8e387c5ef78ebc5f3eec",
+      "bytes": 164663,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj536.png",
+      "sha256": "6678526126414fb656da5f171a0c8141c37c8a7dce062664f766ebbde76abf31",
+      "git_sha": "35732fd63fb19f24655a8e387c5ef78ebc5f3eec",
+      "bytes": 164663,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj537.png",
+      "sha256": "6678526126414fb656da5f171a0c8141c37c8a7dce062664f766ebbde76abf31",
+      "git_sha": "35732fd63fb19f24655a8e387c5ef78ebc5f3eec",
+      "bytes": 164663,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj544.png",
+      "sha256": "94c5c7084501cb886f4dd4c3c48ab25a9a9223abbcecf495ad8f50f67a97b36b",
+      "git_sha": "a81dd1ad7e5f224883c738f78aff4c37c52ca4e3",
+      "bytes": 146398,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj609.png",
+      "sha256": "da6e1660e8e74d3380c34e1600d4b87bd9e0e558f6073be6c0f1149388af093e",
+      "git_sha": "68390683730800e3a3fae34926545a8a40bc9cdb",
+      "bytes": 157469,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj610.png",
+      "sha256": "da6e1660e8e74d3380c34e1600d4b87bd9e0e558f6073be6c0f1149388af093e",
+      "git_sha": "68390683730800e3a3fae34926545a8a40bc9cdb",
+      "bytes": 157469,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj614.png",
+      "sha256": "da6e1660e8e74d3380c34e1600d4b87bd9e0e558f6073be6c0f1149388af093e",
+      "git_sha": "68390683730800e3a3fae34926545a8a40bc9cdb",
+      "bytes": 157469,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj623.png",
+      "sha256": "aca86312eb5cad675c8885d29f650e8df6b858dd33fa2616fe12fcf03f1c7369",
+      "git_sha": "c90bcfc783fdca530560baeae8f26a8e9146829a",
+      "bytes": 161490,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj645.png",
+      "sha256": "a0d446c099bf5021d5a78a7d97af565491de65a824986e0d87a6ec8ba22c00ed",
+      "git_sha": "f3af323061a3b5d349cb61056e888ed0c9991ed1",
+      "bytes": 164481,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj646.png",
+      "sha256": "a0d446c099bf5021d5a78a7d97af565491de65a824986e0d87a6ec8ba22c00ed",
+      "git_sha": "f3af323061a3b5d349cb61056e888ed0c9991ed1",
+      "bytes": 164481,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj647.png",
+      "sha256": "acd80f1c6405ba7d6246a26bf413b3fcea6d920d9c7c348e22c2238de8bcefe2",
+      "git_sha": "633c97c7cdbaced678992d30a67ccd0a679ea934",
+      "bytes": 58737,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "inventory/obj653.png",
+      "sha256": "ef39db6cfc82b0038d51fe378ebebc3029df549e95aac1893852f404281f4ac9",
+      "git_sha": "c99c66d2154cbc5ddd452f214720e5b04ea4e236",
+      "bytes": 205700,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "ui/verbhjul/buy.png",
+      "sha256": "1fceb00a91dec08ae8133e87dd236631f436685c01855cbd20ec6fe3dd872539",
+      "git_sha": "630f4bc0363bbb8ee94a8517babf767f5f652a78",
+      "bytes": 351932,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "ui/verbhjul/close.png",
+      "sha256": "6b67f8c2af300c0ec366ac8c17e4ecb39c9f6ace598519fadb3034b581f8efa7",
+      "git_sha": "056d1627645d65357ba250925541570f550ded80",
+      "bytes": 296388,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "ui/verbhjul/give.png",
+      "sha256": "1a4a3b2b2562dc00668b6e38d35132942ba057cd32f2010862bc9696595eb643",
+      "git_sha": "e323e696889d172da8623d8cd9e9f4024d14bc8d",
+      "bytes": 299513,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "ui/verbhjul/open.png",
+      "sha256": "06a9d8a1bf1f16a8702d0757cd70690cb50c9880fa11815f054993299d3c1b73",
+      "git_sha": "8187c240b0c735d24fbbf609e9ffc77ed90f1301",
+      "bytes": 339140,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "ui/verbhjul/pick-up.png",
+      "sha256": "e5517dd4d12e6b07053e4e904380b8d0d6a5e2039836daa56a468f5e3ab93b68",
+      "git_sha": "185d5debfec45fc206a4a0eae8e0ec376108fe81",
+      "bytes": 312735,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "ui/verbhjul/pull.png",
+      "sha256": "d19d921f228aa5b7f5d89afa8bd27ce2689ac67cec3c777f6d59988fb5528d06",
+      "git_sha": "eea7a7a69a14b97ddef6b1fc68430e4f052a3e7c",
+      "bytes": 304344,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "ui/verbhjul/push.png",
+      "sha256": "bb41feeb03d827ead970352585f01f6c57afe60961d215d716e0738215efbf2d",
+      "git_sha": "ef6d81690b7407797f0e2ba8c3ea3a724f6fd2c4",
+      "bytes": 324337,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "ui/verbhjul/put-on.png",
+      "sha256": "b2998dbe3af9439623e6e3211a6d91ae98b881914f02e4f62198da22e0d2d62f",
+      "git_sha": "6c05f72056ac8fcc1e8450616aa607926623737c",
+      "bytes": 323839,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "ui/verbhjul/read.png",
+      "sha256": "272b9f873d488d4fc532d33ef50830f78fb20ee40e36ba723311cc9cd47741b4",
+      "git_sha": "6f20c2a8f1772e3fb70e91ba1bf4bc9333b92e54",
+      "bytes": 314348,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "ui/verbhjul/sell.png",
+      "sha256": "57bfd400657f201ac284ac86933be548c73323f24e4c9abde4f4ddd5dfff52e9",
+      "git_sha": "2a509fefc956baae8db5217653ff1847190a2668",
+      "bytes": 310686,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "ui/verbhjul/take-off.png",
+      "sha256": "780cba3f170e45fb6fab2c1ea1f112bd842b51aa5b7a9d9ba5c3afca20e3670a",
+      "git_sha": "9dba4d2d0fee7c2e996a65c415d924c4ff990c5a",
+      "bytes": 321057,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "ui/verbhjul/teleport.png",
+      "sha256": "ea28ed8b6a9da3daedf6b6664592c15714b8f01d752ef9f5fbb21620567bcef7",
+      "git_sha": "7ba19f7b2de637b0df6a96ce8e70ead826abe842",
+      "bytes": 287169,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "ui/verbhjul/turn-off.png",
+      "sha256": "2574d35883ba96aba55f463a12a3609cb7779f9431aec32cc39d79accc8b2279",
+      "git_sha": "efad97aaebb58d11fe87ec170192c3b153168e62",
+      "bytes": 305671,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "ui/verbhjul/turn-on.png",
+      "sha256": "6376f25bf47b12ea21c29241561ef55d0bfee376879beccae92fcd3c165e381a",
+      "git_sha": "a27d2074213acbc396bf36b31f96f398cb6a1fdc",
+      "bytes": 317897,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "ui/verbhjul/use.png",
+      "sha256": "039050f0a2ffefe1df0901bb89c4863c222ed09bdc1cb3ed698865abd26c384a",
+      "git_sha": "1a7433721d3bdbaba20d0b3772e4aa8255c130c2",
+      "bytes": 324533,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    }
+  ]
+}

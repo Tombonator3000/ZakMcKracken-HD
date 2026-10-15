@@ -93,3 +93,7 @@ Tom avviste første Caponian-pilot, vurderte v2 som mye bedre, og presiserte der
 Dette er brukerens korrigerte designgrunnlag. V1 er avvist og v2 er erstattet etter den nye rettelsen; ingen av dem brukes som bildeanker for v3. Tidligere positiv stillbildekontroll overså disse feilene. Se [gjeldende rettelsesnotat](konsept/2026-10-13-figurpiloter/CAPONIAN-RETTELSE-03.md) og [ny pilot v3](konsept/2026-10-13-figurpiloter/caponian-pilot-v3.png). Ny pilot er en kandidat, ikke et godkjent produksjonsark. Gangavspilling er ikke laget eller testet.
 
 Tom godkjente Caponian v3, Zak- og Annie-arket og rom 42-konseptet som stilankere 14. oktober 2026. De ligger i [stil/](stil/README.md).
+
+## UI-stilrettelse fra Tom 15. oktober 2026
+
+Verbhjul og inventar skal ha mer av den rare, lekne og humoristiske Purcell-stilen fra Sam & Max-repoet. Farge- og tusjreferansene er sett direkte. Den glattere første serien er utelatt. Figurarkene for Zak og Annie er fortsatt identitetsankere; stilreferansen gir ikke tillatelse til å flytte Sam og Max inn på Zak-gjenstander. Se rapporter/hjul-inventar-20261015/notat.md og STILRETTELSE-02.md i samme mappe.

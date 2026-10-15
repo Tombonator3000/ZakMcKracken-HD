@@ -61,3 +61,9 @@
 
 ## 2026-10-15 10:28 (Claude)
 - GRAFIKK-HJUL-OG-INVENTAR.md oppdatert fra main: portrettene for figurbytte (del 1b).
+
+## 2026-10-15 11:43 (Codex)
+- Direkte bestilling fra Tom: verbhjul og inventargrafikk. Stil presisert mot Purcells rare, lekne og humoristiske Sam & Max-uttrykk. Referansene i Sam & Max-repoet sett direkte.
+- 15 verbikoner og 81 logiske inventarbilder levert med alfa, tilstandsvarianter og aliaser: 141 PNG for 105 objektnumre. Første glatte serie utelatt.
+- Alle filene kontrollert: 512 x 512 RGBA med alfa; build_ui tar inn 141 filer uten pikselendring; identiske aliaser; sjekksummer og kontaktark. Ikke prøvd i motoren og ikke godkjent av Tom.
+- Leveranse, faktiske prompter, rettelser, usikkerhet og forhåndsvisning i rapporter/hjul-inventar-20261015/. Main og spillfilene er ikke endret.
