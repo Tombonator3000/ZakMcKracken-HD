@@ -1,6 +1,6 @@
 {
   "date": "2026-10-15T11:45:24+02:00",
-  "status": "til-kontroll",
+  "status": "godkjent av Tom 15. oktober 2026",
   "tool": "image_gen, innebygd",
   "model": "ikke oppgitt av verktøyet",
   "verbs": 15,
@@ -2958,5 +2958,10 @@
         255
       ]
     }
-  ]
+  ],
+  "approval": {
+    "by": "Tom",
+    "date": "2026-10-15T13:26:47+02:00",
+    "scope": "alle 15 verbikoner og 126 inventarfiler; ingen bildefiler endret"
+  }
 }

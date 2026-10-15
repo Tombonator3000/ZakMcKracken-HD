@@ -39,3 +39,7 @@ Repoet har samme oppsett som Sam & Max HD og The Dig HD Remake, tilpasset Zak Mc
 - Kostymefargene i RGBA-bildene er fra rommet kostymet ligger i; spillet kan vise andre farger.
 - Promptene i `gpt.py` og `figur.py` er grovt tilpasset Zak, ikke prøvd. Bestillingen er ikke aktiv før stilpiloten.
 - Nettsiden: ikke prøvd på en ekte telefon, i fullskjerm, med F5-menyen og lagring, eller i Firefox og Safari. Den virker bare så lenge repoet er offentlig (Pages).
+
+## Godkjenning 15. oktober
+
+Tom har godkjent 21 karakterark, inventaret og verbhjulet visuelt. The King er rettet som v2 med Elvis-tupé etter hans bestilling; denne rettelsen vises til kontroll. Første spritesheet-leveranse er bestilt for bare Zak.

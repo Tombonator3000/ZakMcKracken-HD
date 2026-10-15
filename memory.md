@@ -89,3 +89,8 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 - HD-grafikk i `main` (Tom 14. oktober 2026): godkjent HD-grafikk legges under `grafikk/`. Spillfilene ligger fortsatt bare i `spilldata`.
 - HD av og på (Tom 14. oktober 2026): spilleren velger selv HD eller originalgrafikk mens spillet går, med Ctrl+H og en rad i menyen (for mobil). Valget lagres (`dighd_classic`).
 - Deling (13. oktober 2026): Tom tillater at grafikk og annet fra spillet deles utenfor repoet til hans eget private bruk (egne enheter, private steder). Offentlige sider og pakker har fortsatt ingen spillgrafikk.
+
+## Godkjent grafikk, 15. oktober 2026
+- Tom godkjente alle de 21 øvrige karakterarkene, 15 verbikonene og 126 inventarfilene. The King v1 var unntaket: han skal ha svart Elvis-tupé på Caponian-hodet. Høye ekte øyne og langt smalt midtansikt skal beholdes.
+- The King v2 er rettet med tupé og lagt i PR 11. Ny rettelse registreres ikke automatisk som godkjent.
+- Neste spritesheet-bestilling gjelder bare Zak først, med godkjent Zak-master som identitetsanker.

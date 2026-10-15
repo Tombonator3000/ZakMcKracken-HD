@@ -41,3 +41,7 @@ forhandsvisning.html er en lokal grafikkoversikt med søk, lys og mørk bakgrunn
 ## Innlegging i hovedrepoet, 15. oktober 2026
 
 Tom ba om at hele leveransen legges i repoet via PR. De 15 verbikonene ligger nå i grafikk/ui/verbhjul-gpt/ og de 126 inventarfilene i grafikk/inventar/, slik build_ui forventer. Filene er byteidentiske med leveransen i gpt-arbeid. Manifest, aliaser, galleri og sjekksummer er tilpasset mappene. Produksjonsnotatene over beskriver status ved tegning; innleggingen er ingen påstand om ny spilltest eller visuell godkjenning.
+
+## Toms godkjenning, 15. oktober 2026
+
+Tom godkjente hele inventar- og verbhjulleveransen. Unntaket gjaldt The King i karakterarkene, ikke UI-bildene. Dette er visuell godkjenning og endrer ikke den oppgitte statusen for motorprøving.

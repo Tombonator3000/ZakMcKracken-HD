@@ -236,3 +236,8 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Flyttet inn 15 verbikoner, 126 inventarfiler og 22 karakterark med gallerier, faktiske prompter, manifest og SHA-256. Bildene bevares byte for byte; originaluttrekk og skript beholdes i gpt-arbeid.
 - UI-bildene ligger i grafikk/ui/verbhjul-gpt/ og grafikk/inventar/, der build_ui allerede leser dem. Konseptarkene importeres ikke som animasjonsruter. Ingen motor- eller pipelinekode endret.
 - Kontroll før PR: build_ui tok inn alle 141 UI-filer med uendrede dekodede piksler; 172 PNG er byteidentiske med gpt-arbeid, 79 aliaskoblinger stemmer og alle 96 bilder i UI-galleriet finnes. Tre SHA-256-lister kontrollert. 37 pipelinetester bestått (2 spilldatatester utelatt), 21 nettlesertester, 4 Pages-pakkertester og hunk-hoder i 4 patcher bestått.
+
+## 2026-10-15 13:26 (Codex)
+- Tom godkjente resten av grafikkleveransen, men ba om Elvis-hår som tupé på The King. Ett innebygd image_gen-redigeringskall ga king-v2.png med tupé i alle seks visninger. Hodeform, høye øyne, scenedrakt og positurer kontrollert visuelt.
+- Godkjenning, valgt fil, galleri, kontaktoversikt, prompt og sjekksummer oppdatert både i grafikkleveransen og gpt-arbeid. Tidligere King v1 beholdes som ikke godkjent historikk.
+- Tom bestilte deretter spritesheet for bare Zak først. Originalens kostyme 1 har 51 ruter fordelt på tre ark i eksisterende pipeline.

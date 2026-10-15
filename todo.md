@@ -52,7 +52,10 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 
 - [x] 15 malte verbikoner og 126 inventarfiler lagt i mappene `build_ui` leser, etter Toms bestilling
 - [x] 22 karakterkonsepter med galleri, prompter, kilder og sjekksummer lagt i `grafikk/konsept/`
-- [ ] Tom vurderer konseptdetaljene og ser de nye UI-bildene i spillet
+- [x] Tom godkjente 21 karakterark, inventaret og verbhjulet (15. oktober)
+- [x] The King rettet med svart Elvis-tupé som v2, til kontroll
+- [ ] Tom ser de nye UI-bildene i spillet
+- [ ] Første spritesheet-leveranse for bare Zak
 
 ### Verbhjulet i HD (15. oktober)
 
