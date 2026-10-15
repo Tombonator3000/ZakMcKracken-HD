@@ -1,5 +1,5 @@
 diff --git a/engines/scumm/input.cpp b/engines/scumm/input.cpp
-index 3b27bf68..9584b371 100644
+index 3b27bf68..50f31f2a 100644
 --- a/engines/scumm/input.cpp
 +++ b/engines/scumm/input.cpp
 @@ -29,6 +29,7 @@
@@ -21,6 +21,28 @@ index 3b27bf68..9584b371 100644
  	// Handle Macintosh events before scaling the mouse coordinates.
  	//
  	// TODO: Don't allow menu while message banner is active. Don't allow
+@@ -311,7 +316,8 @@ void ScummEngine::parseEvent(Common::Event event) {
+ 
+ 		// Dig HD: a request to quit that did not come from the menu's Quit
+ 		// button opens the game's menu instead of quitting
+-		if (_digHD && isUsingOriginalGUI() && !_quitByGUIPrompt && !_mainMenuIsActive) {
++		// (Zak FM-Towns: the game's save room has no Quit, so ScummVM's own question is asked)
++		if (_digHD && !_verbWheel && isUsingOriginalGUI() && !_quitByGUIPrompt && !_mainMenuIsActive) {
+ 			getEventManager()->resetQuit();
+ 			getEventManager()->resetReturnToLauncher();
+ 			_digHD->interceptQuit(event.type == Common::EVENT_QUIT ? "quit event" : "return to launcher");
+@@ -987,7 +993,10 @@ void ScummEngine::processKeyboard(Common::KeyState lastKeyHit) {
+ 	const bool digHDMenuKey =
+ 		((lastKeyHit.keycode == Common::KEYCODE_F5 || lastKeyHit.keycode == Common::KEYCODE_F1) && lastKeyHit.hasFlags(0)) ||
+ 		(lastKeyHit.keycode == Common::KEYCODE_k && lastKeyHit.hasFlags(Common::KBD_CTRL));
+-	if (_digHD && isUsingOriginalGUI() && mainmenuKeyEnabled && !_mainMenuIsActive &&
++	// Zak FM-Towns (verb wheel): the menu key goes to the game's own save room
++	// (the sphinx with Play, Save and Load), as in the original. ScummVM's copy of
++	// the menu from the DOS versions must not open, and F1 to F4 pick the kids.
++	if (_digHD && !_verbWheel && isUsingOriginalGUI() && mainmenuKeyEnabled && !_mainMenuIsActive &&
+ 	    digHDMenuKey) {
+ 		showMainMenu();
+ 		return;
 diff --git a/engines/scumm/module.mk b/engines/scumm/module.mk
 index 42985c9e..ace26be3 100644
 --- a/engines/scumm/module.mk

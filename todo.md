@@ -59,6 +59,11 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [ ] Portrettene for figurbytte i samme stil
 - [ ] Prøve med ekte mus, på telefon og i nettleseren
 
+### Lagring (15. oktober)
+
+- [x] Bare FM-Towns-lagreskjermen (sfinksen) på F5; ScummVMs DOS-meny åpnes ikke for Zak
+- [ ] Prøve lagring og lasting helt gjennom i nettleseren, og lukking av vinduet
+
 ### Motor (`docs/HD-MOTOR.md`)
 
 - [x] Patch 0002 rettet: flettingen 13. oktober (087fd93) ga feil tall i hunk-hodene, så motoren bygget ikke fra main. Laget på nytt med `tools/lag_patcher.sh`, verbhjul-testen bestått (14. oktober)

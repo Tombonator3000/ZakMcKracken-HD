@@ -14,6 +14,7 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 
 - Verbhjulet i HD (15. oktober): Tom ba om grafiske ikoner som i DOTT og Sam & Max i stedet for pikslene. 15 egne tegnede ikoner (`tools/verbhjul_ikoner.py`, `grafikk/ui/`), bygget inn i motoren som base64-PNG (`verbhjul_ikoner.h`), tekst i Comic Neue Bold (OFL). HD-laget går for Zak også uten HD-pakke, så hjulet alltid er skarpt (`ZAKHD_LAV=1` slår av). Ikke godkjent av Tom ennå. Ingen munn: Zak har ikke Talk to.
 - Grafikk fra ChatGPT (Tom 15. oktober: gjør klar): motoren leser `ui/verbhjul/<navn>.png` og `inventory/objNNN.png` fra modden; godkjente legges i `grafikk/ui/verbhjul-gpt/` og `grafikk/inventar/`. Inventaret vises som rutenett i HD (bilde eller navn) med hjulet på. `docs/inventar.csv`: 123 ting. Ingen bilder bestilt ennå.
+- Lagring i Zak: bare spillets egen lagreskjerm (rom 50, sfinksen), åpnet med F5. ScummVMs meny fra DOS-utgavene skal ikke vises (Tom 15. oktober); DigHD-menykroken og avskjæringen av avslutning er av for Zak i 0002.
 - `tools/lag_patcher.sh` lager bare 0002 som standard; 0001 er felles og endres ikke herfra.
 
 ## Spillfilene
