@@ -1,5 +1,7 @@
 # Leveranse og kontroll
 
+Tom godkjente 15. oktober 2026 de øvrige 21 karakterarkene, inventaret og verbhjulet. The King v1 er ikke godkjent fordi Elvis-tupé manglet. V2 har fått tupé og er ny rettelse til kontroll. [Godkjenning og rettelse](GODKJENT.md).
+
 22 konseptark, tegnet med innebygd image_gen. Alle er visuelt sett mot stilankrene. De har tre hovedvinkler og tre uttrykk, med tillegg for hjelmer, maske, rollevarianter og dyrenes særlige trekk. Ingen ark er et ferdig animasjonsark eller importert i motoren.
 
 Piloten v1 lignet Zak for mye og er erstattet med v2. Delfinen v1 hadde bare oppreiste positurer; v2 har en tydelig svømmeprofil og blåsehull. Tidligere utkast ligger lokalt i revisjoner og inngår ikke i leveransen.
@@ -20,7 +22,7 @@ Nye bukser/sko for bakeren og redaktøren, TV-presentatørens skjørt, vaktens f
 | Flyplassmannen | [bum-v1.png](ark/bum-v1.png) | Samme mann før og etter at han leser guruens bok. Den opprinnelige bokselgeren er en annen figur. |
 | Stonehenge-vakten | [sentry-v1.png](ark/sentry-v1.png) | Originalens klær og rolle, med nye vinkler og uttrykk som konseptforslag. |
 | Nepalsk politi og tempelvakt | [police-v1.png](ark/police-v1.png) | Kostyme 26 deles av politi og tempelvakt. Vaktens separate ansikt og okerfarge er foreløpige forslag. |
-| The King | [king-v1.png](ark/king-v1.png) | Samme høye øyne, smale midtansikt og korallhud som godkjent Caponian, med hvit scenedrakt og gullsmykker. |
+| The King | [king-v2.png](ark/king-v2.png) | V2: svart Elvis-tupé i alle seks visninger. De høye øynene, det lange Caponian-hodet og den hvite scenedrakten er beholdt. Rettet etter Toms bestilling; ny versjon til kontroll. |
 | Skolarian-projeksjonen | [skolarian-v1.png](ark/skolarian-v1.png) | Blå projeksjon med bred skalle og mørk kappe. Skal fortsatt tegnes som en projeksjon i spillet. |
 | Redaktøren | [boss-v1.png](ark/boss-v1.png) | Originalen viser en byste. Hele kroppen er en konsepttolkning rundt den brede redaktørsilhuetten. |
 | TV-presentatøren | [tv-anchor-v1.png](ark/tv-anchor-v1.png) | Originalen viser henne på TV. Skjørt og sko er en konsepttolkning. |

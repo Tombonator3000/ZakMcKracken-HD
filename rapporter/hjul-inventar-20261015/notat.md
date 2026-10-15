@@ -37,3 +37,7 @@ Originalinventaret er tekst, så motivlisten beskriver mange ting ut fra navn og
 ui/verbhjul/ og inventory/ kan brukes som --egne-kilde i den eksisterende pipelinen. Godkjente filer flyttes etter repoets mottaksflyt til grafikk/ui/verbhjul-gpt/ og grafikk/inventar/. Spillets motor, skript og main er ikke endret.
 
 forhandsvisning.html er en lokal grafikkoversikt med søk, lys og mørk bakgrunn, alfa og forstørrelse. Kontaktarkene er forhåndsvisninger, ikke skjermbilder fra motoren.
+
+## Toms godkjenning, 15. oktober 2026
+
+Tom godkjente hele inventar- og verbhjulleveransen. Unntaket gjaldt The King i karakterarkene, ikke UI-bildene. Dette er visuell godkjenning og endrer ikke den oppgitte statusen for motorprøving.

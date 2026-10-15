@@ -1,7 +1,7 @@
 {
   "date": "2026-10-15",
   "mode": "built-in image_gen",
-  "status": "konsept til kontroll, ikke motorressurser",
+  "status": "21 karakterark godkjent av Tom; The King v2 rettet til kontroll",
   "anchors": [
     "../../stil/zak-pilot-v1.png",
     "../../stil/annie-pilot-v1.png",
@@ -24,7 +24,7 @@
       "sha256": "e61135791536af7c69308f23272199161f98fe3616ebcee3e5fcc0667879bee9",
       "bytes": 2101438,
       "note": "Blond bob, blå romdrakt og forsiktige uttrykk. Opprullede ermer viser avslappet drakt i trykksatt rom; utendørsdrakten må lukkes ved animasjonsarbeid.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "leslie",
@@ -42,7 +42,7 @@
       "sha256": "8e1030f3358ac4312395c5b810554ef5db56aedab40d4e2a3e7385f7de3ad1c9",
       "bytes": 2034597,
       "note": "Brunrød hestehale, rosa romdrakt og mer kantet, selvsikker mimikk. Utendørsdrakten må lukkes ved animasjonsarbeid.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "lou",
@@ -59,7 +59,7 @@
       "sha256": "7a9be06c25af91c2a51932109303e0bc067ac7905fde4adf600640a057ea6a7b",
       "bytes": 1886754,
       "note": "Originalens klær og rolle, med nye vinkler og uttrykk som konseptforslag.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "baker",
@@ -76,7 +76,7 @@
       "sha256": "a22f30502c7a1050c5c7b8cd16aaf506bfa7258f02f7c76c2fdeb6a4c9829572",
       "bytes": 1879005,
       "note": "Originalen viser ham i et vindu. Bukser og sko er en konsepttolkning.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "pilot",
@@ -93,7 +93,7 @@
       "sha256": "fa2772751d7ac444225ee4edda521eb806313cc32e6c4745597d4f5d159df7d2",
       "bytes": 1942732,
       "note": "V2 er valgt: eldre, tungøyet ansikt og lang skjev nese skiller ham fra Zak.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "stewardess",
@@ -110,7 +110,7 @@
       "sha256": "5a7a2816e3b2b3e9aa011a99e0b820e1874c2c975f4cc12774502ef565f8eec3",
       "bytes": 1885263,
       "note": "Originalens klær og rolle, med nye vinkler og uttrykk som konseptforslag.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "guru",
@@ -127,7 +127,7 @@
       "sha256": "c88f08b6326b5cae2178c2afd6e5bdb9ca0b22f4b5ead5f4ac2380328a13a736",
       "bytes": 2027286,
       "note": "Originalens klær og rolle, med nye vinkler og uttrykk som konseptforslag.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "shaman",
@@ -144,7 +144,7 @@
       "sha256": "5ff44b939f3c27283f639feab3b2d52c92fe048116ac9a1d475cfec0907b1349",
       "bytes": 1839521,
       "note": "Kostyme 21 deles av shamanen og to landsbyboere. De små rollevurderingene er forslag; masken følger originalens blå form.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "devotee",
@@ -161,7 +161,7 @@
       "sha256": "3d63e10e9783ce6f1c27b02f6cb5d65b46d15c2c90717a10958ddcb0c119cec0",
       "bytes": 1875119,
       "note": "Originalens klær og rolle, med nye vinkler og uttrykk som konseptforslag.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "bum",
@@ -178,7 +178,7 @@
       "sha256": "d677b75396ba1331acd6d3b3aa9ce5ad6eca3c7e06c51feccc34976e3ffdc89e",
       "bytes": 2033230,
       "note": "Samme mann før og etter at han leser guruens bok. Den opprinnelige bokselgeren er en annen figur.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "sentry",
@@ -195,7 +195,7 @@
       "sha256": "37ab46af94b8e2c010147f50604854b21a62f333a7ea83ea6e4de5cbc260db25",
       "bytes": 1799230,
       "note": "Originalens klær og rolle, med nye vinkler og uttrykk som konseptforslag.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "police",
@@ -212,24 +212,29 @@
       "sha256": "83db4d64fc4d7e3503aaebfea415b87d4e9355d077be0f366b5be9106b2f11e4",
       "bytes": 1915964,
       "note": "Kostyme 26 deles av politi og tempelvakt. Vaktens separate ansikt og okerfarge er foreløpige forslag.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "king",
       "name": "The King",
       "group": "Romvesener",
-      "file": "ark/king-v1.png",
-      "prompt": "prompter/king-v1.txt",
+      "file": "ark/king-v2.png",
+      "prompt": "prompter/king-v2.txt",
       "source": "referanser/costume027-sheet.png",
       "costumes": [
         27
       ],
       "width": 1659,
       "height": 948,
-      "sha256": "15a79edb152df555be4a1dcec42b575a3cdd59c144752c35352d98756f53e9cc",
-      "bytes": 1789140,
-      "note": "Samme høye øyne, smale midtansikt og korallhud som godkjent Caponian, med hvit scenedrakt og gullsmykker.",
-      "status": "konsept til kontroll"
+      "sha256": "aab3654480305689e03650dbaf0dc0b1208bcb393d3068d887e03e514f32a289",
+      "bytes": 1868453,
+      "note": "V2: svart Elvis-tupé i alle seks visninger. De høye øynene, det lange Caponian-hodet og den hvite scenedrakten er beholdt. Rettet etter Toms bestilling; ny versjon til kontroll.",
+      "status": "rettet til kontroll",
+      "replaced": {
+        "file": "ark/king-v1.png",
+        "sha256": "15a79edb152df555be4a1dcec42b575a3cdd59c144752c35352d98756f53e9cc",
+        "status": "ikke godkjent; manglet Elvis-tupé"
+      }
     },
     {
       "id": "skolarian",
@@ -246,7 +251,7 @@
       "sha256": "08a78e11729fac18c9402657c9ae9c3ecc4fd2e4bb9b4d908f553a58ad7a019c",
       "bytes": 1783396,
       "note": "Blå projeksjon med bred skalle og mørk kappe. Skal fortsatt tegnes som en projeksjon i spillet.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "boss",
@@ -263,7 +268,7 @@
       "sha256": "0e15600cce25bb0e6243ae095da200d35817e3eb339e800adeaa56a264aa755f",
       "bytes": 1803242,
       "note": "Originalen viser en byste. Hele kroppen er en konsepttolkning rundt den brede redaktørsilhuetten.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "tv-anchor",
@@ -280,7 +285,7 @@
       "sha256": "4ba87cc2ffbec9035709efe3d8d5d3f27706991ad6830647a52d347b6a44b166",
       "bytes": 1979750,
       "note": "Originalen viser henne på TV. Skjørt og sko er en konsepttolkning.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "broom-alien",
@@ -297,7 +302,7 @@
       "sha256": "fe79dbe13d2f078c79b036f28cf41282cd73d48354bf12c9fd27a0d3c2e874b2",
       "bytes": 1758876,
       "note": "Børstehodet er levende, med tungøyde blikk. Skaftet er kroppen; ingen menneskearmer eller ben.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "bird",
@@ -315,7 +320,7 @@
       "sha256": "2da0d57b2b3f318bbba476297b60807f10c44732015f4754a0ded532b22af835",
       "bytes": 1742597,
       "note": "Mørk blå fugl med gult nebb og føtter, kontrollert mot originalen og godkjent rom 42.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "dolphin",
@@ -333,7 +338,7 @@
       "sha256": "53639d2cae9baca6e85eef36347b6ff991d0458beeb535244964d73e1606b9db",
       "bytes": 1503905,
       "note": "V2 er valgt: tydelig sideprofil i svømmestilling, ryggfinne og blåsehull.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "two-headed-squirrel",
@@ -348,7 +353,7 @@
       "sha256": "bc94651ab9ed336d33a6bbe459288f4857284d2be63673512f55abe01eee94b1",
       "bytes": 1966080,
       "note": "To separate hoder, én kropp og én hale. Hvert hode har sitt eget temperament.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "yak",
@@ -363,7 +368,7 @@
       "sha256": "df756668b89d5f8dd610f6244f47b6a7c3094f87edc776d8d8a0afa34e04e781",
       "bytes": 2041943,
       "note": "Rufsete pels, lyse horn, hovføtter og blå sele fra originalens rombilde.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     },
     {
       "id": "sushi",
@@ -378,7 +383,13 @@
       "sha256": "0843db3c65731913c8dbf0b6d5359fae817d9efb0684febb18c391093c9d9bac",
       "bytes": 1928948,
       "note": "Liten gullfisk, både alene og i glassbollen.",
-      "status": "konsept til kontroll"
+      "status": "godkjent av Tom 15. oktober 2026"
     }
-  ]
+  ],
+  "approval": {
+    "by": "Tom",
+    "date": "2026-10-15T13:26:47+02:00",
+    "approved_character_sheets": 21,
+    "exception": "The King v1 manglet Elvis-tupé. V2 er en rettelse, ikke en påstått ny godkjenning."
+  }
 }

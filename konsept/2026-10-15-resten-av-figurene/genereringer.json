@@ -207,7 +207,7 @@
       "referanser/costume027-sheet.png"
     ],
     "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-dd7ce7bb-7394-47a8-8adf-9ff5b8f3372e.png",
-    "selected": true
+    "selected": false
   },
   {
     "id": "skolarian",
@@ -357,6 +357,18 @@
       "referanser/sushi-rom001.png"
     ],
     "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-de392c98-c6f2-427d-bd5e-9b380afb8d7a.png",
+    "selected": true
+  },
+  {
+    "id": "king",
+    "version": 2,
+    "tool": "image_gen.imagegen",
+    "mode": "built-in edit",
+    "prompt": "prompter/king-v2.txt",
+    "references": [
+      "ark/king-v1.png"
+    ],
+    "generated_source": "/home/tom/.codex/generated_images/01a13eac-18af-7940-95b1-dda70440b1fa/exec-873e4e22-1a23-4242-a246-caa327e22078.png",
     "selected": true
   }
 ]
