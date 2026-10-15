@@ -126,6 +126,7 @@ Motoren leser bilder fra HD-modden når de finnes, og bruker det innebygde eller
 | I modden | Hva | Fra |
 | --- | --- | --- |
 | `ui/verbhjul/<navn>.png` | Ikonet til et verb i hjulet, i stedet for det innebygde (navnene i [grafikk/ui/README.md](../grafikk/ui/README.md)) | `grafikk/ui/verbhjul-gpt/` og `--egne` |
+| `ui/verbhjul/portrett-<figur>.png` | Portrettet til en figur (zak, annie, melissa, leslie) | `grafikk/ui/verbhjul-gpt/` og `--egne` |
 | `inventory/objNNN.png` | Bildet av en ting i inventaret, i stedet for navnet | `grafikk/inventar/` og `--egne` |
 | `inventory/objNNN-<navn>.png` | Bildet for tingen når den har dette navnet (for eksempel `obj014-taped-fish-bowl.png`, `obj049-lit-lighter.png`); vinner over `objNNN.png` | samme |
 
@@ -139,6 +140,8 @@ Med hjulet på og HD-laget i gang vises inventaret som et rutenett i HD som fyll
 - En ting uten bilde vises med navnet i HD-skriften, på én eller to linjer.
 - Ruten sender det samme klikket som tekstplassen i originalen (verb 101 til 110, pilene 115 og 116), så skriptene ser ingen forskjell. Høyreklikk åpner hjulet som før.
 - Viser panelet navnene på figurene, Done eller verbene for dyrene der rutenettet ville vært (verb 31 til 40), brukes tekstinventaret som i originalen så lenge de står der.
+- Musehjulet over inventaret blar opp og ned, som pilene (samme klikk på verb 115 og 116, så spillets skript blar to ting om gangen).
+- Portrettene for figurbytte står to og to i kolonnen til høyre, tegnet i HD som runde mynter med figurens ansikt (Claude, 15. oktober; `grafikk/ui/portretter/`). Den man styrer har gul ring; pekeren over et portrett gjør det større og viser navnet. Et trykk bytter figur, som før.
 - `verbhjul_inventar` i scummvm.ini (standard på) og `VERBHJUL_INVENTAR=0` slår det av.
 
 Testet uten skjerm 15. oktober: tekst i ruten (billetten), et testbilde for billetten (obj082) med navnet over ruten under pekeren, hjulet åpnet på ruten, og et ikon (Use) fra en testmod i stedet for det innebygde. `tools/verbhjul_test.sh` bestått med rutenettet på; inventarklikkene der traff ruten for billetten. Ikke testet: flere ting enn ti (pilene), og når panelet viser figurnavnene.

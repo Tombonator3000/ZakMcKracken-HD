@@ -349,6 +349,56 @@ def ikon_teleport():
     return ic
 
 
+# ------------------------------------------------------------------ portrettene
+
+def face(ic, hair, shirt, shirt_sh, hair_kind, tie=None, collar=None):
+    """Hode og skuldre i mynten. Fargene fra figurarkene og spillets figurer."""
+    ic.ell(64, 122, 44, 30, shirt)                                 # skuldre
+    if collar:
+        ic.poly([(50, 94), (64, 106), (78, 94), (74, 100), (64, 112), (54, 100)], collar)
+    if tie:
+        ic.poly([(60, 98), (68, 98), (70, 128), (64, 134), (58, 128)], tie)
+    ic.rect(56, 82, 16, 18, 6, SKIN)                               # hals
+    if hair_kind == 'long':                                         # hår bak hodet
+        ic.rect(34, 40, 60, 62, 22, hair)
+    ic.ell(64, 60, 25, 29, SKIN)                                   # hode
+    ic.ell(39, 62, 5, 7, SKIN)                                     # ører
+    ic.ell(89, 62, 5, 7, SKIN)
+    if hair_kind == 'messy':      # Zak: brunt hår med lokk
+        ic.path('M 38 56 Q 34 30 58 28 Q 70 22 84 32 Q 94 40 90 58 Q 84 44 74 42 Q 62 50 48 44 Q 42 50 38 56 Z', hair)
+        ic.path('M 60 30 Q 66 18 76 24 Q 68 26 66 34 Z', hair)
+    elif hair_kind == 'long':     # Annie: svart skulderlangt hår med lugg
+        ic.path('M 37 58 Q 36 30 64 28 Q 92 30 91 58 Q 82 42 64 44 Q 46 42 37 58 Z', hair)
+    elif hair_kind == 'blond':    # Melissa: lyst, kort hår med pannelugg
+        ic.path('M 37 60 Q 34 28 64 26 Q 94 28 91 60 Q 88 46 80 44 L 74 50 L 68 42 L 60 50 L 52 42 Q 42 46 37 60 Z', hair)
+    elif hair_kind == 'curly':    # Leslie: rødbrunt, krøllete hår
+        for cx, cy in ((42, 46), (52, 34), (64, 30), (76, 34), (86, 46), (40, 58), (88, 58)):
+            ic.ell(cx, cy, 11, 10, hair)
+    ic.raw(f'<circle cx="55" cy="62" r="3.6" fill="{INK}"/><circle cx="73" cy="62" r="3.6" fill="{INK}"/>')
+    ic.curve('M 56 76 Q 64 82 72 76', 3)
+    ic.curve('M 64 64 Q 66 70 62 71', 2.5, SKIN_SH)
+
+
+def portrett_zak():
+    ic = Icon(); face(ic, '#7a4a26', BLUE, BLUE_SH, 'messy', tie=RED, collar=BLUE_SH); return ic
+
+
+def portrett_annie():
+    ic = Icon(); face(ic, '#24201f', BLUE, BLUE_SH, 'long', collar=BLUE); return ic
+
+
+def portrett_melissa():
+    ic = Icon(); face(ic, '#e3c04a', '#4a5fc8', '#6a3a9a', 'blond'); return ic
+
+
+def portrett_leslie():
+    ic = Icon(); face(ic, '#9a4a26', '#d04aa8', '#9a2f80', 'curly'); return ic
+
+
+# figurnummer (skuespiller 1 til 4) -> (filnavn, tegnefunksjon)
+PORTRETTER = {1: ('zak', portrett_zak), 2: ('annie', portrett_annie), 3: ('melissa', portrett_melissa),
+              4: ('leslie', portrett_leslie)}
+
 # verbnummer i Zak -> (filnavn, tegnefunksjon)
 IKONER = {
     1: ('push', ikon_push), 2: ('open', ikon_open), 4: ('put-on', ikon_put_on),
@@ -395,6 +445,13 @@ def write_all():
         data = optimize(render(s, PNG))
         (UT / f'{name}.png').write_bytes(data)
         pngs[verb] = (name, data)
+    (UT.parent / 'portretter').mkdir(exist_ok=True)
+    for kid, (name, fn) in PORTRETTER.items():
+        s = svg(fn())
+        (UT.parent / 'portretter' / f'{name}.svg').write_text(s)
+        data = optimize(render(s, PNG))
+        (UT.parent / 'portretter' / f'{name}.png').write_bytes(data)
+        pngs[100 + kid] = ('portrett-' + name, data)
     return pngs
 
 

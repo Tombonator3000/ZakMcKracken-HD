@@ -5,6 +5,7 @@ Grafikk til grensesnittet i Zak McKracken HD, laget for prosjektet. Ingenting he
 | Mappe | Hva |
 | --- | --- |
 | [verbhjul/](verbhjul/) | De 15 ikonene til verbhjulet, som SVG (kilden) og PNG (160 x 160, RGBA) |
+| [portretter/](portretter/) | Portrettene for figurbytte: zak, annie, melissa, leslie (SVG og PNG), tegnet av Claude 15. oktober 2026 |
 | [skrift/](skrift/) | Comic Neue Bold, skriften i teksten under hjulet. SIL Open Font License 1.1 ([OFL.txt](skrift/OFL.txt)), fra github.com/google/fonts (`ofl/comicneue`) |
 
 ## Verbhjulet

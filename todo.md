@@ -59,7 +59,8 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [ ] Sjekke radene merket «usikker» og «trolig ikke» i spillet, og ting som mangler i listen
 - [ ] Lage jobbene til ChatGPT for ikonene og inventarbildene når Tom vil
 - [ ] Prøve pilene i inventaret med mer enn ti ting, og når panelet viser figurnavnene
-- [ ] Portrettene for figurbytte i samme stil
+- [x] Portrettene for figurbytte tegnet og i HD ved inventaret; musehjulet blar i inventaret (15. oktober)
+- [ ] Figurark for Melissa og Leslie før portrettene males
 - [ ] Prøve med ekte mus, på telefon og i nettleseren
 
 ### Lagring (15. oktober)

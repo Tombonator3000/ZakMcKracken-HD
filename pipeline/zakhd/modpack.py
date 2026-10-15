@@ -58,7 +58,8 @@ UI_SOURCES = [  # (mappe i repoet eller i --egne, mappe i modden, navnemønster)
 ]
 UI_OWN = [("ui/verbhjul", "ui/verbhjul", r"[a-z-]+\.png"), ("inventory", "inventory", r"obj\d{3}(-[a-z0-9-]+)?\.png")]
 VERB_ICONS = {"push", "open", "put-on", "turn-on", "pull", "close", "pick-up", "take-off", "turn-off",
-              "give", "read", "use", "buy", "sell", "teleport"}
+              "give", "read", "use", "buy", "sell", "teleport",
+              "portrett-zak", "portrett-annie", "portrett-melissa", "portrett-leslie"}
 
 
 def build_ui(out: Path, own: Path | None = None, repo: Path = REPO) -> list[str]:
