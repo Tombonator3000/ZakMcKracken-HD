@@ -52,6 +52,10 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 
 - [x] 15 tegnede ikoner og HD-tegning med myke kanter, tekst i Comic Neue; HD-laget også uten HD-pakke
 - [ ] Tom ser på ikonene og sier ja eller hva som skal endres (eller om ChatGPT skal male dem i ankerstilen)
+- [x] Motoren leser malte ikoner (`ui/verbhjul/`) og bilder av tingene i inventaret (`inventory/objNNN.png`) fra modden; inventaret som rutenett i HD (15. oktober)
+- [x] `docs/inventar.csv` (123 ting), `tools/inventarliste.py`, `build_ui` i modpack, bestillingen beskrevet
+- [ ] Lage jobbene til ChatGPT for ikonene og inventarbildene når Tom vil (format i BESTILLING-CHATGPT)
+- [ ] Prøve pilene i inventaret med mer enn ti ting, og når panelet viser figurnavnene
 - [ ] Portrettene for figurbytte i samme stil
 - [ ] Prøve med ekte mus, på telefon og i nettleseren
 

@@ -119,6 +119,29 @@ Ikke godkjent av Tom ennå. Kan erstattes av ikoner malt av ChatGPT med de samme
 - HD-laget går nå også uten HD-pakke (originalpikslene fire ganger så store), så hjulet alltid er skarpt. `ZAKHD_LAV=1` gir spillets egen skjerm på 320 x 240, og da tegnes de gamle runde ikonene med bokstaver. Virker med 16 og 32 bits farger (programvaretegning og OpenGL).
 - Portrettene for figurbytte er fortsatt de enkle boksene.
 
+## Grafikk fra grafikerne
+
+Motoren leser bilder fra HD-modden når de finnes, og bruker det innebygde ellers:
+
+| I modden | Hva | Fra |
+| --- | --- | --- |
+| `ui/verbhjul/<navn>.png` | Ikonet til et verb i hjulet, i stedet for det innebygde (navnene i [grafikk/ui/README.md](../grafikk/ui/README.md)) | `grafikk/ui/verbhjul-gpt/` og `--egne` |
+| `inventory/objNNN.png` | Bildet av en ting i inventaret, i stedet for navnet | `grafikk/inventar/` og `--egne` |
+
+PNG med alfa i hvilken som helst størrelse (minst 64 piksler); motoren skalerer ned med flatemiddel og bevarer formen. `zakhd build-mod` legger dem i modden (`build_ui` i `pipeline/zakhd/modpack.py`), og nettsiden tar dem med (`local-files.mjs`). Bestillingen står i [BESTILLING-CHATGPT.md](BESTILLING-CHATGPT.md), og tingene i [inventar.csv](inventar.csv) (`tools/inventarliste.py`).
+
+## Inventaret som bilder
+
+Med hjulet på og HD-laget i gang vises inventaret som et rutenett i HD der verbpanelet og tekstinventaret var: fem ruter i to rader (spillets y 154 til 216), og pilene som gule trekanter i en kolonne til høyre. Portrettene står under, som før.
+
+- En ting med bilde i modden vises som bildet. Pekeren over ruten gir en gul ramme og navnet i en boks over ruten.
+- En ting uten bilde vises med navnet i HD-skriften, på én eller to linjer.
+- Ruten sender det samme klikket som tekstplassen i originalen (verb 101 til 110, pilene 115 og 116), så skriptene ser ingen forskjell. Høyreklikk åpner hjulet som før.
+- Viser panelet navnene på figurene, Done eller verbene for dyrene der rutenettet ville vært (verb 31 til 40), brukes tekstinventaret som i originalen så lenge de står der.
+- `verbhjul_inventar` i scummvm.ini (standard på) og `VERBHJUL_INVENTAR=0` slår det av.
+
+Testet uten skjerm 15. oktober: tekst i ruten (billetten), et testbilde for billetten (obj082) med navnet over ruten under pekeren, hjulet åpnet på ruten, og et ikon (Use) fra en testmod i stedet for det innebygde. `tools/verbhjul_test.sh` bestått med rutenettet på; inventarklikkene der traff ruten for billetten. Ikke testet: flere ting enn ti (pilene), og når panelet viser figurnavnene.
+
 ## Arbeidet i motoren
 
 Patch 0002 ligger oppå HD-patchen (0001, den samme som i The Dig og Sam & Max). `tools/lag_patcher.sh` lager begge på nytt fra `engine/scummvm`.
@@ -128,6 +151,7 @@ Patch 0002 ligger oppå HD-patchen (0001, den samme som i The Dig og Sam & Max).
 | `engines/scumm/verbhjul.cpp`, `verbhjul.h` | Klassen `VerbWheel`: urskiven, verbene for objektet, det dynamiske utvalget, portrettene, klikkene, ventingen på objekt nummer to, tegningen og testdriveren. Bare for `zak` på FM-Towns |
 | `engines/scumm/verbhjul_ikoner.h` | Ikonene og skriften som PNG i base64, laget av `tools/verbhjul_ikoner.py` |
 | `engines/scumm/verbhjul_zak.h` | Reglene for det dynamiske hjulet, 337 objekter, laget av `tools/verbhjul_dynamisk.py --cpp` (bare objekt- og verbnummer) |
+| `verbs.cpp`, `findVerbAtPos` | Med inventaret som rutenett: ruten under pekeren gir verbplassen 101 til 110, 115 eller 116 |
 | `input.cpp`, `ScummEngine::parseEvent` | Hjulet ser hver hendelse først (høyreklikk, klikk mens hjulet er åpent, Ctrl+W) |
 | `verbs.cpp`, `checkExecVerbs` | Ett klikk fra hjulet per ramme, før spillets egne klikk |
 | `verbs.cpp`, `findVerbAtPos` og `drawVerb` | Verb 1 til 17 tegnes ikke og kan ikke klikkes mens hjulet er på, og Switch (36) ikke mens portrettene er på |

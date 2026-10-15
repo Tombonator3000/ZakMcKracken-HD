@@ -1598,3 +1598,23 @@ def test_verbhjul_dynamisk_regler(tmp_path):
     assert vd.ikoner("g=2;5;8;10;11;12;14 p=5/10:c6+b143.0 x=11 i=12 r=8", True) == 4
     g, par, inv, rom, aldri = vd.tolk("g=4;9 p=4/9:v222=14|16 i=11 r=8")
     assert g == [[4], [9]] and par == [(4, 9, "v222=14|16")] and inv == {11} and rom == {8} and not aldri
+
+
+def test_build_ui_takes_wheel_icons_and_inventory_pictures(tmp_path):
+    from PIL import Image
+    from zakhd import modpack
+    repo, own, out = tmp_path / "repo", tmp_path / "egne", tmp_path / "mod"
+    (repo / "grafikk/ui/verbhjul-gpt").mkdir(parents=True)
+    (repo / "grafikk/inventar").mkdir(parents=True)
+    (own / "inventory").mkdir(parents=True)
+    Image.new("RGBA", (256, 256), (1, 2, 3, 255)).save(repo / "grafikk/ui/verbhjul-gpt/use.png")
+    Image.new("RGBA", (256, 256)).save(repo / "grafikk/ui/verbhjul-gpt/talk.png")       # ikke et verb
+    Image.new("RGB", (300, 200), (9, 9, 9)).save(repo / "grafikk/inventar/obj082.png")
+    Image.new("RGBA", (32, 32)).save(repo / "grafikk/inventar/obj083.png")              # for lite
+    Image.new("RGBA", (256, 256), (5, 5, 5, 255)).save(own / "inventory/obj082.png")     # egne vinner
+    Image.new("RGBA", (256, 256)).save(own / "inventory/ticket.png")                     # feil navn
+    done = modpack.build_ui(out, own, repo=repo)
+    assert done == ["inventory/obj082.png", "ui/verbhjul/use.png"]
+    assert Image.open(out / "inventory/obj082.png").mode == "RGBA"
+    assert Image.open(out / "inventory/obj082.png").getpixel((0, 0)) == (5, 5, 5, 255)
+

@@ -13,6 +13,8 @@ Faste fakta og beslutninger. Oppdateres når noe endrer seg.
 - DOTT Remastered sitt hjul viser verbene som gjelder objektet (PopMatters, PCWorld), ikke alle ni. GRENSESNITT.md sa først det motsatte; rettet 12. oktober.
 
 - Verbhjulet i HD (15. oktober): Tom ba om grafiske ikoner som i DOTT og Sam & Max i stedet for pikslene. 15 egne tegnede ikoner (`tools/verbhjul_ikoner.py`, `grafikk/ui/`), bygget inn i motoren som base64-PNG (`verbhjul_ikoner.h`), tekst i Comic Neue Bold (OFL). HD-laget går for Zak også uten HD-pakke, så hjulet alltid er skarpt (`ZAKHD_LAV=1` slår av). Ikke godkjent av Tom ennå. Ingen munn: Zak har ikke Talk to.
+- Grafikk fra ChatGPT (Tom 15. oktober: gjør klar): motoren leser `ui/verbhjul/<navn>.png` og `inventory/objNNN.png` fra modden; godkjente legges i `grafikk/ui/verbhjul-gpt/` og `grafikk/inventar/`. Inventaret vises som rutenett i HD (bilde eller navn) med hjulet på. `docs/inventar.csv`: 123 ting. Ingen bilder bestilt ennå.
+- `tools/lag_patcher.sh` lager bare 0002 som standard; 0001 er felles og endres ikke herfra.
 
 ## Spillfilene
 - Original på Google Drive, mappen `Zak-fm` (id `1C4-aa3j3Jgso3Z2J00UYS3lfvNcxl4-Z`) i mappen `Scummvm` (id `1YpufOwLtohaVAPOdRxnIs4DHzO_0GcQ5`). `Scummvm` var fortsatt delt med lenke 11. oktober (fra Sam & Max-arbeidet), så filene ble hentet med curl.

@@ -40,4 +40,4 @@ tools/lag_patcher.sh
 
 Skriptet skriver SVG og PNG hit og lager `verbhjul_ikoner.h`, der PNG-ene og skriften ligger som base64. Motoren trenger ingen filer ved siden av seg. Krever `rsvg-convert` (librsvg2-bin) og Pillow.
 
-Vil Tom heller ha ikonene malt av ChatGPT i stilen fra ankrene, kan de leveres som PNG (RGBA, kvadratiske, med mynten) med de samme filnavnene; `--cpp`-steget tar dem da inn i stedet for SVG-ene. Det steget er ikke laget ennå.
+Malte ikoner fra ChatGPT trenger ingen ny bygging av motoren: legg de godkjente i `grafikk/ui/verbhjul-gpt/` med de samme filnavnene (PNG med alfa, gjerne 512 x 512). `zakhd build-mod` legger dem i modden (`ui/verbhjul/`), og motoren bruker dem i stedet for de innebygde. Bildene til inventaret går på samme måte i `grafikk/inventar/` (se [../inventar/README.md](../inventar/README.md)).

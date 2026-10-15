@@ -124,10 +124,10 @@ index 20c4b0c5..af9f2fbd 100644
  	byte _completeScreenBuffer[320 * 200];
 diff --git a/engines/scumm/verbhjul.cpp b/engines/scumm/verbhjul.cpp
 new file mode 100644
-index 00000000..133780de
+index 00000000..73ead344
 --- /dev/null
 +++ b/engines/scumm/verbhjul.cpp
-@@ -0,0 +1,1667 @@
+@@ -0,0 +1,1904 @@
 +/* ScummVM - Graphic Adventure Engine
 + *
 + * ScummVM is the legal property of its developers, whose names
@@ -296,6 +296,8 @@ index 00000000..133780de
 +		_dynamic = ConfMan.getBool("verbhjul_dynamisk", app);
 +	if (ConfMan.hasKey("verbhjul_portretter", app))
 +		_portraits = ConfMan.getBool("verbhjul_portretter", app);
++	if (ConfMan.hasKey("verbhjul_inventar", app))
++		_invGrid = ConfMan.getBool("verbhjul_inventar", app);
 +	if (const char *e = getenv("VERBHJUL"))
 +		_enabled = (*e != '0');
 +	if (const char *e = getenv("VERBHJUL_ALLE"))
@@ -304,6 +306,8 @@ index 00000000..133780de
 +		_dynamic = (*e != '0');
 +	if (const char *e = getenv("VERBHJUL_PORTRETTER"))
 +		_portraits = (*e != '0');
++	if (const char *e = getenv("VERBHJUL_INVENTAR"))
++		_invGrid = (*e != '0');
 +	if (const char *d = getenv("VERBHJUL_DUMP_DIR"))
 +		_dumpDir = d;
 +	if (const char *t = getenv("VERBHJUL_TEST"))
@@ -389,7 +393,8 @@ index 00000000..133780de
 +}
 +
 +bool VerbWheel::hidesVerb(int verbid) const {
-+	return (_enabled && verbid >= 1 && verbid <= 17) || (_portraits && verbid == kZakSwitch);
++	return (_enabled && verbid >= 1 && verbid <= 17) || (_portraits && verbid == kZakSwitch) ||
++	       (_invGridOn && ((verbid >= kZakInvFirst && verbid <= kZakInvLast) || verbid == kZakInvUp || verbid == kZakInvDown));
 +}
 +
 +bool VerbWheel::verbActive(int verbid) const {
@@ -1104,9 +1109,14 @@ index 00000000..133780de
 +
 +void VerbWheel::draw() {
 +	drawPortraits();
-+	if (_state != kOpen && _hdDrawn) {
++	setInventoryGrid(inventoryGridWanted());
++	if (_wheelOv.drawn || _invOv.drawn || _invGridOn) {
 +		if (Graphics::Surface *s = g_system->lockScreen()) {
-+			restoreHD(*s);
++			// Off the screen first, the wheel before the inventory it may lie on
++			restoreOverlay(*s, _wheelOv);
++			restoreOverlay(*s, _invOv);
++			if (_invGridOn && (s->format.bytesPerPixel == 2 || s->format.bytesPerPixel == 4))
++				drawInventory(*s);
 +			g_system->unlockScreen();
 +		}
 +	}
@@ -1198,18 +1208,19 @@ index 00000000..133780de
 +static const int kIconHD = 12;
 +static const int kIconHoverHD = 14;
 +
-+static bool decodeEmbeddedPng(const char *b64, uint32 size, VerbWheel *, int &w, int &h, Common::Array<byte> &px) {
-+	Common::String enc(b64);
-+	Common::MemoryReadStream *st = Common::b64DecodeStream(enc, size);
-+	if (!st)
-+		return false;
++// The inventory as a grid of pictures (HD layer, wheel on), in game pixels:
++// five cells in two rows where the verb panel and the text inventory were,
++// the arrows in a column to the right. The portraits stay in the corner below.
++static const int kInvTop = 154, kInvBottom = 216;
++static const int kInvLeft = 2, kInvCellsRight = 296, kInvRight = 318;
++
++static bool decodePng(Common::SeekableReadStream &st, int &w, int &h, Common::Array<byte> &px) {
 +	Image::PNGDecoder dec;
-+	const bool ok = dec.loadStream(*st);
-+	delete st;
-+	if (!ok || !dec.getSurface())
++	if (!dec.loadStream(st) || !dec.getSurface())
 +		return false;
 +	const Graphics::Surface *src = dec.getSurface();
-+	Graphics::Surface *conv = src->convertTo(Graphics::PixelFormat::createFormatRGBA32());
++	Graphics::Surface *conv = src->convertTo(Graphics::PixelFormat::createFormatRGBA32(),
++		dec.getPalette().size() ? dec.getPalette().data() : nullptr, dec.getPalette().size());
 +	if (!conv)
 +		return false;
 +	w = conv->w;
@@ -1229,40 +1240,69 @@ index 00000000..133780de
 +	return true;
 +}
 +
++static bool decodeEmbeddedPng(const char *b64, uint32 size, int &w, int &h, Common::Array<byte> &px) {
++	Common::String enc(b64);
++	Common::MemoryReadStream *st = Common::b64DecodeStream(enc, size);
++	if (!st)
++		return false;
++	const bool ok = decodePng(*st, w, h, px);
++	delete st;
++	return ok;
++}
++
++// A PNG in the HD pack (DIGHD_MOD / dighd_mod), for graphics from the artists
++bool VerbWheel::loadModPng(const Common::String &rel, Img &img) const {
++	Common::String mod = ConfMan.get("dighd_mod");
++	if (const char *env = getenv("DIGHD_MOD"))
++		mod = env;
++	if (mod.empty())
++		return false;
++	Common::FSNode node(Common::Path(mod, '/').join(Common::Path(rel, '/')));
++	if (!node.exists())
++		return false;
++	Common::SeekableReadStream *st = node.createReadStream();
++	if (!st)
++		return false;
++	const bool ok = decodePng(*st, img.w, img.h, img.px);
++	delete st;
++	if (!ok)
++		warning("Verbhjul: could not read %s in the HD pack", rel.c_str());
++	return ok;
++}
++
 +void VerbWheel::loadHD() {
 +	if (_hdLoaded)
 +		return;
 +	_hdLoaded = true;
-+	int n = 0;
++	int n = 0, fromMod = 0;
 +	for (const VerbWheelIcon *ic = kVerbWheelIcons; ic->png; ic++) {
 +		Img img;
-+		if (decodeEmbeddedPng(ic->png, ic->size, this, img.w, img.h, img.px)) {
-+			_iconSrc[ic->verb] = img;
-+			n++;
-+		} else {
++		// Icons painted by the artists (ui/verbhjul/<name>.png in the HD pack)
++		// take the place of the built-in ones
++		if (loadModPng(Common::String::format("ui/verbhjul/%s.png", ic->name), img)) {
++			fromMod++;
++		} else if (!decodeEmbeddedPng(ic->png, ic->size, img.w, img.h, img.px)) {
 +			warning("Verbhjul: could not read the icon %s", ic->name);
++			continue;
 +		}
++		_iconSrc[ic->verb] = img;
++		n++;
 +	}
-+	if (!decodeEmbeddedPng(kVerbWheelFontPng, kVerbWheelFontPngSize, this, _font.w, _font.h, _font.px))
++	if (!decodeEmbeddedPng(kVerbWheelFontPng, kVerbWheelFontPngSize, _font.w, _font.h, _font.px))
 +		warning("Verbhjul: could not read the font");
-+	debug("Verbhjul: %d drawn icons, font %d x %d", n, _font.w, _font.h);
++	debug("Verbhjul: %d drawn icons (%d from the HD pack), font %d x %d", n, fromMod, _font.w, _font.h);
 +}
 +
-+// The icon at a size (pixels), area-averaged from the PNG with premultiplied alpha
-+const VerbWheel::Img *VerbWheel::iconAt(int verb, int size) {
-+	const int key = verb * 1000 + size;
-+	if (_iconCache.contains(key))
-+		return &_iconCache[key];
-+	if (!_iconSrc.contains(verb) || size <= 0)
-+		return nullptr;
-+	const Img &src = _iconSrc[verb];
-+	Img dst;
-+	dst.w = dst.h = size;
-+	dst.px.resize(size * size * 4);
-+	const float fx = (float)src.w / size, fy = (float)src.h / size;
++// An image at a size that fits w x h (keeps its shape), area-averaged with premultiplied alpha
++void VerbWheel::scaleImg(const Img &src, int w, int h, Img &dst) {
++	const float k = MIN((float)w / src.w, (float)h / src.h);
++	dst.w = MAX(1, (int)(src.w * k + 0.5f));
++	dst.h = MAX(1, (int)(src.h * k + 0.5f));
++	dst.px.resize(dst.w * dst.h * 4);
++	const float fx = (float)src.w / dst.w, fy = (float)src.h / dst.h;
 +	const int n = MAX(2, (int)ceilf(MAX(fx, fy)) + 1);
-+	for (int y = 0; y < size; y++) {
-+		for (int x = 0; x < size; x++) {
++	for (int y = 0; y < dst.h; y++) {
++		for (int x = 0; x < dst.w; x++) {
 +			float r = 0, g = 0, b = 0, a = 0;
 +			for (int j = 0; j < n; j++) {
 +				const int sy = CLIP<int>((int)((y + (j + 0.5f) / n) * fy), 0, src.h - 1);
@@ -1273,7 +1313,7 @@ index 00000000..133780de
 +					r += p[0] * al; g += p[1] * al; b += p[2] * al; a += al;
 +				}
 +			}
-+			byte *d = &dst.px[(y * size + x) * 4];
++			byte *d = &dst.px[(y * dst.w + x) * 4];
 +			if (a > 0) {
 +				d[0] = (byte)CLIP<float>(r / a + 0.5f, 0, 255);
 +				d[1] = (byte)CLIP<float>(g / a + 0.5f, 0, 255);
@@ -1284,8 +1324,33 @@ index 00000000..133780de
 +			d[3] = (byte)CLIP<float>(a / (n * n) * 255 + 0.5f, 0, 255);
 +		}
 +	}
-+	_iconCache[key] = dst;
++}
++
++const VerbWheel::Img *VerbWheel::iconAt(int verb, int size) {
++	const int key = verb * 1000 + size;
++	if (_iconCache.contains(key))
++		return &_iconCache[key];
++	if (!_iconSrc.contains(verb) || size <= 0)
++		return nullptr;
++	scaleImg(_iconSrc[verb], size, size, _iconCache[key]);
 +	return &_iconCache[key];
++}
++
++// The picture of an inventory object (inventory/objNNN.png in the HD pack), or nullptr
++const VerbWheel::Img *VerbWheel::inventoryImage(int obj, int w, int h) {
++	if (!_invSrc.contains(obj)) {
++		Img img;
++		if (loadModPng(Common::String::format("inventory/obj%03d.png", obj), img))
++			debug("Verbhjul: inventory picture for object %d (%d x %d)", obj, img.w, img.h);
++		_invSrc[obj] = img;   // empty: none, and not looked for again
++	}
++	const Img &src = _invSrc[obj];
++	if (!src.w)
++		return nullptr;
++	const int key = obj * 1000000 + w * 1000 + h;
++	if (!_invCache.contains(key))
++		scaleImg(src, w, h, _invCache[key]);
++	return &_invCache[key];
 +}
 +
 +int VerbWheel::textWidth(const Common::String &text, float f) const {
@@ -1314,8 +1379,10 @@ index 00000000..133780de
 +		*(uint32 *)p = c;
 +}
 +
-+// The composed picture of the wheel's box, in RGB floats
-+struct Canvas {
++} // End of anonymous namespace
++
++// The composed picture of an overlay's box, in RGB floats
++struct VerbWheel::Canvas {
 +	Common::Rect box;
 +	Common::Array<float> rgb;
 +	void blend(int x, int y, float r, float g, float b, float a) {
@@ -1356,9 +1423,163 @@ index 00000000..133780de
 +			}
 +		}
 +	}
++	void image(const VerbWheel::Img &img, int x0, int y0, float alpha = 1.0f) {
++		for (int y = 0; y < img.h; y++) {
++			for (int x = 0; x < img.w; x++) {
++				const byte *p = &img.px[(y * img.w + x) * 4];
++				if (p[3])
++					blend(x0 + x, y0 + y, p[0], p[1], p[2], p[3] / 255.0f * alpha);
++			}
++		}
++	}
 +};
 +
-+} // End of anonymous namespace
++// Text in the built-in font with a dark outline: the first `split` letters in
++// gold, the rest in cream. x and baseline in screen pixels, f the font scale.
++void VerbWheel::drawText(Canvas &cv, const Common::Rect &clip, const Common::String &text, int split,
++                         float x, int baseline, float f) const {
++	const Common::Rect tb = clip.findIntersectingRect(cv.box);
++	if (tb.isEmpty() || !_font.w)
++		return;
++	const int mw = tb.width(), mh = tb.height();
++	Common::Array<float> mVerb(mw * mh, 0.0f), mName(mw * mh, 0.0f);
++	float pen = x;
++	for (uint i = 0; i < text.size(); i++) {
++		const int c = (byte)text[i];
++		if (c < 32 || c >= 127)
++			continue;
++		const short *gl = kVerbWheelGlyphs[c - 32];
++		Common::Array<float> &m = ((int)i < split) ? mVerb : mName;
++		const float gx = pen + gl[4] * f, gy = baseline + gl[5] * f;
++		const int w = (int)ceilf(gl[2] * f) + 2, h = (int)ceilf(gl[3] * f) + 2;
++		for (int y = 0; y < h; y++) {
++			for (int xx = 0; xx < w; xx++) {
++				const int X = (int)floorf(gx) + xx, Y = (int)floorf(gy) + y;
++				if (X < tb.left || X >= tb.right || Y < tb.top || Y >= tb.bottom)
++					continue;
++				// Bilinear sample of the glyph
++				const float u = (X + 0.5f - gx) / f - 0.5f, v = (Y + 0.5f - gy) / f - 0.5f;
++				const int u0 = (int)floorf(u), v0 = (int)floorf(v);
++				const float fu = u - u0, fv = v - v0;
++				float a = 0;
++				for (int j = 0; j < 2; j++) {
++					for (int k = 0; k < 2; k++) {
++						const int ax = u0 + k, ay = v0 + j;
++						if (ax < 0 || ay < 0 || ax >= gl[2] || ay >= gl[3])
++							continue;
++						const float wgt = (k ? fu : 1 - fu) * (j ? fv : 1 - fv);
++						a += wgt * _font.px[((gl[1] + ay) * _font.w + gl[0] + ax) * 4 + 3] / 255.0f;
++					}
++				}
++				float &d = m[(Y - tb.top) * mw + (X - tb.left)];
++				d = MAX(d, a);
++			}
++		}
++		pen += gl[6] * f;
++	}
++	const int ro = MAX(1, (int)(2.5f * f + 0.5f));
++	for (int y = 0; y < mh; y++) {
++		for (int xx = 0; xx < mw; xx++) {
++			float o = 0;
++			for (int dy = -ro; dy <= ro && o < 1; dy++) {
++				for (int dx = -ro; dx <= ro; dx++) {
++					if (dx * dx + dy * dy > ro * ro + ro)
++						continue;
++					const int X = xx + dx, Y = y + dy;
++					if (X < 0 || Y < 0 || X >= mw || Y >= mh)
++						continue;
++					o = MAX(o, MAX(mVerb[Y * mw + X], mName[Y * mw + X]));
++				}
++			}
++			if (o > 0)
++				cv.blend(tb.left + xx, tb.top + y, 16, 10, 8, o);
++		}
++	}
++	for (int y = 0; y < mh; y++) {
++		for (int xx = 0; xx < mw; xx++) {
++			cv.blend(tb.left + xx, tb.top + y, 245, 197, 52, mVerb[y * mw + xx]);
++			cv.blend(tb.left + xx, tb.top + y, 250, 243, 228, mName[y * mw + xx]);
++		}
++	}
++}
++
++// A label: the text in a gold-rimmed dark box. Returns the box.
++void VerbWheel::drawLabel(Canvas &cv, const Common::Rect &box, const Common::String &text, int split, float f) const {
++	const float rad = box.height() / 2.0f;
++	cv.roundRect(box, rad, 245, 197, 52, 1.0f);
++	const int b = (int)ceilf(3 * f);
++	cv.roundRect(Common::Rect(box.left + b, box.top + b, box.right - b, box.bottom - b), rad - 3 * f, 34, 24, 30, 0.92f);
++	const int padX = (int)(16 * f), padY = (int)(6 * f);
++	drawText(cv, box, text, split, box.left + padX, box.top + padY + (int)(kVerbWheelFontAscent * f), f);
++}
++
++Common::Rect VerbWheel::labelBox(const Common::String &text, float f, int centerX, int top, int bottomLimit,
++                                 int altBottom, int screenW) const {
++	const int tw = textWidth(text, f);
++	const int th = (int)ceilf((kVerbWheelFontAscent + kVerbWheelFontDescent) * f);
++	const int w = tw + 2 * (int)(16 * f), h = th + 2 * (int)(6 * f);
++	if (top + h > bottomLimit)
++		top = altBottom - h;
++	const int left = CLIP<int>(centerX - w / 2, 0, MAX(0, screenW - w));
++	return Common::Rect(left, top, left + w, top + h);
++}
++
++// ------------------------------------------------------------------ overlays
++
++// Takes an overlay off the screen: where the screen still has what the overlay
++// wrote, the game's pixels from under it are put back.
++void VerbWheel::restoreOverlay(Graphics::Surface &s, Overlay &ov) {
++	if (ov.drawn && (s.format.bytesPerPixel == 2 || s.format.bytesPerPixel == 4)) {
++		Common::Rect r = ov.box;
++		r.clip(Common::Rect(s.w, s.h));
++		for (int y = r.top; y < r.bottom; y++) {
++			for (int x = r.left; x < r.right; x++) {
++				const int k = (y - ov.box.top) * ov.box.width() + (x - ov.box.left);
++				if (getPx(s, x, y) == ov.last[k])
++					setPx(s, x, y, ov.under[k]);
++			}
++		}
++	}
++	ov.drawn = false;
++	ov.box = Common::Rect();
++	ov.under.clear();
++	ov.last.clear();
++}
++
++// Starts an overlay: the canvas holds the game's pixels in the box
++void VerbWheel::beginOverlay(Graphics::Surface &s, Overlay &ov, Canvas &cv, const Common::Rect &box) {
++	ov.box = box;
++	ov.under.resize(box.width() * box.height());
++	cv.box = box;
++	cv.rgb.resize(box.width() * box.height() * 3);
++	for (int y = box.top; y < box.bottom; y++) {
++		for (int x = box.left; x < box.right; x++) {
++			const int k = (y - box.top) * box.width() + (x - box.left);
++			const uint32 c = getPx(s, x, y);
++			ov.under[k] = c;
++			byte r, g, b;
++			s.format.colorToRGB(c, r, g, b);
++			cv.rgb[k * 3] = r; cv.rgb[k * 3 + 1] = g; cv.rgb[k * 3 + 2] = b;
++		}
++	}
++}
++
++void VerbWheel::endOverlay(Graphics::Surface &s, Overlay &ov, const Canvas &cv) {
++	ov.last.resize(ov.box.width() * ov.box.height());
++	for (int y = ov.box.top; y < ov.box.bottom; y++) {
++		for (int x = ov.box.left; x < ov.box.right; x++) {
++			const int k = (y - ov.box.top) * ov.box.width() + (x - ov.box.left);
++			const float *p = &cv.rgb[k * 3];
++			const uint32 out = s.format.RGBToColor((byte)CLIP<float>(p[0] + 0.5f, 0, 255), (byte)CLIP<float>(p[1] + 0.5f, 0, 255),
++			                                       (byte)CLIP<float>(p[2] + 0.5f, 0, 255));
++			setPx(s, x, y, out);
++			ov.last[k] = out;
++		}
++	}
++	ov.drawn = true;
++}
++
++// ------------------------------------------------------------------ the wheel in HD
 +
 +bool VerbWheel::drawHD(Graphics::Surface &s) {
 +	loadHD();
@@ -1394,28 +1615,17 @@ index 00000000..133780de
 +	}
 +
 +	// What the click will do, under the wheel; the verb in gold
-+	const Common::String name = objectName(_obj);
-+	Common::String text = name;
++	Common::String text = objectName(_obj);
 +	int split = 0;
 +	if (_hover >= 0 && _slots[_hover]) {
 +		const Common::String verb = verbName(_slots[_hover]);
-+		text = verb + " " + name;
++		text = verb + " " + text;
 +		split = verb.size();
 +	}
 +	Common::Rect label;
-+	int baseline = 0, textX = 0;
 +	if (!text.empty()) {
-+		const int tw = textWidth(text, f);
-+		const int th = (int)ceilf((kVerbWheelFontAscent + kVerbWheelFontDescent) * f);
-+		const int padX = (int)(16 * f), padY = (int)(6 * f);
-+		const int w = tw + 2 * padX, h = th + 2 * padY;
-+		int top = (int)((_center.y + kRadius + kIconHD + 3) * sy);
-+		if (top + h > s.h)
-+			top = (int)((_center.y - kRadius - kIconHD - 3) * sy) - h;
-+		const int left = CLIP<int>((int)(_center.x * sx) - w / 2, 0, MAX(0, s.w - w));
-+		label = Common::Rect(left, top, left + w, top + h);
-+		textX = left + padX;
-+		baseline = top + padY + (int)(kVerbWheelFontAscent * f);
++		label = labelBox(text, f, (int)(_center.x * sx), (int)((_center.y + kRadius + kIconHD + 3) * sy), s.h,
++		                 (int)((_center.y - kRadius - kIconHD - 3) * sy), s.w);
 +		if (bbox.isEmpty())
 +			bbox = label;
 +		else
@@ -1425,37 +1635,8 @@ index 00000000..133780de
 +	if (bbox.isEmpty())
 +		return true;
 +
-+	// The game's pixels: where the screen still has what the wheel wrote last
-+	// time, the pixels under it are the ones kept then
-+	Common::Rect area = bbox;
-+	if (_hdDrawn)
-+		area.extend(_hdBox);
-+	area.clip(Common::Rect(s.w, s.h));
-+	Common::Array<uint32> clean(area.width() * area.height());
-+	for (int y = area.top; y < area.bottom; y++) {
-+		for (int x = area.left; x < area.right; x++) {
-+			uint32 c = getPx(s, x, y);
-+			if (_hdDrawn && _hdBox.contains(x, y)) {
-+				const int k = (y - _hdBox.top) * _hdBox.width() + (x - _hdBox.left);
-+				if (c == _hdLast[k])
-+					c = _hdUnder[k];
-+			}
-+			clean[(y - area.top) * area.width() + (x - area.left)] = c;
-+		}
-+	}
-+
 +	Canvas cv;
-+	cv.box = bbox;
-+	cv.rgb.resize(bbox.width() * bbox.height() * 3);
-+	for (int y = bbox.top; y < bbox.bottom; y++) {
-+		for (int x = bbox.left; x < bbox.right; x++) {
-+			byte r, g, b;
-+			s.format.colorToRGB(clean[(y - area.top) * area.width() + (x - area.left)], r, g, b);
-+			float *p = &cv.rgb[((y - bbox.top) * bbox.width() + (x - bbox.left)) * 3];
-+			p[0] = r; p[1] = g; p[2] = b;
-+		}
-+	}
-+
++	beginOverlay(s, _wheelOv, cv, bbox);
 +	// Shadows first, so no shadow falls on a neighbour
 +	for (uint i = 0; i < spots.size(); i++)
 +		cv.disc(spots[i].x + 3 * f, spots[i].y + 6 * f, spots[i].r * 0.98f, 20, 12, 8, 0.45f, 6 * f + 1);
@@ -1469,128 +1650,182 @@ index 00000000..133780de
 +			cv.disc(sp.x, sp.y, sp.r, 247, 236, 211, 1.0f);
 +			continue;
 +		}
-+		const int x0 = (int)(sp.x - size / 2.0f + 0.5f), y0 = (int)(sp.y - size / 2.0f + 0.5f);
-+		for (int y = 0; y < img->h; y++) {
-+			for (int x = 0; x < img->w; x++) {
-+				const byte *p = &img->px[(y * img->w + x) * 4];
-+				if (p[3])
-+					cv.blend(x0 + x, y0 + y, p[0], p[1], p[2], p[3] / 255.0f);
-+			}
-+		}
++		cv.image(*img, (int)(sp.x - img->w / 2.0f + 0.5f), (int)(sp.y - img->h / 2.0f + 0.5f));
 +	}
-+
-+	if (!label.isEmpty()) {
-+		const float rad = label.height() / 2.0f;
-+		cv.roundRect(label, rad, 245, 197, 52, 1.0f);
-+		Common::Rect inner(label.left + (int)ceilf(3 * f), label.top + (int)ceilf(3 * f),
-+		                   label.right - (int)ceilf(3 * f), label.bottom - (int)ceilf(3 * f));
-+		cv.roundRect(inner, rad - 3 * f, 34, 24, 30, 0.92f);
-+
-+		// Text: an alpha mask per colour, an outline from both
-+		const Common::Rect &tb = label;
-+		const int mw = tb.width(), mh = tb.height();
-+		Common::Array<float> mVerb(mw * mh, 0.0f), mName(mw * mh, 0.0f);
-+		float pen = textX;
-+		for (uint i = 0; i < text.size(); i++) {
-+			const int c = (byte)text[i];
-+			if (c < 32 || c >= 127)
-+				continue;
-+			const short *gl = kVerbWheelGlyphs[c - 32];
-+			Common::Array<float> &m = ((int)i < split) ? mVerb : mName;
-+			const float gx = pen + gl[4] * f, gy = baseline + gl[5] * f;
-+			const int w = (int)ceilf(gl[2] * f) + 1, h = (int)ceilf(gl[3] * f) + 1;
-+			for (int y = 0; y < h; y++) {
-+				for (int x = 0; x < w; x++) {
-+					const int X = (int)floorf(gx) + x, Y = (int)floorf(gy) + y;
-+					if (X < tb.left || X >= tb.right || Y < tb.top || Y >= tb.bottom)
-+						continue;
-+					// Bilinear sample of the glyph
-+					const float u = (X + 0.5f - gx) / f - 0.5f, v = (Y + 0.5f - gy) / f - 0.5f;
-+					const int u0 = (int)floorf(u), v0 = (int)floorf(v);
-+					const float fu = u - u0, fv = v - v0;
-+					float a = 0;
-+					for (int j = 0; j < 2; j++) {
-+						for (int k = 0; k < 2; k++) {
-+							const int ax = u0 + k, ay = v0 + j;
-+							if (ax < 0 || ay < 0 || ax >= gl[2] || ay >= gl[3])
-+								continue;
-+							const float wgt = (k ? fu : 1 - fu) * (j ? fv : 1 - fv);
-+							a += wgt * _font.px[((gl[1] + ay) * _font.w + gl[0] + ax) * 4 + 3] / 255.0f;
-+						}
-+					}
-+					float &d = m[(Y - tb.top) * mw + (X - tb.left)];
-+					d = MAX(d, a);
-+				}
-+			}
-+			pen += gl[6] * f;
-+		}
-+		const int ro = MAX(1, (int)(2.5f * f + 0.5f));
-+		for (int y = 0; y < mh; y++) {
-+			for (int x = 0; x < mw; x++) {
-+				float o = 0;
-+				for (int dy = -ro; dy <= ro && o < 1; dy++) {
-+					for (int dx = -ro; dx <= ro; dx++) {
-+						if (dx * dx + dy * dy > ro * ro + ro)
-+							continue;
-+						const int X = x + dx, Y = y + dy;
-+						if (X < 0 || Y < 0 || X >= mw || Y >= mh)
-+							continue;
-+						o = MAX(o, MAX(mVerb[Y * mw + X], mName[Y * mw + X]));
-+					}
-+				}
-+				if (o > 0)
-+					cv.blend(tb.left + x, tb.top + y, 16, 10, 8, o);
-+			}
-+		}
-+		for (int y = 0; y < mh; y++) {
-+			for (int x = 0; x < mw; x++) {
-+				cv.blend(tb.left + x, tb.top + y, 245, 197, 52, mVerb[y * mw + x]);
-+				cv.blend(tb.left + x, tb.top + y, 250, 243, 228, mName[y * mw + x]);
-+			}
-+		}
-+	}
-+
-+	// Write: the wheel in its box, the game's pixels where it was before
-+	Common::Array<uint32> under(bbox.width() * bbox.height()), last(bbox.width() * bbox.height());
-+	for (int y = area.top; y < area.bottom; y++) {
-+		for (int x = area.left; x < area.right; x++) {
-+			const uint32 c = clean[(y - area.top) * area.width() + (x - area.left)];
-+			uint32 out = c;
-+			if (bbox.contains(x, y)) {
-+				const float *p = &cv.rgb[((y - bbox.top) * bbox.width() + (x - bbox.left)) * 3];
-+				out = s.format.RGBToColor((byte)CLIP<float>(p[0] + 0.5f, 0, 255), (byte)CLIP<float>(p[1] + 0.5f, 0, 255),
-+				                          (byte)CLIP<float>(p[2] + 0.5f, 0, 255));
-+				const int k = (y - bbox.top) * bbox.width() + (x - bbox.left);
-+				under[k] = c;
-+				last[k] = out;
-+			}
-+			setPx(s, x, y, out);
-+		}
-+	}
-+	_hdBox = bbox;
-+	_hdUnder = under;
-+	_hdLast = last;
-+	_hdDrawn = true;
++	if (!label.isEmpty())
++		drawLabel(cv, label, text, split, f);
++	endOverlay(s, _wheelOv, cv);
 +	return true;
 +}
 +
-+void VerbWheel::restoreHD(Graphics::Surface &s) {
-+	if (_hdDrawn && (s.format.bytesPerPixel == 2 || s.format.bytesPerPixel == 4)) {
-+		Common::Rect r = _hdBox;
-+		r.clip(Common::Rect(s.w, s.h));
-+		for (int y = r.top; y < r.bottom; y++) {
-+			for (int x = r.left; x < r.right; x++) {
-+				const int k = (y - _hdBox.top) * _hdBox.width() + (x - _hdBox.left);
-+				if (getPx(s, x, y) == _hdLast[k])
-+					setPx(s, x, y, _hdUnder[k]);
++// ------------------------------------------------------------------ the inventory in HD
++
++void VerbWheel::setInventoryGrid(bool on) {
++	if (_invGridOn == on)
++		return;
++	_invGridOn = on;
++	debug("Verbhjul: inventory as pictures %s", on ? "on" : "off");
++	// The text inventory and the arrows are hidden or drawn again
++	_vm->redrawVerbs();
++}
++
++bool VerbWheel::inventoryGridWanted() const {
++	if (!_enabled || !_invGrid || !_vm->_digHD)
++		return false;
++	// The panel shows the kids' names, Done or the animals' verbs where the grid
++	// would be: the text inventory then stays as in the original
++	for (int i = 1; i < _vm->_numVerbs; i++) {
++		const VerbSlot &vs = _vm->_verbs[i];
++		if (vs.curmode == 1 && vs.verbid >= 31 && vs.verbid <= 40 && !hidesVerb(vs.verbid) &&
++		    vs.curRect.top < kInvBottom && vs.curRect.bottom > kInvTop)
++			return false;
++	}
++	return true;
++}
++
++Common::Rect VerbWheel::inventoryCell(int i) const {
++	const int col = i % 5, row = i / 5;
++	const int x0 = kInvLeft + col * (kInvCellsRight - kInvLeft) / 5, x1 = kInvLeft + (col + 1) * (kInvCellsRight - kInvLeft) / 5;
++	const int y0 = kInvTop + row * (kInvBottom - kInvTop) / 2, y1 = kInvTop + (row + 1) * (kInvBottom - kInvTop) / 2;
++	return Common::Rect(x0 + 1, y0 + 1, x1 - 1, y1 - 1);
++}
++
++Common::Rect VerbWheel::inventoryArrow(bool down) const {
++	const int mid = (kInvTop + kInvBottom) / 2;
++	return down ? Common::Rect(kInvCellsRight + 2, mid + 1, kInvRight, kInvBottom - 1)
++	            : Common::Rect(kInvCellsRight + 2, kInvTop + 1, kInvRight, mid - 1);
++}
++
++int VerbWheel::inventoryVerbAt(int x, int y) const {
++	if (!_invGridOn || y < kInvTop || y >= kInvBottom || x < kInvLeft || x >= kInvRight)
++		return -1;
++	for (int i = 0; i < 10; i++) {
++		if (!inventoryCell(i).contains(x, y))
++			continue;
++		const int slot = _vm->getVerbSlot(kZakInvFirst + i, 0);
++		if (slot > 0 && _vm->_verbs[slot].curmode == 1 && _vm->_scummVars[kVarInventory + i] > 0)
++			return slot;
++		return 0;
++	}
++	for (int d = 0; d < 2; d++) {
++		if (!inventoryArrow(d == 1).contains(x, y))
++			continue;
++		const int slot = _vm->getVerbSlot(d ? kZakInvDown : kZakInvUp, 0);
++		return (slot > 0 && _vm->_verbs[slot].curmode == 1) ? slot : 0;
++	}
++	return 0;
++}
++
++void VerbWheel::drawInventory(Graphics::Surface &s) {
++	loadHD();
++	const float sx = (float)s.w / _vm->_screenWidth, sy = (float)s.h / _vm->_screenHeight;
++	const float f = sx / 4;
++	auto toScr = [&](const Common::Rect &r) {
++		return Common::Rect((int)(r.left * sx), (int)(r.top * sy), (int)(r.right * sx), (int)(r.bottom * sy));
++	};
++
++	Common::Rect box = toScr(Common::Rect(kInvLeft, kInvTop, kInvRight, kInvBottom));
++	const int hoverCell = (_state == kClosed) ? inventoryVerbAt(_vm->_mouse.x, _vm->_mouse.y) : -1;
++	Common::String hoverText;
++	Common::Rect hoverRect;
++	int shown = 0;
++	for (int i = 0; i < 10; i++) {
++		const int slot = _vm->getVerbSlot(kZakInvFirst + i, 0);
++		if (slot > 0 && _vm->_verbs[slot].curmode == 1 && _vm->_scummVars[kVarInventory + i] > 0)
++			shown++;
++	}
++	if (!shown && _vm->getVerbSlot(kZakInvUp, 0) <= 0)
++		return;
++
++	// The name over the cell under the pointer, when the cell shows a picture
++	Common::Rect label;
++	for (int i = 0; i < 10 && hoverCell > 0; i++) {
++		if (_vm->getVerbSlot(kZakInvFirst + i, 0) != hoverCell)
++			continue;
++		const int obj = _vm->_scummVars[kVarInventory + i];
++		hoverRect = toScr(inventoryCell(i));
++		if (inventoryImage(obj, hoverRect.width(), hoverRect.height())) {
++			hoverText = objectName(obj);
++			label = labelBox(hoverText, f * 0.85f, (hoverRect.left + hoverRect.right) / 2, hoverRect.top - (int)(46 * f * 0.85f),
++			                 s.h, hoverRect.top, s.w);
++			box.extend(label);
++		}
++	}
++	box.clip(Common::Rect(s.w, s.h));
++
++	Canvas cv;
++	beginOverlay(s, _invOv, cv, box);
++	for (int i = 0; i < 10; i++) {
++		const int slot = _vm->getVerbSlot(kZakInvFirst + i, 0);
++		const int obj = _vm->_scummVars[kVarInventory + i];
++		if (slot <= 0 || _vm->_verbs[slot].curmode != 1 || obj <= 0)
++			continue;
++		const Common::Rect c = toScr(inventoryCell(i));
++		const bool hot = (slot == hoverCell);
++		cv.roundRect(c, 10 * f, hot ? 245 : 70, hot ? 197 : 58, hot ? 52 : 84, hot ? 0.45f : 0.55f);
++		const int pad = (int)(6 * f);
++		if (const Img *img = inventoryImage(obj, c.width() - 2 * pad, c.height() - 2 * pad)) {
++			cv.image(*img, c.left + (c.width() - img->w) / 2, c.top + (c.height() - img->h) / 2);
++			continue;
++		}
++		// No picture yet: the name, on one or two lines, made smaller until it fits
++		const Common::String name = objectName(obj);
++		float tf = f * 0.75f;
++		Common::String l1 = name, l2;
++		const int maxW = c.width() - 2 * pad;
++		if (textWidth(name, tf) > maxW) {
++			// Split at the space nearest the middle
++			int best = -1;
++			for (uint k = 0; k < name.size(); k++)
++				if (name[k] == ' ' && (best < 0 || ABS((int)k - (int)name.size() / 2) < ABS(best - (int)name.size() / 2)))
++					best = k;
++			if (best > 0) {
++				l1 = Common::String(name.c_str(), best);
++				l2 = Common::String(name.c_str() + best + 1);
++			}
++			const int w = MAX(textWidth(l1, tf), textWidth(l2, tf));
++			if (w > maxW)
++				tf *= (float)maxW / w;
++		}
++		const float lh = (kVerbWheelFontAscent + kVerbWheelFontDescent) * tf * 0.9f;
++		const int lines = l2.empty() ? 1 : 2;
++		const float top = c.top + (c.height() - lines * lh) / 2;
++		drawText(cv, c, l1, 0, c.left + (c.width() - textWidth(l1, tf)) / 2.0f, (int)(top + kVerbWheelFontAscent * tf), tf);
++		if (!l2.empty())
++			drawText(cv, c, l2, 0, c.left + (c.width() - textWidth(l2, tf)) / 2.0f, (int)(top + lh + kVerbWheelFontAscent * tf), tf);
++	}
++	// The arrows: gold triangles when the inventory can scroll that way
++	for (int d = 0; d < 2; d++) {
++		const int slot = _vm->getVerbSlot(d ? kZakInvDown : kZakInvUp, 0);
++		if (slot <= 0 || _vm->_verbs[slot].curmode != 1)
++			continue;
++		const Common::Rect a = toScr(inventoryArrow(d == 1));
++		const bool hot = (slot == hoverCell);
++		cv.roundRect(a, 8 * f, 70, 58, 84, hot ? 0.9f : 0.55f);
++		const float cx = (a.left + a.right) / 2.0f, cy = (a.top + a.bottom) / 2.0f, r = MIN(a.width(), a.height()) * 0.32f;
++		// Triangle: apex up (or down), the base below (or above), 4 x 4 samples per pixel
++		const float ay = d ? cy + r : cy - r, by = d ? cy - r * 0.7f : cy + r * 0.7f;
++		for (int y = (int)(cy - r) - 1; y <= (int)(cy + r) + 1; y++) {
++			for (int x = (int)(cx - r) - 1; x <= (int)(cx + r) + 1; x++) {
++				int in = 0;
++				for (int j = 0; j < 4; j++) {
++					for (int k = 0; k < 4; k++) {
++						const float px = x + (k + 0.5f) / 4, py = y + (j + 0.5f) / 4;
++						const float t = (py - ay) / (by - ay);   // 0 at the apex, 1 at the base
++						if (t >= 0 && t <= 1 && fabsf(px - cx) <= r * t)
++							in++;
++					}
++				}
++				if (in)
++					cv.blend(x, y, 245, 197, 52, in / 16.0f);
 +			}
 +		}
 +	}
-+	_hdDrawn = false;
-+	_hdBox = Common::Rect();
-+	_hdUnder.clear();
-+	_hdLast.clear();
++	if (!label.isEmpty())
++		drawLabel(cv, label, hoverText, 0, f * 0.85f);
++	endOverlay(s, _invOv, cv);
 +}
++
 +
 +// ------------------------------------------------------------------ tests
 +
@@ -1748,6 +1983,8 @@ index 00000000..133780de
 +			}
 +			if (!found)
 +				debug("Verbhjul: test pick: verb %d is not in the wheel", v);
++		} else if (t.cmd == "move" && parseXY(t.arg, x, y)) {
++			pushMouse(Common::EVENT_MOUSEMOVE, x, y);
 +		} else if (t.cmd == "hover") {
 +			// hover=V: the pointer onto the icon of verb V, without a click
 +			const int v = atoi(t.arg.c_str());
@@ -1797,10 +2034,10 @@ index 00000000..133780de
 +} // End of namespace Scumm
 diff --git a/engines/scumm/verbhjul.h b/engines/scumm/verbhjul.h
 new file mode 100644
-index 00000000..11ab0497
+index 00000000..565a6fe4
 --- /dev/null
 +++ b/engines/scumm/verbhjul.h
-@@ -0,0 +1,277 @@
+@@ -0,0 +1,309 @@
 +/* ScummVM - Graphic Adventure Engine
 + *
 + * ScummVM is the legal property of its developers, whose names
@@ -1933,6 +2170,11 @@ index 00000000..11ab0497
 +	 * DigHD::create. ZAKHD_LAV=1 keeps the game's own 320 x 240 screen.
 +	 */
 +	void defaultHD();
++	/**
++	 * With the inventory as a grid: the verb slot under a point (0 for an empty
++	 * cell), or -1 when the point is outside the grid or the grid is off.
++	 */
++	int inventoryVerbAt(int x, int y) const;
 +	~VerbWheel();
 +
 +	/** First look at every event. True means the engine must not see it. */
@@ -2003,26 +2245,53 @@ index 00000000..11ab0497
 +
 +	// Drawing in HD: the icons and the font are PNGs built into the engine
 +	// (verbhjul_ikoner.h, from tools/verbhjul_ikoner.py), alpha blended on a
-+	// true colour screen (the HD layer). The pixels under the wheel are kept,
-+	// so the soft edges are blended on the game's own pixels every frame.
++	// true colour screen (the HD layer). Pictures painted by the artists can
++	// come from the HD pack: ui/verbhjul/<name>.png for the wheel, and
++	// inventory/objNNN.png for the inventory. Each overlay keeps the game's
++	// pixels under it and puts them back before the next frame is drawn.
++public:
 +	struct Img {
 +		int w = 0, h = 0;
 +		Common::Array<byte> px;   // RGBA, straight alpha
 +	};
++private:
++	struct Canvas;
++	struct Overlay {
++		bool drawn = false;
++		Common::Rect box;
++		Common::Array<uint32> under;   // the game's pixels
++		Common::Array<uint32> last;    // what the overlay wrote
++	};
 +	void loadHD();
++	bool loadModPng(const Common::String &rel, Img &img) const;
++	static void scaleImg(const Img &src, int w, int h, Img &dst);
 +	const Img *iconAt(int verb, int size);
++	const Img *inventoryImage(int obj, int w, int h);
 +	bool drawHD(Graphics::Surface &s);
-+	void restoreHD(Graphics::Surface &s);
 +	int textWidth(const Common::String &text, float f) const;
-+	void drawText(Graphics::Surface &s, const Common::String &text, int x, int baseline, float f, int split) const;
++	void drawText(Canvas &cv, const Common::Rect &clip, const Common::String &text, int split, float x, int baseline, float f) const;
++	void drawLabel(Canvas &cv, const Common::Rect &box, const Common::String &text, int split, float f) const;
++	Common::Rect labelBox(const Common::String &text, float f, int centerX, int top, int bottomLimit, int altBottom, int screenW) const;
++	void restoreOverlay(Graphics::Surface &s, Overlay &ov);
++	void beginOverlay(Graphics::Surface &s, Overlay &ov, Canvas &cv, const Common::Rect &box);
++	void endOverlay(Graphics::Surface &s, Overlay &ov, const Canvas &cv);
++
++	// The inventory as pictures (or names in HD) in a grid, with the wheel on
++	bool inventoryGridWanted() const;
++	void setInventoryGrid(bool on);
++	Common::Rect inventoryCell(int i) const;     // game screen coordinates
++	Common::Rect inventoryArrow(bool down) const;
++	void drawInventory(Graphics::Surface &s);
++
 +	Common::HashMap<int, Img> _iconSrc;
 +	Common::HashMap<int, Img> _iconCache;   // verb * 1000 + size
++	Common::HashMap<int, Img> _invSrc;      // object -> picture (empty: none)
++	Common::HashMap<int, Img> _invCache;
 +	Img _font;
 +	bool _hdLoaded = false;
-+	bool _hdDrawn = false;
-+	Common::Rect _hdBox;                    // screen rectangle drawn last time
-+	Common::Array<uint32> _hdUnder;         // the game's pixels under it
-+	Common::Array<uint32> _hdLast;          // what the wheel wrote there
++	Overlay _wheelOv, _invOv;
++	bool _invGrid = true;                   // verbhjul_inventar
++	bool _invGridOn = false;
 +	uint32 _openedAt = 0;
 +
 +	// Drawing on the system screen
@@ -5224,7 +5493,7 @@ index 00000000..1a345435
 +
 +#endif
 diff --git a/engines/scumm/verbs.cpp b/engines/scumm/verbs.cpp
-index 1637dd33..b5206295 100644
+index 1637dd33..a2281f35 100644
 --- a/engines/scumm/verbs.cpp
 +++ b/engines/scumm/verbs.cpp
 @@ -29,6 +29,7 @@
@@ -5246,7 +5515,21 @@ index 1637dd33..b5206295 100644
  	if (_userPut <= 0 || _mouseAndKeyboardStat == 0)
  		return;
  
-@@ -1017,6 +1022,8 @@ int ScummEngine::findVerbAtPos(int x, int y) const {
+@@ -1010,6 +1015,13 @@ int ScummEngine::findVerbAtPos(int x, int y) const {
+ 	if (!_numVerbs)
+ 		return 0;
+ 
++	// Zak FM-Towns verb wheel: the inventory as a grid of pictures
++	if (_verbWheel) {
++		const int inv = _verbWheel->inventoryVerbAt(x, y);
++		if (inv >= 0)
++			return inv;
++	}
++
+ 	VerbSlot *vs;
+ 	int i = _numVerbs - 1;
+ 
+@@ -1017,6 +1029,8 @@ int ScummEngine::findVerbAtPos(int x, int y) const {
  	do {
  		if (vs->curmode != 1 || !vs->verbid || vs->saveid || y < vs->curRect.top || y >= vs->curRect.bottom)
  			continue;
@@ -5255,7 +5538,7 @@ index 1637dd33..b5206295 100644
  		if (vs->center) {
  			if (x < -(vs->curRect.right - 2 * vs->curRect.left) || x >= vs->curRect.right)
  				continue;
-@@ -1132,6 +1139,12 @@ void ScummEngine::drawVerb(int verb, int mode, Common::TextToSpeechManager::Acti
+@@ -1132,6 +1146,12 @@ void ScummEngine::drawVerb(int verb, int mode, Common::TextToSpeechManager::Acti
  
  	vs = &_verbs[verb];
  

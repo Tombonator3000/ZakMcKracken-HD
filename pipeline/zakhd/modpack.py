@@ -30,6 +30,12 @@ før den vanlige ruten.
 
 HD-skriften for teksten (fonts/map.txt og fonts/<mappe>/NNN.png, se skrift.py) legges med
 i alle modder, uten --uten-skrift.
+
+Grensesnittet (Zak, verbhjulet): ikonene til hjulet (ui/verbhjul/<navn>.png, navnene i
+grafikk/ui/README.md) og bildene av tingene i inventaret (inventory/objNNN.png) tas med fra
+den godkjente grafikken i grafikk/ (verbhjul-gpt/ og inventar/) og fra --egne (ui/verbhjul/ og
+inventory/). PNG med alfa, helst kvadratiske og minst 256 piksler. Motoren skalerer dem selv og
+bruker de innebygde ikonene og navnene der det ikke finnes noe.
 """
 from __future__ import annotations
 
@@ -44,6 +50,43 @@ from . import skrift
 from .upscale import upscale, upscale_alpha
 
 MARGIN = 8  # piksler med bakgrunn rundt et objekt når det skaleres
+
+REPO = Path(__file__).resolve().parents[2]
+UI_SOURCES = [  # (mappe i repoet eller i --egne, mappe i modden, navnemønster)
+    ("grafikk/ui/verbhjul-gpt", "ui/verbhjul", r"[a-z-]+\.png"),
+    ("grafikk/inventar", "inventory", r"obj\d{3}\.png"),
+]
+UI_OWN = [("ui/verbhjul", "ui/verbhjul", r"[a-z-]+\.png"), ("inventory", "inventory", r"obj\d{3}\.png")]
+VERB_ICONS = {"push", "open", "put-on", "turn-on", "pull", "close", "pick-up", "take-off", "turn-off",
+              "give", "read", "use", "buy", "sell", "teleport"}
+
+
+def build_ui(out: Path, own: Path | None = None, repo: Path = REPO) -> list[str]:
+    """Ikonene til verbhjulet og bildene til inventaret, fra grafikk/ og fra --egne (egne vinner)."""
+    import re
+    done = {}
+    sources = [(repo / a, b, pat) for a, b, pat in UI_SOURCES]
+    if own:
+        sources += [(own / a, b, pat) for a, b, pat in UI_OWN]
+    for src, dst, pat in sources:
+        if not src.is_dir():
+            continue
+        for f in sorted(src.glob("*.png")):
+            if not re.fullmatch(pat, f.name):
+                continue
+            if dst == "ui/verbhjul" and f.stem not in VERB_ICONS:
+                print(f"  Hopper over {f.name}: ikke et verb i hjulet")
+                continue
+            im = Image.open(f)
+            if im.mode != "RGBA":
+                im = im.convert("RGBA")
+            if min(im.size) < 64:
+                print(f"  Hopper over {f.name}: {im.width}x{im.height} er for lite")
+                continue
+            (out / dst).mkdir(parents=True, exist_ok=True)
+            im.save(out / dst / f.name)
+            done[f"{dst}/{f.name}"] = True
+    return sorted(done)
 
 
 def soft_size_ok(size: tuple[int, int], cel: tuple[int, int], scale: int) -> bool:
@@ -129,6 +172,7 @@ def build_mod(extract: Path, out: Path, *, scale: int, method: str, rooms: set[i
         if costumes or has_own_cels else []
     done_films = _build_films(san, out, scale, method, films, own, **upscale_kw) if films and san else []
     letters = skrift.lag_skrift(out) if text_font else {}
+    ui = build_ui(out, own)
 
     manifest = {
         "format": 1,
@@ -142,6 +186,7 @@ def build_mod(extract: Path, out: Path, *, scale: int, method: str, rooms: set[i
         "costume_cels": len(done_costumes),
         "films": done_films,
         "fonts": letters,
+        "ui": ui,
     }
     (out / "mod.json").write_text(json.dumps(manifest, indent=1))
     print(f"Ferdig: {len(done_rooms)} rom, {len(done_objects)} objektbilder og {len(done_costumes)} kostymeruter "

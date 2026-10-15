@@ -4,9 +4,15 @@
 #   0001-dighd-hd-grafikk.patch  HD-motoren, den samme som i The Dig og Sam & Max
 #   0002-verbhjul.patch          verbhjulet for Zak (engines/scumm/verbhjul.*, verbhjul_zak.h, verbhjul_ikoner.h og krokene)
 #
-# Bruk:  tools/lag_patcher.sh            (etter endringer i engine/scummvm)
+# Bruk:  tools/lag_patcher.sh            (etter endringer i verbhjulet: bare 0002 lages på nytt)
+#        tools/lag_patcher.sh --ny-0001  (etter endringer i DigHD: begge, se under)
 #
-# Slik: en midlertidig kopi av ScummVM ved engine/SCUMMVM_COMMIT får alle filene som er endret
+# Vanlig: 0001 er felles med The Dig, Sam & Max og Dig-HD-Web og endres ikke herfra. 0002 er
+# forskjellen fra commiten med 0001 til det som er i engine/scummvm. Slik kommer nye kroker
+# for hjulet i ScummVM-filene (for eksempel findVerbAtPos) alltid i 0002 (15. oktober 2026:
+# den gamle måten la en ny krok i verbs.cpp i 0001).
+#
+# --ny-0001: en midlertidig kopi av ScummVM ved engine/SCUMMVM_COMMIT får alle filene som er endret
 # i engine/scummvm. Filene verbhjul.* og verbhjul_zak.h fjernes og krokene i den gamle 0002 trekkes fra (git apply -R);
 # det som er igjen, er den nye 0001.
 # Så legges filene inn igjen, og forskjellen mot 0001 er den nye 0002. Går det ikke å trekke fra
@@ -20,6 +26,28 @@ P="$ROOT/engine/patches"
 COMMIT="$(cat "$ROOT/engine/SCUMMVM_COMMIT")"
 TMP="$(mktemp -d)"
 trap 'git -C "$SRC" worktree remove --force "$TMP/x" >/dev/null 2>&1 || true; git -C "$SRC" worktree remove --force "$TMP/sjekk" >/dev/null 2>&1 || true; rm -rf "${TMP:?}"' EXIT
+
+if [ "${1:-}" != "--ny-0001" ]; then
+	cd "$SRC"
+	git add -N engines/scumm/dighd.cpp engines/scumm/dighd.h engines/scumm/verbhjul.cpp engines/scumm/verbhjul.h engines/scumm/verbhjul_zak.h engines/scumm/verbhjul_ikoner.h
+	mapfile -t FILER < <(git diff --name-only "$COMMIT")
+	git worktree add -q --detach "$TMP/x" "$COMMIT"
+	git -C "$TMP/x" apply "$P/0001-dighd-hd-grafikk.patch"
+	git -C "$TMP/x" add -A
+	git -C "$TMP/x" -c commit.gpgsign=false -c user.name=lag_patcher -c user.email=lag@patcher commit -q -m "midlertidig: 0001"
+	for f in "${FILER[@]}"; do
+		mkdir -p "$TMP/x/$(dirname "$f")"
+		cp "$f" "$TMP/x/$f"
+	done
+	git -C "$TMP/x" add -N engines/scumm/verbhjul.cpp engines/scumm/verbhjul.h engines/scumm/verbhjul_zak.h engines/scumm/verbhjul_ikoner.h
+	git -C "$TMP/x" -c core.abbrev=8 diff > "$TMP/0002.patch"
+	git -C "$SRC" worktree add -q --detach "$TMP/sjekk" "$COMMIT"
+	git -C "$TMP/sjekk" apply "$P/0001-dighd-hd-grafikk.patch"
+	git -C "$TMP/sjekk" apply --check "$TMP/0002.patch"
+	cp "$TMP/0002.patch" "$P/0002-verbhjul.patch"
+	echo "Ferdig: 0002 ($(wc -l < "$P/0002-verbhjul.patch") linjer) passer oppå 0001 (uendret) mot $COMMIT."
+	exit 0
+fi
 
 cd "$SRC"
 git add -N engines/scumm/dighd.cpp engines/scumm/dighd.h engines/scumm/verbhjul.cpp engines/scumm/verbhjul.h engines/scumm/verbhjul_zak.h engines/scumm/verbhjul_ikoner.h
