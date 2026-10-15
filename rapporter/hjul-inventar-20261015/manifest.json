@@ -1,6 +1,6 @@
 {
   "date": "2026-10-15T11:45:24+02:00",
-  "status": "godkjent av Tom 15. oktober 2026",
+  "status": "Inventar og fire ikoner uendret godkjent; 11 håndikoner rettet etter retur 15. oktober, til kontroll",
   "tool": "image_gen, innebygd",
   "model": "ikke oppgitt av verktøyet",
   "verbs": 15,
@@ -2735,9 +2735,9 @@
     },
     {
       "path": "ui/verbhjul/buy.png",
-      "sha256": "1fceb00a91dec08ae8133e87dd236631f436685c01855cbd20ec6fe3dd872539",
-      "git_sha": "630f4bc0363bbb8ee94a8517babf767f5f652a78",
-      "bytes": 351932,
+      "sha256": "7876f802f4d38442a05ce835e47f879e219a089bb7d648835495a7d258cd63b3",
+      "git_sha": "95e4afd170af41a407be419f09376253ccb0046f",
+      "bytes": 338262,
       "size": [
         512,
         512
@@ -2746,7 +2746,8 @@
       "alpha_range": [
         0,
         255
-      ]
+      ],
+      "revision": "verbhjul-hender-20261015"
     },
     {
       "path": "ui/verbhjul/close.png",
@@ -2765,9 +2766,9 @@
     },
     {
       "path": "ui/verbhjul/give.png",
-      "sha256": "1a4a3b2b2562dc00668b6e38d35132942ba057cd32f2010862bc9696595eb643",
-      "git_sha": "e323e696889d172da8623d8cd9e9f4024d14bc8d",
-      "bytes": 299513,
+      "sha256": "5052b698ed8e97e0bb7598c8f38db65a0a014a18f75a243b4336553ddb74b6d8",
+      "git_sha": "5afea09bcaffd75fd511032113e15fb4587279cd",
+      "bytes": 294203,
       "size": [
         512,
         512
@@ -2776,13 +2777,14 @@
       "alpha_range": [
         0,
         255
-      ]
+      ],
+      "revision": "verbhjul-hender-20261015"
     },
     {
       "path": "ui/verbhjul/open.png",
-      "sha256": "06a9d8a1bf1f16a8702d0757cd70690cb50c9880fa11815f054993299d3c1b73",
-      "git_sha": "8187c240b0c735d24fbbf609e9ffc77ed90f1301",
-      "bytes": 339140,
+      "sha256": "2170353b7bf3187e04deb4d941c20a9d00ec8f2e3ebcfa9f7cd45881085a48b5",
+      "git_sha": "19b3c874bfcbfdf7d8c507ef1c1adc6313854267",
+      "bytes": 339932,
       "size": [
         512,
         512
@@ -2791,13 +2793,14 @@
       "alpha_range": [
         0,
         255
-      ]
+      ],
+      "revision": "verbhjul-hender-20261015"
     },
     {
       "path": "ui/verbhjul/pick-up.png",
-      "sha256": "e5517dd4d12e6b07053e4e904380b8d0d6a5e2039836daa56a468f5e3ab93b68",
-      "git_sha": "185d5debfec45fc206a4a0eae8e0ec376108fe81",
-      "bytes": 312735,
+      "sha256": "032b0338e5f53bdd362cb4469152e36ab9177ac88381dc4db805fe4b7b8414a0",
+      "git_sha": "a780c952128d864f91e830b8008dcb0299cc4b1b",
+      "bytes": 294802,
       "size": [
         512,
         512
@@ -2806,13 +2809,14 @@
       "alpha_range": [
         0,
         255
-      ]
+      ],
+      "revision": "verbhjul-hender-20261015"
     },
     {
       "path": "ui/verbhjul/pull.png",
-      "sha256": "d19d921f228aa5b7f5d89afa8bd27ce2689ac67cec3c777f6d59988fb5528d06",
-      "git_sha": "eea7a7a69a14b97ddef6b1fc68430e4f052a3e7c",
-      "bytes": 304344,
+      "sha256": "f03ea3f1889fd86e54bea7321c320a641f3c8d3f39f1b4c283ba1ae4100a3010",
+      "git_sha": "500bfddf1955f05281ff0b247b9e6eaf7bc4becd",
+      "bytes": 299739,
       "size": [
         512,
         512
@@ -2821,13 +2825,14 @@
       "alpha_range": [
         0,
         255
-      ]
+      ],
+      "revision": "verbhjul-hender-20261015"
     },
     {
       "path": "ui/verbhjul/push.png",
-      "sha256": "bb41feeb03d827ead970352585f01f6c57afe60961d215d716e0738215efbf2d",
-      "git_sha": "ef6d81690b7407797f0e2ba8c3ea3a724f6fd2c4",
-      "bytes": 324337,
+      "sha256": "a2274bc0face5c93648825f5b7eeee0deb4cb5bee1fa49683f882a229442cef9",
+      "git_sha": "90074214d982a84a0da5833e0d24f9486a582f28",
+      "bytes": 307309,
       "size": [
         512,
         512
@@ -2836,13 +2841,14 @@
       "alpha_range": [
         0,
         255
-      ]
+      ],
+      "revision": "verbhjul-hender-20261015"
     },
     {
       "path": "ui/verbhjul/put-on.png",
-      "sha256": "b2998dbe3af9439623e6e3211a6d91ae98b881914f02e4f62198da22e0d2d62f",
-      "git_sha": "6c05f72056ac8fcc1e8450616aa607926623737c",
-      "bytes": 323839,
+      "sha256": "209fc14b7bd8bbd2529e3eb3b2736424a81a79740ca529c1bee9e038d257b7a2",
+      "git_sha": "429e698ba783dd33edae7ce7d86d8a2ee4238e65",
+      "bytes": 325326,
       "size": [
         512,
         512
@@ -2851,7 +2857,8 @@
       "alpha_range": [
         0,
         255
-      ]
+      ],
+      "revision": "verbhjul-hender-20261015"
     },
     {
       "path": "ui/verbhjul/read.png",
@@ -2885,9 +2892,9 @@
     },
     {
       "path": "ui/verbhjul/take-off.png",
-      "sha256": "780cba3f170e45fb6fab2c1ea1f112bd842b51aa5b7a9d9ba5c3afca20e3670a",
-      "git_sha": "9dba4d2d0fee7c2e996a65c415d924c4ff990c5a",
-      "bytes": 321057,
+      "sha256": "89eed2956ab63faf5ed31bb6b51a8f94d10eb3393aa64213fd5b15194c268661",
+      "git_sha": "a2944fa5e19601519f1a84e7da19c8bcd53ac3e4",
+      "bytes": 312211,
       "size": [
         512,
         512
@@ -2896,7 +2903,8 @@
       "alpha_range": [
         0,
         255
-      ]
+      ],
+      "revision": "verbhjul-hender-20261015"
     },
     {
       "path": "ui/verbhjul/teleport.png",
@@ -2915,9 +2923,9 @@
     },
     {
       "path": "ui/verbhjul/turn-off.png",
-      "sha256": "2574d35883ba96aba55f463a12a3609cb7779f9431aec32cc39d79accc8b2279",
-      "git_sha": "efad97aaebb58d11fe87ec170192c3b153168e62",
-      "bytes": 305671,
+      "sha256": "f3dcb18aaaba24772ea5c99414e773b5144eae507cdd448725b74554a724f3a6",
+      "git_sha": "de19df3081dfddbd50aba28b26b559c94c88358d",
+      "bytes": 283830,
       "size": [
         512,
         512
@@ -2926,13 +2934,14 @@
       "alpha_range": [
         0,
         255
-      ]
+      ],
+      "revision": "verbhjul-hender-20261015"
     },
     {
       "path": "ui/verbhjul/turn-on.png",
-      "sha256": "6376f25bf47b12ea21c29241561ef55d0bfee376879beccae92fcd3c165e381a",
-      "git_sha": "a27d2074213acbc396bf36b31f96f398cb6a1fdc",
-      "bytes": 317897,
+      "sha256": "65e49ce92aa6bfc06db053d3e588bcc3992a9bbc000d7ef00cd2b1c90058ddf1",
+      "git_sha": "5755fb9ce60246ee00bbd4354d61bb0e5d757e99",
+      "bytes": 309986,
       "size": [
         512,
         512
@@ -2941,13 +2950,14 @@
       "alpha_range": [
         0,
         255
-      ]
+      ],
+      "revision": "verbhjul-hender-20261015"
     },
     {
       "path": "ui/verbhjul/use.png",
-      "sha256": "039050f0a2ffefe1df0901bb89c4863c222ed09bdc1cb3ed698865abd26c384a",
-      "git_sha": "1a7433721d3bdbaba20d0b3772e4aa8255c130c2",
-      "bytes": 324533,
+      "sha256": "15207106687d9b8882b88bb87b994e17e6c4e865245bc69a4515781e46aa8202",
+      "git_sha": "43c72522cdc6af6f7026e7aa7083f55dd83ca0c4",
+      "bytes": 313456,
       "size": [
         512,
         512
@@ -2956,12 +2966,14 @@
       "alpha_range": [
         0,
         255
-      ]
+      ],
+      "revision": "verbhjul-hender-20261015"
     }
   ],
   "approval": {
     "by": "Tom",
     "date": "2026-10-15T13:26:47+02:00",
     "scope": "alle 15 verbikoner og 126 inventarfiler; ingen bildefiler endret"
-  }
+  },
+  "hand_revision": "../verbhjul-hender-20261015/README.md"
 }

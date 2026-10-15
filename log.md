@@ -77,3 +77,8 @@
 ## 2026-10-15: Zak spritesheet
 
 Tom ba om bare Zak først. Tre valgte v1-ark, 51 deler, 24 sammensatte ruter. 38 ok, 13 sjekk, 0 mangler i mottaket. Dokumentasjon og faktiske prompter i sprites/zak/. Side 2 v2 forkastet, lagret lokalt i ignorert revisjoner/. Ikke prøvd i motoren.
+
+## 2026-10-15 16:46 (Codex)
+- Tom ba om bedre fingre og bare hender uten dressjakke på verbikonene. Deretter presiserte han at hattene skal være fedora.
+- Rettet 11 håndikoner med innebygd image_gen, flere målrettede forsøk der fingre manglet eller ble for mange. Begge hattikoner viser samme blå fedora med rødt bånd, med inventarhatten som formreferanse. Fire ikoner uten hender og inventaret er uendret.
+- Faktiske prompter, genereringslogg, gamle bilder, før/etter, kontaktark og SHA-256 i rapporter/verbhjul-hender-20261015 (grafikk/ i kodegrenen). Eksport 512 x 512 RGBA; mottaket tar inn filene som før. Ingen motor- eller pipelinekode endret. Rettelsen er til kontroll, ikke prøvd i motoren.
