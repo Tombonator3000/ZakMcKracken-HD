@@ -109,3 +109,18 @@ Prøv selv: `engine/run.sh ingen --shader=engine/shadere/klassisk-crt.glslp` (el
 4. Effektvalget i menyen (del 6), når HD-laget virker for Zak.
 5. Lys med normalkart på prosessoren etter stilpiloten (del 7).
 6. Skjermkortveien bare hvis 5 ikke holder på mobil, eller Tom vil ha effekter per lag.
+
+## 10. Gjort 15. oktober: HD-laget og verbhjulet
+
+Tom spurte om spillkoden kan refaktoreres og optimaliseres, siden den er 40 år gammel. Svaret var at spillets skript ikke er trege og skal stå (AGENTS), at ScummVM er ny, og at gevinsten ligger i vår egen kode. Tom ba så om de to grepene under.
+
+**Målt i spillet, ikke bare i benken.** Med den ekte motoren (OpenGL under Xvfb, nearest-mod) brukte `compose()` 4,7 til 5,9 ms for hele skjermen, ikke 12 til 21 ms som benken i del 2. Profilen (`perf`) viste at overleggene til verbhjulet og inventaret kostet omtrent like mye som `compose()`, fordi de ble tegnet på nytt hver gang skjermen ble oppdatert.
+
+1. **Kopi av uendrede HD-piksler i `compose()` (0001).** Når fargen ikke er endret (ingen nedtoning eller fargeskifte), ingen tak på pikslene og skjermen har samme 32-bits format som HD-bildet, kopieres HD-pikslene rett, med alfa satt til 255 som før. Ellers går den gamle veien. Dette er den enkle delen av punkt 1 i del 3; tabellen per palettindeks for nedtoning er ikke laget. Målt: 4,7 til 5,9 ms ned til 1,6 til 2,7 ms for hele skjermen. Med 16-bits skjerm (surfacesdl) er veien uendret.
+2. **Overleggene tegnes bare når noe er endret (0002).** Hjulet og inventaret har hver sin nøkkel (åpent objekt, peker, verb, innholdet i inventaret, portrettene og så videre). Er nøkkelen den samme og pikslene under fortsatt våre, står overlegget som det er. Målt med `perf`: fra omtrent 10 prosent til 1,5 prosent av tiden.
+3. **`verbhjul.cpp` delt i fire filer (0002).** Den hadde vokst til 2086 linjer. Nå: `verbhjul.cpp` (regler, mål, inndata, tekst og tegningen i lav oppløsning, 1033 linjer), `verbhjul_hd.cpp` (hjulet, inventarrutene og portrettene på HD-laget, 770), `verbhjul_test.cpp` (testkommandoene fra `VERBHJUL_TEST`, 269) og `verbhjul_intern.h` (konstantene de deler). Bare flyttet, ingen kode endret. `tools/lag_patcher.sh` har fått listen `HJUL` med alle filene.
+
+Testet: `engine/test.sh` (16 bit) og samme test med OpenGL, 0 avvik mot nearest-moden; bilder fra intro og rom 1, 2 og 8 byte for byte like med gammel og ny motor; `tools/verbhjul_test.sh` bestått (11 like setninger, venting, avbrudd, figurbytte), og skjermbildene fra testen like med gammel motor bortsett fra fiskebollen, som animeres et bilde forskjøvet; `tools/lag_patcher.sh` og `--ny-0001` gir de samme patchene; `tools/sjekk_patcher.py`. Ikke testet: mobil og nettleser (nettsiden bygges av CI).
+
+**0001 er endret.** Den er ikke lenger lik den i The Dig HD Remake, Sam & Max HD og Dig-HD-Web før den er kopiert dit (todo).
+

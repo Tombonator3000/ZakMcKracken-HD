@@ -136,8 +136,12 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 - [x] Målt den varmeste løkken i HD-laget (`tools/ytelse/compose_bench.cpp`): 12 til 21 ms for hele skjermen i dag, 0,6 ms med tabell per palettindeks, 0 ulike byte
 - [x] To egne shadere i `engine/shadere/` (klassisk CRT og HD-glød), prøvd i Zak under Xvfb med programvare-OpenGL, sammen med fire fra ScummVM
 - [ ] Tom velger hva som skal gjøres (MOTOR-FORBEDRING del 9)
-- [ ] Tabell per palettindeks og kopi i `compose()`, figurrutene uten skalering, bildebuffer på tvers av rom og lasting ved rombytte. Gjøres i Sam & Max HD med `DIGHD_BENCH` og `engine/test.sh`, og 0001 kopieres hit
-- [ ] Verbhjulet tegner bare når noe er endret (i dag låses skjermen hver gang den oppdateres mens portrettene vises)
+- [ ] Bildebuffer på tvers av rom og lasting ved rombytte
+- [x] Verbhjulet tegner bare når noe er endret (overleggene med nøkkel, 15. oktober; fra omtrent 10 til 1,5 prosent i profilen)
+- [x] Kopi av uendrede HD-piksler i `compose()` med 32-bits skjerm (15. oktober): 4,7 til 5,9 ms ned til 1,6 til 2,7 ms for hele skjermen, 0 avvik
+- [x] `verbhjul.cpp` delt i `verbhjul.cpp`, `verbhjul_hd.cpp`, `verbhjul_test.cpp` og `verbhjul_intern.h` (15. oktober)
+- [ ] Kopier den nye 0001 til Dig-HD-Remake, Sam-Max-HD og Dig-HD-Web (endret i Zak 15. oktober, bare `compose()` i `dighd.cpp`)
+- [ ] Tabell per palettindeks for nedtoning og fargeskifte i `compose()`, og figurrutene uten skalering
 - [ ] Effektvalg som følger HD-valget: `dighd_effekt_hd` og `dighd_effekt_klassisk` (av som standard), `setShader()` ved Ctrl+H, raden «Effekter» i menyen
 - [ ] Shaderne i Linux-pakken og på nettsiden; prøv på ekte skjermkort, i nettleseren og på mobil
 - [ ] `klassisk-crt` med `KILDEPIKSEL = 4` når HD-laget viser originalgrafikken

@@ -154,7 +154,10 @@ Patch 0002 ligger oppå HD-patchen (0001, den samme som i The Dig og Sam & Max).
 
 | Sted | Hva |
 | --- | --- |
-| `engines/scumm/verbhjul.cpp`, `verbhjul.h` | Klassen `VerbWheel`: urskiven, verbene for objektet, det dynamiske utvalget, portrettene, klikkene, ventingen på objekt nummer to, tegningen og testdriveren. Bare for `zak` på FM-Towns |
+| `engines/scumm/verbhjul.cpp`, `verbhjul.h` | Klassen `VerbWheel`: urskiven, verbene for objektet, det dynamiske utvalget, portrettene, klikkene, ventingen på objekt nummer to og tegningen i lav oppløsning. Bare for `zak` på FM-Towns |
+| `engines/scumm/verbhjul_hd.cpp` | Hjulet, inventarrutene og portrettene på HD-laget. Overleggene tegnes bare når nøkkelen (det som vises) er endret |
+| `engines/scumm/verbhjul_test.cpp` | Testdriveren (`VERBHJUL_TEST`) |
+| `engines/scumm/verbhjul_intern.h` | Konstantene de tre filene deler (variabler i skript 11, plassene på skjermen, størrelser) |
 | `engines/scumm/verbhjul_ikoner.h` | Ikonene og skriften som PNG i base64, laget av `tools/verbhjul_ikoner.py` |
 | `engines/scumm/verbhjul_zak.h` | Reglene for det dynamiske hjulet, 337 objekter, laget av `tools/verbhjul_dynamisk.py --cpp` (bare objekt- og verbnummer) |
 | `verbs.cpp`, `findVerbAtPos` | Med inventaret som rutenett: ruten under pekeren gir verbplassen 101 til 110, 115 eller 116 |

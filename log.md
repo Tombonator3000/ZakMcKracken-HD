@@ -243,3 +243,14 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Modden bygget og publisert i grenen `hd-mod` med `tools/mod_gren.sh send` (mod.json, ui/, inventory/, SHA256SUMS).
 - Testet uten skjerm med modden: «19 drawn icons (15 from the HD pack)», de malte ikonene i hjulet (Turn on lamp), inventaret med malte bilder (billett, fiskebolle med Sushi, regning, kazoo, tapet, CashCard, plastkort) og navn for tingene uten bilde (receiver, telephone, cat clock), hjulet åpnet på billetten.
 - `docs/inventar.csv` laget på nytt: status «godkjent» der bildet finnes.
+
+## 2026-10-15 14:20 til 15:35 (Claude)
+- Tom: «Er det mulig å refactor og optimalisere spillkoden? Den er 40 år gammel.» Svar: spillets skript er ikke trege og lappes ikke uten Toms ja; ScummVM er ny. Gevinsten ligger i HD-laget og verbhjulet, som er vår egen kode. Målt i spillet (OpenGL under Xvfb, nearest-mod): `compose()` 4,7 til 5,9 ms for hele skjermen, og overleggene til hjulet og inventaret kostet omtrent like mye.
+- Tom: «Gjør de to grepene.»
+- 1: `compose()` i `dighd.cpp` kopierer HD-pikslene rett når fargen er uendret, uten tak og med 32-bits skjerm i samme format (alfa 255 som før). 1,6 til 2,7 ms for hele skjermen. 0001 laget på nytt med `tools/lag_patcher.sh --ny-0001`; bare `dighd.cpp` endret.
+- 1b: overleggene i verbhjulet har en nøkkel for det som vises og tegnes bare når den endres og pikslene under er våre. Fra omtrent 10 til 1,5 prosent i `perf`.
+- 2: `verbhjul.cpp` (2086 linjer) delt i `verbhjul.cpp` (1033), `verbhjul_hd.cpp` (770), `verbhjul_test.cpp` (269) og `verbhjul_intern.h` (konstantene). Bare flyttet. `module.mk` og `tools/lag_patcher.sh` (ny liste `HJUL`) oppdatert.
+- Testet: bygget uten advarsler; `engine/test.sh` 0 avvik med 16 bit og med OpenGL; bilder fra intro og rom 1, 2 og 8 byte for byte like med gammel motor; `tools/verbhjul_test.sh` bestått, og skjermbildene like med gammel motor utenom fiskebollen (animasjonen et bilde forskjøvet); `tools/lag_patcher.sh` og `--ny-0001` gir de samme patchene; `tools/sjekk_patcher.py` OK.
+- Ikke gjort: 0001 kopiert til Dig-HD-Remake, Sam-Max-HD og Dig-HD-Web (todo). Tabell per palettindeks for nedtoning er ikke laget.
+- Dokumentert i `docs/MOTOR-FORBEDRING.md` del 10, `docs/VERBHJUL.md`, STATUS, memory og todo.
+
