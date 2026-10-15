@@ -4,7 +4,7 @@
 
 | Patch | Hva | Kilde |
 | --- | --- | --- |
-| `0001-browser-filesystem-cache.patch` | HTTP-filsystemet (`backends/fs/emscripten/http-fs.*`): én felles oversikt over filene per kjøring i stedet for å bygge søskenlisten på nytt ved hvert oppslag, og ingen lekkasjer av JSON, mapper og nedlastinger | Dig-HD-Web `engine/patches/0002-browser-filesystem-cache.patch`, a8e4474 (12. oktober 2026) |
+| `0001-browser-filesystem-cache.patch` | HTTP-filsystemet (`backends/fs/emscripten/http-fs.*`): én felles oversikt over filene per kjøring i stedet for å bygge søskenlisten på nytt ved hvert oppslag, og ingen lekkasjer av JSON, mapper og nedlastinger | Dig-HD-Web `engine/patches/0002-browser-filesystem-cache.patch`. Laget på nytt 15. oktober 2026 oppå den felles 0001, som har sin egen retting av lekkasjen; filene blir byte for byte de samme som før (Dig-HD-Web PR 2) |
 | `0002-browser-canvas-coordinate-sync.patch` | Lerretet i fullskjerm: OpenGL-visningen og musekoordinatene følger lerretets faktiske størrelse, så klikk treffer der pekeren er | Dig-HD-Web `engine/patches/0005-browser-canvas-coordinate-sync.patch`, a8e4474 |
 
 Begge er GPL-3.0-or-later som ScummVM. `python3 tools/sjekk_patcher.py` sjekker hunk-hodene her også, og `engine/build-pages.py` sjekker at hele stakken er lagt på før nettsiden pakkes. `engine/tests/test-http-fs-cache.sh` tester HTTP-filsystemet i Wasm etter byggingen (fra Dig-HD-Web).

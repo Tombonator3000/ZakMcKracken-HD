@@ -167,3 +167,8 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Ikke prøvd: Esc forbi introen (et Esc etter 40 sekunder gjorde ingenting synlig), F5-menyen, lagring, fullskjerm, lyden med ører, Firefox, Safari og en ekte telefon.
 - PAGES, STATUS, SPILLTEST, README, AGENTS, memory og todo oppdatert.
 - 16:30 Løsningskortet `nettside-med-github-api-i-sandkassen` lagt i prosjektbiblioteket (f89f2a1). `claude/alt-i-main.patch` i Claude-prosjektet går ikke rett på etter nettsidearbeidet; `git apply --3way` med `local-files.mjs`, testen og PAGES.md utelatt er skrevet i todo og i `claude/zak-hd-status.md` (prøvd for README.md: fletter uten konflikt). Patchen sier at repoet er privat; det stemmer ikke nå.
+
+## 2026-10-15 05:26 (Claude)
+- Tom (i Dig-økta): «fiks zak fmtowns». Først den felles motorpatchen inn her, så porten av HD-laget til FM-Towns.
+- `engine/patches/0001-dighd-hd-grafikk.patch` byttet til den felles patchen for The Dig og Sam & Max (byte for byte lik Dig main bf582dc og Sam & Max main 3598f39). 0002 (verbhjulet) legger seg uendret oppå. `engine/patches-web/0001` laget på nytt oppå den nye 0001 (den felles patchen har sin egen retting av lekkasjen i HTTP-filsystemet); filene blir de samme som før.
+- Testet: `engine/build.sh` bygget (spillfilene hentet), `tools/verbhjul_test.sh` bestått (11 like setninger, venting, avbrudd og figurbytte), `tools/sjekk_patcher.py` (4 patcher), `test-build-pages.py`, nodetester (20), og hele stakken med nettleserpatchene lagt på c9091321.
