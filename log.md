@@ -55,3 +55,6 @@
 - AGENTS og BESTILLING kopiert fra `docs/` i PR 9: stilen følger ankrene i `stil/`, også Annies blå genser; innholdet er originalens. Pekeren til ANALYSE.md er beholdt, og en peker til `stil/README.md` er lagt til.
 - `GODKJENT.md` i begge konseptmappene, en linje i ANALYSE.md og ny status i ORDRE.md. README, rettelsesnotater og manifest i konseptmappene er ikke endret, så sjekksummene der stemmer.
 - Merk: `zakhd gpt-pakke` lister bare PNG-filer i `stil/` som ankere, så avisforsiden (JPEG) kommer ikke med av seg selv. Ingen jobber er laget.
+
+## 2026-10-15 10:01 (Claude)
+- La inn GRAFIKK-HJUL-OG-INVENTAR.md (listen over ikonene til verbhjulet og tingene i inventaret, fra docs/ i main) og en henvisning i AGENTS.md. Ikke bestilt; ORDRE.md er uendret.

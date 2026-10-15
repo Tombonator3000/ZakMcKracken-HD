@@ -6,6 +6,8 @@ Denne grenen er arbeidsbordet for HD-grafikken til Zak McKracken HD Remake (enge
 
 Les `ORDRE.md` først. Den er siste beskjed fra Claude, med jobbene du skal gjøre nå. Les deretter `BESTILLING.md`, som gjelder foran alt annet her.
 
+Grafikken til verbhjulet og inventaret (15 ikoner og bilder av tingene) er beskrevet i [GRAFIKK-HJUL-OG-INVENTAR.md](GRAFIKK-HJUL-OG-INVENTAR.md): filnavn, utseende og motiv. Den er ikke bestilt før `ORDRE.md` sier det.
+
 Les også [stil/README.md](stil/README.md), som beskriver de godkjente stilankerne, og [ANALYSE.md](ANALYSE.md) før nytegning. Analysen bevarer Toms DOTT-/strekrettelser og skiller spillets stil fra eksemplene i andre spill.
 
 ## Kildetro grafikk før produksjon
