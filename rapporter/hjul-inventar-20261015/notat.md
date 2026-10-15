@@ -45,3 +45,6 @@ Tom godkjente hele inventar- og verbhjulleveransen. Unntaket gjaldt The King i k
 ## Retur: hender og fedora, 15. oktober
 
 Tom ba om tydelige fingre og bare hender uten dressjakke, og presiserte at begge hattene skal være fedora. 11 ikoner er erstattet; fire ikoner uten hånd og hele inventaret er uendret. Faktiske nye prompter, før/etter, valgte SHA-256 og kontroll står i [rettelsen](../verbhjul-hender-20261015/README.md). Ny rettelse er til kontroll og ikke prøvd i motoren.
+
+## Andre retur på hender
+Buy, give og take-off er tegnet om etter ny retur fra Tom. [Siste rettelse](../verbhjul-hender-retur-02-20261015/README.md) med manuell anatomivurdering og nye prompter.

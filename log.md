@@ -82,3 +82,8 @@ Tom ba om bare Zak først. Tre valgte v1-ark, 51 deler, 24 sammensatte ruter. 38
 - Tom ba om bedre fingre og bare hender uten dressjakke på verbikonene. Deretter presiserte han at hattene skal være fedora.
 - Rettet 11 håndikoner med innebygd image_gen, flere målrettede forsøk der fingre manglet eller ble for mange. Begge hattikoner viser samme blå fedora med rødt bånd, med inventarhatten som formreferanse. Fire ikoner uten hender og inventaret er uendret.
 - Faktiske prompter, genereringslogg, gamle bilder, før/etter, kontaktark og SHA-256 i rapporter/verbhjul-hender-20261015 (grafikk/ i kodegrenen). Eksport 512 x 512 RGBA; mottaket tar inn filene som før. Ingen motor- eller pipelinekode endret. Rettelsen er til kontroll, ikke prøvd i motoren.
+
+## 2026-10-15 17:26 (Codex)
+- Tom påpekte at buy, give og take-off fortsatt hadde feil fingre/hender. Den forrige kontrollen overså anatomifeilene. Tre hender er tegnet helt om med enklere naturlige grep, kort bart håndledd og mindre skravering. Fedoraen er beholdt.
+- Fire innebygde image_gen-kall: give v1 manglet en synlig finger og ble rettet i v2. Forrige runde er bevart og markert som avvist for disse tre filene. Tolv øvrige ikoner og inventaret er uendret.
+- Før/etter, nærbilder, 112-pikslers kontaktark, faktiske prompter, valg og SHA-256 i rapporter/verbhjul-hender-retur-02-20261015 (grafikk/ i kodegrenen). Filformat, alfa og eksisterende UI-mottak kontrollert. Ny rettelse er til vurdering, ikke prøvd i motoren.
