@@ -1,0 +1,324 @@
+{
+ "id": "fig001_01",
+ "rom": 49,
+ "navn": "Zak",
+ "del_nr": 1,
+ "deler": 1,
+ "rom_storrelse": [
+  352,
+  240
+ ],
+ "region": [
+  0,
+  0,
+  352,
+  240
+ ],
+ "plassering": [
+  16,
+  8
+ ],
+ "skala": 4,
+ "lerret": [
+  1536,
+  1024
+ ],
+ "type": "figur",
+ "objekt": null,
+ "tilstand": null,
+ "objekt_i_rom": null,
+ "lag": 1,
+ "kostyme": 1,
+ "ruter": [
+  {
+   "bilde": "costume001_000",
+   "kostyme": 1,
+   "rute": 0,
+   "rekt": [
+    4,
+    4,
+    12,
+    31
+   ],
+   "synlig": [
+    4,
+    4,
+    15,
+    35
+   ],
+   "animasjon": 3,
+   "retning": 1,
+   "lag": 0,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_006",
+   "kostyme": 1,
+   "rute": 6,
+   "rekt": [
+    22,
+    9,
+    20,
+    26
+   ],
+   "synlig": [
+    23,
+    9,
+    42,
+    35
+   ],
+   "animasjon": 3,
+   "retning": 2,
+   "lag": 0,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_134",
+   "kostyme": 1,
+   "rute": 134,
+   "rekt": [
+    3,
+    45,
+    14,
+    22
+   ],
+   "synlig": [
+    4,
+    45,
+    16,
+    67
+   ],
+   "animasjon": 3,
+   "retning": 1,
+   "lag": 1,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_135",
+   "kostyme": 1,
+   "rute": 135,
+   "rekt": [
+    23,
+    43,
+    12,
+    24
+   ],
+   "synlig": [
+    24,
+    43,
+    35,
+    67
+   ],
+   "animasjon": 3,
+   "retning": 2,
+   "lag": 1,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_136",
+   "kostyme": 1,
+   "rute": 136,
+   "rekt": [
+    43,
+    43,
+    10,
+    24
+   ],
+   "synlig": [
+    43,
+    43,
+    52,
+    67
+   ],
+   "animasjon": 3,
+   "retning": 3,
+   "lag": 1,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_256",
+   "kostyme": 1,
+   "rute": 256,
+   "rekt": [
+    4,
+    75,
+    16,
+    20
+   ],
+   "synlig": [
+    4,
+    75,
+    20,
+    95
+   ],
+   "animasjon": 3,
+   "retning": 1,
+   "lag": 2,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_257",
+   "kostyme": 1,
+   "rute": 257,
+   "rekt": [
+    27,
+    75,
+    16,
+    20
+   ],
+   "synlig": [
+    28,
+    75,
+    43,
+    95
+   ],
+   "animasjon": 3,
+   "retning": 2,
+   "lag": 2,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_258",
+   "kostyme": 1,
+   "rute": 258,
+   "rekt": [
+    51,
+    76,
+    14,
+    19
+   ],
+   "synlig": [
+    51,
+    76,
+    64,
+    95
+   ],
+   "animasjon": 3,
+   "retning": 3,
+   "lag": 2,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_388",
+   "kostyme": 1,
+   "rute": 388,
+   "rekt": [
+    3,
+    103,
+    6,
+    5
+   ],
+   "synlig": [
+    4,
+    103,
+    8,
+    108
+   ],
+   "animasjon": 1,
+   "retning": 1,
+   "lag": 3,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_513",
+   "kostyme": 1,
+   "rute": 513,
+   "rekt": [
+    3,
+    116,
+    6,
+    21
+   ],
+   "synlig": [
+    4,
+    116,
+    9,
+    137
+   ],
+   "animasjon": 3,
+   "retning": 2,
+   "lag": 4,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_516",
+   "kostyme": 1,
+   "rute": 516,
+   "rekt": [
+    17,
+    116,
+    6,
+    21
+   ],
+   "synlig": [
+    17,
+    116,
+    23,
+    137
+   ],
+   "animasjon": 3,
+   "retning": 3,
+   "lag": 4,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_644",
+   "kostyme": 1,
+   "rute": 644,
+   "rekt": [
+    3,
+    145,
+    8,
+    21
+   ],
+   "synlig": [
+    4,
+    145,
+    10,
+    166
+   ],
+   "animasjon": 3,
+   "retning": 2,
+   "lag": 5,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_641",
+   "kostyme": 1,
+   "rute": 641,
+   "rekt": [
+    3,
+    174,
+    6,
+    21
+   ],
+   "synlig": [
+    4,
+    174,
+    9,
+    195
+   ],
+   "animasjon": 1,
+   "retning": 3,
+   "lag": 5,
+   "nr": 0
+  }
+ ],
+ "bakgrunn": [
+  255,
+  0,
+  255
+ ],
+ "rekkefolge": 1,
+ "innhold": "stående mot høyre, mot oss (2 ruter); stående (lag 1, tegnes over kroppen) mot høyre, mot oss, bort (3 ruter); stående (lag 2, tegnes over kroppen) mot høyre, mot oss, bort (3 ruter); start (lag 3, tegnes over kroppen) mot høyre (1 rute); stående (lag 4, tegnes over kroppen) mot oss, bort (2 ruter); stående (lag 5, tegnes over kroppen) mot oss (1 rute); start (lag 5, tegnes over kroppen) bort (1 rute)",
+ "laget": "2026-10-15 13:27",
+ "sha256_referanse": "7f7ade70c4f31ae4455dd82b5f9624e5c759c686cd36c55bb111bac990928890",
+ "sha256_prompt": "715e8d3aaf2d77255c61364e2f6ad604397f592a2db5244dad00aa934dc119d3",
+ "bilde_i_lerret": [
+  64,
+  32,
+  1408,
+  960
+ ],
+ "stilreferanse": "zak-pilot-v1.png"
+}

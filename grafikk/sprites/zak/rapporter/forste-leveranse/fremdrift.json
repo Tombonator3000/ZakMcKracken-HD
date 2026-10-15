@@ -1,0 +1,19 @@
+{
+  "leveranser": [
+    {
+      "jobb": "fig001_01",
+      "resultat": "jobber/fig001_01/resultat-v1.png",
+      "sha256": "4430bf7d06220288f2afda87726e03e75641c3bdc976daf1e9b364ea67176944"
+    },
+    {
+      "jobb": "fig001_02",
+      "resultat": "jobber/fig001_02/resultat-v1.png",
+      "sha256": "62971481e6a26f4f4823c1273fdbc18a210f590c490ec07e5fafdb50d78e8511"
+    },
+    {
+      "jobb": "fig001_03",
+      "resultat": "jobber/fig001_03/resultat-v1.png",
+      "sha256": "372d192db65edd16f8e21bd99aec76957333786102023b97593c28ee465b1c20"
+    }
+  ]
+}

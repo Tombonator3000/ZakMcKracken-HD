@@ -1,0 +1,478 @@
+{
+  "image": "zak-spritesheet.png",
+  "size": [
+    1792,
+    864
+  ],
+  "cell_size": [
+    224,
+    288
+  ],
+  "status": "første pilot, samlet kontrollvisning; 51 motorfragmenter ligger i mottak/",
+  "frames": [
+    {
+      "name": "idle-east",
+      "rect": [
+        0,
+        0,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        0,
+        134,
+        256
+      ],
+      "mirrored": false
+    },
+    {
+      "name": "idle-west",
+      "rect": [
+        224,
+        0,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        0,
+        134,
+        256
+      ],
+      "mirrored": true
+    },
+    {
+      "name": "idle-south",
+      "rect": [
+        448,
+        0,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        6,
+        135,
+        257,
+        513,
+        644
+      ],
+      "mirrored": false
+    },
+    {
+      "name": "idle-north",
+      "rect": [
+        672,
+        0,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        6,
+        136,
+        258,
+        516,
+        644
+      ],
+      "mirrored": false
+    },
+    {
+      "name": "walk-east-01",
+      "rect": [
+        896,
+        0,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        133,
+        256
+      ],
+      "mirrored": false
+    },
+    {
+      "name": "walk-east-02",
+      "rect": [
+        1120,
+        0,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        128,
+        256
+      ],
+      "mirrored": false
+    },
+    {
+      "name": "walk-east-03",
+      "rect": [
+        1344,
+        0,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        129,
+        256
+      ],
+      "mirrored": false
+    },
+    {
+      "name": "walk-east-04",
+      "rect": [
+        1568,
+        0,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        130,
+        256
+      ],
+      "mirrored": false
+    },
+    {
+      "name": "walk-east-05",
+      "rect": [
+        0,
+        288,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        131,
+        256
+      ],
+      "mirrored": false
+    },
+    {
+      "name": "walk-east-06",
+      "rect": [
+        224,
+        288,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        132,
+        256
+      ],
+      "mirrored": false
+    },
+    {
+      "name": "walk-west-01",
+      "rect": [
+        448,
+        288,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        133,
+        256
+      ],
+      "mirrored": true
+    },
+    {
+      "name": "walk-west-02",
+      "rect": [
+        672,
+        288,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        128,
+        256
+      ],
+      "mirrored": true
+    },
+    {
+      "name": "walk-west-03",
+      "rect": [
+        896,
+        288,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        129,
+        256
+      ],
+      "mirrored": true
+    },
+    {
+      "name": "walk-west-04",
+      "rect": [
+        1120,
+        288,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        130,
+        256
+      ],
+      "mirrored": true
+    },
+    {
+      "name": "walk-west-05",
+      "rect": [
+        1344,
+        288,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        131,
+        256
+      ],
+      "mirrored": true
+    },
+    {
+      "name": "walk-west-06",
+      "rect": [
+        1568,
+        288,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        132,
+        256
+      ],
+      "mirrored": true
+    },
+    {
+      "name": "walk-south-01",
+      "rect": [
+        0,
+        576,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        7,
+        135,
+        257,
+        513,
+        641
+      ],
+      "mirrored": false
+    },
+    {
+      "name": "walk-south-02",
+      "rect": [
+        224,
+        576,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        8,
+        135,
+        257,
+        515,
+        643
+      ],
+      "mirrored": false
+    },
+    {
+      "name": "walk-south-03",
+      "rect": [
+        448,
+        576,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        9,
+        135,
+        257,
+        514,
+        642
+      ],
+      "mirrored": false
+    },
+    {
+      "name": "walk-south-04",
+      "rect": [
+        672,
+        576,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        10,
+        135,
+        257,
+        515,
+        643
+      ],
+      "mirrored": false
+    },
+    {
+      "name": "walk-north-01",
+      "rect": [
+        896,
+        576,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        13,
+        136,
+        258,
+        516,
+        643
+      ],
+      "mirrored": false
+    },
+    {
+      "name": "walk-north-02",
+      "rect": [
+        1120,
+        576,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        14,
+        136,
+        258,
+        514,
+        644
+      ],
+      "mirrored": false
+    },
+    {
+      "name": "walk-north-03",
+      "rect": [
+        1344,
+        576,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        15,
+        136,
+        258,
+        515,
+        642
+      ],
+      "mirrored": false
+    },
+    {
+      "name": "walk-north-04",
+      "rect": [
+        1568,
+        576,
+        224,
+        288
+      ],
+      "anchor": [
+        112,
+        272
+      ],
+      "original_cels": [
+        16,
+        136,
+        258,
+        514,
+        644
+      ],
+      "mirrored": false
+    }
+  ]
+}

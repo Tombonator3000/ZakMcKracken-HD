@@ -1,0 +1,577 @@
+{
+ "id": "fig001_02",
+ "rom": 49,
+ "navn": "Zak",
+ "del_nr": 1,
+ "deler": 1,
+ "rom_storrelse": [
+  352,
+  240
+ ],
+ "region": [
+  0,
+  0,
+  352,
+  240
+ ],
+ "plassering": [
+  16,
+  8
+ ],
+ "skala": 4,
+ "lerret": [
+  1536,
+  1024
+ ],
+ "type": "figur",
+ "objekt": null,
+ "tilstand": null,
+ "objekt_i_rom": null,
+ "lag": 2,
+ "bilde_to": "jobber/fig001_01/resultat.png",
+ "kostyme": 1,
+ "ruter": [
+  {
+   "bilde": "costume001_133",
+   "kostyme": 1,
+   "rute": 133,
+   "rekt": [
+    4,
+    4,
+    20,
+    49
+   ],
+   "synlig": [
+    4,
+    4,
+    24,
+    53
+   ],
+   "animasjon": 2,
+   "retning": 1,
+   "lag": 1,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_128",
+   "kostyme": 1,
+   "rute": 128,
+   "rekt": [
+    31,
+    4,
+    40,
+    49
+   ],
+   "synlig": [
+    32,
+    4,
+    70,
+    53
+   ],
+   "animasjon": 2,
+   "retning": 1,
+   "lag": 1,
+   "nr": 1
+  },
+  {
+   "bilde": "costume001_129",
+   "kostyme": 1,
+   "rute": 129,
+   "rekt": [
+    78,
+    4,
+    32,
+    49
+   ],
+   "synlig": [
+    78,
+    4,
+    109,
+    53
+   ],
+   "animasjon": 2,
+   "retning": 1,
+   "lag": 1,
+   "nr": 2
+  },
+  {
+   "bilde": "costume001_130",
+   "kostyme": 1,
+   "rute": 130,
+   "rekt": [
+    117,
+    4,
+    20,
+    49
+   ],
+   "synlig": [
+    117,
+    4,
+    136,
+    53
+   ],
+   "animasjon": 2,
+   "retning": 1,
+   "lag": 1,
+   "nr": 3
+  },
+  {
+   "bilde": "costume001_131",
+   "kostyme": 1,
+   "rute": 131,
+   "rekt": [
+    143,
+    4,
+    34,
+    49
+   ],
+   "synlig": [
+    144,
+    4,
+    176,
+    53
+   ],
+   "animasjon": 2,
+   "retning": 1,
+   "lag": 1,
+   "nr": 4
+  },
+  {
+   "bilde": "costume001_132",
+   "kostyme": 1,
+   "rute": 132,
+   "rekt": [
+    183,
+    6,
+    30,
+    47
+   ],
+   "synlig": [
+    184,
+    6,
+    212,
+    53
+   ],
+   "animasjon": 2,
+   "retning": 1,
+   "lag": 1,
+   "nr": 5
+  },
+  {
+   "bilde": "costume001_391",
+   "kostyme": 1,
+   "rute": 391,
+   "rekt": [
+    4,
+    61,
+    6,
+    6
+   ],
+   "synlig": [
+    4,
+    61,
+    9,
+    67
+   ],
+   "animasjon": 4,
+   "retning": 1,
+   "lag": 3,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_385",
+   "kostyme": 1,
+   "rute": 385,
+   "rekt": [
+    3,
+    79,
+    4,
+    1
+   ],
+   "synlig": [
+    4,
+    79,
+    7,
+    80
+   ],
+   "animasjon": 4,
+   "retning": 2,
+   "lag": 3,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_384",
+   "kostyme": 1,
+   "rute": 384,
+   "rekt": [
+    15,
+    75,
+    6,
+    5
+   ],
+   "synlig": [
+    15,
+    75,
+    20,
+    80
+   ],
+   "animasjon": 4,
+   "retning": 2,
+   "lag": 3,
+   "nr": 1
+  },
+  {
+   "bilde": "costume001_007",
+   "kostyme": 1,
+   "rute": 7,
+   "rekt": [
+    4,
+    89,
+    12,
+    24
+   ],
+   "synlig": [
+    4,
+    89,
+    16,
+    113
+   ],
+   "animasjon": 2,
+   "retning": 2,
+   "lag": 0,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_008",
+   "kostyme": 1,
+   "rute": 8,
+   "rekt": [
+    24,
+    88,
+    14,
+    25
+   ],
+   "synlig": [
+    24,
+    88,
+    37,
+    113
+   ],
+   "animasjon": 2,
+   "retning": 2,
+   "lag": 0,
+   "nr": 1
+  },
+  {
+   "bilde": "costume001_009",
+   "kostyme": 1,
+   "rute": 9,
+   "rekt": [
+    44,
+    89,
+    14,
+    24
+   ],
+   "synlig": [
+    45,
+    89,
+    57,
+    113
+   ],
+   "animasjon": 2,
+   "retning": 2,
+   "lag": 0,
+   "nr": 2
+  },
+  {
+   "bilde": "costume001_010",
+   "kostyme": 1,
+   "rute": 10,
+   "rekt": [
+    65,
+    88,
+    14,
+    25
+   ],
+   "synlig": [
+    65,
+    88,
+    78,
+    113
+   ],
+   "animasjon": 2,
+   "retning": 2,
+   "lag": 0,
+   "nr": 3
+  },
+  {
+   "bilde": "costume001_515",
+   "kostyme": 1,
+   "rute": 515,
+   "rekt": [
+    4,
+    121,
+    6,
+    19
+   ],
+   "synlig": [
+    4,
+    121,
+    10,
+    140
+   ],
+   "animasjon": 2,
+   "retning": 2,
+   "lag": 4,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_514",
+   "kostyme": 1,
+   "rute": 514,
+   "rekt": [
+    18,
+    123,
+    6,
+    17
+   ],
+   "synlig": [
+    18,
+    123,
+    24,
+    140
+   ],
+   "animasjon": 2,
+   "retning": 2,
+   "lag": 4,
+   "nr": 1
+  },
+  {
+   "bilde": "costume001_643",
+   "kostyme": 1,
+   "rute": 643,
+   "rekt": [
+    3,
+    150,
+    8,
+    17
+   ],
+   "synlig": [
+    4,
+    150,
+    10,
+    167
+   ],
+   "animasjon": 2,
+   "retning": 2,
+   "lag": 5,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_642",
+   "kostyme": 1,
+   "rute": 642,
+   "rekt": [
+    17,
+    148,
+    8,
+    19
+   ],
+   "synlig": [
+    18,
+    148,
+    24,
+    167
+   ],
+   "animasjon": 2,
+   "retning": 2,
+   "lag": 5,
+   "nr": 1
+  },
+  {
+   "bilde": "costume001_013",
+   "kostyme": 1,
+   "rute": 13,
+   "rekt": [
+    4,
+    180,
+    14,
+    23
+   ],
+   "synlig": [
+    4,
+    180,
+    18,
+    203
+   ],
+   "animasjon": 2,
+   "retning": 3,
+   "lag": 0,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_014",
+   "kostyme": 1,
+   "rute": 14,
+   "rekt": [
+    25,
+    178,
+    14,
+    25
+   ],
+   "synlig": [
+    26,
+    178,
+    39,
+    203
+   ],
+   "animasjon": 2,
+   "retning": 3,
+   "lag": 0,
+   "nr": 1
+  },
+  {
+   "bilde": "costume001_015",
+   "kostyme": 1,
+   "rute": 15,
+   "rekt": [
+    47,
+    175,
+    14,
+    28
+   ],
+   "synlig": [
+    47,
+    175,
+    61,
+    203
+   ],
+   "animasjon": 2,
+   "retning": 3,
+   "lag": 0,
+   "nr": 2
+  },
+  {
+   "bilde": "costume001_016",
+   "kostyme": 1,
+   "rute": 16,
+   "rekt": [
+    68,
+    178,
+    14,
+    25
+   ],
+   "synlig": [
+    69,
+    178,
+    82,
+    203
+   ],
+   "animasjon": 2,
+   "retning": 3,
+   "lag": 0,
+   "nr": 3
+  },
+  {
+   "bilde": "costume001_389",
+   "kostyme": 1,
+   "rute": 389,
+   "rekt": [
+    3,
+    211,
+    6,
+    5
+   ],
+   "synlig": [
+    4,
+    211,
+    8,
+    216
+   ],
+   "animasjon": 6,
+   "retning": 1,
+   "lag": 3,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_386",
+   "kostyme": 1,
+   "rute": 386,
+   "rekt": [
+    15,
+    214,
+    6,
+    2
+   ],
+   "synlig": [
+    16,
+    214,
+    20,
+    216
+   ],
+   "animasjon": 6,
+   "retning": 2,
+   "lag": 3,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_390",
+   "kostyme": 1,
+   "rute": 390,
+   "rekt": [
+    4,
+    229,
+    6,
+    5
+   ],
+   "synlig": [
+    4,
+    229,
+    9,
+    234
+   ],
+   "animasjon": 7,
+   "retning": 1,
+   "lag": 3,
+   "nr": 0
+  },
+  {
+   "bilde": "costume001_387",
+   "kostyme": 1,
+   "rute": 387,
+   "rekt": [
+    16,
+    224,
+    8,
+    10
+   ],
+   "synlig": [
+    17,
+    224,
+    23,
+    234
+   ],
+   "animasjon": 7,
+   "retning": 2,
+   "lag": 3,
+   "nr": 0
+  }
+ ],
+ "bakgrunn": [
+  255,
+  0,
+  255
+ ],
+ "rekkefolge": 1,
+ "innhold": "gange (lag 1, tegnes over kroppen) mot høyre (6 ruter); snakking (lag 3, tegnes over kroppen) mot høyre, mot oss (3 ruter); gange mot oss (4 ruter); gange (lag 4, tegnes over kroppen) mot oss (2 ruter); gange (lag 5, tegnes over kroppen) mot oss (2 ruter); gange bort (4 ruter); animasjon 6 (lag 3, tegnes over kroppen) mot høyre, mot oss (2 ruter); animasjon 7 (lag 3, tegnes over kroppen) mot høyre, mot oss (2 ruter)",
+ "laget": "2026-10-15 13:27",
+ "sha256_referanse": "c5242441c499bcf2b60fc1b736396b1586cf6ddca38676aa6ec7d4c7c53a11b5",
+ "sha256_prompt": "5c62abb83cfa56b899f65cecccd2429b77dc6ed0c721ec14a6057e814f02623a",
+ "bilde_i_lerret": [
+  64,
+  32,
+  1408,
+  960
+ ],
+ "stilreferanse": "zak-pilot-v1.png"
+}

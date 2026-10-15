@@ -186,3 +186,9 @@ Det som gjenstår, viktigst først. Kryss av når noe er gjort, og logg det i `l
 
 - [ ] Vurder én felles kode-repo for alle LucasArts-HD-spillene, når Sam & Max og Zak trenger samme motor
 - [ ] Slå på push-utløseren i `.github/workflows/linux.yml` når HD virker
+
+### Zak spritesheet, første pilot 15. oktober
+
+- [x] Bare Zak først: 24 sammensatte ruter, tre ark, 51 deler, faktiske prompter og rutekart.
+- [ ] Tom vurderer spritepiloten og King v2 med Elvis-tupé.
+- [ ] Kontroller de 13 importmerknadene for munn/utstyr og prøv de nye delene i motoren før de tas i bruk.

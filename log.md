@@ -241,3 +241,8 @@ Alt som gjøres i prosjektet, med tidspunkt (norsk tid). Nyeste nederst.
 - Tom godkjente resten av grafikkleveransen, men ba om Elvis-hår som tupé på The King. Ett innebygd image_gen-redigeringskall ga king-v2.png med tupé i alle seks visninger. Hodeform, høye øyne, scenedrakt og positurer kontrollert visuelt.
 - Godkjenning, valgt fil, galleri, kontaktoversikt, prompt og sjekksummer oppdatert både i grafikkleveransen og gpt-arbeid. Tidligere King v1 beholdes som ikke godkjent historikk.
 - Tom bestilte deretter spritesheet for bare Zak først. Originalens kostyme 1 har 51 ruter fordelt på tre ark i eksisterende pipeline.
+
+## 2026-10-15: Zak spritesheet (Codex)
+- Laget bare Zak, kostyme 1, etter Toms bestilling. Tre image_gen-ark med 51 deler og det godkjente Zak-ankeret. Side 2 v2 forkastet fordi munnfragmenter forsvant; alle valgte ark er v1.
+- Laget transparent spritesheet med 24 sammensatte stå- og gåruter, rutekart, faktiske prompter, kontrollnotat og SHA-256 under grafikk/sprites/zak/. Ingen originalbilder kopiert til kodegrenen.
+- Eksplisitt kobling og eksisterende myk-mottak: 51 importert fra de nye arkene, 38 ok, 13 sjekk, 0 mangler. Alle 24 sammensatte ruter kontrollert for cellekanter og visuelt. De 13 små munn-/utstyrsrutene må fortsatt kontrolleres før motorbruk. Ingen motor- eller pipelinekode endret; grafikken er ikke prøvd i motoren.
